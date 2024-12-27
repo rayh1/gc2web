@@ -35,10 +35,11 @@ RUN mkdir -p -m 755 /etc/apt/keyrings && \
     apt-get update && apt-get install -y --no-install-recommends gh && \
     apt-get clean && rm -rf /var/lib/apt/lists/*    
 
-# Install required Python dependencies
-#RUN /app/venv/bin/pip install -r requirements.txt
-
 COPY app/* .
+
+# Create Python venv and install required Python dependencies
+RUN /usr/bin/python3 -m venv venv && \
+    /workspaces/venv/bin/pip install -r requirements.txt
 
 # Prepare scripts
 RUN dos2unix init.sh && \
