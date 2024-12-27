@@ -3,5 +3,32 @@
     "dockerComposeFile": "compose.yaml",
     "service": "gc2web",
     "workspaceFolder": "/workspaces",
-    "shutdownAction": "stopCompose"
+    "shutdownAction": "stopCompose",
+	
+	"customizations": {
+        "vscode": {
+            "extensions": [
+                "redhat.java",  
+                "vscjava.vscode-java-debug",  
+                "vscjava.vscode-java-test",  
+                "vscjava.vscode-maven",  
+                "vscjava.vscode-java-dependency",  
+
+                "ms-python.vscode-pylance",  
+                "ms-python.python",  
+                "ms-python.debugpy",
+				
+                "Angular.ng-template",
+                "dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+
+                "redhat.fabric8-analytics",
+                "SanaAjani.taskrunnercode",
+                "mgmcdermott.vscode-language-babel",
+                "stylelint.vscode-stylelint",
+				"eamodio.gitlens",
+				"mhutchie.git-graph"
+            ]  
+        }
+    }
 }
