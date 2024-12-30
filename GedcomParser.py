@@ -1,8 +1,10 @@
 import re
 
-from GedcomLine import GedcomLine
 from typing import List, Optional, TextIO
 from collections import deque
+
+from GedcomLine import GedcomLine
+from GedcomTags import GedcomTags
 
 class GedcomParser:
     def __init__(self, gedcom_stream: TextIO):
@@ -21,7 +23,7 @@ class GedcomParser:
         xref_id: str | None = match.group(2)
         tag: str = match.group(3)
         pointer_value: str | None = match.group(4)
-        value: str | None = match.group(5).strip() if match.group(5) else None
+        value: str | None = match.group(5)
         
         return GedcomLine(level, tag, xref_id, pointer_value, value)
 
@@ -33,12 +35,12 @@ class GedcomParser:
         prev_parsed_line = None
 
         for line in self.gedcom_stream:
-            line = line.strip()
-            if line:  # Skip empty lines
+            stripped_line = line.strip()
+            if stripped_line:  # Skip empty lines
                 try:
                     parsed_line = self.parse_gedcom_line(line)
-                    self.all_lines.append(parsed_line)
 
+                    # Parse sublines
                     if (parsed_line.level == 0):
                         stack.clear()
                         self.main_lines.append(parsed_line)
@@ -46,13 +48,27 @@ class GedcomParser:
                     elif parsed_line.level == stack[-1].level + 1:
                         stack[-1].sublines.append(parsed_line)
                     elif parsed_line.level == stack[-1].level + 2:
+                        if prev_parsed_line.tag == GedcomTags.CONC or prev_parsed_line.tag == GedcomTags.CONT:
+                            raise ValueError(f"CONT or CONC line cannot have sublines: {parsed_line}")
+                        
+                        if parsed_line.tag == GedcomTags.CONC:
+                            prev_parsed_line.value += parsed_line.value
+                            continue
+
+                        if parsed_line.tag == GedcomTags.CONT:
+                            prev_parsed_line.value += "\r\n" + parsed_line.value
+                            continue
+
                         stack.append(prev_parsed_line)
                         stack[-1].sublines.append(parsed_line)
                     elif parsed_line.level <= stack[-1].level:
                         while parsed_line.level <= stack[-1].level:
                             stack.pop()
                         stack[-1].sublines.append(parsed_line)
-
+                    else:
+                        raise ValueError(f"Invalid level for line: {parsed_line}")
+                    
+                    self.all_lines.append(parsed_line)
                     prev_parsed_line = parsed_line
 
                 except ValueError as e:
