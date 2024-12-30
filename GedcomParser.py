@@ -71,7 +71,7 @@ class GedcomParser:
                     transmission.all_lines.append(parsed_line)
                     prev_parsed_line = parsed_line
 
-                except (ValueError, TypeError) as e:
+                except (ValueError, TypeError, AttributeError) as e:
                     print(f"Skipping line {lineno} due to error: {e}")
                     exit(1)
         
