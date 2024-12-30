@@ -43,13 +43,13 @@ class GedcomParser:
                         stack.clear()
                         self.main_lines.append(parsed_line)
                         stack.append(parsed_line)
-                    elif prev_parsed_line.level == parsed_line.level:
+                    elif parsed_line.level == stack[-1].level + 1:
                         stack[-1].sublines.append(parsed_line)
-                    elif prev_parsed_line.level < parsed_line.level:
+                    elif parsed_line.level == stack[-1].level + 2:
                         stack.append(prev_parsed_line)
                         stack[-1].sublines.append(parsed_line)
-                    else: # stack[-1].level > parsed_line.level
-                        while stack[-1].level >= parsed_line.level:
+                    elif parsed_line.level <= stack[-1].level:
+                        while parsed_line.level <= stack[-1].level:
                             stack.pop()
                         stack[-1].sublines.append(parsed_line)
 
