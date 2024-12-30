@@ -7,8 +7,8 @@ def main(argv: List[str]):
     with open(gedcom_file_path, 'r') as gedcom_stream:
         parser = GedcomParser(gedcom_stream)
         parser.parse()
-        for gedcom_line in parser.lines:
-            print(gedcom_line)
+        for gedcom_line in parser.main_lines:
+            gedcom_line.print()
 
 # Example usage
 if __name__ == '__main__':
