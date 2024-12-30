@@ -23,7 +23,7 @@ escape_text: anychar+;
 
 pointer: '@' alphanum pointer_string '@';
 
-pointer_string: pointer_char+;
+pointer_string: pointer_char*;
 
 pointer_char: ALPHA | DIGIT | otherchar | '#';
 
