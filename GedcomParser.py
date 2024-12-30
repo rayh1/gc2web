@@ -1,17 +1,11 @@
 import re
-
-from typing import List, Optional, TextIO
+from typing import TextIO
 from collections import deque
-
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
+from GedcomTransmission import GedcomTransmission
 
 class GedcomParser:
-    def __init__(self, gedcom_stream: TextIO):
-        self.gedcom_stream: TextIO = gedcom_stream
-        self.all_lines: List[GedcomLine] = []
-        self.main_lines: List[GedcomLine] = []
-
     def parse_gedcom_line(self, line: str) -> GedcomLine:
         """Parses a single GEDCOM line and returns its components."""
         gedcom_regex = r"^\s*(\d+)\s+(@[^@]+@)?\s*([A-Za-z0-9_]+)\s*(@[^@]+@)?(.+)?$"
@@ -27,14 +21,15 @@ class GedcomParser:
         
         return GedcomLine(level, tag, xref_id, pointer_value, value)
 
-    def parse(self):
+    def parse(self, gedcom_stream: TextIO) -> GedcomTransmission:
         """Reads a GEDCOM stream and parses each line into a GedcomLine instance."""
-        self.all_lines = []
-        self.main_lines = []
+        transmission = GedcomTransmission()
         stack: deque[GedcomLine] = deque()
         prev_parsed_line = None
+        lineno: int = 0
 
-        for line in self.gedcom_stream:
+        for line in gedcom_stream:
+            lineno += 1
             stripped_line = line.strip()
             if stripped_line:  # Skip empty lines
                 try:
@@ -43,7 +38,7 @@ class GedcomParser:
                     # Parse sublines
                     if (parsed_line.level == 0):
                         stack.clear()
-                        self.main_lines.append(parsed_line)
+                        transmission.main_lines.append(parsed_line)
                         stack.append(parsed_line)
                     elif parsed_line.level == stack[-1].level + 1:
                         stack[-1].sublines.append(parsed_line)
@@ -52,11 +47,13 @@ class GedcomParser:
                             raise ValueError(f"CONT or CONC line cannot have sublines: {parsed_line}")
                         
                         if parsed_line.tag == GedcomTags.CONC:
+                            value = "" if parsed_line.value == None else parsed_line.value
                             prev_parsed_line.value += parsed_line.value
                             continue
 
                         if parsed_line.tag == GedcomTags.CONT:
-                            prev_parsed_line.value += "\r\n" + parsed_line.value
+                            value = "" if parsed_line.value == None else parsed_line.value
+                            prev_parsed_line.value += "\r\n" + value
                             continue
 
                         stack.append(prev_parsed_line)
@@ -67,9 +64,15 @@ class GedcomParser:
                         stack[-1].sublines.append(parsed_line)
                     else:
                         raise ValueError(f"Invalid level for line: {parsed_line}")
+
+                    if parsed_line.xref_id:
+                        transmission.id_map[parsed_line.xref_id] = parsed_line
                     
-                    self.all_lines.append(parsed_line)
+                    transmission.all_lines.append(parsed_line)
                     prev_parsed_line = parsed_line
 
-                except ValueError as e:
-                    print(f"Skipping line due to error: {e}")
+                except (ValueError, TypeError) as e:
+                    print(f"Skipping line {lineno} due to error: {e}")
+                    exit(1)
+        
+        return transmission
