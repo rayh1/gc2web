@@ -1,12 +1,13 @@
 from GedcomLine import GedcomLine
 import re
+from typing import List, Optional, TextIO
 
 class GedcomParser:
-    def __init__(self, gedcom_stream):
-        self.gedcom_stream = gedcom_stream
-        self.lines = []
+    def __init__(self, gedcom_stream: TextIO):
+        self.gedcom_stream: TextIO = gedcom_stream
+        self.lines: List[GedcomLine] = []
 
-    def parse_gedcom_line(self, line):
+    def parse_gedcom_line(self, line: str) -> GedcomLine:
         """Parses a single GEDCOM line and returns its components."""
         gedcom_regex = r"^\s*(\d+)\s+(@[^@]+@)?\s*([A-Za-z0-9_]+)\s*(@[^@]+@)?(.+)?$"
         match = re.match(gedcom_regex, line)
@@ -30,4 +31,3 @@ class GedcomParser:
                     self.lines.append(parsed_line)
                 except ValueError as e:
                     print(f"Skipping line due to error: {e}")
-        return self.lines
