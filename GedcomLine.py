@@ -6,6 +6,7 @@ class GedcomLine:
         self.pointer_value: str | None = pointer_value
         self.value: str | None = value
         self.sublines: list[GedcomLine] = []
+        self.parent: GedcomLine | None = None
 
     def __repr__(self) -> str:
         return f"[level={self.level}, tag='{self.tag}', xref_id='{self.xref_id}', pointer_value='{self.pointer_value}', value='{self.value}']"

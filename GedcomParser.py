@@ -36,13 +36,14 @@ class GedcomParser:
                     parsed_line = self.parse_gedcom_line(line)
 
                     # Parse sublines
-                    if (parsed_line.level == 0):
+                    if (parsed_line.level == 0):    # Root line
                         stack.clear()
                         transmission.main_lines.append(parsed_line)
                         stack.append(parsed_line)
-                    elif parsed_line.level == stack[-1].level + 1:
+                    elif parsed_line.level == stack[-1].level + 1: # Subline
+                        parsed_line.parent = stack[-1]
                         stack[-1].sublines.append(parsed_line)
-                    elif parsed_line.level == stack[-1].level + 2:
+                    elif parsed_line.level == stack[-1].level + 2:  # Deeper subline
                         if prev_parsed_line.tag == GedcomTags.CONC or prev_parsed_line.tag == GedcomTags.CONT:
                             raise ValueError(f"CONT or CONC line cannot have sublines: {parsed_line}")
                         
@@ -57,17 +58,21 @@ class GedcomParser:
                             continue
 
                         stack.append(prev_parsed_line)
+                        parsed_line.parent = stack[-1]
                         stack[-1].sublines.append(parsed_line)
-                    elif parsed_line.level <= stack[-1].level:
+                    elif parsed_line.level <= stack[-1].level:  # Higher level subline
                         while parsed_line.level <= stack[-1].level:
                             stack.pop()
+                        parsed_line.parent = stack[-1]
                         stack[-1].sublines.append(parsed_line)
                     else:
                         raise ValueError(f"Invalid level for line: {parsed_line}")
 
+                    # Store xref_id mappings
                     if parsed_line.xref_id:
                         transmission.id_map[parsed_line.xref_id] = parsed_line
                     
+                    # Bookkeeping
                     transmission.all_lines.append(parsed_line)
                     prev_parsed_line = parsed_line
 

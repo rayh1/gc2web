@@ -10,6 +10,7 @@ def main(argv: List[str]):
     ap.add_argument('-i', '--id', type=str, required=False, nargs='?', default=None, help='Id of Gedcom line')
     ap.add_argument('-t', '--tag', type=str, required=False, nargs='?', default=None, help='Tag to filter by')
     ap.add_argument('-v', '--value',  type=str, required=False, nargs='?', default=None, help='Regex to filter values by')
+    ap.add_argument('-p', '--parent', action='store_true', help='Print parent lines')
     ap.add_argument('--no-follow-pointer', action='store_true', help='Do not follow pointers')
     
     args = ap.parse_args(argv[1:])
@@ -27,6 +28,8 @@ def main(argv: List[str]):
 
         for line in iterator:
             print(line)
+            if args.parent and line.parent:
+                print(f"\tPARENT: {line.parent}")
 
 # Example usage
 if __name__ == '__main__':
