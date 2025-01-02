@@ -16,6 +16,7 @@ class GedcomTags:
     DEAT: str = "DEAT"
     BURI: str = "BURI"
     RESI: str = "RESI"
+    FAM: str = "FAM"
     FAMS: str = "FAMS"
     FAMC: str = "FAMC"
     ADOP: str = "ADOP"

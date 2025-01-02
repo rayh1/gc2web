@@ -2,7 +2,7 @@ import argparse
 import sys
 from typing import Tuple, List, Dict
 from GedcomParser import GedcomParser
-from GedcomTransmission import GedcomTransmission
+from GedcomTransmission import GedcomTransmission, Individual, Family
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 
@@ -17,123 +17,51 @@ def extract_date_place(transmission: GedcomTransmission, line: GedcomLine) -> tu
             place = subline.value if subline.value else ""
     return date, place
 
-def find_person_details(transmission: GedcomTransmission, xref_id: str) -> dict:
-    """Find name, birth, death details for a person"""
-    details = {
-        'name': 'Unknown',
-        'birth_date': '',
-        'birth_place': '',
-        'death_date': '',
-        'death_place': ''
-    }
-    
-    # Find name
-    for line in transmission.iterate_id(xref_id, tag=GedcomTags.NAME):
-        details['name'] = line.value if line.value else "Unknown"
-        break
-        
-    # Find birth info
-    for line in transmission.iterate_id(xref_id, tag=GedcomTags.BIRT):
-        details['birth_date'], details['birth_place'] = extract_date_place(transmission, line)
-            
-    # Find death info
-    for line in transmission.iterate_id(xref_id, tag=GedcomTags.DEAT):
-        details['death_date'], details['death_place'] = extract_date_place(transmission, line)
-    
-    return details
+def parse_gedcom(transmission: GedcomTransmission) -> Tuple[Dict[str, Individual], Dict[str, Family]]:
+    """Parse the GedcomTransmission and generate all Individual and Family instances"""
+    individuals = {}
+    families = {}
 
-def find_family_members(transmission: GedcomTransmission, xref_id: str) -> tuple[list, list, str]:
-    """Find parents, children and marriage date for a person"""
-    parents = []
-    children = []
-    marriage_date = ""
-    
-    # Find family where person is child
-    for famc in transmission.iterate_id(xref_id, tag=GedcomTags.FAMC):
-        if famc.pointer_value:
-            # Get parents from this family
-            for family in transmission.iterate_id(famc.pointer_value):
-                if family.tag == GedcomTags.HUSB and family.pointer_value:
-                    parents.append(family.pointer_value)
-                elif family.tag == GedcomTags.WIFE and family.pointer_value:
-                    parents.append(family.pointer_value)
-                elif family.tag == GedcomTags.MARR:
-                    date, _ = extract_date_place(transmission, family)
-                    marriage_date = date
-    
-    # Find families where person is parent
-    for fams in transmission.iterate_id(xref_id, tag=GedcomTags.FAMS):
-        if fams.pointer_value:
-            # Get children from this family
-            for family in transmission.iterate_id(fams.pointer_value):
-                if family.tag == GedcomTags.CHIL and family.pointer_value:
-                    children.append(family.pointer_value)
-    
-    return parents, children, marriage_date
+    # Parse individuals
+    for line in transmission.iterate(tag=GedcomTags.INDI):
+        xref_id = line.xref_id
+        individual = Individual(xref_id=xref_id)
+        individuals[xref_id] = individual
 
-def find_spouse_details(transmission: GedcomTransmission, xref_id: str) -> dict:
-    """Find name, birth, death details for a spouse"""
-    details = {
-        'name': 'Unknown',
-        'birth_date': '',
-        'birth_place': '',
-        'death_date': '',
-        'death_place': ''
-    }
-    
-    # Find name
-    for line in transmission.iterate_id(xref_id, tag=GedcomTags.NAME):
-        details['name'] = line.value if line.value else "Unknown"
-        break
-        
-    # Find birth info
-    for line in transmission.iterate_id(xref_id, tag=GedcomTags.BIRT):
-        details['birth_date'], details['birth_place'] = extract_date_place(transmission, line)
-            
-    # Find death info
-    for line in transmission.iterate_id(xref_id, tag=GedcomTags.DEAT):
-        details['death_date'], details['death_place'] = extract_date_place(transmission, line)
-    
-    return details
+        for subline in transmission.iterate(line):
+            if subline.tag == GedcomTags.NAME:
+                individual.name = subline.value if subline.value else "Unknown"
+            elif subline.tag == GedcomTags.BIRT:
+                individual.birth_date, individual.birth_place = extract_date_place(transmission, subline)
+            elif subline.tag == GedcomTags.DEAT:
+                individual.death_date, individual.death_place = extract_date_place(transmission, subline)
+            elif subline.tag == GedcomTags.FAMS:
+                individual.fams.append(subline.pointer_value)
+            elif subline.tag == GedcomTags.FAMC:
+                individual.famc = subline.pointer_value
 
-def find_spouse(transmission: GedcomTransmission, xref_id: str) -> tuple[dict, str]:
-    """Find spouse details and marriage date for a person"""
-    spouse = {}
-    marriage_date = ""
-    
-    # Find families where person is parent
-    for fams in transmission.iterate_id(xref_id, tag=GedcomTags.FAMS):
-        if fams.pointer_value:
-            for family in transmission.iterate_id(fams.pointer_value):
-                if family.tag == GedcomTags.HUSB and family.pointer_value != xref_id:
-                    spouse = find_spouse_details(transmission, family.pointer_value)
-                elif family.tag == GedcomTags.WIFE and family.pointer_value != xref_id:
-                    spouse = find_spouse_details(transmission, family.pointer_value)
-                elif family.tag == GedcomTags.MARR:
-                    date, _ = extract_date_place(transmission, family)
-                    marriage_date = date
-    
-    return spouse, marriage_date
+    # Parse families
+    for line in transmission.iterate(tag=GedcomTags.FAM):
+        xref_id = line.xref_id
+        family = Family(xref_id=xref_id)
+        families[xref_id] = family
 
-def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) -> str:
+        for subline in transmission.iterate(line):
+        #for subline in transmission.iterate(line):
+            if subline.tag == GedcomTags.HUSB:
+                family.husband = subline.pointer_value
+            elif subline.tag == GedcomTags.WIFE:
+                family.wife = subline.pointer_value
+            elif subline.tag == GedcomTags.CHIL:
+                family.children.append(subline.pointer_value)
+            elif subline.tag == GedcomTags.MARR:
+                family.marriage_date, family.marriage_place = extract_date_place(transmission, subline)
+
+    return individuals, families
+
+def create_individual_diagram(individuals: Dict[str, Individual], families: Dict[str, Family], xref_id: str) -> str:
     """Create a PlantUML family diagram for an individual"""
-    
-    # Get details for main individual
-    person = find_person_details(transmission, xref_id)
-    
-    # Find family members
-    parents, children, parents_marriage = find_family_members(transmission, xref_id)
-    
-    # Get details for parents
-    parent_details = [find_person_details(transmission, p) for p in parents]
-    
-    # Get details for children
-    child_details = [find_person_details(transmission, c) for c in children]
-    
-    # Get details for spouse
-    spouse, marriage_date = find_spouse(transmission, xref_id)
-    
-    # Create PlantUML diagram
+    person = individuals[xref_id]
     diagram = [
         "@startuml",
         "skinparam backgroundColor transparent",
@@ -143,81 +71,81 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
         "",
         "' Parents",
     ]
-    
+
     # Add parents
-    for i, parent in enumerate(parent_details):
-        diagram.append(f'class "{parent["name"]}" as P{i} #lightgreen {{')
-        birth_date = parent['birth_date'] if parent['birth_date'] else "?"
-        birth_place = parent['birth_place'] if parent['birth_place'] else "?"
-        death_date = parent['death_date'] if parent['death_date'] else "?"
-        death_place = parent['death_place'] if parent['death_place'] else "?"
-        diagram.append(f'<&plus> {birth_date} {birth_place}')
-        diagram.append(f'<&x> {death_date} {death_place}')
-        diagram.append("}")
-        
-    if parents_marriage:
-        diagram.append(f'class "Marriage" as M1 #lightyellow {{')
-        diagram.append(f'<&people> {parents_marriage if parents_marriage else "?"}')
-        diagram.append("}")
-    
+    if person.famc:
+        family = families[person.famc]
+        parent_details = [individuals[family.husband], individuals[family.wife]]
+        for i, parent in enumerate(parent_details):
+            diagram.append(f'class "{parent.name}" as P{i} #lightgreen {{')
+            birth_date = parent.birth_date if parent.birth_date else "?"
+            birth_place = parent.birth_place if parent.birth_place else "?"
+            death_date = parent.death_date if parent.death_date else "?"
+            death_place = parent.death_place if parent.death_place else "?"
+            diagram.append(f'<&plus> {birth_date} {birth_place}')
+            diagram.append(f'<&x> {death_date} {death_place}')
+            diagram.append("}")
+
+        if family.marriage_date:
+            diagram.append(f'class "Marriage" as M1 #lightyellow {{')
+            diagram.append(f'<&people> {family.marriage_date if family.marriage_date else "?"}')
+            diagram.append("}")
+
+        # Add relationships from parents to marriage block
+        diagram.append(f'P0 -- M1')
+        diagram.append(f'P1 -- M1')
+        diagram.append(f'M1 -- {xref_id.strip("@")}')
+
     # Add main individual
     diagram.append("")
-    diagram.append(f'class "{person["name"]}" as {xref_id.strip("@")} #lightblue {{')
-    birth_date = person['birth_date'] if person['birth_date'] else "?"
-    birth_place = person['birth_place'] if person['birth_place'] else "?"
-    death_date = person['death_date'] if person['death_date'] else "?"
-    death_place = person['death_place'] if person['death_place'] else "?"
+    diagram.append(f'class "{person.name}" as {xref_id.strip("@")} #lightblue {{')
+    birth_date = person.birth_date if person.birth_date else "?"
+    birth_place = person.birth_place if person.birth_place else "?"
+    death_date = person.death_date if person.death_date else "?"
+    death_place = person.death_place if person.death_place else "?"
     diagram.append(f'<&plus> {birth_date} {birth_place}')
     diagram.append(f'<&x> {death_date} {death_place}')
     diagram.append("}")
-    
-    # Add spouse
-    if spouse:
+
+    # Add spouse and children
+    for fam_id in person.fams:
+        family = families[fam_id]
+        spouse_id = family.husband if family.husband != xref_id else family.wife
+        spouse = individuals[spouse_id]
+
         diagram.append("")
-        diagram.append(f'class "{spouse["name"]}" as S1 #lightcoral {{')
-        birth_date = spouse['birth_date'] if spouse['birth_date'] else "?"
-        birth_place = spouse['birth_place'] if spouse['birth_place'] else "?"
-        death_date = spouse['death_date'] if spouse['death_date'] else "?"
-        death_place = spouse['death_place'] if spouse['death_place'] else "?"
+        diagram.append(f'class "{spouse.name}" as S1 #lightcoral {{')
+        birth_date = spouse.birth_date if spouse.birth_date else "?"
+        birth_place = spouse.birth_place if spouse.birth_place else "?"
+        death_date = spouse.death_date if spouse.death_date else "?"
+        death_place = spouse.death_place if spouse.death_place else "?"
         diagram.append(f'<&plus> {birth_date} {birth_place}')
         diagram.append(f'<&x> {death_date} {death_place}')
         diagram.append("}")
-        
-        if marriage_date:
+
+        if family.marriage_date:
             diagram.append(f'class "Marriage" as M2 #lightyellow {{')
-            diagram.append(f'<&people> {marriage_date if marriage_date else "?"}')
+            diagram.append(f'<&people> {family.marriage_date if family.marriage_date else "?"}')
             diagram.append("}")
-    
-    # Add children
-    diagram.append("")
-    for i, child in enumerate(child_details):
-        diagram.append(f'class "{child["name"]}" as C{i} #pink {{')
-        birth_date = child['birth_date'] if child['birth_date'] else "?"
-        birth_place = child['birth_place'] if child['birth_place'] else "?"
-        death_date = child['death_date'] if child['death_date'] else "?"
-        death_place = child['death_place'] if child['death_place'] else "?"
-        diagram.append(f'<&plus> {birth_date} {birth_place}')
-        diagram.append(f'<&x> {death_date} {death_place}')
-        diagram.append("}")
-    
-    # Add relationships
-    if len(parents) == 2:
-        diagram.append(f'\nP0 -- M1')
-        diagram.append(f'P1 -- M1')
-        diagram.append(f'M1 -- {xref_id.strip("@")}')
-        
-    if spouse:
+
+        for i, child_id in enumerate(family.children):
+            child = individuals[child_id]
+            diagram.append(f'class "{child.name}" as C{i} #pink {{')
+            birth_date = child.birth_date if child.birth_date else "?"
+            birth_place = child.birth_place if child.birth_place else "?"
+            death_date = child.death_date if child.death_date else "?"
+            death_place = child.death_place if child.death_place else "?"
+            diagram.append(f'<&plus> {birth_date} {birth_place}')
+            diagram.append(f'<&x> {death_date} {death_place}')
+            diagram.append("}")
+
+        # Add relationships
         diagram.append(f'{xref_id.strip("@")} -- M2')
         diagram.append(f'S1 -- M2')
-        
-    for i in range(len(children)):
-        if spouse:
+        for i in range(len(family.children)):
             diagram.append(f'M2 -- C{i}')
-        else:
-            diagram.append(f'{xref_id.strip("@")} -- C{i}')
-        
+
     diagram.extend(["", "@enduml"])
-    
     return "\n".join(diagram)
 
 def main(argv: List[str]):
@@ -231,7 +159,8 @@ def main(argv: List[str]):
         parser = GedcomParser()
         transmission = parser.parse(gedcom_stream)
 
-        print(create_individual_diagram(transmission, args.id))
+        individuals, families = parse_gedcom(transmission)
+        print(create_individual_diagram(individuals, families, args.id))
 
 # Example usage
 if __name__ == '__main__':
