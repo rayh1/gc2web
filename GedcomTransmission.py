@@ -91,9 +91,9 @@ class GedcomTransmission:
         place = ""
         for subline in self.iterate(line):
             if subline.tag == GedcomTags.DATE:
-                date = subline.value if subline.value else ""
+                date = subline.value
             elif subline.tag == GedcomTags.PLAC:
-                place = subline.value if subline.value else ""
+                place = subline.value
         return date, place
 
     def parse_individuals(self):

@@ -2,10 +2,10 @@ class Individual:
     def __init__(self, xref_id: str):
         self.__xref_id = xref_id
         self.__name = "Unknown"
-        self.__birth_date = ""
-        self.__birth_place = ""
-        self.__death_date = ""
-        self.__death_place = ""
+        self.__birth_date = None
+        self.__birth_place = None
+        self.__death_date = None
+        self.__death_place = None
         self.__fams = []
         self.__famc = None
 
