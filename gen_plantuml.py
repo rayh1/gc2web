@@ -2,66 +2,15 @@ import argparse
 import sys
 from typing import Tuple, List, Dict
 from GedcomParser import GedcomParser
-from GedcomTransmission import GedcomTransmission, Individual, Family
+from GedcomTransmission import GedcomTransmission
+from Individual import Individual
+from Family import Family
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 
-def extract_date_place(transmission: GedcomTransmission, line: GedcomLine) -> tuple[str, str]:
-    """Extract date and place from a GEDCOM event line"""
-    date = ""
-    place = ""
-    for subline in transmission.iterate(line):
-        if subline.tag == GedcomTags.DATE:
-            date = subline.value if subline.value else ""
-        elif subline.tag == GedcomTags.PLAC:
-            place = subline.value if subline.value else ""
-    return date, place
-
-def parse_gedcom(transmission: GedcomTransmission) -> Tuple[Dict[str, Individual], Dict[str, Family]]:
-    """Parse the GedcomTransmission and generate all Individual and Family instances"""
-    individuals = {}
-    families = {}
-
-    # Parse individuals
-    for line in transmission.iterate(tag=GedcomTags.INDI):
-        xref_id = line.xref_id
-        individual = Individual(xref_id=xref_id)
-        individuals[xref_id] = individual
-
-        for subline in transmission.iterate(line):
-            if subline.tag == GedcomTags.NAME:
-                individual.name = subline.value if subline.value else "Unknown"
-            elif subline.tag == GedcomTags.BIRT:
-                individual.birth_date, individual.birth_place = extract_date_place(transmission, subline)
-            elif subline.tag == GedcomTags.DEAT:
-                individual.death_date, individual.death_place = extract_date_place(transmission, subline)
-            elif subline.tag == GedcomTags.FAMS:
-                individual.fams.append(subline.pointer_value)
-            elif subline.tag == GedcomTags.FAMC:
-                individual.famc = subline.pointer_value
-
-    # Parse families
-    for line in transmission.iterate(tag=GedcomTags.FAM):
-        xref_id = line.xref_id
-        family = Family(xref_id=xref_id)
-        families[xref_id] = family
-
-        for subline in transmission.iterate(line):
-        #for subline in transmission.iterate(line):
-            if subline.tag == GedcomTags.HUSB:
-                family.husband = subline.pointer_value
-            elif subline.tag == GedcomTags.WIFE:
-                family.wife = subline.pointer_value
-            elif subline.tag == GedcomTags.CHIL:
-                family.children.append(subline.pointer_value)
-            elif subline.tag == GedcomTags.MARR:
-                family.marriage_date, family.marriage_place = extract_date_place(transmission, subline)
-
-    return individuals, families
-
-def create_individual_diagram(individuals: Dict[str, Individual], families: Dict[str, Family], xref_id: str) -> str:
+def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) -> str:
     """Create a PlantUML family diagram for an individual"""
-    person = individuals[xref_id]
+    person = transmission.individuals[xref_id]
     diagram = [
         "@startuml",
         "skinparam backgroundColor transparent",
@@ -74,8 +23,8 @@ def create_individual_diagram(individuals: Dict[str, Individual], families: Dict
 
     # Add parents
     if person.famc:
-        family = families[person.famc]
-        parent_details = [individuals[family.husband], individuals[family.wife]]
+        family = transmission.families[person.famc]
+        parent_details = [transmission.individuals[family.husband], transmission.individuals[family.wife]]
         for i, parent in enumerate(parent_details):
             diagram.append(f'class "{parent.name}" as P{i} #lightgreen {{')
             birth_date = parent.birth_date if parent.birth_date else "?"
@@ -109,9 +58,9 @@ def create_individual_diagram(individuals: Dict[str, Individual], families: Dict
 
     # Add spouse and children
     for fam_id in person.fams:
-        family = families[fam_id]
+        family = transmission.families[fam_id]
         spouse_id = family.husband if family.husband != xref_id else family.wife
-        spouse = individuals[spouse_id]
+        spouse = transmission.individuals[spouse_id]
 
         diagram.append("")
         diagram.append(f'class "{spouse.name}" as S1 #lightcoral {{')
@@ -129,7 +78,7 @@ def create_individual_diagram(individuals: Dict[str, Individual], families: Dict
             diagram.append("}")
 
         for i, child_id in enumerate(family.children):
-            child = individuals[child_id]
+            child = transmission.individuals[child_id]
             diagram.append(f'class "{child.name}" as C{i} #pink {{')
             birth_date = child.birth_date if child.birth_date else "?"
             birth_place = child.birth_place if child.birth_place else "?"
@@ -158,9 +107,9 @@ def main(argv: List[str]):
     with open(args.file, 'r') as gedcom_stream:
         parser = GedcomParser()
         transmission = parser.parse(gedcom_stream)
+        transmission.parse_gedcom()
 
-        individuals, families = parse_gedcom(transmission)
-        print(create_individual_diagram(individuals, families, args.id))
+        print(create_individual_diagram(transmission, args.id))
 
 # Example usage
 if __name__ == '__main__':
