@@ -42,13 +42,37 @@ class GedcomTransmission:
         self.id_map: dict[str, GedcomLine] = {}
 
     def iterate(self, line: GedcomLine = None, tag: str | None = None, value_re: str | None = None, follow_pointers: bool | None = None) -> GedcomIterator:
+        """
+        Iterate over Gedcom lines based on specified criteria.
+
+        Args:
+            line (GedcomLine, optional): Iterate over all sublines of this line. If None, iterate over all lines.
+            tag (str, optional): The tag to filter lines by. If None, no tag filtering is applied.
+            value_re (str, optional): A regular expression to filter lines by their value. If None, no value filtering is applied.
+            follow_pointers (bool, optional): If True, follow pointers during iteration. If None, pointers are not followed.
+
+        Returns:
+            GedcomIterator: An iterator over the filtered Gedcom lines.
+        """
         if line == None:
             return GedcomIterator(self, self.all_lines, tag, value_re, follow_pointers)
         else:
             return GedcomIterator(self, line.sublines, tag, value_re, follow_pointers)
 
     def iterate_id(self, id: str, tag: str | None = None, value_re: str | None = None, follow_pointers: bool | None = None) -> GedcomIterator:
-            return GedcomIterator(self, self.id_map[id].sublines, tag, value_re, follow_pointers)
+        """
+        Iterate over Gedcom lines based on specified criteria.
+
+        Args:
+            id (GedcomLine, optional): Find a line with this id and iterate over all its sublines.
+            tag (str, optional): The tag to filter lines by. If None, no tag filtering is applied.
+            value_re (str, optional): A regular expression to filter lines by their value. If None, no value filtering is applied.
+            follow_pointers (bool, optional): If True, follow pointers during iteration. If None, pointers are not followed.
+
+        Returns:
+            GedcomIterator: An iterator over the filtered Gedcom lines.
+        """
+        return GedcomIterator(self, self.id_map[id].sublines, tag, value_re, follow_pointers)
     
     def follow_pointers(self, line: GedcomLine) -> GedcomLine:
         while line and line.pointer_value:
