@@ -67,6 +67,8 @@ class Family:
     def marriage_place(self, value: str):
         self.__marriage_place = value
 
+# Utility methods
+
     @property
     def husband(self) -> Individual | None:
         return self.transmission.get_individual(self.husband_id)

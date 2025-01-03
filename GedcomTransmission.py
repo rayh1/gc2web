@@ -120,6 +120,8 @@ class GedcomTransmission:
                     individual.fams_ids.append(subline.pointer_value)
                 elif subline.tag == GedcomTags.FAMC:
                     individual.famc_id = subline.pointer_value
+                elif subline.tag == GedcomTags.SEX:
+                    individual.sex = subline.value
 
     def parse_families(self):
         """Parse families from the GedcomTransmission"""

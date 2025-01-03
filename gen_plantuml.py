@@ -11,13 +11,22 @@ from GedcomTags import GedcomTags
 def s(value: str) -> str:
     return value if value else "?"
 
-def add_individual_to_diagram(diagram: List[str], individual: Individual, box_name: str, color: str):
+def add_individual_to_diagram(diagram: List[str], individual: Individual, box_name: str, color: str = None):
+    if color is None:
+        if individual.is_male:
+            color = '#lightblue'
+        elif individual.is_female:
+            color = '#pink'
+        else:
+            color = '#lightgrey'
     diagram.append(f'class "{individual.name}" as {box_name} {color} {{')
     diagram.append(f'{{field}} <&plus> {s(individual.birth_date)} {s(individual.birth_place)}')
     diagram.append(f'{{field}} <&x> {s(individual.death_date)} {s(individual.death_place)}')
     diagram.append("}")
 
-def add_marriage_to_diagram(diagram: List[str], family: Family, box_name: str, color: str):
+def add_marriage_to_diagram(diagram: List[str], family: Family, box_name: str, color: str = None):
+    if color is None:
+        color = '#lightyellow'
     diagram.append(f'class "<&people> {family.marriage_date if family.marriage_date else "?"}" as {box_name} {color} {{')
     diagram.append("}")
 
@@ -39,10 +48,10 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
     if family:
         parents = [family.husband, family.wife]
         for i, parent in enumerate(parents):
-            add_individual_to_diagram(diagram, parent, f'P{i}', '#lightgreen')
+            add_individual_to_diagram(diagram, parent, f'P{i}')
 
         if family.marriage_date:
-            add_marriage_to_diagram(diagram, family, "M1", '#lightyellow')
+            add_marriage_to_diagram(diagram, family, "M1")
 
         # Add relationships from parents to marriage block
         diagram.append(f'P0 -- M1')
@@ -51,7 +60,7 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
 
     # Add main individual
     diagram.append("")
-    add_individual_to_diagram(diagram, person, xref_id.strip("@"), '#lightblue')
+    add_individual_to_diagram(diagram, person, xref_id.strip("@"))
 
     # Add spouse and children
     for family in person.fams:
@@ -59,12 +68,12 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
         spouse = transmission.get_individual(spouse_id)
 
         diagram.append("")
-        add_individual_to_diagram(diagram, spouse, 'S1', '#lightcoral')
+        add_individual_to_diagram(diagram, spouse, 'S1')
 
-        add_marriage_to_diagram(diagram, family, "M2", '#lightyellow')
+        add_marriage_to_diagram(diagram, family, "M2")
 
         for i, child in enumerate(family.children):
-            add_individual_to_diagram(diagram, child, f'C{i}', '#pink')
+            add_individual_to_diagram(diagram, child, f'C{i}')
 
         # Add relationships
         diagram.append(f'{xref_id.strip("@")} -- M2')

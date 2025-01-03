@@ -9,6 +9,7 @@ class Individual:
         self.__death_place = None
         self.__fams_ids = []
         self.__famc_id = None
+        self.__sex = None  # Initialize the sex property
 
     @property
     def xref_id(self) -> str:
@@ -83,6 +84,16 @@ class Individual:
         self.__famc_id = value
 
     @property
+    def sex(self) -> str | None:
+        return self.__sex
+
+    @sex.setter
+    def sex(self, value: str | None):
+        self.__sex = value
+
+# Utility methods
+
+    @property
     def fams(self) -> list['Family']: # type: ignore
         return [self.transmission.get_family(fams_id) for fams_id in self.fams_ids]
 
@@ -90,16 +101,19 @@ class Individual:
     def famc(self) -> 'Family': # type: ignore
         return self.__transmission.get_family(self.__famc_id)
 
+    @property
     def father(self) -> 'Individual':
         if self.famc:
             return self.famc.husband
         return None
 
+    @property
     def mother(self) -> 'Individual':
         if self.famc:
             return self.famc.wife
         return None
 
+    @property
     def spouses(self) -> list['Individual']:
         spouses = []
         for family in self.fams:
@@ -109,9 +123,22 @@ class Individual:
                 spouses.append(family.wife)
         return spouses
 
+    @property
     def children(self, spouse: 'Individual') -> list['Individual']:
         children = []
         for family in self.fams:
             if (family.husband == self and family.wife == spouse) or (family.husband == spouse and family.wife == self):
                 children.extend(family.children)
         return children
+
+    @property
+    def is_male(self) -> bool:
+        return self.__sex == 'M'
+
+    @property
+    def is_female(self) -> bool:
+        return self.__sex == 'F'
+
+    @property
+    def is_unknown_sex(self) -> bool:
+        return self.__sex not in ['M', 'F']
