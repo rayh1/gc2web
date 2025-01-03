@@ -1,13 +1,14 @@
 class Individual:
-    def __init__(self, xref_id: str):
+    def __init__(self, xref_id: str, transmission: 'GedcomTransmission'): # type: ignore
         self.__xref_id = xref_id
+        self.__transmission: 'GedcomTransmission' = transmission # type: ignore
         self.__name = "Unknown"
         self.__birth_date = None
         self.__birth_place = None
         self.__death_date = None
         self.__death_place = None
-        self.__fams = []
-        self.__famc = None
+        self.__fams_ids = []
+        self.__famc_id = None
 
     @property
     def xref_id(self) -> str:
@@ -16,6 +17,14 @@ class Individual:
     @xref_id.setter
     def xref_id(self, value: str):
         self.__xref_id = value
+
+    @property
+    def transmission(self) -> 'GedcomTransmission': # type: ignore
+        return self.__transmission
+
+    @transmission.setter
+    def transmission(self, value: 'GedcomTransmission'): # type: ignore
+        self.__transmission = value
 
     @property
     def name(self) -> str:
@@ -58,17 +67,17 @@ class Individual:
         self.__death_place = value
 
     @property
-    def fams(self) -> list:
-        return self.__fams
+    def fams_ids(self) -> list:
+        return self.__fams_ids
 
-    @fams.setter
-    def fams(self, value: list):
-        self.__fams = value
+    @fams_ids.setter
+    def fams_ids(self, value: list):
+        self.__fams_ids = value
 
     @property
-    def famc(self) -> str | None:
-        return self.__famc
+    def famc_id(self) -> str | None:
+        return self.__famc_id
 
-    @famc.setter
-    def famc(self, value: str | None):
-        self.__famc = value
+    @famc_id.setter
+    def famc_id(self, value: str | None):
+        self.__famc_id = value

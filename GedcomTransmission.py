@@ -79,6 +79,12 @@ class GedcomTransmission:
         """
         return GedcomIterator(self, self.id_map[id].sublines, tag, value_re, follow_pointers)
     
+    def get_individual(self, id: str) -> Individual | None:
+        return self.individuals[id]
+    
+    def get_family(self, id: str) -> Family | None:
+        return self.families[id]
+    
     def follow_pointers(self, line: GedcomLine) -> GedcomLine:
         while line and line.pointer_value:
             line = self.id_map[line.pointer_value]
@@ -100,7 +106,7 @@ class GedcomTransmission:
         """Parse individuals from the GedcomTransmission"""
         for line in self.iterate(tag=GedcomTags.INDI):
             xref_id = line.xref_id
-            individual = Individual(xref_id=xref_id)
+            individual = Individual(xref_id=xref_id, transmission=self)
             self.individuals[xref_id] = individual
 
             for subline in self.iterate(line):
@@ -111,24 +117,24 @@ class GedcomTransmission:
                 elif subline.tag == GedcomTags.DEAT:
                     individual.death_date, individual.death_place = self.extract_date_place(subline)
                 elif subline.tag == GedcomTags.FAMS:
-                    individual.fams.append(subline.pointer_value)
+                    individual.fams_ids.append(subline.pointer_value)
                 elif subline.tag == GedcomTags.FAMC:
-                    individual.famc = subline.pointer_value
+                    individual.famc_id = subline.pointer_value
 
     def parse_families(self):
         """Parse families from the GedcomTransmission"""
         for line in self.iterate(tag=GedcomTags.FAM):
             xref_id = line.xref_id
-            family = Family(xref_id=xref_id)
+            family = Family(xref_id=xref_id, transmission=self)  # Pass the current instance
             self.families[xref_id] = family
 
             for subline in self.iterate(line):
                 if subline.tag == GedcomTags.HUSB:
-                    family.husband = subline.pointer_value
+                    family.husband_id = subline.pointer_value
                 elif subline.tag == GedcomTags.WIFE:
-                    family.wife = subline.pointer_value
+                    family.wife_id = subline.pointer_value
                 elif subline.tag == GedcomTags.CHIL:
-                    family.children.append(subline.pointer_value)
+                    family.children_ids.append(subline.pointer_value)
                 elif subline.tag == GedcomTags.MARR:
                     family.marriage_date, family.marriage_place = self.extract_date_place(subline)
 

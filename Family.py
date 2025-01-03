@@ -1,9 +1,13 @@
+from Individual import Individual
+
+
 class Family:
-    def __init__(self, xref_id: str):
+    def __init__(self, xref_id: str, transmission: 'GedcomTransmission'): # type: ignore
         self.__xref_id: str = xref_id
-        self.__husband: str | None = None
-        self.__wife: str | None = None
-        self.__children: list[str] = []
+        self.__transmission: 'GedcomTransmission' = transmission # type: ignore
+        self.__husband_id: str | None = None
+        self.__wife_id: str | None = None
+        self.__children_ids: list[str] = []
         self.__marriage_date: str = None
         self.__marriage_place: str = None
 
@@ -16,28 +20,36 @@ class Family:
         self.__xref_id = value
 
     @property
-    def husband(self) -> str | None:
-        return self.__husband
+    def transmission(self) -> 'GedcomTransmission': # type: ignore
+        return self.__transmission
 
-    @husband.setter
-    def husband(self, value: str | None):
-        self.__husband = value
-
-    @property
-    def wife(self) -> str | None:
-        return self.__wife
-
-    @wife.setter
-    def wife(self, value: str | None):
-        self.__wife = value
+    @transmission.setter
+    def transmission(self, value: 'GedcomTransmission'): # type: ignore
+        self.__transmission = value
 
     @property
-    def children(self) -> list[str]:
-        return self.__children
+    def husband_id(self) -> str | None:
+        return self.__husband_id
 
-    @children.setter
-    def children(self, value: list[str]):
-        self.__children = value
+    @husband_id.setter
+    def husband_id(self, value: str | None):
+        self.__husband_id = value
+
+    @property
+    def wife_id(self) -> str | None:
+        return self.__wife_id
+
+    @wife_id.setter
+    def wife_id(self, value: str | None):
+        self.__wife_id = value
+
+    @property
+    def children_ids(self) -> list[str]:
+        return self.__children_ids
+
+    @children_ids.setter
+    def children_ids(self, value: list[str]):
+        self.__children_ids = value
 
     @property
     def marriage_date(self) -> str:
@@ -54,3 +66,15 @@ class Family:
     @marriage_place.setter
     def marriage_place(self, value: str):
         self.__marriage_place = value
+
+    @property
+    def husband(self) -> Individual | None:
+        return self.transmission.get_individual(self.husband_id)
+
+    @property
+    def wife(self) -> Individual | None:
+        return self.transmission.get_individual(self.wife_id)
+    
+    @property
+    def children(self) -> Individual | None:
+        return [self.transmission.get_individual(child_id) for child_id in self.children_ids]

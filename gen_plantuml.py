@@ -13,7 +13,7 @@ def s(value: str) -> str:
 
 def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) -> str:
     """Create a PlantUML family diagram for an individual"""
-    person = transmission.individuals[xref_id]
+    person = transmission.get_individual(xref_id)
     diagram = [
         "@startuml",
         "skinparam backgroundColor transparent",
@@ -25,9 +25,9 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
     ]
 
     # Add parents
-    if person.famc:
-        family = transmission.families[person.famc]
-        parent_details = [transmission.individuals[family.husband], transmission.individuals[family.wife]]
+    if person.famc_id:
+        family = transmission.get_family(person.famc_id)
+        parent_details = [family.husband, family.wife]
         for i, parent in enumerate(parent_details):
             diagram.append(f'class "{parent.name}" as P{i} #lightgreen {{')
             diagram.append(f'<&plus> {s(parent.birth_date)} {s(parent.birth_place)}')
@@ -52,10 +52,10 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
     diagram.append("}")
 
     # Add spouse and children
-    for fam_id in person.fams:
-        family = transmission.families[fam_id]
-        spouse_id = family.husband if family.husband != xref_id else family.wife
-        spouse = transmission.individuals[spouse_id]
+    for fam_id in person.fams_ids:
+        family = transmission.get_family(fam_id)
+        spouse_id = family.husband_id if family.husband_id != xref_id else family.wife_id
+        spouse = transmission.get_individual(spouse_id)
 
         diagram.append("")
         diagram.append(f'class "{spouse.name}" as S1 #lightcoral {{')
@@ -68,8 +68,7 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
             diagram.append(f'<&people> {family.marriage_date if family.marriage_date else "?"}')
             diagram.append("}")
 
-        for i, child_id in enumerate(family.children):
-            child = transmission.individuals[child_id]
+        for i, child in enumerate(family.children):
             diagram.append(f'class "{child.name}" as C{i} #pink {{')
             diagram.append(f'<&plus> {s(child.birth_date)} {s(child.birth_place)}')
             diagram.append(f'<&x> {s(child.death_date)} {s(child.death_place)}')
@@ -78,7 +77,7 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
         # Add relationships
         diagram.append(f'{xref_id.strip("@")} -- M2')
         diagram.append(f'S1 -- M2')
-        for i in range(len(family.children)):
+        for i in range(len(family.children_ids)):
             diagram.append(f'M2 -- C{i}')
 
     diagram.extend(["", "@enduml"])
