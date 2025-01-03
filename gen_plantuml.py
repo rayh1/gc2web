@@ -11,7 +11,7 @@ from GedcomTags import GedcomTags
 def s(value: str) -> str:
     return value if value else "?"
 
-def add_individual_to_diagram(diagram: List[str], individual: Individual, box_name: str, color: str = None):
+def add_individual_to_diagram(diagram: List[str], individual: Individual, box_name: str, color: str = None, stereotype: str = None):
     if color is None:
         if individual.is_male:
             color = '#lightblue'
@@ -19,7 +19,8 @@ def add_individual_to_diagram(diagram: List[str], individual: Individual, box_na
             color = '#pink'
         else:
             color = '#lightgrey'
-    diagram.append(f'class "{individual.name}" as {box_name} {color} {{')
+    stereotype = f'<<{stereotype}>>' if stereotype else ''
+    diagram.append(f'class "{individual.name}" as {box_name} {stereotype} {color} {{')
     diagram.append(f'{{field}} <&plus> {s(individual.birth_date)} {s(individual.birth_place)}')
     diagram.append(f'{{field}} <&x> {s(individual.death_date)} {s(individual.death_place)}')
     diagram.append("}")
@@ -39,6 +40,11 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
         "skinparam roundcorner 20",
         "hide circle",
         "hide empty members",
+        "hide stereotype",
+        "",
+        "skinparam class {",
+        "   BorderThickness<<main>> 2",
+        "}",
         "",
         "' Parents",
     ]
@@ -60,7 +66,7 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
 
     # Add main individual
     diagram.append("")
-    add_individual_to_diagram(diagram, person, xref_id.strip("@"))
+    add_individual_to_diagram(diagram, person, xref_id.strip("@"), '#lightgreen', stereotype="main")
 
     # Add spouse and children
     for family in person.fams:
