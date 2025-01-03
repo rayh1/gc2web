@@ -89,3 +89,29 @@ class Individual:
     @property
     def famc(self) -> 'Family': # type: ignore
         return self.__transmission.get_family(self.__famc_id)
+
+    def father(self) -> 'Individual':
+        if self.famc:
+            return self.famc.husband
+        return None
+
+    def mother(self) -> 'Individual':
+        if self.famc:
+            return self.famc.wife
+        return None
+
+    def spouses(self) -> list['Individual']:
+        spouses = []
+        for family in self.fams:
+            if family.husband and family.husband != self:
+                spouses.append(family.husband)
+            if family.wife and family.wife != self:
+                spouses.append(family.wife)
+        return spouses
+
+    def children(self, spouse: 'Individual') -> list['Individual']:
+        children = []
+        for family in self.fams:
+            if (family.husband == self and family.wife == spouse) or (family.husband == spouse and family.wife == self):
+                children.extend(family.children)
+        return children

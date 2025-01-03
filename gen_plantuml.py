@@ -37,8 +37,8 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
     # Add parents
     family = person.famc
     if family:
-        parent_details = [family.husband, family.wife]
-        for i, parent in enumerate(parent_details):
+        parents = [family.husband, family.wife]
+        for i, parent in enumerate(parents):
             add_individual_to_diagram(diagram, parent, f'P{i}', '#lightgreen')
 
         if family.marriage_date:
