@@ -11,7 +11,7 @@ from GedcomTags import GedcomTags
 def s(value: str) -> str:
     return value if value else "?"
 
-def add_individual_to_diagram(diagram: List[str], individual: Individual, box_name: str, color: str = None, stereotype: str = None):
+def add_individual_to_diagram(diagram: List[str], individual: Individual, color: str = None, stereotype: str = None):
     if color is None:
         if individual.is_male:
             color = '#E3F5FB'
@@ -20,15 +20,15 @@ def add_individual_to_diagram(diagram: List[str], individual: Individual, box_na
         else:
             color = '#lightgrey'
     stereotype = f'<<{stereotype}>>' if stereotype else ''
-    diagram.append(f'class "{individual.name}" as {box_name} {stereotype} {color} {{')
+    diagram.append(f'class "{individual.name}" as {individual.xref_id} {stereotype} {color} {{')
     diagram.append(f'{{field}} <:baby_bottle:> {s(individual.birth_date)} {s(individual.birth_place)}')
     diagram.append(f'{{field}} <:skull_and_crossbones:> {s(individual.death_date)} {s(individual.death_place)}')
     diagram.append("}")
 
-def add_marriage_to_diagram(diagram: List[str], family: Family, box_name: str, color: str = None):
+def add_marriage_to_diagram(diagram: List[str], family: Family, color: str = None):
     if color is None:
         color = '#lightyellow'
-    diagram.append(f'class "<:wedding:> {family.marriage_date if family.marriage_date else "?"}" as {box_name} {color} {{')
+    diagram.append(f'class "<:wedding:> {s(family.marriage_date)}" as {family.xref_id} {color} {{')
     diagram.append("}")
 
 def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) -> str:
@@ -52,21 +52,18 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
     # Add parents
     family = person.famc
     if family:
-        parents = [family.husband, family.wife]
-        for i, parent in enumerate(parents):
-            add_individual_to_diagram(diagram, parent, f'P{i}')
+        add_individual_to_diagram(diagram, family.husband)
+        add_individual_to_diagram(diagram, family.wife)
 
-        if family.marriage_date:
-            add_marriage_to_diagram(diagram, family, "M1")
+        add_marriage_to_diagram(diagram, family)
 
-        # Add relationships from parents to marriage block
-        diagram.append(f'P0 -- M1')
-        diagram.append(f'P1 -- M1')
-        diagram.append(f'M1 -- {xref_id.strip("@")}')
+        diagram.append(f'{family.husband.xref_id} -- {family.xref_id}')
+        diagram.append(f'{family.wife.xref_id} -- {family.xref_id}')
+        diagram.append(f'{family.xref_id} -- {xref_id}')
 
     # Add main individual
     diagram.append("")
-    add_individual_to_diagram(diagram, person, xref_id.strip("@"), stereotype="main")
+    add_individual_to_diagram(diagram, person, stereotype="main")
 
     # Add spouse and children
     for family in person.fams:
@@ -74,18 +71,18 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
         spouse = transmission.get_individual(spouse_id)
 
         diagram.append("")
-        add_individual_to_diagram(diagram, spouse, 'S1')
+        add_individual_to_diagram(diagram, spouse)
 
-        add_marriage_to_diagram(diagram, family, "M2")
+        add_marriage_to_diagram(diagram, family)
 
         for i, child in enumerate(family.children):
-            add_individual_to_diagram(diagram, child, f'C{i}')
+            add_individual_to_diagram(diagram, child)
 
         # Add relationships
-        diagram.append(f'{xref_id.strip("@")} -- M2')
-        diagram.append(f'S1 -- M2')
-        for i in range(len(family.children_ids)):
-            diagram.append(f'M2 -- C{i}')
+        diagram.append(f'{xref_id} -- {family.xref_id}')
+        diagram.append(f'{spouse.xref_id} -- {family.xref_id}')
+        for child in family.children:
+            diagram.append(f'{family.xref_id} -- {child.xref_id}')
 
     diagram.extend(["", "@enduml"])
     return "\n".join(diagram)

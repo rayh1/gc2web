@@ -14,9 +14,9 @@ class GedcomParser:
             raise ValueError(f"Invalid GEDCOM line: {line}")
         
         level: int = int(match.group(1))
-        xref_id: str | None = match.group(2)
+        xref_id: str | None = match.group(2)[1:-1] if match.group(2) else None
         tag: str = match.group(3)
-        pointer_value: str | None = match.group(4)
+        pointer_value: str | None = match.group(4)[1:-1] if match.group(4) else None   
         value: str | None = match.group(5)
         
         return GedcomLine(level, tag, xref_id, pointer_value, value)
