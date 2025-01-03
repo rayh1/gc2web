@@ -14,21 +14,21 @@ def s(value: str) -> str:
 def add_individual_to_diagram(diagram: List[str], individual: Individual, box_name: str, color: str = None, stereotype: str = None):
     if color is None:
         if individual.is_male:
-            color = '#lightblue'
+            color = '#E3F5FB'
         elif individual.is_female:
-            color = '#pink'
+            color = '#FBE3E3'
         else:
             color = '#lightgrey'
     stereotype = f'<<{stereotype}>>' if stereotype else ''
     diagram.append(f'class "{individual.name}" as {box_name} {stereotype} {color} {{')
-    diagram.append(f'{{field}} <&plus> {s(individual.birth_date)} {s(individual.birth_place)}')
-    diagram.append(f'{{field}} <&x> {s(individual.death_date)} {s(individual.death_place)}')
+    diagram.append(f'{{field}} <:baby_bottle:> {s(individual.birth_date)} {s(individual.birth_place)}')
+    diagram.append(f'{{field}} <:skull_and_crossbones:> {s(individual.death_date)} {s(individual.death_place)}')
     diagram.append("}")
 
 def add_marriage_to_diagram(diagram: List[str], family: Family, box_name: str, color: str = None):
     if color is None:
         color = '#lightyellow'
-    diagram.append(f'class "<&people> {family.marriage_date if family.marriage_date else "?"}" as {box_name} {color} {{')
+    diagram.append(f'class "<:wedding:> {family.marriage_date if family.marriage_date else "?"}" as {box_name} {color} {{')
     diagram.append("}")
 
 def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) -> str:
@@ -66,7 +66,7 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
 
     # Add main individual
     diagram.append("")
-    add_individual_to_diagram(diagram, person, xref_id.strip("@"), '#lightgreen', stereotype="main")
+    add_individual_to_diagram(diagram, person, xref_id.strip("@"), stereotype="main")
 
     # Add spouse and children
     for family in person.fams:
