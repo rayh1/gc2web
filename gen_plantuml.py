@@ -25,8 +25,8 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
     ]
 
     # Add parents
-    if person.famc_id:
-        family = transmission.get_family(person.famc_id)
+    family = person.famc
+    if family:
         parent_details = [family.husband, family.wife]
         for i, parent in enumerate(parent_details):
             diagram.append(f'class "{parent.name}" as P{i} #lightgreen {{')
@@ -52,8 +52,7 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
     diagram.append("}")
 
     # Add spouse and children
-    for fam_id in person.fams_ids:
-        family = transmission.get_family(fam_id)
+    for family in person.fams:
         spouse_id = family.husband_id if family.husband_id != xref_id else family.wife_id
         spouse = transmission.get_individual(spouse_id)
 

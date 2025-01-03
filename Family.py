@@ -76,5 +76,5 @@ class Family:
         return self.transmission.get_individual(self.wife_id)
     
     @property
-    def children(self) -> Individual | None:
+    def children(self) -> list[Individual]:
         return [self.transmission.get_individual(child_id) for child_id in self.children_ids]

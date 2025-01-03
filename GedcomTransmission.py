@@ -80,10 +80,10 @@ class GedcomTransmission:
         return GedcomIterator(self, self.id_map[id].sublines, tag, value_re, follow_pointers)
     
     def get_individual(self, id: str) -> Individual | None:
-        return self.individuals[id]
+        return self.individuals.get(id, None)
     
     def get_family(self, id: str) -> Family | None:
-        return self.families[id]
+        return self.families.get(id, None)
     
     def follow_pointers(self, line: GedcomLine) -> GedcomLine:
         while line and line.pointer_value:

@@ -81,3 +81,11 @@ class Individual:
     @famc_id.setter
     def famc_id(self, value: str | None):
         self.__famc_id = value
+
+    @property
+    def fams(self) -> list['Family']: # type: ignore
+        return [self.transmission.get_family(fams_id) for fams_id in self.fams_ids]
+
+    @property
+    def famc(self) -> 'Family': # type: ignore
+        return self.__transmission.get_family(self.__famc_id)
