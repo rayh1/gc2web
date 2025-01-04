@@ -122,6 +122,10 @@ class GedcomTransmission:
                     individual.famc_id = subline.pointer_value
                 elif subline.tag == GedcomTags.SEX:
                     individual.sex = subline.value
+                elif subline.tag == GedcomTags.CHR:
+                    individual.baptism_date, individual.baptism_place = self.extract_date_place(subline)
+                elif subline.tag == GedcomTags.BURI:
+                    individual.burial_date, individual.burial_place = self.extract_date_place(subline)
 
     def parse_families(self):
         """Parse families from the GedcomTransmission"""

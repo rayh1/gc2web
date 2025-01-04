@@ -42,3 +42,4 @@ class GedcomTags:
     TRLR: str = "TRLR"
     CONC: str = "CONC"
     CONT: str = "CONT"
+    CHR: str = "CHR"

@@ -10,6 +10,10 @@ class Individual:
         self.__fams_ids = []
         self.__famc_id = None
         self.__sex = None  # Initialize the sex property
+        self.__baptism_date = None
+        self.__baptism_place = None
+        self.__burial_date = None
+        self.__burial_place = None
 
     @property
     def xref_id(self) -> str:
@@ -90,6 +94,38 @@ class Individual:
     @sex.setter
     def sex(self, value: str | None):
         self.__sex = value
+
+    @property
+    def baptism_date(self) -> str:
+        return self.__baptism_date
+
+    @baptism_date.setter
+    def baptism_date(self, value: str):
+        self.__baptism_date = value
+
+    @property
+    def baptism_place(self) -> str:
+        return self.__baptism_place
+
+    @baptism_place.setter
+    def baptism_place(self, value: str):
+        self.__baptism_place = value
+
+    @property
+    def burial_date(self) -> str:
+        return self.__burial_date
+
+    @burial_date.setter
+    def burial_date(self, value: str):
+        self.__burial_date = value
+
+    @property
+    def burial_place(self) -> str:
+        return self.__burial_place
+
+    @burial_place.setter
+    def burial_place(self, value: str):
+        self.__burial_place = value
 
 # Utility methods
 

@@ -21,8 +21,15 @@ def add_individual_to_diagram(diagram: List[str], individual: Individual, color:
             color = '#lightgrey'
     stereotype = f'<<{stereotype}>>' if stereotype else ''
     diagram.append(f'class "{individual.name}" as {individual.xref_id} {stereotype} {color} {{')
-    diagram.append(f'{{field}} <:baby_bottle:> {s(individual.birth_date)} {s(individual.birth_place)}')
-    diagram.append(f'{{field}} <:skull_and_crossbones:> {s(individual.death_date)} {s(individual.death_place)}')
+    
+    birth_date = s(individual.birth_date) if individual.birth_date else s(individual.baptism_date)
+    birth_place = s(individual.birth_place) if individual.birth_place else s(individual.baptism_place)
+    diagram.append(f'{{field}} <:baby_bottle:> {birth_date} {birth_place}')
+    
+    death_date = s(individual.death_date) if individual.death_date else s(individual.burial_date)
+    death_place = s(individual.death_place) if individual.death_place else s(individual.burial_place)
+    diagram.append(f'{{field}} <:skull_and_crossbones:> {death_date} {death_place}')
+    
     diagram.append("}")
 
 def add_marriage_to_diagram(diagram: List[str], family: Family, color: str = None):
