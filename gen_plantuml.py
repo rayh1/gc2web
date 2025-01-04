@@ -43,6 +43,7 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
     person = transmission.get_individual(xref_id)
     diagram = [
         "@startuml",
+        "!pragma layout smetana",
         "skinparam backgroundColor transparent",
         "skinparam roundcorner 20",
         "hide circle",
@@ -50,7 +51,7 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
         "hide stereotype",
         "",
         "skinparam class {",
-        "   BorderThickness<<main>> 2",
+        "   BorderThickness<<main>> 3",
         "}",
         "",
         "' Parents",
@@ -89,7 +90,13 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
         diagram.append(f'{xref_id} -- {family.xref_id}')
         diagram.append(f'{spouse.xref_id} -- {family.xref_id}')
         for child in family.children:
-            diagram.append(f'{family.xref_id} -- {child.xref_id}')
+            diagram.append(f'{family.xref_id} - {child.xref_id}')
+
+        prev_child = None    
+        for child in family.children:
+            if prev_child:
+                diagram.append(f'{prev_child.xref_id} -[hidden]- {child.xref_id}')
+            prev_child = child
 
     diagram.extend(["", "@enduml"])
     return "\n".join(diagram)
