@@ -6,6 +6,17 @@ from GedcomTags import GedcomTags
 from GedcomTransmission import GedcomTransmission
 
 class GedcomParser:
+    def add_str(self, s1: str | None, s2: str | None, sep: str = "") -> str:
+        """Concatenates two strings with an optional separator, ignoring None values."""
+        if s1 and s2:
+            return s1 + sep + s2
+        elif s1:
+            return s1 + sep
+        elif s2:
+            return sep + s2
+        else:
+            return sep
+
     def parse_gedcom_line(self, line: str) -> GedcomLine:
         """Parses a single GEDCOM line and returns its components."""
         gedcom_regex = r"^\s*(\d+)\s+(@[^@]+@)?\s*([A-Za-z0-9_]+)\s*(@[^@]+@)?(.+)?$"
@@ -23,9 +34,9 @@ class GedcomParser:
 
     def parse(self, gedcom_stream: TextIO) -> GedcomTransmission:
         """Reads a GEDCOM stream and parses each line into a GedcomLine instance."""
-        transmission = GedcomTransmission()
+        transmission: GedcomTransmission = GedcomTransmission()
         stack: deque[GedcomLine] = deque()
-        prev_parsed_line = None
+        prev_parsed_line: GedcomLine | None = None
         lineno: int = 0
 
         for line in gedcom_stream:
@@ -44,17 +55,18 @@ class GedcomParser:
                         parsed_line.parent = stack[-1]
                         stack[-1].sublines.append(parsed_line)
                     elif parsed_line.level == stack[-1].level + 2:  # Deeper subline
+                        if not prev_parsed_line:
+                            raise ValueError(f"Level increase without previous line: {parsed_line}")
+                        
                         if prev_parsed_line.tag == GedcomTags.CONC or prev_parsed_line.tag == GedcomTags.CONT:
                             raise ValueError(f"CONT or CONC line cannot have sublines: {parsed_line}")
                         
                         if parsed_line.tag == GedcomTags.CONC:
-                            value = "" if parsed_line.value == None else parsed_line.value
-                            prev_parsed_line.value += parsed_line.value
+                            prev_parsed_line.value = self.add_str(prev_parsed_line.value, parsed_line.value)
                             continue
 
                         if parsed_line.tag == GedcomTags.CONT:
-                            value = "" if parsed_line.value == None else parsed_line.value
-                            prev_parsed_line.value += "\r\n" + value
+                            prev_parsed_line.value = self.add_str(prev_parsed_line.value, parsed_line.value, "\r\n")
                             continue
 
                         stack.append(prev_parsed_line)

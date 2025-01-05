@@ -26,7 +26,6 @@ class GedcomTags:
     HUSB: str = "HUSB"
     WIFE: str = "WIFE"
     CHIL: str = "CHIL"
-    SUBM: str = "SUBM"
     ADDR: str = "ADDR"
     PHON: str = "PHON"
     DATA: str = "DATA"

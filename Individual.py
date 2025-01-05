@@ -2,18 +2,18 @@ class Individual:
     def __init__(self, xref_id: str, transmission: 'GedcomTransmission'): # type: ignore
         self.__xref_id = xref_id
         self.__transmission: 'GedcomTransmission' = transmission # type: ignore
-        self.__name = "Unknown"
-        self.__birth_date = None
-        self.__birth_place = None
-        self.__death_date = None
-        self.__death_place = None
-        self.__fams_ids = []
-        self.__famc_id = None
-        self.__sex = None  # Initialize the sex property
-        self.__baptism_date = None
-        self.__baptism_place = None
-        self.__burial_date = None
-        self.__burial_place = None
+        self.__name: str | None = "Unknown"
+        self.__birth_date: str | None = None
+        self.__birth_place: str | None = None
+        self.__death_date: str | None = None
+        self.__death_place: str | None = None
+        self.__fams_ids: list[str] = []
+        self.__famc_id: str | None = None
+        self.__sex: str | None = None
+        self.__baptism_date: str | None = None
+        self.__baptism_place: str | None = None
+        self.__burial_date: str | None = None
+        self.__burial_place: str | None = None
 
     @property
     def xref_id(self) -> str:
@@ -32,51 +32,51 @@ class Individual:
         self.__transmission = value
 
     @property
-    def name(self) -> str:
+    def name(self) -> str | None:
         return self.__name
 
     @name.setter
-    def name(self, value: str):
+    def name(self, value: str | None):
         self.__name = value
 
     @property
-    def birth_date(self) -> str:
+    def birth_date(self) -> str | None:
         return self.__birth_date
 
     @birth_date.setter
-    def birth_date(self, value: str):
+    def birth_date(self, value: str | None):
         self.__birth_date = value
 
     @property
-    def birth_place(self) -> str:
+    def birth_place(self) -> str | None:
         return self.__birth_place
 
     @birth_place.setter
-    def birth_place(self, value: str):
+    def birth_place(self, value: str | None):
         self.__birth_place = value
 
     @property
-    def death_date(self) -> str:
+    def death_date(self) -> str | None:
         return self.__death_date
 
     @death_date.setter
-    def death_date(self, value: str):
+    def death_date(self, value: str | None):
         self.__death_date = value
 
     @property
-    def death_place(self) -> str:
+    def death_place(self) -> str | None:
         return self.__death_place
 
     @death_place.setter
-    def death_place(self, value: str):
+    def death_place(self, value: str | None):
         self.__death_place = value
 
     @property
-    def fams_ids(self) -> list:
+    def fams_ids(self) -> list[str]:
         return self.__fams_ids
 
     @fams_ids.setter
-    def fams_ids(self, value: list):
+    def fams_ids(self, value: list[str]):
         self.__fams_ids = value
 
     @property
@@ -96,35 +96,35 @@ class Individual:
         self.__sex = value
 
     @property
-    def baptism_date(self) -> str:
+    def baptism_date(self) -> str | None:
         return self.__baptism_date
 
     @baptism_date.setter
-    def baptism_date(self, value: str):
+    def baptism_date(self, value: str | None):
         self.__baptism_date = value
 
     @property
-    def baptism_place(self) -> str:
+    def baptism_place(self) -> str | None:
         return self.__baptism_place
 
     @baptism_place.setter
-    def baptism_place(self, value: str):
+    def baptism_place(self, value: str | None):
         self.__baptism_place = value
 
     @property
-    def burial_date(self) -> str:
+    def burial_date(self) -> str | None:
         return self.__burial_date
 
     @burial_date.setter
-    def burial_date(self, value: str):
+    def burial_date(self, value: str | None):
         self.__burial_date = value
 
     @property
-    def burial_place(self) -> str:
+    def burial_place(self) -> str | None:
         return self.__burial_place
 
     @burial_place.setter
-    def burial_place(self, value: str):
+    def burial_place(self, value: str | None):
         self.__burial_place = value
 
 # Utility methods
@@ -141,13 +141,13 @@ class Individual:
     def father(self) -> 'Individual':
         if self.famc:
             return self.famc.husband
-        return None
+        return None # type: ignore
 
     @property
     def mother(self) -> 'Individual':
         if self.famc:
             return self.famc.wife
-        return None
+        return None # type: ignore
 
     @property
     def spouses(self) -> list['Individual']:
@@ -159,7 +159,7 @@ class Individual:
                 spouses.append(family.wife)
         return spouses
 
-    @property
+    @property # type: ignore
     def children(self, spouse: 'Individual') -> list['Individual']:
         children = []
         for family in self.fams:

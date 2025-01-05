@@ -1,17 +1,15 @@
 import argparse
 import sys
-from typing import Tuple, List, Dict
+from typing import List
 from GedcomParser import GedcomParser
 from GedcomTransmission import GedcomTransmission
 from Individual import Individual
 from Family import Family
-from GedcomLine import GedcomLine
-from GedcomTags import GedcomTags
 
-def s(value: str) -> str:
+def s(value: str | None) -> str:
     return value if value else "?"
 
-def add_individual_to_diagram(diagram: List[str], individual: Individual, color: str = None, stereotype: str = None):
+def add_individual_to_diagram(diagram: List[str], individual: Individual, color: str | None = None, stereotype: str | None = None):
     if color is None:
         if individual.is_male:
             color = '#E3F5FB'
@@ -32,7 +30,7 @@ def add_individual_to_diagram(diagram: List[str], individual: Individual, color:
     
     diagram.append("}")
 
-def add_marriage_to_diagram(diagram: List[str], family: Family, color: str = None):
+def add_marriage_to_diagram(diagram: List[str], family: Family, color: str | None = None):
     if color is None:
         color = '#lightyellow'
     diagram.append(f'class "<:wedding:> {s(family.marriage_date)}" as {family.xref_id} {color} {{')
@@ -40,7 +38,10 @@ def add_marriage_to_diagram(diagram: List[str], family: Family, color: str = Non
 
 def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) -> str:
     """Create a PlantUML family diagram for an individual"""
-    person = transmission.get_individual(xref_id)
+    person: Individual | None = transmission.get_individual(xref_id)
+    if not person:
+        raise ValueError(f"Individual {xref_id} not found")
+    
     diagram = [
         "@startuml",
         "skinparam backgroundColor transparent",
@@ -74,8 +75,10 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
 
     # Add spouse and children
     for family in person.fams:
-        spouse_id = family.husband_id if family.husband_id != xref_id else family.wife_id
-        spouse = transmission.get_individual(spouse_id)
+        spouse_id: str = family.husband_id if family.husband_id != xref_id else family.wife_id
+        spouse: Individual | None = transmission.get_individual(spouse_id)
+        if not spouse:
+            raise ValueError(f"Spouse {spouse_id} not found")
 
         diagram.append("")
         add_individual_to_diagram(diagram, spouse)

@@ -8,8 +8,8 @@ class Family:
         self.__husband_id: str | None = None
         self.__wife_id: str | None = None
         self.__children_ids: list[str] = []
-        self.__marriage_date: str = None
-        self.__marriage_place: str = None
+        self.__marriage_date: str | None = None
+        self.__marriage_place: str | None = None
 
     @property
     def xref_id(self) -> str:
@@ -52,19 +52,19 @@ class Family:
         self.__children_ids = value
 
     @property
-    def marriage_date(self) -> str:
+    def marriage_date(self) -> str | None:
         return self.__marriage_date
 
     @marriage_date.setter
-    def marriage_date(self, value: str):
+    def marriage_date(self, value: str | None):
         self.__marriage_date = value
 
     @property
-    def marriage_place(self) -> str:
+    def marriage_place(self) -> str | None:
         return self.__marriage_place
 
     @marriage_place.setter
-    def marriage_place(self, value: str):
+    def marriage_place(self, value: str | None):
         self.__marriage_place = value
 
 # Utility methods

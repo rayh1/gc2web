@@ -6,12 +6,12 @@ from Individual import Individual
 from Family import Family
 
 class GedcomIterator:
-    def __init__(self, transmission: 'GedcomTransmission', lines: List[GedcomLine], tag:str | None, value_re: str | None, follow_pointers: bool = True):
+    def __init__(self, transmission: 'GedcomTransmission', lines: List[GedcomLine], tag:str | None, value_re: str | None, follow_pointers: bool | None = True):
         self.transmission: 'GedcomTransmission' = transmission
         self.lines: List[GedcomLine] = lines
         self.tag: str | None = tag
         self.value_re: str | None = value_re
-        self.follow_pointers: bool = follow_pointers
+        self.follow_pointers: bool = follow_pointers if follow_pointers != None else False
 
         self.cur_index: int = 0
 
@@ -46,7 +46,7 @@ class GedcomTransmission:
         self.individuals: Dict[str, Individual] = {}
         self.families: Dict[str, Family] = {}
 
-    def iterate(self, line: GedcomLine = None, tag: str | None = None, value_re: str | None = None, follow_pointers: bool | None = None) -> GedcomIterator:
+    def iterate(self, line: GedcomLine | None = None, tag: str | None = None, value_re: str | None = None, follow_pointers: bool | None = None) -> GedcomIterator:
         """
         Iterate over Gedcom lines based on specified criteria.
 
@@ -91,7 +91,7 @@ class GedcomTransmission:
 
         return line
 
-    def extract_date_place(self, line: GedcomLine) -> Tuple[str, str]:
+    def extract_date_place(self, line: GedcomLine) -> Tuple[str | None, str | None]:
         """Extract date and place from a GEDCOM event line"""
         date = ""
         place = ""
@@ -105,9 +105,11 @@ class GedcomTransmission:
     def parse_individuals(self):
         """Parse individuals from the GedcomTransmission"""
         for line in self.iterate(tag=GedcomTags.INDI):
-            xref_id = line.xref_id
-            individual = Individual(xref_id=xref_id, transmission=self)
-            self.individuals[xref_id] = individual
+            if not line.xref_id:
+                raise ValueError(f"Individual has no xref_id: {line}")
+            
+            individual = Individual(xref_id=line.xref_id, transmission=self)
+            self.individuals[line.xref_id] = individual
 
             for subline in self.iterate(line):
                 if subline.tag == GedcomTags.NAME:
@@ -117,7 +119,7 @@ class GedcomTransmission:
                 elif subline.tag == GedcomTags.DEAT:
                     individual.death_date, individual.death_place = self.extract_date_place(subline)
                 elif subline.tag == GedcomTags.FAMS:
-                    individual.fams_ids.append(subline.pointer_value)
+                    if subline.pointer_value: individual.fams_ids.append(subline.pointer_value)
                 elif subline.tag == GedcomTags.FAMC:
                     individual.famc_id = subline.pointer_value
                 elif subline.tag == GedcomTags.SEX:
@@ -130,9 +132,11 @@ class GedcomTransmission:
     def parse_families(self):
         """Parse families from the GedcomTransmission"""
         for line in self.iterate(tag=GedcomTags.FAM):
-            xref_id = line.xref_id
-            family = Family(xref_id=xref_id, transmission=self)  # Pass the current instance
-            self.families[xref_id] = family
+            if not line.xref_id:
+                raise ValueError(f"Family has no xref_id: {line}")
+
+            family = Family(xref_id=line.xref_id, transmission=self)  # Pass the current instance
+            self.families[line.xref_id] = family
 
             for subline in self.iterate(line):
                 if subline.tag == GedcomTags.HUSB:
@@ -140,7 +144,7 @@ class GedcomTransmission:
                 elif subline.tag == GedcomTags.WIFE:
                     family.wife_id = subline.pointer_value
                 elif subline.tag == GedcomTags.CHIL:
-                    family.children_ids.append(subline.pointer_value)
+                    if subline.pointer_value: family.children_ids.append(subline.pointer_value)
                 elif subline.tag == GedcomTags.MARR:
                     family.marriage_date, family.marriage_place = self.extract_date_place(subline)
 
