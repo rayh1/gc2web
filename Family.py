@@ -10,6 +10,9 @@ class Family:
         self.__children_ids: list[str] = []
         self.__marriage_date: str | None = None
         self.__marriage_place: str | None = None
+        self.__husband_cache: Individual | None = None
+        self.__wife_cache: Individual | None = None
+        self.__children_cache: list[Individual] | None = None
 
     @property
     def xref_id(self) -> str:
@@ -71,15 +74,21 @@ class Family:
 
     @property
     def husband(self) -> Individual | None:
-        return self.transmission.get_individual(self.husband_id)
+        if self.__husband_cache is None:
+            self.__husband_cache = self.transmission.get_individual(self.husband_id)
+        return self.__husband_cache
 
     @property
     def wife(self) -> Individual | None:
-        return self.transmission.get_individual(self.wife_id)
+        if self.__wife_cache is None:
+            self.__wife_cache = self.transmission.get_individual(self.wife_id)
+        return self.__wife_cache
     
     @property
     def children(self) -> list[Individual]:
-        return [self.transmission.get_individual(child_id) for child_id in self.children_ids]
+        if self.__children_cache is None:
+            self.__children_cache = [self.transmission.get_individual(child_id) for child_id in self.children_ids]
+        return self.__children_cache
 
     def spouse(self, individual: Individual) -> Individual | None:
         if individual.xref_id == self.husband_id:

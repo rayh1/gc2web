@@ -14,6 +14,9 @@ class Individual:
         self.__baptism_place: str | None = None
         self.__burial_date: str | None = None
         self.__burial_place: str | None = None
+        self.__fams_cache: list['Family'] | None = None # type: ignore
+        self.__famc_cache: 'Family' | None = None # type: ignore
+        self.__spouses_cache: list['Individual'] | None = None
 
     @property
     def xref_id(self) -> str:
@@ -131,11 +134,15 @@ class Individual:
 
     @property
     def fams(self) -> list['Family']: # type: ignore
-        return [self.transmission.get_family(fams_id) for fams_id in self.fams_ids]
+        if self.__fams_cache is None:
+            self.__fams_cache = [self.transmission.get_family(fams_id) for fams_id in self.fams_ids]
+        return self.__fams_cache
 
     @property
     def famc(self) -> 'Family': # type: ignore
-        return self.__transmission.get_family(self.__famc_id)
+        if self.__famc_cache is None:
+            self.__famc_cache = self.__transmission.get_family(self.__famc_id)
+        return self.__famc_cache
 
     @property
     def father(self) -> 'Individual':
@@ -151,13 +158,14 @@ class Individual:
 
     @property
     def spouses(self) -> list['Individual']:
-        spouses = []
-        for family in self.fams:
-            if family.husband and family.husband != self:
-                spouses.append(family.husband)
-            if family.wife and family.wife != self:
-                spouses.append(family.wife)
-        return spouses
+        if self.__spouses_cache is None:
+            self.__spouses_cache = []
+            for family in self.fams:
+                if family.husband and family.husband != self:
+                    self.__spouses_cache.append(family.husband)
+                if family.wife and family.wife != self:
+                    self.__spouses_cache.append(family.wife)
+        return self.__spouses_cache
 
     @property # type: ignore
     def children(self, spouse: 'Individual') -> list['Individual']:
