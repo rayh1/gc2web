@@ -43,7 +43,6 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
     person = transmission.get_individual(xref_id)
     diagram = [
         "@startuml",
-        "!pragma layout smetana",
         "skinparam backgroundColor transparent",
         "skinparam roundcorner 20",
         "hide circle",
