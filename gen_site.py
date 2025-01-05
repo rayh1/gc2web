@@ -47,7 +47,7 @@ def write_markdown_file(individual: Individual, filepath: Path) -> None:
             if father:
                 content.append(f"- De vader is [{father.name}](../{father.xref_id.lower()}/)")
             mother: Individual | None = individual.mother
-            if father:
+            if mother:
                 content.append(f"- De moeder is [{mother.name}](../{mother.xref_id.lower()}/)")
 
             content.append("")

@@ -4,6 +4,7 @@ from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from Individual import Individual
 from Family import Family
+from Place import Place
 
 class GedcomIterator:
     def __init__(self, transmission: 'GedcomTransmission', lines: List[GedcomLine], tag:str | None, value_re: str | None, follow_pointers: bool | None = True):
@@ -92,15 +93,15 @@ class GedcomTransmission:
 
         return line
 
-    def extract_date_place(self, line: GedcomLine) -> Tuple[str | None, str | None]:
+    def extract_date_place(self, line: GedcomLine) -> Tuple[str | None, Place]:
         """Extract date and place from a GEDCOM event line"""
         date = ""
-        place = ""
+        place = Place()
         for subline in self.iterate(line):
             if subline.tag == GedcomTags.DATE:
                 date = subline.value
             elif subline.tag == GedcomTags.PLAC:
-                place = subline.value
+                place.value = subline.value
         return date, place
 
     def parse_individuals(self):

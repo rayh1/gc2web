@@ -1,19 +1,21 @@
+from Place import Place
+
 class Individual:
     def __init__(self, xref_id: str, transmission: 'GedcomTransmission'): # type: ignore
         self.__xref_id = xref_id
         self.__transmission: 'GedcomTransmission' = transmission # type: ignore
         self.__name: str | None = "Unknown"
         self.__birth_date: str | None = None
-        self.__birth_place: str | None = None
+        self.__birth_place: Place = Place()
         self.__death_date: str | None = None
-        self.__death_place: str | None = None
+        self.__death_place: Place = Place()
         self.__fams_ids: list[str] = []
         self.__famc_id: str | None = None
         self.__sex: str | None = None
         self.__baptism_date: str | None = None
-        self.__baptism_place: str | None = None
+        self.__baptism_place: Place = Place()
         self.__burial_date: str | None = None
-        self.__burial_place: str | None = None
+        self.__burial_place: Place = Place()
         self.__fams_cache: list['Family'] | None = None # type: ignore
         self.__famc_cache: 'Family' | None = None # type: ignore
         self.__spouses_cache: list['Individual'] | None = None
@@ -51,11 +53,11 @@ class Individual:
         self.__birth_date = value
 
     @property
-    def birth_place(self) -> str | None:
+    def birth_place(self) -> Place:
         return self.__birth_place
 
     @birth_place.setter
-    def birth_place(self, value: str | None):
+    def birth_place(self, value: Place):
         self.__birth_place = value
 
     @property
@@ -67,11 +69,11 @@ class Individual:
         self.__death_date = value
 
     @property
-    def death_place(self) -> str | None:
+    def death_place(self) -> Place:
         return self.__death_place
 
     @death_place.setter
-    def death_place(self, value: str | None):
+    def death_place(self, value: Place):
         self.__death_place = value
 
     @property
@@ -107,11 +109,11 @@ class Individual:
         self.__baptism_date = value
 
     @property
-    def baptism_place(self) -> str | None:
+    def baptism_place(self) -> Place:
         return self.__baptism_place
 
     @baptism_place.setter
-    def baptism_place(self, value: str | None):
+    def baptism_place(self, value: Place):
         self.__baptism_place = value
 
     @property
@@ -123,11 +125,11 @@ class Individual:
         self.__burial_date = value
 
     @property
-    def burial_place(self) -> str | None:
+    def burial_place(self) -> Place:
         return self.__burial_place
 
     @burial_place.setter
-    def burial_place(self, value: str | None):
+    def burial_place(self, value: Place):
         self.__burial_place = value
 
 # Utility methods
