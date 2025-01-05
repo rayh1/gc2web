@@ -1,33 +1,38 @@
 import argparse
 import os
 import sys
+import logging
+from pathlib import Path
+from typing import List, Dict
+from tqdm import tqdm
+
 import PlantUMLEncoder
 import PlantUMLCreator
-
-from typing import List
 from GedcomTransmission import GedcomTransmission
 from GedcomParser import GedcomParser
 from Individual import Individual
 
 PLANTUML_BASE_URL = "https://www.plantuml.com/plantuml/svg"
 
-def generate_markdown_files(transmission: GedcomTransmission, output_dir: str):
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+logging.basicConfig(level=logging.INFO, 
+                   format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
-    for i, individual in enumerate(transmission.individuals.values()):
-        #if i >= 3:
-        #    break
-        filename = f"{individual.xref_id}.md"
-        filepath = os.path.join(output_dir, filename)
+def write_markdown_file(individual: Individual, filepath: Path) -> None:
+    """Write markdown content for an individual to a file.
+    
+    Args:
+        individual: The Individual object containing genealogical data
+        filepath: Path object for the output file
+    """
+    try:
+        filepath.parent.mkdir(parents=True, exist_ok=True)
         with open(filepath, 'w') as file:
             content = []
             content.append(f"---")
             content.append(f"title: \"{individual.name}\"")
-            #content.append(f"tags: [\"en\", \"tech\"]")
             content.append(f"description: \"Individual\"")
             content.append(f"pubDate: \"November 20 2024\"")
-            #content.append(f"draft: false\n")
             content.append(f"---")
             content.append(f"")
             content.append(f"# {individual.name}")
@@ -57,6 +62,37 @@ def generate_markdown_files(transmission: GedcomTransmission, output_dir: str):
                     content.append(f"- Kind [{child.name}](../{child.xref_id.lower()}/)")
 
             file.writelines("\n".join(content))
+    except IOError as e:
+        logger.error(f"Failed to write file {filepath}: {e}")
+        raise
+
+def generate_markdown_files(transmission: GedcomTransmission, 
+                          output_dir: str) -> None:
+    """Generate markdown files for all individuals in the transmission.
+    
+    Args:
+        transmission: GedcomTransmission object containing all genealogical data
+        output_dir: Directory path where markdown files will be created
+    
+    Raises:
+        ValueError: If transmission is empty or output_dir is invalid
+    """
+    if not transmission.individuals:
+        raise ValueError("No individuals found in transmission")
+    
+    output_path = Path(output_dir)
+    if not output_path.parent.exists():
+        raise ValueError(f"Parent directory {output_path.parent} does not exist")
+
+    logger.info(f"Generating markdown files for {len(transmission.individuals)} individuals")
+    
+    for individual in tqdm(transmission.individuals.values(),
+                         desc="Generating markdown files"):
+        filename = f"{individual.xref_id}.md"
+        filepath = output_path / filename
+        write_markdown_file(individual, filepath)
+
+    logger.info(f"Successfully generated {len(transmission.individuals)} files")
 
 def main(argv: List[str]):
     ap = argparse.ArgumentParser(description='Process a GEDCOM file.')
