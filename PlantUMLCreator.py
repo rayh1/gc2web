@@ -71,7 +71,7 @@ def create_individual_diagram(person: Individual) -> str:
 
         diagram.append(f'{family.husband.xref_id} -- {family.xref_id}')
         diagram.append(f'{family.wife.xref_id} -- {family.xref_id}')
-        diagram.append(f'{family.xref_id} -- {xref_id}')
+        diagram.append(f'{family.xref_id} -- {person.xref_id}')
 
     # Add main individual
     diagram.append("")
@@ -92,7 +92,7 @@ def create_individual_diagram(person: Individual) -> str:
             add_individual_to_diagram(diagram, child)
 
         # Add relationships
-        diagram.append(f'{xref_id} -- {family.xref_id}')
+        diagram.append(f'{person.xref_id} -- {family.xref_id}')
         diagram.append(f'{spouse.xref_id} -- {family.xref_id}')
         for child in family.children:
             diagram.append(f'{family.xref_id} - {child.xref_id}')
