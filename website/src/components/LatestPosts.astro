@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import PostList from "./PostList.astro";
+
+const posts = (await getCollection("blog"))
+  .filter((post) => post.data.draft === false)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 8);
+---
+
+<div>
+  <h2>Latest Posts</h2>
+    {posts.length === 0 && <p>No posts yet.</p>}
+    {posts.length > 0 && <PostList posts={posts}/>}
+  <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="/blog">
+    All posts
+  </a>
+</div>

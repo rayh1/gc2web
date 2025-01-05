@@ -41,8 +41,9 @@ class GedcomIterator:
 class GedcomTransmission:
     def __init__(self):
         self.all_lines: List[GedcomLine] = []
-        self.main_lines: List[GedcomLine] = []
+        self.main_lines: List[GedcomLine] = []        
         self.id_map: dict[str, GedcomLine] = {}
+        
         self.individuals: Dict[str, Individual] = {}
         self.families: Dict[str, Family] = {}
 

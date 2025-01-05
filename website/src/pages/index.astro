@@ -1,0 +1,19 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import LatestPosts from "../components/LatestPosts.astro";
+import { Image } from "astro:assets";
+import heroImage from "../../public/banner.webp";
+---
+
+<PageLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <Image
+    width={668}
+    src={heroImage}
+    alt="Mindspark"
+  />
+  <p>
+    Genealogy of the Hoofman family, from the 17th century to the present day.
+  </p>
+  <LatestPosts />
+</PageLayout>
