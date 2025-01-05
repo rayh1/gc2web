@@ -23,3 +23,12 @@ cd gc2web
 
 git config --global user.name "raymond"
 git config --global user.email "raymond-prive@charm.nl"
+
+git config --global user.name "raymond"
+git config --global user.email "raymond-prive@charm.nl"
+
+cd site
+
+npm install
+
+npm run astro telemetry disable

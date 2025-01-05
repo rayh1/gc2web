@@ -3,6 +3,7 @@ FROM ubuntu:24.04
 ARG ARG_JDK_VERSION
 ARG ARG_JDK_VENDOR
 ARG ARG_MAVEN_VERSION
+ARG ARG_NODE_VERSION
 
 WORKDIR /workspaces
 
@@ -10,6 +11,10 @@ WORKDIR /workspaces
 RUN apt-get update && \
     apt-get install -y --no-install-recommends wget sudo git vim curl gpg gnupg apt-transport-https lsb-release unzip dos2unix python3-full && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install Nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_${ARG_NODE_VERSION}.x | sudo -E bash - && \
+    apt install -y nodejs
 
 # Install Java (build and runtime)
 RUN wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor | tee /etc/apt/trusted.gpg.d/adoptium.gpg > /dev/null && \

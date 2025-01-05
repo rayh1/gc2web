@@ -8,17 +8,12 @@
 	"customizations": {
         "vscode": {
             "extensions": [
-                "redhat.java",  
-                "vscjava.vscode-java-debug",  
-                "vscjava.vscode-java-test",  
-                "vscjava.vscode-maven",  
-                "vscjava.vscode-java-dependency",  
-
                 "ms-python.vscode-pylance",  
                 "ms-python.python",  
                 "ms-python.debugpy",
+
+                "astro-build.astro-vscode",
 				
-                "Angular.ng-template",
                 "dbaeumer.vscode-eslint",
 				"esbenp.prettier-vscode",
 
