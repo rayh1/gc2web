@@ -6,6 +6,8 @@ from GedcomTags import GedcomTags
 from GedcomTransmission import GedcomTransmission
 
 class GedcomParser:
+    GEDCOM_REGEX = r"^\s*(\d+)\s+(@[^@]+@)?\s*([A-Za-z0-9_]+)\s*(@[^@]+@)?(.+)?$"
+
     def add_str(self, s1: str | None, s2: str | None, sep: str = "") -> str:
         """Concatenates two strings with an optional separator, ignoring None values."""
         if s1 and s2:
@@ -19,8 +21,7 @@ class GedcomParser:
 
     def parse_gedcom_line(self, line: str) -> GedcomLine:
         """Parses a single GEDCOM line and returns its components."""
-        gedcom_regex = r"^\s*(\d+)\s+(@[^@]+@)?\s*([A-Za-z0-9_]+)\s*(@[^@]+@)?(.+)?$"
-        match = re.match(gedcom_regex, line)
+        match = re.match(self.GEDCOM_REGEX, line)
         if not match:
             raise ValueError(f"Invalid GEDCOM line: {line}")
         
