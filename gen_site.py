@@ -39,11 +39,12 @@ def generate_markdown_files(transmission: GedcomTransmission, output_dir: str):
                 content.append(f"- De moeder is [{mother.name}](../{mother.xref_id.lower()}/)")
 
             content.append("")
-            content.append(f"## Relaties ({len(individual.fams)})")
+            content.append(f"## Relaties en Kinderen")
 
             for fams in individual.fams:
                 spouse: Individual | None = fams.spouse(individual)
                 if spouse:
+                    content.append(f"")
                     content.append(f"Gehuwd met [{spouse.name}](../{spouse.xref_id.lower()}/) op {fams.marriage_date} te {fams.marriage_place}")
                 for child in fams.children:
                     content.append(f"- Kind [{child.name}](../{child.xref_id.lower()}/)")
