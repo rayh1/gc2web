@@ -38,7 +38,7 @@ class Individual:
 
     @property
     def name(self) -> str | None:
-        return self.__name
+        return self.__name.replace("/", "") if self.__name else None
 
     @name.setter
     def name(self, value: str | None):
