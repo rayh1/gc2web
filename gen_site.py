@@ -1,10 +1,15 @@
 import argparse
 import os
 import sys
+import PlantUMLEncoder
+import PlantUMLCreator
+
 from typing import List
 from GedcomTransmission import GedcomTransmission
 from GedcomParser import GedcomParser
 from Individual import Individual
+
+PLANTUML_BASE_URL = "https://www.plantuml.com/plantuml/svg"
 
 def generate_markdown_files(transmission: GedcomTransmission, output_dir: str):
     if not os.path.exists(output_dir):
@@ -26,6 +31,8 @@ def generate_markdown_files(transmission: GedcomTransmission, output_dir: str):
             content.append(f"---")
             content.append(f"")
             content.append(f"# {individual.name}")
+
+            content.append(f"![test]({PLANTUML_BASE_URL}/{PlantUMLEncoder.encode(PlantUMLCreator.create_individual_diagram(individual))})")
 
             content.append(f"- Geboren op {individual.birth_date} te {individual.birth_place}")
             content.append(f"- Overleden op {individual.death_date} te {individual.death_place}")
