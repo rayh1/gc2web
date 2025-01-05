@@ -80,3 +80,11 @@ class Family:
     @property
     def children(self) -> list[Individual]:
         return [self.transmission.get_individual(child_id) for child_id in self.children_ids]
+
+    def spouse(self, individual: Individual) -> Individual | None:
+        if individual.xref_id == self.husband_id:
+            return self.wife
+        elif individual.xref_id == self.wife_id:
+            return self.husband
+        else:
+            return None

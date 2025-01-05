@@ -11,8 +11,8 @@ def generate_markdown_files(transmission: GedcomTransmission, output_dir: str):
         os.makedirs(output_dir)
 
     for i, individual in enumerate(transmission.individuals.values()):
-        if i >= 3:
-            break
+        #if i >= 3:
+        #    break
         filename = f"{individual.xref_id}.md"
         filepath = os.path.join(output_dir, filename)
         with open(filepath, 'w') as file:
@@ -27,9 +27,26 @@ def generate_markdown_files(transmission: GedcomTransmission, output_dir: str):
             content.append(f"")
             content.append(f"# {individual.name}")
 
+            content.append(f"- Geboren op {individual.birth_date} te {individual.birth_place}")
+            content.append(f"- Overleden op {individual.death_date} te {individual.death_place}")
+
+            content.append(f"## Ouders")
             father: Individual | None = individual.father
             if father:
-                content.append(f"- Kind van [{father.name}](../{father.xref_id.lower()}/)")
+                content.append(f"- De vader is [{father.name}](../{father.xref_id.lower()}/)")
+            mother: Individual | None = individual.mother
+            if father:
+                content.append(f"- De moeder is [{mother.name}](../{mother.xref_id.lower()}/)")
+
+            content.append("")
+            content.append(f"## Relaties ({len(individual.fams)})")
+
+            for fams in individual.fams:
+                spouse: Individual | None = fams.spouse(individual)
+                if spouse:
+                    content.append(f"Gehuwd met [{spouse.name}](../{spouse.xref_id.lower()}/) op {fams.marriage_date} te {fams.marriage_place}")
+                for child in fams.children:
+                    content.append(f"- Kind [{child.name}](../{child.xref_id.lower()}/)")
 
             file.writelines("\n".join(content))
 

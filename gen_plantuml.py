@@ -87,10 +87,9 @@ def create_individual_diagram(transmission: GedcomTransmission, xref_id: str) ->
 
     # Add spouse and children
     for family in person.fams:
-        spouse_id: str = family.husband_id if family.husband_id != xref_id else family.wife_id
-        spouse: Individual | None = transmission.get_individual(spouse_id)
+        spouse: Individual | None = family.spouse(person)
         if not spouse:
-            raise ValueError(f"Spouse {spouse_id} not found")
+            raise ValueError(f"Spuse not found for family {family.xref_id}")
 
         diagram.append("")
         add_individual_to_diagram(diagram, spouse)
