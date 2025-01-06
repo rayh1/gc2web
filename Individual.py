@@ -1,11 +1,12 @@
 from Place import Place
 from Date import Date
+from Name import Name
 
 class Individual:
     def __init__(self, xref_id: str, transmission: 'GedcomTransmission'): # type: ignore
         self.__xref_id = xref_id
         self.__transmission: 'GedcomTransmission' = transmission # type: ignore
-        self.__names: list[str] = []
+        self.__names: list[Name] = []
         self.__birth_date: Date = Date()
         self.__birth_place: Place = Place()
         self.__death_date: Date = Date()
@@ -38,15 +39,15 @@ class Individual:
         self.__transmission = value
 
     @property
-    def name(self) -> str | None:
+    def name(self) -> Name | None:
         return self.__names[0] if len(self.__names) > 0 else None
 
     @property
-    def names(self) -> list[str]:
+    def names(self) -> list[Name]:
         return self.__names
 
-    def add_name(self, value: str):
-        self.__names.append(value.replace("/", ""))
+    def add_name(self, value: Name):
+        self.__names.append(value)
 
     @property
     def birth_date(self) -> Date:

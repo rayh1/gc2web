@@ -11,6 +11,7 @@ import PlantUMLCreator
 from GedcomTransmission import GedcomTransmission
 from GedcomParser import GedcomParser
 from Individual import Individual
+from Name import Name
 
 PLANTUML_BASE_URL = "https://www.plantuml.com/plantuml/svg"
 

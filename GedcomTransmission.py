@@ -6,6 +6,7 @@ from Individual import Individual
 from Family import Family
 from Place import Place
 from Date import Date
+from Name import Name
 
 class GedcomIterator:
     def __init__(self, transmission: 'GedcomTransmission', lines: List[GedcomLine], tag:str | None, value_re: str | None, follow_pointers: bool | None = True):
@@ -116,7 +117,7 @@ class GedcomTransmission:
 
             for subline in self.iterate(line):
                 if subline.tag == GedcomTags.NAME:
-                    if subline.value: individual.add_name(subline.value)
+                    if subline.value: individual.add_name(Name(subline.value))
                 elif subline.tag == GedcomTags.BIRT:
                     individual.birth_date, individual.birth_place = self.extract_date_place(subline)
                 elif subline.tag == GedcomTags.DEAT:
