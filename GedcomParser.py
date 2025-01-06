@@ -7,6 +7,7 @@ from GedcomTransmission import GedcomTransmission
 
 class GedcomParser:
     GEDCOM_REGEX = r"^\s*(\d+)\s+(@[^@]+@)?\s*([A-Za-z0-9_]+)\s*(@[^@]+@)?(.+)?$"
+    CONT_SEP: str = "\r\n"
 
     def add_str(self, s1: str | None, s2: str | None, sep: str = "") -> str:
         """Concatenates two strings with an optional separator, ignoring None values."""
@@ -67,7 +68,7 @@ class GedcomParser:
                             continue
 
                         if parsed_line.tag == GedcomTags.CONT:
-                            prev_parsed_line.value = self.add_str(prev_parsed_line.value, parsed_line.value, "\r\n")
+                            prev_parsed_line.value = self.add_str(prev_parsed_line.value, parsed_line.value, self.CONT_SEP)
                             continue
 
                         stack.append(prev_parsed_line)
