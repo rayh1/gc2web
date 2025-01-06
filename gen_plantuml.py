@@ -6,6 +6,7 @@ from typing import List
 from GedcomParser import GedcomParser
 from GedcomTransmission import GedcomTransmission
 from Individual import Individual
+from Date import Date
 
 def main(argv: List[str]):
     ap = argparse.ArgumentParser(description='Process a GEDCOM file.')

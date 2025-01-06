@@ -1,6 +1,7 @@
 from typing import List
 from Individual import Individual
 from Family import Family
+from Date import Date
 
 # Constants
 COLOR_MALE = '#E3F5FB'
@@ -27,8 +28,8 @@ START_PLANTUML = [
 
 END_PLANTUML = ["", "@enduml"]
 
-def s(value: str | None) -> str:
-    return value if value else "?"
+def s(value: Date | None) -> str:
+    return str(value) if value else "?"
 
 def add_individual_to_diagram(diagram: List[str], individual: Individual, color: str | None = None, stereotype: str | None = None):
     if color is None:
@@ -41,11 +42,11 @@ def add_individual_to_diagram(diagram: List[str], individual: Individual, color:
     stereotype = f'<<{stereotype}>>' if stereotype else ''
     diagram.append(f'class "{individual.name}" as {individual.xref_id} {stereotype} {color} {{')
     
-    birth_date = s(individual.birth_date) if individual.birth_date else s(individual.baptism_date)
+    birth_date = s(individual.birth_date) if individual.birth_date.value else s(individual.baptism_date)
     birth_place = s(individual.birth_place) if individual.birth_place else s(individual.baptism_place)
     diagram.append(f'{{field}} {ICON_BIRTH} {birth_date} {birth_place}')
     
-    death_date = s(individual.death_date) if individual.death_date else s(individual.burial_date)
+    death_date = s(individual.death_date) if individual.death_date.value else s(individual.burial_date)
     death_place = s(individual.death_place) if individual.death_place else s(individual.burial_place)
     diagram.append(f'{{field}} {ICON_DEATH} {death_date} {death_place}')
     

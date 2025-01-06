@@ -1,20 +1,21 @@
 from Place import Place
+from Date import Date
 
 class Individual:
     def __init__(self, xref_id: str, transmission: 'GedcomTransmission'): # type: ignore
         self.__xref_id = xref_id
         self.__transmission: 'GedcomTransmission' = transmission # type: ignore
         self.__name: str | None = "Unknown"
-        self.__birth_date: str | None = None
+        self.__birth_date: Date = Date()
         self.__birth_place: Place = Place()
-        self.__death_date: str | None = None
+        self.__death_date: Date = Date()
         self.__death_place: Place = Place()
         self.__fams_ids: list[str] = []
         self.__famc_id: str | None = None
         self.__sex: str | None = None
-        self.__baptism_date: str | None = None
+        self.__baptism_date: Date = Date()
         self.__baptism_place: Place = Place()
-        self.__burial_date: str | None = None
+        self.__burial_date: Date = Date()
         self.__burial_place: Place = Place()
         self.__fams_cache: list['Family'] | None = None # type: ignore
         self.__famc_cache: 'Family' | None = None # type: ignore
@@ -45,11 +46,11 @@ class Individual:
         self.__name = value
 
     @property
-    def birth_date(self) -> str | None:
+    def birth_date(self) -> Date:
         return self.__birth_date
 
     @birth_date.setter
-    def birth_date(self, value: str | None):
+    def birth_date(self, value: Date):
         self.__birth_date = value
 
     @property
@@ -61,11 +62,11 @@ class Individual:
         self.__birth_place = value
 
     @property
-    def death_date(self) -> str | None:
+    def death_date(self) -> Date:
         return self.__death_date
 
     @death_date.setter
-    def death_date(self, value: str | None):
+    def death_date(self, value: Date):
         self.__death_date = value
 
     @property
@@ -101,11 +102,11 @@ class Individual:
         self.__sex = value
 
     @property
-    def baptism_date(self) -> str | None:
+    def baptism_date(self) -> Date:
         return self.__baptism_date
 
     @baptism_date.setter
-    def baptism_date(self, value: str | None):
+    def baptism_date(self, value: Date):
         self.__baptism_date = value
 
     @property
@@ -117,11 +118,11 @@ class Individual:
         self.__baptism_place = value
 
     @property
-    def burial_date(self) -> str | None:
+    def burial_date(self) -> Date:
         return self.__burial_date
 
     @burial_date.setter
-    def burial_date(self, value: str | None):
+    def burial_date(self, value: Date):
         self.__burial_date = value
 
     @property
