@@ -39,8 +39,13 @@ def write_markdown_file(individual: Individual, filepath: Path) -> None:
 
             content.append(f"![test]({PLANTUML_BASE_URL}/{PlantUMLEncoder.encode(PlantUMLCreator.create_individual_diagram(individual))})")
 
+            content.append(f"## Gegevens")
             content.append(f"- Geboren op {individual.birth_date} te {individual.birth_place}")
             content.append(f"- Overleden op {individual.death_date} te {individual.death_place}")
+            if len(individual.names)  > 1:
+                content.append(f"- Alternatieve Namen")
+                for name in individual.names[1:]:
+                    content.append(f"  - {name}")
 
             content.append(f"## Ouders")
             father: Individual | None = individual.father

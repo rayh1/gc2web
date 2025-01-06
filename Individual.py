@@ -5,7 +5,7 @@ class Individual:
     def __init__(self, xref_id: str, transmission: 'GedcomTransmission'): # type: ignore
         self.__xref_id = xref_id
         self.__transmission: 'GedcomTransmission' = transmission # type: ignore
-        self.__name: str | None = "Unknown"
+        self.__names: list[str] = []
         self.__birth_date: Date = Date()
         self.__birth_place: Place = Place()
         self.__death_date: Date = Date()
@@ -39,11 +39,14 @@ class Individual:
 
     @property
     def name(self) -> str | None:
-        return self.__name.replace("/", "") if self.__name else None
+        return self.__names[0] if len(self.__names) > 0 else None
 
-    @name.setter
-    def name(self, value: str | None):
-        self.__name = value
+    @property
+    def names(self) -> list[str]:
+        return self.__names
+
+    def add_name(self, value: str):
+        self.__names.append(value.replace("/", ""))
 
     @property
     def birth_date(self) -> Date:
