@@ -42,3 +42,6 @@ class GedcomTags:
     CONC: str = "CONC"
     CONT: str = "CONT"
     CHR: str = "CHR"
+    AUTH: str = "AUTH"
+    PUBL: str = "PUBL"
+    TEXT: str = "TEXT"

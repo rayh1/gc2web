@@ -7,6 +7,7 @@ from Family import Family
 from Place import Place
 from Date import Date
 from Name import Name
+from Source import Source
 
 class GedcomIterator:
     def __init__(self, transmission: 'GedcomTransmission', lines: List[GedcomLine], tag:str | None, value_re: str | None, follow_pointers: bool | None = True):
@@ -49,6 +50,7 @@ class GedcomTransmission:
         
         self.individuals: Dict[str, Individual] = {}
         self.families: Dict[str, Family] = {}
+        self.sources: Dict[str, Source] = {}
 
     def iterate(self, line: GedcomLine | None = None, tag: str | None = None, value_re: str | None = None, follow_pointers: bool | None = None) -> GedcomIterator:
         """
@@ -88,6 +90,9 @@ class GedcomTransmission:
     
     def get_family(self, id: str) -> Family | None:
         return self.families.get(id, None)
+    
+    def get_source(self, xref_id: str) -> Source | None:
+        return self.sources.get(xref_id, None)
     
     def follow_pointers(self, line: GedcomLine) -> GedcomLine:
         while line and line.pointer_value:
@@ -152,7 +157,27 @@ class GedcomTransmission:
                 elif subline.tag == GedcomTags.MARR:
                     family.marriage_date, family.marriage_place = self.extract_date_place(subline)
 
+    def parse_sources(self):
+        """Parse sources from the GedcomTransmission"""
+        for line in self.iterate(tag=GedcomTags.SOUR):
+            if not line.xref_id:
+                continue # Skip sources without xref_id
+
+            source = Source(xref_id=line.xref_id, transmission=self)
+            self.sources[line.xref_id] = source
+
+            for subline in self.iterate(line):
+                if subline.tag == GedcomTags.TITL:
+                    source.title = subline.value
+                elif subline.tag == GedcomTags.AUTH:
+                    source.author = subline.value
+                elif subline.tag == GedcomTags.PUBL:
+                    source.publication = subline.value
+                elif subline.tag == GedcomTags.TEXT:
+                    source.text = subline.value
+
     def parse_gedcom(self):
-        """Parse the GedcomTransmission and generate all Individual and Family instances"""
+        """Parse the GedcomTransmission and generate all Individual, Family, and Source instances"""
         self.parse_individuals()
         self.parse_families()
+        self.parse_sources()
