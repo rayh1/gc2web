@@ -12,7 +12,7 @@ class Name:
         self.__sources_cache: list[Source] | None = None
         
     @classmethod
-    def parse(cls: type, transmission: 'GedcomTransmission', line: GedcomLine) -> type: # type: ignore
+    def parse(cls: type, transmission: 'GedcomTransmission', line: GedcomLine) -> 'Name': # type: ignore
         """Parse a name from a GEDCOM line"""
         name = cls(transmission, line.value)
         for subline in transmission.iterate(line, tag=GedcomTags.SOUR):
