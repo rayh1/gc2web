@@ -137,8 +137,7 @@ class GedcomTransmission:
 
         for subline in self.iterate(line):
             if subline.tag == GedcomTags.NAME:
-                name: Name = Name.parse(self, subline) 
-                individual.add_name(name)
+                individual.add_name(Name(self).parse(subline))
             elif subline.tag == GedcomTags.BIRT:
                 individual.birth_date, individual.birth_place = self.extract_date_place(subline)
             elif subline.tag == GedcomTags.DEAT:

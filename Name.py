@@ -4,22 +4,21 @@ from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 
 class Name:
-    def __init__(self, transmission: 'GedcomTransmission', value: str | None = None): # type: ignore
+    def __init__(self, transmission: 'GedcomTransmission'): # type: ignore
         self.__transmission: 'GedcomTransmission' = transmission # type: ignore
-        self.__value: str | None = value
+        self.__value: str | None = None
         self.__source_ids: list[str] = []
 
         self.__sources_cache: list[Source] | None = None
-        
-    @classmethod
-    def parse(cls: type, transmission: 'GedcomTransmission', line: GedcomLine) -> 'Name': # type: ignore
+
+    def parse(self, line: GedcomLine) -> 'Name':
         """Parse a name from a GEDCOM line"""
-        name = cls(transmission, line.value)
-        for subline in transmission.iterate(line, tag=GedcomTags.SOUR):
+        self.__value = line.value
+        for subline in self.__transmission.iterate(line, tag=GedcomTags.SOUR):
             if subline.pointer_value:
-                name.source_ids.append(subline.pointer_value)
+                self.__source_ids.append(subline.pointer_value)
         
-        return name
+        return self
 
     @property
     def transmission(self) -> 'GedcomTransmission': # type: ignore
