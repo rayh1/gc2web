@@ -1,4 +1,7 @@
+from typing import TypeVar
 from Source import Source
+from GedcomLine import GedcomLine
+from GedcomTags import GedcomTags
 
 class Name:
     def __init__(self, transmission: 'GedcomTransmission', value: str | None = None): # type: ignore
@@ -7,6 +10,16 @@ class Name:
         self.__source_ids: list[str] = []
 
         self.__sources_cache: list[Source] | None = None
+        
+    @classmethod
+    def parse(cls: type, transmission: 'GedcomTransmission', line: GedcomLine) -> type: # type: ignore
+        """Parse a name from a GEDCOM line"""
+        name = cls(transmission, line.value)
+        for subline in transmission.iterate(line, tag=GedcomTags.SOUR):
+            if subline.pointer_value:
+                name.source_ids.append(subline.pointer_value)
+        
+        return name
 
     @property
     def transmission(self) -> 'GedcomTransmission': # type: ignore
