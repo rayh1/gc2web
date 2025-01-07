@@ -1,6 +1,7 @@
 from Individual import Individual
 from Place import Place
 from Date import Date
+from EventDetails import EventDetails
 
 class Family:
     def __init__(self, xref_id: str, transmission: 'GedcomTransmission'): # type: ignore
@@ -9,8 +10,7 @@ class Family:
         self.__husband_id: str | None = None
         self.__wife_id: str | None = None
         self.__children_ids: list[str] = []
-        self.__marriage_date: Date = Date()
-        self.__marriage_place: Place = Place()
+        self.__marriage: EventDetails = EventDetails(transmission)
         
         self.__husband_cache: Individual | None = None
         self.__wife_cache: Individual | None = None
@@ -57,20 +57,12 @@ class Family:
         self.__children_ids = value
 
     @property
-    def marriage_date(self) -> Date:
-        return self.__marriage_date
+    def marriage(self) -> EventDetails:
+        return self.__marriage
 
-    @marriage_date.setter
-    def marriage_date(self, value: Date):
-        self.__marriage_date = value
-
-    @property
-    def marriage_place(self) -> Place:
-        return self.__marriage_place
-
-    @marriage_place.setter
-    def marriage_place(self, value: Place):
-        self.__marriage_place = value
+    @marriage.setter
+    def marriage(self, value: EventDetails):
+        self.__marriage = value
 
 # Utility methods
 

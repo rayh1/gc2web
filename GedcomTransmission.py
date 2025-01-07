@@ -8,6 +8,7 @@ from Place import Place
 from Date import Date
 from Name import Name
 from Source import Source
+from EventDetails import EventDetails
 
 class GedcomLineIterator:
     def __init__(self, transmission: 'GedcomTransmission', lines: List[GedcomLine], tag:str | None, value_re: str | None, follow_pointers: bool | None = True):
@@ -122,13 +123,6 @@ class GedcomTransmission:
                 source_ids.append(subline.pointer_value)
         return source_ids
     
-    def parse_name(self, line: GedcomLine) -> Name:
-        """Parse a name from a GEDCOM line"""
-        name = Name(self, line.value)
-        name.source_ids = self.extract_source_ids(line)
-        
-        return name
-
     def parse_individual(self, line: GedcomLine) -> Individual:
         if not line.xref_id:
             raise ValueError(f"Individual has no xref_id: {line}")
@@ -175,7 +169,7 @@ class GedcomTransmission:
             elif subline.tag == GedcomTags.CHIL:
                 if subline.pointer_value: family.children_ids.append(subline.pointer_value)
             elif subline.tag == GedcomTags.MARR:
-                family.marriage_date, family.marriage_place = self.extract_date_place(subline)
+                family.marriage = EventDetails(self).parse(subline)
         
         return family
 

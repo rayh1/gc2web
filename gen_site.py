@@ -61,7 +61,7 @@ def write_markdown_file(individual: Individual, filepath: Path):
                 spouse: Individual | None = fams.spouse(individual)
                 if spouse:
                     content.append(f"")
-                    content.append(f"Gehuwd met [{spouse.name}](../{spouse.xref_id.lower()}/) op {fams.marriage_date} te {fams.marriage_place}")
+                    content.append(f"Gehuwd met [{spouse.name}](../{spouse.xref_id.lower()}/) op {fams.marriage.date} te {fams.marriage.place}")
                 for child in fams.children:
                     content.append(f"- Kind [{child.name}](../{child.xref_id.lower()}/)")
 

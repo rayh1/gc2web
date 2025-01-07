@@ -28,7 +28,7 @@ START_PLANTUML = [
 
 END_PLANTUML = ["", "@enduml"]
 
-def s(value: Date | None) -> str:
+def s(value) -> str:
     return str(value) if value else "?"
 
 def add_individual_to_diagram(diagram: List[str], individual: Individual, color: str | None = None, stereotype: str | None = None):
@@ -55,7 +55,7 @@ def add_individual_to_diagram(diagram: List[str], individual: Individual, color:
 def add_marriage_to_diagram(diagram: List[str], family: Family, color: str | None = None):
     if color is None:
         color = COLOR_MARRIAGE
-    diagram.append(f'class "{ICON_MARRIAGE} {s(family.marriage_date)}" as {family.xref_id} {color} {{')
+    diagram.append(f'class "{ICON_MARRIAGE} {s(family.marriage.date)}" as {family.xref_id} {color} {{')
     diagram.append("}")
 
 def create_individual_diagram(person: Individual) -> str:
