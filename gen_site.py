@@ -1,9 +1,8 @@
 import argparse
-import os
 import sys
 import logging
 from pathlib import Path
-from typing import List, Dict
+from typing import List
 from tqdm import tqdm
 
 import PlantUMLEncoder
@@ -11,7 +10,6 @@ import PlantUMLCreator
 from GedcomTransmission import GedcomTransmission
 from GedcomParser import GedcomParser
 from Individual import Individual
-from Name import Name
 
 PLANTUML_BASE_URL = "https://www.plantuml.com/plantuml/svg"
 
@@ -19,7 +17,7 @@ logging.basicConfig(level=logging.INFO,
                    format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-def write_markdown_file(individual: Individual, filepath: Path) -> None:
+def write_markdown_file(individual: Individual, filepath: Path):
     """Write markdown content for an individual to a file.
     
     Args:
@@ -82,17 +80,14 @@ def generate_markdown_files(transmission: GedcomTransmission,
     
     Raises:
         ValueError: If transmission is empty or output_dir is invalid
-    """
-    if not transmission.individuals:
-        raise ValueError("No individuals found in transmission")
-    
+    """    
     output_path = Path(output_dir)
     if not output_path.parent.exists():
         raise ValueError(f"Parent directory {output_path.parent} does not exist")
 
     logger.info(f"Generating markdown files for {len(transmission.individuals)} individuals")
     
-    for individual in tqdm(transmission.individuals.values(),
+    for individual in tqdm(transmission.individuals,
                          desc="Generating markdown files"):
         filename = f"{individual.xref_id}.md"
         filepath = output_path / filename

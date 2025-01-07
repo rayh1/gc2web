@@ -18,6 +18,7 @@ class Individual:
         self.__baptism_place: Place = Place()
         self.__burial_date: Date = Date()
         self.__burial_place: Place = Place()
+
         self.__fams_cache: list['Family'] | None = None # type: ignore
         self.__famc_cache: 'Family' | None = None # type: ignore
         self.__spouses_cache: list['Individual'] | None = None

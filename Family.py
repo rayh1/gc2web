@@ -11,6 +11,7 @@ class Family:
         self.__children_ids: list[str] = []
         self.__marriage_date: Date = Date()
         self.__marriage_place: Place = Place()
+        
         self.__husband_cache: Individual | None = None
         self.__wife_cache: Individual | None = None
         self.__children_cache: list[Individual] | None = None

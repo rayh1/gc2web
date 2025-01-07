@@ -44,13 +44,25 @@ class GedcomIterator:
 
 class GedcomTransmission:
     def __init__(self):
-        self.all_lines: List[GedcomLine] = []
-        self.main_lines: List[GedcomLine] = []        
-        self.id_map: dict[str, GedcomLine] = {}
+        self.__all_lines: List[GedcomLine] = []
+        self.__main_lines: List[GedcomLine] = []        
+        self.__id_map: dict[str, GedcomLine] = {}
         
-        self.individuals: Dict[str, Individual] = {}
-        self.families: Dict[str, Family] = {}
-        self.sources: Dict[str, Source] = {}
+        self.__individual_map: Dict[str, Individual] = {}
+        self.__family_map: Dict[str, Family] = {}
+        self.__source_map: Dict[str, Source] = {}
+
+    @property
+    def all_lines(self) -> List[GedcomLine]:
+        return self.__all_lines
+
+    @property
+    def main_lines(self) -> List[GedcomLine]:
+        return self.__main_lines
+
+    @property
+    def id_map(self) -> Dict[str, GedcomLine]:
+        return self.__id_map
 
     def iterate(self, line: GedcomLine | None = None, tag: str | None = None, value_re: str | None = None, follow_pointers: bool | None = None) -> GedcomIterator:
         """
@@ -84,16 +96,7 @@ class GedcomTransmission:
             GedcomIterator: An iterator over the filtered Gedcom lines.
         """
         return GedcomIterator(self, self.id_map[id].sublines, tag, value_re, follow_pointers)
-    
-    def get_individual(self, id: str) -> Individual | None:
-        return self.individuals.get(id, None)
-    
-    def get_family(self, id: str) -> Family | None:
-        return self.families.get(id, None)
-    
-    def get_source(self, xref_id: str) -> Source | None:
-        return self.sources.get(xref_id, None)
-    
+        
     def follow_pointers(self, line: GedcomLine) -> GedcomLine:
         while line and line.pointer_value:
             line = self.id_map[line.pointer_value]
@@ -111,6 +114,14 @@ class GedcomTransmission:
                 place = Place(subline.value)
         return date, place
 
+    def extract_source_ids(self, line: GedcomLine) -> list[str]:
+        """Extract source ids from a GEDCOM line"""
+        source_ids = []
+        for subline in self.iterate(line, tag=GedcomTags.SOUR):
+            if subline.pointer_value:
+                source_ids.append(subline.pointer_value)
+        return source_ids
+
     def parse_individuals(self):
         """Parse individuals from the GedcomTransmission"""
         for line in self.iterate(tag=GedcomTags.INDI):
@@ -118,11 +129,14 @@ class GedcomTransmission:
                 raise ValueError(f"Individual has no xref_id: {line}")
             
             individual = Individual(xref_id=line.xref_id, transmission=self)
-            self.individuals[line.xref_id] = individual
+            self.__individual_map[line.xref_id] = individual
 
             for subline in self.iterate(line):
                 if subline.tag == GedcomTags.NAME:
-                    if subline.value: individual.add_name(Name(subline.value))
+                    if subline.value: 
+                        name = Name(self, subline.value)
+                        name.source_ids = self.extract_source_ids(subline)
+                        individual.add_name(name)
                 elif subline.tag == GedcomTags.BIRT:
                     individual.birth_date, individual.birth_place = self.extract_date_place(subline)
                 elif subline.tag == GedcomTags.DEAT:
@@ -145,7 +159,7 @@ class GedcomTransmission:
                 raise ValueError(f"Family has no xref_id: {line}")
 
             family = Family(xref_id=line.xref_id, transmission=self)  # Pass the current instance
-            self.families[line.xref_id] = family
+            self.__family_map[line.xref_id] = family
 
             for subline in self.iterate(line):
                 if subline.tag == GedcomTags.HUSB:
@@ -164,7 +178,7 @@ class GedcomTransmission:
                 continue # Skip sources without xref_id
 
             source = Source(xref_id=line.xref_id, transmission=self)
-            self.sources[line.xref_id] = source
+            self.__source_map[line.xref_id] = source
 
             for subline in self.iterate(line):
                 if subline.tag == GedcomTags.TITL:
@@ -181,3 +195,16 @@ class GedcomTransmission:
         self.parse_individuals()
         self.parse_families()
         self.parse_sources()
+
+    def get_individual(self, id: str) -> Individual | None:
+        return self.__individual_map.get(id, None)
+    
+    def get_family(self, id: str) -> Family | None:
+        return self.__family_map.get(id, None)
+    
+    def get_source(self, xref_id: str) -> Source | None:
+        return self.__source_map.get(xref_id, None)
+
+    @property
+    def individuals(self) -> List[Individual]:
+        return list(self.__individual_map.values())
