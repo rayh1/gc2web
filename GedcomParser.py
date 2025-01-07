@@ -20,7 +20,7 @@ class GedcomParser:
         else:
             return sep
 
-    def parse_gedcom_line(self, line: str) -> GedcomLine:
+    def parse_gedcom_line(self, line_num: int, line: str) -> GedcomLine:
         """Parses a single GEDCOM line and returns its components."""
         match = re.match(self.GEDCOM_REGEX, line)
         if not match:
@@ -32,21 +32,21 @@ class GedcomParser:
         pointer_value: str | None = match.group(4)[1:-1] if match.group(4) else None   
         value: str | None = match.group(5)
         
-        return GedcomLine(level, tag, xref_id, pointer_value, value)
+        return GedcomLine(line_num, level, tag, xref_id, pointer_value, value)
 
     def parse(self, gedcom_stream: TextIO) -> GedcomTransmission:
         """Reads a GEDCOM stream and parses each line into a GedcomLine instance."""
         transmission: GedcomTransmission = GedcomTransmission()
         stack: deque[GedcomLine] = deque()
         prev_parsed_line: GedcomLine | None = None
-        lineno: int = 0
+        line_num: int = 0
 
         for line in gedcom_stream:
-            lineno += 1
+            line_num += 1
             stripped_line = line.strip()
             if stripped_line:  # Skip empty lines
                 try:
-                    parsed_line = self.parse_gedcom_line(line)
+                    parsed_line = self.parse_gedcom_line(line_num, line)
 
                     # Parse sublines
                     if (parsed_line.level == 0):    # Root line
@@ -91,7 +91,7 @@ class GedcomParser:
                     prev_parsed_line = parsed_line
 
                 except (ValueError, TypeError, AttributeError) as e:
-                    print(f"Skipping line {lineno} due to error: {e}")
+                    print(f"Skipping line {line} due to error: {e}")
                     exit(1)
         
         return transmission

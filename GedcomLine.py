@@ -1,5 +1,6 @@
 class GedcomLine:
-    def __init__(self, level: int, tag: str, xref_id: str | None, pointer_value: str | None, value: str | None):
+    def __init__(self, line_num: int, level: int, tag: str, xref_id: str | None, pointer_value: str | None, value: str | None):
+        self.__line_num: int = line_num
         self.__level: int = level
         self.__tag: str = tag
         self.__xref_id: str | None = xref_id
@@ -49,6 +50,14 @@ class GedcomLine:
         self.__value = value
 
     @property
+    def line_num(self) -> int:
+        return self.__line_num
+
+    @line_num.setter
+    def line_num(self, value: int):
+        self.__line_num = value
+
+    @property
     def sublines(self) -> list["GedcomLine"]:
         return self.__sublines
 
@@ -65,7 +74,7 @@ class GedcomLine:
         self.__parent = value
 
     def __repr__(self) -> str:
-        return f"[level={self.level}, tag='{self.tag}', xref_id='{self.xref_id}', pointer_value='{self.pointer_value}', value='{self.value}']"
+        return f"[line_num={self.line_num}, level={self.level}, tag='{self.tag}', xref_id='{self.xref_id}', pointer_value='{self.pointer_value}', value='{self.value}']"
 
     def print(self, parent_tag: str = "", indent: int = 0):
         print("  " * indent, end="")
