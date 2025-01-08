@@ -115,14 +115,6 @@ class GedcomTransmission:
                 place = Place(subline.value)
         return date, place
 
-    def extract_source_ids(self, line: GedcomLine) -> list[str]:
-        """Extract source ids from a GEDCOM line"""
-        source_ids = []
-        for subline in self.iterate(line, tag=GedcomTags.SOUR):
-            if subline.pointer_value:
-                source_ids.append(subline.pointer_value)
-        return source_ids
-    
     def parse_individual(self, line: GedcomLine) -> Individual:
         if not line.xref_id:
             raise ValueError(f"Individual has no xref_id: {line}")
@@ -155,62 +147,26 @@ class GedcomTransmission:
             individual: Individual = self.parse_individual(line)                        
             self.__individual_map[individual.xref_id] = individual
 
-    def parse_family(self, line: GedcomLine) -> Family:
-        if not line.xref_id:
-            raise ValueError(f"Family has no xref_id: {line}")
-
-        family = Family(xref_id=line.xref_id, transmission=self)
-
-        for subline in self.iterate(line):
-            if subline.tag == GedcomTags.HUSB:
-                family.husband_id = subline.pointer_value
-            elif subline.tag == GedcomTags.WIFE:
-                family.wife_id = subline.pointer_value
-            elif subline.tag == GedcomTags.CHIL:
-                if subline.pointer_value: family.children_ids.append(subline.pointer_value)
-            elif subline.tag == GedcomTags.MARR:
-                family.marriage = EventDetails(self).parse(subline)
-        
-        return family
-
     def parse_families(self):
         """Parse families from the GedcomTransmission"""
         for line in self.iterate(tag=GedcomTags.FAM):
-            family = self.parse_family(line)
+            family = Family(transmission=self).parse(line)
             self.__family_map[family.xref_id] = family
-
-    def parse_source(self, line: GedcomLine) -> Source:
-        if not line.xref_id:
-            raise ValueError(f"Source has no xref_id: {line}")
-
-        source = Source(xref_id=line.xref_id, transmission=self)
-
-        for subline in self.iterate(line):
-            if subline.tag == GedcomTags.TITL:
-                source.title = subline.value
-            elif subline.tag == GedcomTags.AUTH:
-                source.author = subline.value
-            elif subline.tag == GedcomTags.PUBL:
-                source.publication = subline.value
-            elif subline.tag == GedcomTags.TEXT:
-                source.text = subline.value
-
-        return source
 
     def parse_sources(self):
         """Parse sources from the GedcomTransmission"""
         for line in self.iterate(tag=GedcomTags.SOUR):
             if not line.xref_id:
-                continue
+                continue    # Ignore SOUR line in header
             
-            source: Source = self.parse_source(line)
+            source = Source(transmission=self).parse(line)
             self.__source_map[source.xref_id] = source
 
     def parse_gedcom(self):
         """Parse the GedcomTransmission and generate all Individual, Family, and Source instances"""
+        self.parse_sources()
         self.parse_individuals()
         self.parse_families()
-        self.parse_sources()
 
     def get_individual(self, id: str) -> Individual | None:
         return self.__individual_map.get(id, None)

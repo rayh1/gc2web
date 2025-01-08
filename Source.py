@@ -1,13 +1,33 @@
 from typing import Optional
+from GedcomLine import GedcomLine
+from GedcomTags import GedcomTags
 
 class Source:
-    def __init__(self, xref_id: str, transmission: 'GedcomTransmission', title: str  | None = None, author: str | None = None, publication: str | None = None, text: str | None = None): # type: ignore
-        self.__xref_id: str = xref_id
+    def __init__(self, transmission: 'GedcomTransmission'): # type: ignore
+        self.__xref_id: str = ""
         self.__transmission: 'GedcomTransmission' = transmission # type: ignore
-        self.__title: str | None = title
-        self.__author: str | None = author
-        self.__publication: str | None = publication
-        self.__text: str | None = text
+        self.__title: str | None = None
+        self.__author: str | None = None
+        self.__publication: str | None = None
+        self.__text: str | None = None
+
+    def parse(self, line: GedcomLine) -> 'Source':
+        """Parse a source from a GEDCOM line"""
+        if not line.xref_id:
+            raise ValueError(f"Source has no xref_id: {line}")
+        self.__xref_id = line.xref_id
+
+        for subline in self.__transmission.iterate(line):
+            if subline.tag == GedcomTags.TITL:
+                self.title = subline.value
+            elif subline.tag == GedcomTags.AUTH:
+                self.author = subline.value
+            elif subline.tag == GedcomTags.PUBL:
+                self.publication = subline.value
+            elif subline.tag == GedcomTags.TEXT:
+                self.text = subline.value
+
+        return self
 
     @property
     def xref_id(self) -> str:

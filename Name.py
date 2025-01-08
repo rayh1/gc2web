@@ -14,6 +14,7 @@ class Name:
     def parse(self, line: GedcomLine) -> 'Name':
         """Parse a name from a GEDCOM line"""
         self.__value = line.value
+        
         for subline in self.__transmission.iterate(line, tag=GedcomTags.SOUR):
             if subline.pointer_value:
                 self.__source_ids.append(subline.pointer_value)

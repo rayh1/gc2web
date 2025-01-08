@@ -2,10 +2,11 @@ from Individual import Individual
 from Place import Place
 from Date import Date
 from EventDetails import EventDetails
-
+from GedcomLine import GedcomLine
+from GedcomTags import GedcomTags
 class Family:
-    def __init__(self, xref_id: str, transmission: 'GedcomTransmission'): # type: ignore
-        self.__xref_id: str = xref_id
+    def __init__(self, transmission: 'GedcomTransmission'): # type: ignore
+        self.__xref_id: str = ""
         self.__transmission: 'GedcomTransmission' = transmission # type: ignore
         self.__husband_id: str | None = None
         self.__wife_id: str | None = None
@@ -15,6 +16,24 @@ class Family:
         self.__husband_cache: Individual | None = None
         self.__wife_cache: Individual | None = None
         self.__children_cache: list[Individual] | None = None
+
+    def parse(self, line: GedcomLine) -> 'Family':
+        """Parse a family from a GEDCOM line"""
+        if not line.xref_id:
+            raise ValueError(f"Family has no xref_id: {line}")
+        self.__xref_id: str = line.xref_id
+        
+        for subline in self.transmission.iterate(line):
+            if subline.tag == GedcomTags.HUSB:
+                self.husband_id = subline.pointer_value
+            elif subline.tag == GedcomTags.WIFE:
+                self.wife_id = subline.pointer_value
+            elif subline.tag == GedcomTags.CHIL:
+                if subline.pointer_value: self.children_ids.append(subline.pointer_value)
+            elif subline.tag == GedcomTags.MARR:
+                self.marriage = EventDetails(self.transmission).parse(subline)
+        
+        return self
 
     @property
     def xref_id(self) -> str:
