@@ -8,7 +8,7 @@ from Place import Place
 from Date import Date
 from Name import Name
 from Source import Source
-from EventDetails import EventDetails
+from singleton import singleton
 
 class GedcomLineIterator:
     def __init__(self, transmission: 'GedcomTransmission', lines: List[GedcomLine], tag:str | None, value_re: str | None, follow_pointers: bool | None = True):
@@ -43,6 +43,7 @@ class GedcomLineIterator:
                 
         raise StopIteration
 
+@singleton
 class GedcomTransmission:
     def __init__(self):
         self.__all_lines: List[GedcomLine] = []
@@ -119,11 +120,11 @@ class GedcomTransmission:
         if not line.xref_id:
             raise ValueError(f"Individual has no xref_id: {line}")
         
-        individual: Individual = Individual(xref_id=line.xref_id, transmission=self)
+        individual: Individual = Individual(xref_id=line.xref_id)
 
         for subline in self.iterate(line):
             if subline.tag == GedcomTags.NAME:
-                individual.add_name(Name(self).parse(subline))
+                individual.add_name(Name().parse(subline))
             elif subline.tag == GedcomTags.BIRT:
                 individual.birth_date, individual.birth_place = self.extract_date_place(subline)
             elif subline.tag == GedcomTags.DEAT:
@@ -150,7 +151,7 @@ class GedcomTransmission:
     def parse_families(self):
         """Parse families from the GedcomTransmission"""
         for line in self.iterate(tag=GedcomTags.FAM):
-            family = Family(transmission=self).parse(line)
+            family = Family().parse(line)
             self.__family_map[family.xref_id] = family
 
     def parse_sources(self):
@@ -159,7 +160,7 @@ class GedcomTransmission:
             if not line.xref_id:
                 continue    # Ignore SOUR line in header
             
-            source = Source(transmission=self).parse(line)
+            source = Source().parse(line)
             self.__source_map[source.xref_id] = source
 
     def parse_gedcom(self):

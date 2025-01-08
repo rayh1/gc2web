@@ -3,9 +3,8 @@ from Date import Date
 from Name import Name
 
 class Individual:
-    def __init__(self, xref_id: str, transmission: 'GedcomTransmission'): # type: ignore
+    def __init__(self, xref_id: str):
         self.__xref_id = xref_id
-        self.__transmission: 'GedcomTransmission' = transmission # type: ignore
         self.__names: list[Name] = []
         self.__birth_date: Date = Date()
         self.__birth_place: Place = Place()
@@ -30,14 +29,6 @@ class Individual:
     @xref_id.setter
     def xref_id(self, value: str):
         self.__xref_id = value
-
-    @property
-    def transmission(self) -> 'GedcomTransmission': # type: ignore
-        return self.__transmission
-
-    @transmission.setter
-    def transmission(self, value: 'GedcomTransmission'): # type: ignore
-        self.__transmission = value
 
     @property
     def name(self) -> Name | None:
@@ -142,14 +133,16 @@ class Individual:
 
     @property
     def fams(self) -> list['Family']: # type: ignore
+        from GedcomTransmission import GedcomTransmission
         if self.__fams_cache is None:
-            self.__fams_cache = [self.transmission.get_family(fams_id) for fams_id in self.fams_ids]
+            self.__fams_cache = [GedcomTransmission().get_family(fams_id) for fams_id in self.fams_ids]
         return self.__fams_cache
 
     @property
     def famc(self) -> 'Family': # type: ignore
-        if self.__famc_cache is None:
-            self.__famc_cache = self.__transmission.get_family(self.__famc_id)
+        from GedcomTransmission import GedcomTransmission
+        if self.__famc_cache is None and self.__famc_id:
+            self.__famc_cache = GedcomTransmission().get_family(self.__famc_id)
         return self.__famc_cache
 
     @property

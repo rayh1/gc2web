@@ -4,14 +4,15 @@ from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 
 class EventDetails:
-    def __init__(self, transmission: 'GedcomTransmission'): # type: ignore
-        self.__transmission = transmission
+    def __init__(self):
         self.__date = Date()
         self.__place = Place()
         
     def parse(self, line: GedcomLine) -> 'EventDetails': # type: ignore
+        from GedcomTransmission import GedcomTransmission
+
         """Parse event details from a GEDCOM line"""        
-        for subline in self.__transmission.iterate(line):
+        for subline in GedcomTransmission().iterate(line):
             if subline.tag == GedcomTags.DATE:
                 self.date = Date(subline.value)
             elif subline.tag == GedcomTags.PLAC:

@@ -1,23 +1,23 @@
-from typing import Optional
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 
 class Source:
-    def __init__(self, transmission: 'GedcomTransmission'): # type: ignore
+    def __init__(self):
         self.__xref_id: str = ""
-        self.__transmission: 'GedcomTransmission' = transmission # type: ignore
         self.__title: str | None = None
         self.__author: str | None = None
         self.__publication: str | None = None
         self.__text: str | None = None
 
     def parse(self, line: GedcomLine) -> 'Source':
+        from GedcomTransmission import GedcomTransmission
+
         """Parse a source from a GEDCOM line"""
         if not line.xref_id:
             raise ValueError(f"Source has no xref_id: {line}")
         self.__xref_id = line.xref_id
 
-        for subline in self.__transmission.iterate(line):
+        for subline in GedcomTransmission().iterate(line):
             if subline.tag == GedcomTags.TITL:
                 self.title = subline.value
             elif subline.tag == GedcomTags.AUTH:
@@ -36,14 +36,6 @@ class Source:
     @xref_id.setter
     def xref_id(self, value: str):
         self.__xref_id = value
-
-    @property
-    def transmission(self) -> 'GedcomTransmission': # type: ignore
-        return self.__transmission
-    
-    @transmission.setter
-    def transmission(self, value: 'GedcomTransmission'): # type: ignore
-        self.__transmission = value
    
     @property
     def title(self) -> str | None:
