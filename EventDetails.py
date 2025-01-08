@@ -2,9 +2,12 @@ from Place import Place
 from Date import Date
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
+from SourcesMixin import SourcesMixin
 
-class EventDetails:
+class EventDetails(SourcesMixin):
     def __init__(self):
+        super().__init__()
+
         self.__date = Date()
         self.__place = Place()
         
@@ -17,7 +20,9 @@ class EventDetails:
                 self.date = Date(subline.value)
             elif subline.tag == GedcomTags.PLAC:
                 self.place = Place(subline.value)
-                
+
+        self.parse_sources(line)
+               
         return self
         
     @property

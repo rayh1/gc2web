@@ -11,21 +11,17 @@ from GedcomTransmission import GedcomTransmission
 from GedcomParser import GedcomParser
 from Individual import Individual
 
-PLANTUML_BASE_URL = "https://www.plantuml.com/plantuml/svg"
+PLANTUML_BASE_URL: str = "https://www.plantuml.com/plantuml/svg"
+CONTENT_DIR: Path = Path("/workspaces/gc2web/website/src/content/blog")
 
 logging.basicConfig(level=logging.INFO, 
                    format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-def write_markdown_file(individual: Individual, filepath: Path):
-    """Write markdown content for an individual to a file.
-    
-    Args:
-        individual: The Individual object containing genealogical data
-        filepath: Path object for the output file
-    """
+def generate_individual_page(individual: Individual, filepath: Path):
     try:
         filepath.parent.mkdir(parents=True, exist_ok=True)
+
         with open(filepath, 'w') as file:
             content = []
             content.append(f"---")
@@ -34,6 +30,7 @@ def write_markdown_file(individual: Individual, filepath: Path):
             content.append(f"pubDate: \"November 20 2024\"")
             content.append(f"---")
             content.append(f"")
+
             content.append(f"# {individual.name}")
 
             content.append(f"![test]({PLANTUML_BASE_URL}/{PlantUMLEncoder.encode(PlantUMLCreator.create_individual_diagram(individual))})")
@@ -67,35 +64,54 @@ def write_markdown_file(individual: Individual, filepath: Path):
                 for child in fams.children:
                     content.append(f"- Kind [{child.name}](../{child.xref_id.lower()}/)")
 
+            content.append(f"## Bronnen")
+            for source in individual.sources:
+                content.append(f"- [{source.title}](../{source.xref_id.lower()}/)")
+
             file.writelines("\n".join(content))
     except IOError as e:
         logger.error(f"Failed to write file {filepath}: {e}")
         raise
 
-def generate_markdown_files(transmission: GedcomTransmission, 
-                          output_dir: str) -> None:
-    """Generate markdown files for all individuals in the transmission.
-    
-    Args:
-        transmission: GedcomTransmission object containing all genealogical data
-        output_dir: Directory path where markdown files will be created
-    
-    Raises:
-        ValueError: If transmission is empty or output_dir is invalid
-    """    
-    output_path = Path(output_dir)
-    if not output_path.parent.exists():
-        raise ValueError(f"Parent directory {output_path.parent} does not exist")
+def generate_source_page(source, filepath):
+    try:
+        filepath.parent.mkdir(parents=True, exist_ok=True)
 
-    logger.info(f"Generating markdown files for {len(transmission.individuals)} individuals")
-    
-    for individual in tqdm(transmission.individuals,
-                         desc="Generating markdown files"):
-        filename = f"{individual.xref_id}.md"
-        filepath = output_path / filename
-        write_markdown_file(individual, filepath)
+        with open(filepath, 'w') as file:
+            content = []
+            content.append(f"---")
+            content.append(f"title: \"{source.title}\"")
+            content.append(f"description: \"Source\"")
+            content.append(f"pubDate: \"November 20 2024\"")
+            content.append(f"---")
+            content.append(f"")
 
-    logger.info(f"Successfully generated {len(transmission.individuals)} files")
+            content.append(f"# {source.title}")
+            content.append(f"")
+            content.append(f"## Links")
+            for publication in source.publications:
+                content.append(f"- {publication}")
+
+            file.writelines("\n".join(content))
+    except IOError as e:
+        logger.error(f"Failed to write file {filepath}: {e}")
+        raise        
+
+def generate_individual_pages(transmission: GedcomTransmission, output_dir: Path):
+    logger.info(f"Generating pages for {len(transmission.individuals)} individuals")
+    
+    for individual in tqdm(transmission.individuals, desc="Generating individual pages"):
+        generate_individual_page(individual, output_dir / f"{individual.xref_id}.md")
+
+    logger.info(f"Successfully generated {len(transmission.individuals)} individual pages")
+
+def generate_source_pages(transmission: GedcomTransmission, output_dir: Path):
+    logger.info(f"Generating pages for {len(transmission.sources)} sources")
+    
+    for source in tqdm(transmission.sources, desc="Generating source pages"):
+        generate_source_page(source, output_dir / f"{source.xref_id}.md")
+
+    logger.info(f"Successfully generated {len(transmission.sources)} source pages")
 
 def main(argv: List[str]):
     ap = argparse.ArgumentParser(description='Process a GEDCOM file.')
@@ -107,8 +123,9 @@ def main(argv: List[str]):
         parser = GedcomParser()
         transmission = parser.parse(gedcom_stream)
         transmission.parse_gedcom()
-
-    generate_markdown_files(transmission, "/workspaces/gc2web/website/src/content/blog")
+    
+    generate_individual_pages(transmission, CONTENT_DIR)
+    generate_source_pages(transmission, CONTENT_DIR)
 
 # Example usage
 if __name__ == '__main__':

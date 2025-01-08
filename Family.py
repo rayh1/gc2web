@@ -1,11 +1,12 @@
 from Individual import Individual
-from Place import Place
-from Date import Date
 from EventDetails import EventDetails
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
-class Family:
-    def __init__(self): # type: ignore
+from SourcesMixin import SourcesMixin
+class Family(SourcesMixin):
+    def __init__(self):
+        super().__init__()
+
         self.__xref_id: str = ""
         self.__husband_id: str | None = None
         self.__wife_id: str | None = None
@@ -33,6 +34,8 @@ class Family:
                 if subline.pointer_value: self.children_ids.append(subline.pointer_value)
             elif subline.tag == GedcomTags.MARR:
                 self.marriage = EventDetails().parse(subline)
+        
+        self.parse_sources(line)
         
         return self
 

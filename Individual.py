@@ -4,9 +4,12 @@ from Name import Name
 from EventDetails import EventDetails
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
+from SourcesMixin import SourcesMixin
 
-class Individual:
+class Individual(SourcesMixin):
     def __init__(self):
+        super().__init__()
+
         self.__xref_id = "xref_id"
         self.__names: list[Name] = []
         self.__birth: EventDetails = EventDetails()
@@ -46,6 +49,8 @@ class Individual:
             elif subline.tag == GedcomTags.BURI:
                 self.burial = EventDetails().parse(subline)
 
+        self.parse_sources(line)
+        
         return self
 
     @property

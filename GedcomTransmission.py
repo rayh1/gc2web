@@ -141,3 +141,7 @@ class GedcomTransmission:
     @property
     def individuals(self) -> List[Individual]:
         return list(self.__individual_map.values())
+    
+    @property
+    def sources(self) -> List[Source]:
+        return list(self.__source_map.values())

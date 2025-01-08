@@ -71,3 +71,8 @@ class Source:
 
     def __repr__(self) -> str:
         return f"Source(xref_id={self.xref_id}, title={self.title})"
+
+    @property
+    def publications(self) -> list[str]:
+        from GedcomParser import GedcomParser
+        return list(filter(None, self.__publication.split(GedcomParser.CONT_SEP))) if self.__publication else []
