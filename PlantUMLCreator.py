@@ -42,12 +42,12 @@ def add_individual_to_diagram(diagram: List[str], individual: Individual, color:
     stereotype = f'<<{stereotype}>>' if stereotype else ''
     diagram.append(f'class "{individual.name}" as {individual.xref_id} {stereotype} {color} {{')
     
-    birth_date = s(individual.birth_date) if individual.birth_date.value else s(individual.baptism_date)
-    birth_place = s(individual.birth_place) if individual.birth_place else s(individual.baptism_place)
+    birth_date = s(individual.birth.date) if individual.birth.date.value else s(individual.baptism.date)
+    birth_place = s(individual.birth.place) if individual.birth.place else s(individual.baptism.place)
     diagram.append(f'{{field}} {ICON_BIRTH} {birth_date} {birth_place}')
     
-    death_date = s(individual.death_date) if individual.death_date.value else s(individual.burial_date)
-    death_place = s(individual.death_place) if individual.death_place else s(individual.burial_place)
+    death_date = s(individual.death.date) if individual.death.date.value else s(individual.burial.date)
+    death_place = s(individual.death.place) if individual.death.place else s(individual.burial.place)
     diagram.append(f'{{field}} {ICON_DEATH} {death_date} {death_place}')
     
     diagram.append("}")

@@ -1,26 +1,52 @@
 from Place import Place
 from Date import Date
 from Name import Name
+from EventDetails import EventDetails
+from GedcomLine import GedcomLine
+from GedcomTags import GedcomTags
 
 class Individual:
-    def __init__(self, xref_id: str):
-        self.__xref_id = xref_id
+    def __init__(self):
+        self.__xref_id = "xref_id"
         self.__names: list[Name] = []
-        self.__birth_date: Date = Date()
-        self.__birth_place: Place = Place()
-        self.__death_date: Date = Date()
-        self.__death_place: Place = Place()
+        self.__birth: EventDetails = EventDetails()
+        self.__death: EventDetails = EventDetails()
+        self.__baptism: EventDetails = EventDetails()
+        self.__burial: EventDetails = EventDetails()
         self.__fams_ids: list[str] = []
         self.__famc_id: str | None = None
         self.__sex: str | None = None
-        self.__baptism_date: Date = Date()
-        self.__baptism_place: Place = Place()
-        self.__burial_date: Date = Date()
-        self.__burial_place: Place = Place()
 
         self.__fams_cache: list['Family'] | None = None # type: ignore
         self.__famc_cache: 'Family' | None = None # type: ignore
         self.__spouses_cache: list['Individual'] | None = None
+
+    def parse(self, line: GedcomLine) -> 'Individual':
+        from GedcomTransmission import GedcomTransmission
+
+        if not line.xref_id:
+            raise ValueError(f"Individual has no xref_id: {line}")        
+        self.__xref_id = line.xref_id
+
+        for subline in GedcomTransmission().iterate(line):
+            if subline.tag == GedcomTags.NAME:
+                self.add_name(Name().parse(subline))
+            elif subline.tag == GedcomTags.BIRT:
+                self.birth = EventDetails().parse(subline)
+            elif subline.tag == GedcomTags.DEAT:
+                self.death = EventDetails().parse(subline)
+            elif subline.tag == GedcomTags.FAMS:
+                if subline.pointer_value: self.fams_ids.append(subline.pointer_value)
+            elif subline.tag == GedcomTags.FAMC:
+                self.famc_id = subline.pointer_value
+            elif subline.tag == GedcomTags.SEX:
+                self.sex = subline.value
+            elif subline.tag == GedcomTags.CHR:
+                self.baptism = EventDetails().parse(subline)
+            elif subline.tag == GedcomTags.BURI:
+                self.burial = EventDetails().parse(subline)
+
+        return self
 
     @property
     def xref_id(self) -> str:
@@ -42,36 +68,36 @@ class Individual:
         self.__names.append(value)
 
     @property
-    def birth_date(self) -> Date:
-        return self.__birth_date
+    def birth(self) -> EventDetails:
+        return self.__birth
 
-    @birth_date.setter
-    def birth_date(self, value: Date):
-        self.__birth_date = value
-
-    @property
-    def birth_place(self) -> Place:
-        return self.__birth_place
-
-    @birth_place.setter
-    def birth_place(self, value: Place):
-        self.__birth_place = value
+    @birth.setter
+    def birth(self, value: EventDetails):
+        self.__birth = value
 
     @property
-    def death_date(self) -> Date:
-        return self.__death_date
+    def death(self) -> EventDetails:
+        return self.__death
 
-    @death_date.setter
-    def death_date(self, value: Date):
-        self.__death_date = value
+    @death.setter
+    def death(self, value: EventDetails):
+        self.__death = value
 
     @property
-    def death_place(self) -> Place:
-        return self.__death_place
+    def baptism(self) -> EventDetails:
+        return self.__baptism
 
-    @death_place.setter
-    def death_place(self, value: Place):
-        self.__death_place = value
+    @baptism.setter
+    def baptism(self, value: EventDetails):
+        self.__baptism = value
+
+    @property
+    def burial(self) -> EventDetails:
+        return self.__burial
+
+    @burial.setter
+    def burial(self, value: EventDetails):
+        self.__burial = value
 
     @property
     def fams_ids(self) -> list[str]:
@@ -96,38 +122,6 @@ class Individual:
     @sex.setter
     def sex(self, value: str | None):
         self.__sex = value
-
-    @property
-    def baptism_date(self) -> Date:
-        return self.__baptism_date
-
-    @baptism_date.setter
-    def baptism_date(self, value: Date):
-        self.__baptism_date = value
-
-    @property
-    def baptism_place(self) -> Place:
-        return self.__baptism_place
-
-    @baptism_place.setter
-    def baptism_place(self, value: Place):
-        self.__baptism_place = value
-
-    @property
-    def burial_date(self) -> Date:
-        return self.__burial_date
-
-    @burial_date.setter
-    def burial_date(self, value: Date):
-        self.__burial_date = value
-
-    @property
-    def burial_place(self) -> Place:
-        return self.__burial_place
-
-    @burial_place.setter
-    def burial_place(self, value: Place):
-        self.__burial_place = value
 
 # Utility methods
 

@@ -9,6 +9,7 @@ from Date import Date
 from Name import Name
 from Source import Source
 from singleton import singleton
+from EventDetails import EventDetails
 
 class GedcomLineIterator:
     def __init__(self, transmission: 'GedcomTransmission', lines: List[GedcomLine], tag:str | None, value_re: str | None, follow_pointers: bool | None = True):
@@ -105,47 +106,10 @@ class GedcomTransmission:
 
         return line
 
-    def extract_date_place(self, line: GedcomLine) -> Tuple[Date, Place]:
-        """Extract date and place from a GEDCOM event line"""
-        date: Date = Date()
-        place: Place = Place()
-        for subline in self.iterate(line):
-            if subline.tag == GedcomTags.DATE:
-                date = Date(subline.value)
-            elif subline.tag == GedcomTags.PLAC:
-                place = Place(subline.value)
-        return date, place
-
-    def parse_individual(self, line: GedcomLine) -> Individual:
-        if not line.xref_id:
-            raise ValueError(f"Individual has no xref_id: {line}")
-        
-        individual: Individual = Individual(xref_id=line.xref_id)
-
-        for subline in self.iterate(line):
-            if subline.tag == GedcomTags.NAME:
-                individual.add_name(Name().parse(subline))
-            elif subline.tag == GedcomTags.BIRT:
-                individual.birth_date, individual.birth_place = self.extract_date_place(subline)
-            elif subline.tag == GedcomTags.DEAT:
-                individual.death_date, individual.death_place = self.extract_date_place(subline)
-            elif subline.tag == GedcomTags.FAMS:
-                if subline.pointer_value: individual.fams_ids.append(subline.pointer_value)
-            elif subline.tag == GedcomTags.FAMC:
-                individual.famc_id = subline.pointer_value
-            elif subline.tag == GedcomTags.SEX:
-                individual.sex = subline.value
-            elif subline.tag == GedcomTags.CHR:
-                individual.baptism_date, individual.baptism_place = self.extract_date_place(subline)
-            elif subline.tag == GedcomTags.BURI:
-                individual.burial_date, individual.burial_place = self.extract_date_place(subline)
-
-        return individual
-    
     def parse_individuals(self):
         """Parse individuals from the GedcomTransmission"""
         for line in self.iterate(tag=GedcomTags.INDI):
-            individual: Individual = self.parse_individual(line)                        
+            individual: Individual = Individual().parse(line)                        
             self.__individual_map[individual.xref_id] = individual
 
     def parse_families(self):
