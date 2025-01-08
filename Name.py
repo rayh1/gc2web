@@ -1,4 +1,3 @@
-from typing import TypeVar
 from Source import Source
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags

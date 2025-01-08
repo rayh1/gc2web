@@ -1,7 +1,6 @@
 from typing import List
 from Individual import Individual
 from Family import Family
-from Date import Date
 
 # Constants
 COLOR_MALE = '#E3F5FB'

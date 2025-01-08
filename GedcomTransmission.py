@@ -1,15 +1,11 @@
 import re
-from typing import List, Dict, Tuple
+from typing import List, Dict
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from Individual import Individual
 from Family import Family
-from Place import Place
-from Date import Date
-from Name import Name
 from Source import Source
 from singleton import singleton
-from EventDetails import EventDetails
 
 class GedcomLineIterator:
     def __init__(self, transmission: 'GedcomTransmission', lines: List[GedcomLine], tag:str | None, value_re: str | None, follow_pointers: bool | None = True):
