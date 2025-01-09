@@ -13,7 +13,6 @@ ICON_MARRIAGE = '<:wedding:>'
 START_PLANTUML = [
     "@startuml",
     "skinparam backgroundColor transparent",
-    "skinparam roundcorner 20",
     "hide circle",
     "hide empty members",
     "hide stereotype",
@@ -88,7 +87,7 @@ def create_individual_diagram(person: Individual) -> str:
 
         add_marriage_to_diagram(diagram, family)
 
-        for i, child in enumerate(family.children):
+        for child in family.children:
             add_individual_to_diagram(diagram, child)
 
         # Add relationships
