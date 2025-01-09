@@ -10,13 +10,35 @@ import PlantUMLCreator
 from GedcomTransmission import GedcomTransmission
 from GedcomParser import GedcomParser
 from Individual import Individual
+from SourcesMixin import SourcesMixin
+from Source import Source
 
 PLANTUML_BASE_URL: str = "https://www.plantuml.com/plantuml/svg"
 CONTENT_DIR: Path = Path("/workspaces/gc2web/website/src/content/blog")
+LINK_ICON: str = ":link:"
 
 logging.basicConfig(level=logging.INFO, 
                    format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+def individual_url(individual: Individual) -> str:
+    return f"../{individual.xref_id.lower()}/"
+
+def source_url(source: Source) -> str:
+    return f"../{source.xref_id.lower()}/"
+
+def individual_link(individual: Individual) -> str:
+    return f"[{individual.name}]({individual_url(individual)})"
+
+def source_link(source: Source) -> str:
+    return f"[{source.title}]({source_url(source)})"
+
+def sources_annotation(sources: SourcesMixin) -> str:
+    result = ""
+    for source in sources.sources:
+        result += f"<sup><a href=\"{source_url(source)}\" style=\"text-decoration:none\" title=\"{source.title}\">{LINK_ICON}</a></sup>"
+    
+    return result
 
 def generate_individual_page(individual: Individual, filepath: Path):
     try:
@@ -31,27 +53,26 @@ def generate_individual_page(individual: Individual, filepath: Path):
             content.append(f"---")
             content.append(f"")
 
-            content.append(f"# {individual.name}")
-
             content.append(f"![test]({PLANTUML_BASE_URL}/{PlantUMLEncoder.encode(PlantUMLCreator.create_individual_diagram(individual))})")
 
             content.append(f"## Gegevens")
-            content.append(f"- Geboren op {individual.birth.date} te {individual.birth.place}")
-            if individual.baptism.date.value or individual.baptism.place.value: content.append(f"- Gedoopt op {individual.baptism.date} te {individual.baptism.place}")
-            content.append(f"- Overleden op {individual.death.date} te {individual.death.place}")
-            if individual.burial.date.value or individual.burial.place.value: content.append(f"- Begraven op {individual.burial.date} te {individual.burial.place}")
+            content.append(f"- Naam: {individual.name} {sources_annotation(individual.name)}")
+            content.append(f"- Geboren op {individual.birth.date} te {individual.birth.place} {sources_annotation(individual.birth)}")
+            if individual.baptism.date.value or individual.baptism.place.value: content.append(f"- Gedoopt op {individual.baptism.date} te {individual.baptism.place} {sources_annotation(individual.baptism)}")
+            content.append(f"- Overleden op {individual.death.date} te {individual.death.place} {sources_annotation(individual.death)}")
+            if individual.burial.date.value or individual.burial.place.value: content.append(f"- Begraven op {individual.burial.date} te {individual.burial.place} {sources_annotation(individual.burial)}")
             if len(individual.names)  > 1:
-                content.append(f"- Alternatieve Namen")
+                content.append(f"- Alternatieve namen:")
                 for name in individual.names[1:]:
-                    content.append(f"  - {name}")
+                    content.append(f"  - {name} {sources_annotation(name)}")
 
             content.append(f"## Ouders")
             father: Individual | None = individual.father
             if father:
-                content.append(f"- De vader is [{father.name}](../{father.xref_id.lower()}/)")
+                content.append(f"- De vader is {individual_link(father)}")
             mother: Individual | None = individual.mother
             if mother:
-                content.append(f"- De moeder is [{mother.name}](../{mother.xref_id.lower()}/)")
+                content.append(f"- De moeder is {individual_link(mother)}")
 
             content.append("")
             content.append(f"## Relaties en Kinderen")
@@ -60,13 +81,13 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 spouse: Individual | None = fams.spouse(individual)
                 if spouse:
                     content.append(f"")
-                    content.append(f"Gehuwd met [{spouse.name}](../{spouse.xref_id.lower()}/) op {fams.marriage.date} te {fams.marriage.place}")
+                    content.append(f"Gehuwd met {individual_link(spouse)} op {fams.marriage.date} te {fams.marriage.place} {sources_annotation(fams.marriage)}")
                 for child in fams.children:
-                    content.append(f"- Kind [{child.name}](../{child.xref_id.lower()}/)")
+                    content.append(f"- Kind {individual_link(child)}")
 
-            content.append(f"## Bronnen")
+            content.append(f"## Bronnen lijst")
             for source in individual.sources:
-                content.append(f"- [{source.title}](../{source.xref_id.lower()}/)")
+                content.append(f"- {source_link(source)}")
 
             file.writelines("\n".join(content))
     except IOError as e:
