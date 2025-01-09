@@ -53,7 +53,12 @@ def generate_individual_page(individual: Individual, filepath: Path):
             content.append(f"---")
             content.append(f"")
 
+            content.append("## Boom")
+            content.append("<details><summary>Toon</summary>")
+            content.append(f"")
             content.append(f"![test]({PLANTUML_BASE_URL}/{PlantUMLEncoder.encode(PlantUMLCreator.create_individual_diagram(individual))})")
+            content.append("</details>")
+            content.append(f"")
 
             content.append(f"## Gegevens")
             content.append(f"- Naam: {individual.name} {sources_annotation(individual.name)}")
