@@ -19,6 +19,7 @@ class Individual(SourcesMixin):
         self.__fams_ids: list[str] = []
         self.__famc_id: str | None = None
         self.__sex: str | None = None
+        self.__occupations: list[EventDetails] = []
 
         self.__fams_cache: list['Family'] | None = None # type: ignore
         self.__famc_cache: 'Family' | None = None # type: ignore
@@ -48,6 +49,8 @@ class Individual(SourcesMixin):
                 self.baptism = EventDetails().parse(subline)
             elif subline.tag == GedcomTags.BURI:
                 self.burial = EventDetails().parse(subline)
+            elif subline.tag == GedcomTags.OCCU:
+                self.add_occupation(EventDetails().parse(subline))
 
         self.parse_sources(line)
         
@@ -127,6 +130,13 @@ class Individual(SourcesMixin):
     @sex.setter
     def sex(self, value: str | None):
         self.__sex = value
+
+    @property
+    def occupations(self) -> list[EventDetails]:
+        return self.__occupations
+
+    def add_occupation(self, value: EventDetails):
+        self.__occupations.append(value)
 
 # Utility methods
 

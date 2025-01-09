@@ -8,13 +8,16 @@ class EventDetails(SourcesMixin):
     def __init__(self):
         super().__init__()
 
+        self.__value: str | None = None
+
         self.__date = Date()
         self.__place = Place()
         
     def parse(self, line: GedcomLine) -> 'EventDetails': # type: ignore
         from GedcomTransmission import GedcomTransmission
 
-        """Parse event details from a GEDCOM line"""        
+        self.__value = line.value
+
         for subline in GedcomTransmission().iterate(line):
             if subline.tag == GedcomTags.DATE:
                 self.date = Date(subline.value)
@@ -25,6 +28,14 @@ class EventDetails(SourcesMixin):
                
         return self
         
+    @property
+    def value(self) -> str | None:
+        return self.__value
+
+    @value.setter
+    def value(self, value: str | None):
+        self.__value = value
+    
     @property
     def date(self) -> Date:
         return self.__date

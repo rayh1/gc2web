@@ -66,6 +66,11 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 for name in individual.names[1:]:
                     content.append(f"  - {name} {sources_annotation(name)}")
 
+            if individual.occupations:
+                content.append(f"## Beroepen")
+                for occupation in individual.occupations:
+                    content.append(f"- {occupation.value} op {occupation.date} te {occupation.place} {sources_annotation(occupation)}")
+
             content.append(f"## Ouders")
             father: Individual | None = individual.father
             if father:

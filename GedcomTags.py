@@ -45,3 +45,4 @@ class GedcomTags:
     AUTH: str = "AUTH"
     PUBL: str = "PUBL"
     TEXT: str = "TEXT"
+    OCCU: str = "OCCU"
