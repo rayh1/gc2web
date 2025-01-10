@@ -20,7 +20,7 @@ class TestDate(unittest.TestCase):
         self.assertEqual(date.date(), datetime(2000, 1, 1))
 
     def test_date_int(self):
-        date = Date("INT 01 JAN 2000 (about the new millennium)")
+        date = Date("INT 2000 (2088 - 88)")
         self.assertEqual(date.date(), datetime(2000, 1, 1))
 
     def test_invalid_date(self):

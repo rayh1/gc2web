@@ -5,6 +5,7 @@ from EventDetails import EventDetails
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from SourcesMixin import SourcesMixin
+from datetime import datetime
 
 class Individual(SourcesMixin):
     def __init__(self):
@@ -196,3 +197,22 @@ class Individual(SourcesMixin):
     @property
     def is_unknown_sex(self) -> bool:
         return self.__sex not in ['M', 'F']
+    
+    @property
+    def start_life(self) -> EventDetails:
+        return self.birth if self.birth.date.value else self.baptism
+
+    @property
+    def end_life(self) -> EventDetails:
+        return self.death if self.death.date.value else self.burial
+
+    def age(self, at_date: Date) -> int | None:
+        if not self.start_life.date:
+            return None
+        
+        start_life_date_value = self.start_life.date.date()
+        at_date_value = at_date.date()
+        if not start_life_date_value or not at_date_value:
+            return None
+        return (at_date_value - start_life_date_value).days // 365
+    

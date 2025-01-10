@@ -13,6 +13,7 @@ from GedcomParser import GedcomParser
 from Individual import Individual
 from SourcesMixin import SourcesMixin
 from Source import Source
+from EventDetails import EventDetails
 
 PLANTUML_BASE_URL: str = "https://www.plantuml.com/plantuml/svg"
 CONTENT_DIR: Path = Path("/workspaces/gc2web/website/src/content/blog")
@@ -21,6 +22,9 @@ LINK_ICON: str = ":link:"
 logging.basicConfig(level=logging.INFO, 
                    format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+def s(value) -> str:
+    return str(value) if value else "?"
 
 def individual_url(individual: Individual) -> str:
     return f"../{individual.xref_id.lower()}/"
@@ -41,6 +45,9 @@ def sources_annotation(sources: SourcesMixin | None) -> str:
     for source in sources.sources:
         result += f"<a href=\"{source_url(source)}\" style=\"text-decoration:none\" title=\"{source.title}\">{LINK_ICON}</a>"
     return result + "</sup>"
+
+def age_str(individual: Individual, event: EventDetails) -> str:
+    return f"oud {s(individual.age(event.date))} jaar"
 
 def generate_individual_page(individual: Individual, filepath: Path):
     try:
@@ -66,7 +73,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
             content.append(f"- Naam: {individual.name} {sources_annotation(individual.name)}")
             content.append(f"- Geboren op {individual.birth.date} te {individual.birth.place} {sources_annotation(individual.birth)}")
             if individual.baptism.date.value or individual.baptism.place.value: content.append(f"- Gedoopt op {individual.baptism.date} te {individual.baptism.place} {sources_annotation(individual.baptism)}")
-            content.append(f"- Overleden op {individual.death.date} te {individual.death.place} {sources_annotation(individual.death)}")
+            content.append(f"- Overleden op {individual.death.date} te {individual.death.place}, {age_str(individual, individual.end_life)} jaar {sources_annotation(individual.death)}")
             if individual.burial.date.value or individual.burial.place.value: content.append(f"- Begraven op {individual.burial.date} te {individual.burial.place} {sources_annotation(individual.burial)}")
             if len(individual.names)  > 1:
                 content.append(f"- Alternatieve namen:")
@@ -77,7 +84,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 content.append(f"## Beroepen")
                 sorted_occupations = sorted(individual.occupations, key=lambda x: x.date.date() or datetime.min)
                 for occupation in sorted_occupations:
-                    content.append(f"- {occupation.value} op {occupation.date} te {occupation.place} {sources_annotation(occupation)}")
+                    content.append(f"- {occupation.value} op {occupation.date} te {occupation.place}, {age_str(individual, occupation)} {sources_annotation(occupation)}")
 
             content.append(f"## Ouders")
             father: Individual | None = individual.father
@@ -94,7 +101,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 spouse: Individual | None = fams.spouse(individual)
                 if spouse:
                     content.append(f"")
-                    content.append(f"Gehuwd met {individual_link(spouse)} op {fams.marriage.date} te {fams.marriage.place} {sources_annotation(fams.marriage)}")
+                    content.append(f"Gehuwd met {individual_link(spouse)} ({age_str(spouse, fams.marriage)}) op {fams.marriage.date} te {fams.marriage.place}, {age_str(individual, fams.marriage)} {sources_annotation(fams.marriage)}")
                 for child in fams.children:
                     content.append(f"- Kind {individual_link(child)}")
 

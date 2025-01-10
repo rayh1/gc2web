@@ -51,10 +51,11 @@ class Date:
                 pass
 
         # INT <DATE> (<DATE_PHRASE>)
-        match = re.search(r"INT (\d{1,2} \w{3} \d{4})", self.__value)
+        #match = re.search(r"INT (\d{1,2} \w{3} \d{4})", self.__value)
+        match = re.search(r"INT (\d{4})", self.__value)
         if match:
             try:
-                return datetime.strptime(match.group(1), "%d %b %Y")
+                return datetime.strptime(match.group(1), "%Y")
             except ValueError:
                 pass
 
