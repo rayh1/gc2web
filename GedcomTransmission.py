@@ -5,6 +5,7 @@ from GedcomTags import GedcomTags
 from Individual import Individual
 from Family import Family
 from Source import Source
+from Repository import Repository
 from singleton import singleton
 
 class GedcomLineIterator:
@@ -50,6 +51,7 @@ class GedcomTransmission:
         self.__individual_map: Dict[str, Individual] = {}
         self.__family_map: Dict[str, Family] = {}
         self.__source_map: Dict[str, Source] = {}
+        self.__repository_map: Dict[str, Repository] = {}
 
     @property
     def all_lines(self) -> List[GedcomLine]:
@@ -77,7 +79,7 @@ class GedcomTransmission:
             GedcomIterator: An iterator over the filtered Gedcom lines.
         """
         if line == None:
-            return GedcomLineIterator(self, self.all_lines, tag, value_re, follow_pointers)
+            return GedcomLineIterator(self, self.main_lines, tag, value_re, follow_pointers)
         else:
             return GedcomLineIterator(self, line.sublines, tag, value_re, follow_pointers)
 
@@ -123,11 +125,18 @@ class GedcomTransmission:
             source = Source().parse(line)
             self.__source_map[source.xref_id] = source
 
+    def parse_repositories(self):
+        """Parse repositories from the GedcomTransmission"""
+        for line in self.iterate(tag=GedcomTags.REPO):
+            repository = Repository().parse(line)
+            self.__repository_map[repository.xref_id] = repository
+
     def parse_gedcom(self):
-        """Parse the GedcomTransmission and generate all Individual, Family, and Source instances"""
+        """Parse the GedcomTransmission and generate all Individual, Family, Source, and Repository instances"""
         self.parse_sources()
         self.parse_individuals()
         self.parse_families()
+        self.parse_repositories()
 
     def get_individual(self, id: str) -> Individual | None:
         return self.__individual_map.get(id, None)
@@ -138,6 +147,9 @@ class GedcomTransmission:
     def get_source(self, xref_id: str) -> Source | None:
         return self.__source_map.get(xref_id, None)
 
+    def get_repository(self, id: str) -> Repository | None:
+        return self.__repository_map.get(id, None)
+
     @property
     def individuals(self) -> List[Individual]:
         return list(self.__individual_map.values())
@@ -145,3 +157,7 @@ class GedcomTransmission:
     @property
     def sources(self) -> List[Source]:
         return list(self.__source_map.values())
+
+    @property
+    def repositories(self) -> List[Repository]:
+        return list(self.__repository_map.values())

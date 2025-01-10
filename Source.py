@@ -1,5 +1,6 @@
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
+from Repository import Repository
 
 class Source:
     def __init__(self):
@@ -8,6 +9,8 @@ class Source:
         self.__author: str | None = None
         self.__publication: str | None = None
         self.__text: str | None = None
+        self.__repository_id: str | None = None
+        self.__repository_cache: Repository | None = None
 
     def parse(self, line: GedcomLine) -> 'Source':
         from GedcomTransmission import GedcomTransmission
@@ -26,6 +29,8 @@ class Source:
                 self.publication = subline.value
             elif subline.tag == GedcomTags.TEXT:
                 self.text = subline.value
+            elif subline.tag == GedcomTags.REPO:
+                self.repository_id = subline.pointer_value
 
         return self
 
@@ -68,6 +73,21 @@ class Source:
     @text.setter
     def text(self, value: str | None):
         self.__text = value
+
+    @property
+    def repository_id(self) -> str | None:
+        return self.__repository_id
+
+    @repository_id.setter
+    def repository_id(self, value: str | None):
+        self.__repository_id = value
+
+    @property
+    def repository(self) -> Repository | None:
+        if self.__repository_cache is None and self.repository_id:
+            from GedcomTransmission import GedcomTransmission
+            self.__repository_cache = GedcomTransmission().get_repository(self.repository_id)
+        return self.__repository_cache
 
     def __repr__(self) -> str:
         return f"Source(xref_id={self.xref_id}, title={self.title})"

@@ -46,3 +46,5 @@ class GedcomTags:
     PUBL: str = "PUBL"
     TEXT: str = "TEXT"
     OCCU: str = "OCCU"
+    REPO: str = "REPO"
+    WWW: str = "WWW"

@@ -18,6 +18,7 @@ from EventDetails import EventDetails
 PLANTUML_BASE_URL: str = "https://www.plantuml.com/plantuml/svg"
 CONTENT_DIR: Path = Path("/workspaces/gc2web/website/src/content/blog")
 LINK_ICON: str = ":link:"
+HEADER_PREFIX: str = "###"
 
 logging.basicConfig(level=logging.INFO, 
                    format='%(asctime)s - %(levelname)s - %(message)s')
@@ -62,14 +63,14 @@ def generate_individual_page(individual: Individual, filepath: Path):
             content.append(f"---")
             content.append(f"")
 
-            content.append("## Boom")
+            content.append(f"{HEADER_PREFIX} Boom")
             content.append("<details><summary>Toon</summary>")
             content.append(f"")
             content.append(f"![test]({PLANTUML_BASE_URL}/{PlantUMLEncoder.encode(PlantUMLCreator.create_individual_diagram(individual))})")
             content.append("</details>")
             content.append(f"")
 
-            content.append(f"## Gegevens")
+            content.append(f"{HEADER_PREFIX} Gegevens")
             content.append(f"- Naam: {individual.name} {sources_annotation(individual.name)}")
             content.append(f"- Geboren op {individual.birth.date} te {individual.birth.place} {sources_annotation(individual.birth)}")
             if individual.baptism.date.value or individual.baptism.place.value: content.append(f"- Gedoopt op {individual.baptism.date} te {individual.baptism.place} {sources_annotation(individual.baptism)}")
@@ -81,12 +82,12 @@ def generate_individual_page(individual: Individual, filepath: Path):
                     content.append(f"  - {name} {sources_annotation(name)}")
 
             if individual.occupations:
-                content.append(f"## Beroepen")
+                content.append(f"{HEADER_PREFIX} Beroepen")
                 sorted_occupations = sorted(individual.occupations, key=lambda x: x.date.date() or datetime.min)
                 for occupation in sorted_occupations:
                     content.append(f"- {occupation.value} op {occupation.date} te {occupation.place}, {age_str(individual, occupation)} {sources_annotation(occupation)}")
 
-            content.append(f"## Ouders")
+            content.append(f"{HEADER_PREFIX} Ouders")
             father: Individual | None = individual.father
             if father:
                 content.append(f"- De vader is {individual_link(father)}")
@@ -95,7 +96,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 content.append(f"- De moeder is {individual_link(mother)}")
 
             content.append("")
-            content.append(f"## Relaties en Kinderen")
+            content.append(f"{HEADER_PREFIX} Relaties en Kinderen")
 
             for fams in individual.fams:
                 spouse: Individual | None = fams.spouse(individual)
@@ -105,7 +106,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 for child in fams.children:
                     content.append(f"- Kind {individual_link(child)}")
 
-            content.append(f"## Bronnen lijst")
+            content.append(f"{HEADER_PREFIX} Bronnen lijst")
             for source in individual.sources:
                 content.append(f"- {source_link(source)}")
 
@@ -127,9 +128,12 @@ def generate_source_page(source, filepath):
             content.append(f"---")
             content.append(f"")
 
-            content.append(f"# {source.title}")
-            content.append(f"")
-            content.append(f"## Links")
+            if source.repository:
+                content.append(f"{HEADER_PREFIX} Archief")
+                content.append(f"[{source.repository.name}]({source.repository.www})")
+                content.append(f"")
+
+            content.append(f"{HEADER_PREFIX} Rechtstreekse Verwijzingen")
             for publication in source.publications:
                 content.append(f"- {publication}")
 
