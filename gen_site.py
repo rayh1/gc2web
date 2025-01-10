@@ -59,6 +59,14 @@ def lifespan_str(individual: Individual) -> str:
     
     return year_str
 
+def gender_str(individual: Individual) -> str:
+    if individual.sex == "M":
+        return "Mannelijk"
+    elif individual.sex == "F":
+        return "Vrouwelijk"
+    else:
+        return "Onbekend"
+
 def generate_individual_page(individual: Individual, filepath: Path):
     try:
         filepath.parent.mkdir(parents=True, exist_ok=True)
@@ -81,6 +89,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
             content.append(f"")
             content.append(f"{HEADER_PREFIX} Gegevens")
             content.append(f"- Naam: {individual.name} {sources_str(individual.name)}")
+            content.append(f"- Geslacht: {gender_str(individual)}")
             content.append(f"- Geboren op {individual.birth.date} te {individual.birth.place} {sources_str(individual.birth)}")
             if individual.baptism.date.value or individual.baptism.place.value: content.append(f"- Gedoopt op {individual.baptism.date} te {individual.baptism.place} {sources_str(individual.baptism)}")
             content.append(f"- Overleden op {individual.death.date} te {individual.death.place}, {age_str(individual, individual.end_life)} jaar {sources_str(individual.death)}")
