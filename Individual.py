@@ -263,3 +263,11 @@ class Individual(SourcesMixin):
             self.__locations_cache = sorted(locations, key=lambda x: x.event.date.date() or datetime.min)
 
         return self.__locations_cache
+    
+    def siblings(self) -> list['Individual']:
+        if self.famc:
+            return sorted(
+                    [child for child in self.famc.children if child != self],
+                    key=lambda x: x.birth.date.date() or datetime.max
+                )
+        return []
