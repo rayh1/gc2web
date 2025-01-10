@@ -1,3 +1,4 @@
+from typing import Union
 from Place import Place
 from Date import Date
 from Name import Name
@@ -6,6 +7,12 @@ from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from SourcesMixin import SourcesMixin
 from datetime import datetime
+
+class Location:
+    def __init__(self, family: Union['Family', None], spouse: Union['Individual', None], event: EventDetails): # type: ignore
+        self.family: Union['Family', None] = family # type: ignore
+        self.spouse: Union['Individual', None] = spouse
+        self.event: EventDetails = event
 
 class Individual(SourcesMixin):
     def __init__(self):
@@ -21,10 +28,12 @@ class Individual(SourcesMixin):
         self.__famc_id: str | None = None
         self.__sex: str | None = None
         self.__occupations: list[EventDetails] = []
+        self.__residences: list[EventDetails] = []
 
         self.__fams_cache: list['Family'] | None = None # type: ignore
         self.__famc_cache: 'Family' | None = None # type: ignore
         self.__spouses_cache: list['Individual'] | None = None
+        self.__locations_cache: list[Location] | None = None
 
     def parse(self, line: GedcomLine) -> 'Individual':
         from GedcomTransmission import GedcomTransmission
@@ -52,6 +61,8 @@ class Individual(SourcesMixin):
                 self.burial = EventDetails().parse(subline)
             elif subline.tag == GedcomTags.OCCU:
                 self.add_occupation(EventDetails().parse(subline))
+            elif subline.tag == GedcomTags.RESI:
+                self.add_residence(EventDetails().parse(subline))
 
         self.parse_sources(line)
         
@@ -139,13 +150,20 @@ class Individual(SourcesMixin):
     def add_occupation(self, value: EventDetails):
         self.__occupations.append(value)
 
+    @property
+    def residences(self) -> list[EventDetails]:
+        return self.__residences
+    
+    def add_residence(self, value: EventDetails):
+        self.__residences.append(value)
+
 # Utility methods
 
     @property
     def fams(self) -> list['Family']: # type: ignore
         from GedcomTransmission import GedcomTransmission
         if self.__fams_cache is None:
-            self.__fams_cache = [GedcomTransmission().get_family(fams_id) for fams_id in self.fams_ids]
+            self.__fams_cache = list(filter(None, [GedcomTransmission().get_family(fams_id) for fams_id in self.fams_ids]))
         return self.__fams_cache
 
     @property
@@ -153,18 +171,18 @@ class Individual(SourcesMixin):
         from GedcomTransmission import GedcomTransmission
         if self.__famc_cache is None and self.__famc_id:
             self.__famc_cache = GedcomTransmission().get_family(self.__famc_id)
-        return self.__famc_cache
+        return self.__famc_cache # type: ignore
 
     @property
     def father(self) -> 'Individual':
         if self.famc:
-            return self.famc.husband
+            return self.famc.husband         # type: ignore
         return None # type: ignore
 
     @property
     def mother(self) -> 'Individual':
         if self.famc:
-            return self.famc.wife
+            return self.famc.wife # type: ignore
         return None # type: ignore
 
     @property
@@ -216,3 +234,32 @@ class Individual(SourcesMixin):
             return None
         return (at_date_value - start_life_date_value).days // 365
     
+    def is_born(self, at_date: Date) -> bool:        
+        start_life_date = self.start_life.date.date()
+        at_date_value = at_date.date()
+
+        if start_life_date is None or at_date_value is None:
+            return False
+        
+        return start_life_date <= at_date_value
+
+    def locations(self) -> list[Location]:
+        if self.__locations_cache is None:
+        
+            locations = []
+            
+            if self.famc:
+                for residence in self.famc.residences:
+                    if self.is_born(residence.date):
+                        locations.append(Location(self.famc, None, residence))
+                    
+            for residence in self.residences:
+                locations.append(Location(None, None, residence))
+
+            for family in self.fams:
+                for residence in family.residences:
+                    locations.append(Location(None, family.spouse(self), residence))
+                    
+            self.__locations_cache = sorted(locations, key=lambda x: x.event.date.date() or datetime.min)
+
+        return self.__locations_cache

@@ -1,7 +1,6 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import LatestPosts from "../components/LatestPosts.astro";
 import { Image } from "astro:assets";
 import heroImage from "../../public/banner.webp";
 ---
@@ -15,5 +14,10 @@ import heroImage from "../../public/banner.webp";
   <p>
     Genealogy of the Hoofman family, from the 17th century to the present day.
   </p>
-  <LatestPosts />
+  <p>
+    Startpunten:
+    <ul>
+      <li>Familie Hoofman: <a href="http://localhost:4321/blog/i00005/">Petrus Johannes Hoofman</a> (mijn opa aan vaderszijde)</li>
+      <li>Familie Walters: <a href="http://localhost:4321/blog/i00073/">Josephus Reinerus Walters</a> (mijn opa aan moederszijde)</li>
+  </p>
 </PageLayout>

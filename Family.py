@@ -12,6 +12,7 @@ class Family(SourcesMixin):
         self.__wife_id: str | None = None
         self.__children_ids: list[str] = []
         self.__marriage: EventDetails = EventDetails()
+        self.__residences: list[EventDetails] = []
         
         self.__husband_cache: Individual | None = None
         self.__wife_cache: Individual | None = None
@@ -34,6 +35,8 @@ class Family(SourcesMixin):
                 if subline.pointer_value: self.children_ids.append(subline.pointer_value)
             elif subline.tag == GedcomTags.MARR:
                 self.marriage = EventDetails().parse(subline)
+            elif subline.tag == GedcomTags.RESI:
+                self.residences.append(EventDetails().parse(subline))
         
         self.parse_sources(line)
         
@@ -78,6 +81,14 @@ class Family(SourcesMixin):
     @marriage.setter
     def marriage(self, value: EventDetails):
         self.__marriage = value
+
+    @property
+    def residences(self) -> list[EventDetails]:
+        return self.__residences
+
+    @residences.setter
+    def residences(self, value: list[EventDetails]):
+        self.__residences = value
 
 # Utility methods
 

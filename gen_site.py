@@ -87,6 +87,16 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 for occupation in sorted_occupations:
                     content.append(f"- {occupation.value} op {occupation.date} te {occupation.place}, {age_str(individual, occupation)} {sources_annotation(occupation)}")
 
+            if individual.locations():
+                content.append(f"{HEADER_PREFIX} Verblijfplaatsen")
+                for location in individual.locations():
+                    extra_info = ""
+                    if location.family:
+                        extra_info = f"met ouders"
+                    elif location.spouse:
+                        extra_info = f"met {individual_link(location.spouse)}"
+                    content.append(f"- {location.event.place} {location.event.address if location.event.address else ""} op {location.event.date}, {age_str(individual, location.event)} {extra_info} {sources_annotation(location.event)}")
+
             content.append(f"{HEADER_PREFIX} Ouders")
             father: Individual | None = individual.father
             if father:
