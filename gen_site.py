@@ -33,12 +33,13 @@ def individual_link(individual: Individual) -> str:
 def source_link(source: Source) -> str:
     return f"[{source.title}]({source_url(source)})"
 
-def sources_annotation(sources: SourcesMixin) -> str:
-    result = ""
-    for source in sources.sources:
-        result += f"<sup><a href=\"{source_url(source)}\" style=\"text-decoration:none\" title=\"{source.title}\">{LINK_ICON}</a></sup>"
+def sources_annotation(sources: SourcesMixin | None) -> str:
+    if not sources or len(sources.sources) == 0: return ""
     
-    return result
+    result = "<sup>"
+    for source in sources.sources:
+        result += f"<a href=\"{source_url(source)}\" style=\"text-decoration:none\" title=\"{source.title}\">{LINK_ICON}</a>"
+    return result + "</sup>"
 
 def generate_individual_page(individual: Individual, filepath: Path):
     try:
