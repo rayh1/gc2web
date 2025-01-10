@@ -1,4 +1,5 @@
 import argparse
+from datetime import datetime
 import sys
 import logging
 from pathlib import Path
@@ -74,7 +75,8 @@ def generate_individual_page(individual: Individual, filepath: Path):
 
             if individual.occupations:
                 content.append(f"## Beroepen")
-                for occupation in individual.occupations:
+                sorted_occupations = sorted(individual.occupations, key=lambda x: x.date.date() or datetime.min)
+                for occupation in sorted_occupations:
                     content.append(f"- {occupation.value} op {occupation.date} te {occupation.place} {sources_annotation(occupation)}")
 
             content.append(f"## Ouders")
