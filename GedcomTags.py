@@ -48,3 +48,5 @@ class GedcomTags:
     OCCU: str = "OCCU"
     REPO: str = "REPO"
     WWW: str = "WWW"
+    FACT: str = "FACT"
+    TYPE: str = "TYPE"

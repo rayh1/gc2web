@@ -13,6 +13,7 @@ class EventDetails(SourcesMixin):
         self.__date = Date()
         self.__place = Place()
         self.__address: str | None = None  # Add address property
+        self.__type: str | None = None
         
     def parse(self, line: GedcomLine) -> 'EventDetails': # type: ignore
         from GedcomTransmission import GedcomTransmission
@@ -26,6 +27,8 @@ class EventDetails(SourcesMixin):
                 self.place = Place(subline.value)
             elif subline.tag == GedcomTags.ADDR:
                 self.address = subline.value
+            elif subline.tag == GedcomTags.TYPE:
+                self.type = subline.value
 
         self.parse_sources(line)
                
@@ -62,3 +65,11 @@ class EventDetails(SourcesMixin):
     @address.setter 
     def address(self, value: str | None):
         self.__address = value
+
+    @property
+    def type(self) -> str | None:
+        return self.__type
+
+    @type.setter
+    def type(self, value: str | None):
+        self.__type = value

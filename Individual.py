@@ -29,6 +29,7 @@ class Individual(SourcesMixin):
         self.__sex: str | None = None
         self.__occupations: list[EventDetails] = []
         self.__residences: list[EventDetails] = []
+        self.__facts: list[EventDetails] = []
 
         self.__fams_cache: list['Family'] | None = None # type: ignore
         self.__famc_cache: 'Family' | None = None # type: ignore
@@ -63,6 +64,8 @@ class Individual(SourcesMixin):
                 self.add_occupation(EventDetails().parse(subline))
             elif subline.tag == GedcomTags.RESI:
                 self.add_residence(EventDetails().parse(subline))
+            elif subline.tag == GedcomTags.FACT:
+                self.add_fact(EventDetails().parse(subline))
 
         self.parse_sources(line)
         
@@ -157,6 +160,13 @@ class Individual(SourcesMixin):
     def add_residence(self, value: EventDetails):
         self.__residences.append(value)
 
+    @property
+    def facts(self) -> list[EventDetails]:
+        return self.__facts
+
+    def add_fact(self, value: EventDetails):
+        self.__facts.append(value)
+
 # Utility methods
 
     @property
@@ -190,9 +200,9 @@ class Individual(SourcesMixin):
         if self.__spouses_cache is None:
             self.__spouses_cache = []
             for family in self.fams:
-                if family.husband and family.husband != self:
+                if (family.husband and family.husband != self):
                     self.__spouses_cache.append(family.husband)
-                if family.wife and family.wife != self:
+                if (family.wife and family.wife != self):
                     self.__spouses_cache.append(family.wife)
         return self.__spouses_cache
 

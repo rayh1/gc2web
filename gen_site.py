@@ -135,6 +135,13 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 for occupation in sorted_occupations:
                     content.append(f"- {occupation.value} op {occupation.date} te {occupation.place}, {age_str(individual, occupation)} {sources_str(occupation)}")
 
+            if individual.facts:
+                content.append("")
+                content.append(f"{HEADER_PREFIX} Feiten")
+                sorted_facts = sorted(individual.facts, key=lambda x: x.date.date() or datetime.min)
+                for fact in sorted_facts:
+                    content.append(f"- {fact.type} op {fact.date} te {fact.place}, {age_str(individual, fact)} {sources_str(fact)}")
+
             if individual.locations():
                 content.append("")
                 content.append(f"{HEADER_PREFIX} Verblijfplaatsen")
