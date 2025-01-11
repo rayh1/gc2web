@@ -258,10 +258,10 @@ class Individual(SourcesMixin):
         
             locations = []
             
-            if self.famc:
-                for residence in self.famc.residences:
-                    if self.is_born(residence.date):
-                        locations.append(Location(self.famc, None, residence))
+#            if self.famc:
+#                for residence in self.famc.residences:
+#                    if self.is_born(residence.date):
+#                        locations.append(Location(self.famc, None, residence))
                     
             for residence in self.residences:
                 locations.append(Location(None, None, residence))
