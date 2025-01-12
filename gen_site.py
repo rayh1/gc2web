@@ -90,9 +90,9 @@ def generate_individual_page(individual: Individual, filepath: Path):
             content.append(f"{HEADER_PREFIX} Gegevens")
             content.append(f"- Naam: {individual.name} {sources_str(individual.name)}")
             content.append(f"- Geslacht: {gender_str(individual)}")
-            content.append(f"- Geboren op {individual.birth.date} te {individual.birth.place} {sources_str(individual.birth)}")
+            content.append(f"- Geboren op {individual.birth.date} te {individual.birth.place}{', ' + individual.birth.address if individual.birth.address else ''} {sources_str(individual.birth)}")
             if individual.baptism.date.value or individual.baptism.place.value: content.append(f"- Gedoopt op {individual.baptism.date} te {individual.baptism.place} {sources_str(individual.baptism)}")
-            content.append(f"- Overleden op {individual.death.date} te {individual.death.place}, {age_str(individual, individual.end_life)} jaar {sources_str(individual.death)}")
+            content.append(f"- Overleden op {individual.death.date} te {individual.death.place}{', ' + individual.death.address if individual.death.address else ''}, {age_str(individual, individual.end_life)} jaar {sources_str(individual.death)}")
             if individual.burial.date.value or individual.burial.place.value: content.append(f"- Begraven op {individual.burial.date} te {individual.burial.place} {sources_str(individual.burial)}")
             if len(individual.names)  > 1:
                 content.append(f"- Alternatieve namen:")
