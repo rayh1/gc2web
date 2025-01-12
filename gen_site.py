@@ -24,8 +24,8 @@ logging.basicConfig(level=logging.INFO,
                    format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-def s(value) -> str:
-    return str(value) if value != None else "?"
+def s(value) -> str: # type: ignore
+    return str(value) if value != None else "?" # type: ignore
 
 def individual_url(individual: Individual) -> str:
     return f"../{individual.xref_id.lower()}/"
@@ -72,7 +72,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
         filepath.parent.mkdir(parents=True, exist_ok=True)
 
         with open(filepath, 'w') as file:
-            content = []
+            content: list[str] = []
             content.append(f"---")
             content.append(f"title: \"{individual.name} {lifespan_str(individual)}\"")
             content.append(f"description: \"Individual\"")
@@ -147,9 +147,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 content.append(f"{HEADER_PREFIX} Verblijfplaatsen")
                 for location in individual.locations():
                     extra_info = ""
-                    if location.family:
-                        extra_info = f"met ouders"
-                    elif location.spouse:
+                    if location.spouse:
                         extra_info = f"met {individual_link(location.spouse)}"
                     content.append(f"- {location.event.place} {location.event.address if location.event.address else ""} op {location.event.date}, {age_str(individual, location.event)} {extra_info} {sources_str(location.event)}")
 
@@ -191,20 +189,20 @@ def generate_source_page(source, filepath):
         raise        
 
 def generate_individual_pages(transmission: GedcomTransmission, output_dir: Path):
-    logger.info(f"Generating pages for {len(transmission.individuals)} individuals")
+    #logger.info(f"Generating pages for {len(transmission.individuals)} individuals")
     
     for individual in tqdm(transmission.individuals, desc="Generating individual pages"):
         generate_individual_page(individual, output_dir / f"{individual.xref_id}.md")
 
-    logger.info(f"Successfully generated {len(transmission.individuals)} individual pages")
+    #logger.info(f"Successfully generated {len(transmission.individuals)} individual pages")
 
 def generate_source_pages(transmission: GedcomTransmission, output_dir: Path):
-    logger.info(f"Generating pages for {len(transmission.sources)} sources")
+    #logger.info(f"Generating pages for {len(transmission.sources)} sources")
     
     for source in tqdm(transmission.sources, desc="Generating source pages"):
         generate_source_page(source, output_dir / f"{source.xref_id}.md")
 
-    logger.info(f"Successfully generated {len(transmission.sources)} source pages")
+    #logger.info(f"Successfully generated {len(transmission.sources)} source pages")
 
 def main(argv: List[str]):
     ap = argparse.ArgumentParser(description='Process a GEDCOM file.')

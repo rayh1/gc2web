@@ -7,16 +7,20 @@ from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from SourcesMixin import SourcesMixin
 from datetime import datetime
+from NotesMixin import NotesMixin
 
 class Location:
-    def __init__(self, family: Union['Family', None], spouse: Union['Individual', None], event: EventDetails): # type: ignore
-        self.family: Union['Family', None] = family # type: ignore
+    """
+    Represents an event of an individual itself or together with its spouse.
+    """
+    def __init__(self, spouse: Union['Individual', None], event: EventDetails): # type: ignore
         self.spouse: Union['Individual', None] = spouse
         self.event: EventDetails = event
 
-class Individual(SourcesMixin):
+class Individual(SourcesMixin, NotesMixin):
     def __init__(self):
         super().__init__()
+        NotesMixin.__init__(self)
 
         self.__xref_id = "xref_id"
         self.__names: list[Name] = []
@@ -68,6 +72,7 @@ class Individual(SourcesMixin):
                 self.add_fact(EventDetails().parse(subline))
 
         self.parse_sources(line)
+        self.parse_notes(line)
         
         return self
 
@@ -256,19 +261,14 @@ class Individual(SourcesMixin):
     def locations(self) -> list[Location]:
         if self.__locations_cache is None:
         
-            locations = []
-            
-#            if self.famc:
-#                for residence in self.famc.residences:
-#                    if self.is_born(residence.date):
-#                        locations.append(Location(self.famc, None, residence))
-                    
+            locations: list[Location] = []
+                                
             for residence in self.residences:
-                locations.append(Location(None, None, residence))
+                locations.append(Location(None, residence))
 
             for family in self.fams:
                 for residence in family.residences:
-                    locations.append(Location(None, family.spouse(self), residence))
+                    locations.append(Location(family.spouse(self), residence))
                     
             self.__locations_cache = sorted(locations, key=lambda x: x.event.date.date() or datetime.min)
 

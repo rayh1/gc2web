@@ -1,5 +1,7 @@
 import re
 from typing import List, Dict
+
+from tqdm import tqdm
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from Individual import Individual
@@ -106,19 +108,19 @@ class GedcomTransmission:
 
     def parse_individuals(self):
         """Parse individuals from the GedcomTransmission"""
-        for line in self.iterate(tag=GedcomTags.INDI):
+        for line in tqdm(list(self.iterate(tag=GedcomTags.INDI)), desc="Parsing individuals"):
             individual: Individual = Individual().parse(line)                        
             self.__individual_map[individual.xref_id] = individual
 
     def parse_families(self):
         """Parse families from the GedcomTransmission"""
-        for line in self.iterate(tag=GedcomTags.FAM):
+        for line in tqdm(list(self.iterate(tag=GedcomTags.FAM)), desc="Parsing families"):
             family = Family().parse(line)
             self.__family_map[family.xref_id] = family
 
     def parse_sources(self):
         """Parse sources from the GedcomTransmission"""
-        for line in self.iterate(tag=GedcomTags.SOUR):
+        for line in tqdm(list(self.iterate(tag=GedcomTags.SOUR)), desc="Parsing sources"):
             if not line.xref_id:
                 continue    # Ignore SOUR line in header
             
@@ -127,9 +129,14 @@ class GedcomTransmission:
 
     def parse_repositories(self):
         """Parse repositories from the GedcomTransmission"""
-        for line in self.iterate(tag=GedcomTags.REPO):
+        for line in tqdm(list(self.iterate(tag=GedcomTags.REPO)), desc="Parsing repositories"):
             repository = Repository().parse(line)
             self.__repository_map[repository.xref_id] = repository
+
+    def exclude_privates(self):
+        """Exclude private individuals from the GedcomTransmission"""
+        for individual in tqdm(list(filter(lambda i: i.is_private(), self.individuals)), desc="Excluding private individuals"):
+            del self.__individual_map[individual.xref_id]
 
     def parse_gedcom(self):
         """Parse the GedcomTransmission and generate all Individual, Family, Source, and Repository instances"""
@@ -137,6 +144,8 @@ class GedcomTransmission:
         self.parse_individuals()
         self.parse_families()
         self.parse_repositories()
+
+        self.exclude_privates()
 
     def get_individual(self, id: str) -> Individual | None:
         return self.__individual_map.get(id, None)

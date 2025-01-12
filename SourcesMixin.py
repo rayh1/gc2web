@@ -14,7 +14,7 @@ class SourcesMixin:
 
         for subline in GedcomTransmission().iterate(line, tag=GedcomTags.SOUR):
             if subline.pointer_value:
-                self.__source_ids.append(subline.pointer_value)
+                self.add_source_id(subline.pointer_value)
                 
     @property
     def sources(self) -> List[Source]:
@@ -24,5 +24,9 @@ class SourcesMixin:
             self.__sources_cache = list(filter(None, (GedcomTransmission().get_source(source_id) for source_id in self.__source_ids)))
         return self.__sources_cache
 
-    def add_source(self, source: Source):
-        self.__source_ids.append(source.xref_id)
+    @property
+    def source_ids(self) -> List[str]:
+        return self.__source_ids
+
+    def add_source_id(self, source_id: str):
+        self.__source_ids.append(source_id)

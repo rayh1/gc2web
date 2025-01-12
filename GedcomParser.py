@@ -1,6 +1,8 @@
 import re
 from typing import TextIO
 from collections import deque
+
+from tqdm import tqdm
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from GedcomTransmission import GedcomTransmission
@@ -41,7 +43,7 @@ class GedcomParser:
         prev_parsed_line: GedcomLine | None = None
         line_num: int = 0
 
-        for line in gedcom_stream:
+        for line in tqdm(list(gedcom_stream), desc="Parsing file lines"):
             line_num += 1
             stripped_line = line.strip()
             if stripped_line:  # Skip empty lines

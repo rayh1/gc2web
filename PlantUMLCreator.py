@@ -26,8 +26,8 @@ START_PLANTUML = [
 
 END_PLANTUML = ["", "@enduml"]
 
-def s(value) -> str:
-    return str(value) if value else "?"
+def s(value) -> str: # type: ignore
+    return str(value) if value else "?" # type: ignore
 
 def add_individual_to_diagram(diagram: List[str], individual: Individual, color: str | None = None, stereotype: str | None = None):
     if color is None:
