@@ -13,7 +13,7 @@ from GedcomParser import GedcomParser
 from Individual import Individual
 from SourcesMixin import SourcesMixin
 from Source import Source
-from EventDetails import EventDetails
+from EventDetail import EventDetail
 
 PLANTUML_BASE_URL: str = "https://www.plantuml.com/plantuml/svg"
 CONTENT_DIR: Path = Path("/workspaces/gc2web/website/src/content/blog")
@@ -47,7 +47,7 @@ def sources_str(sources: SourcesMixin | None) -> str:
         result += f"<a href=\"{source_url(source)}\" style=\"text-decoration:none\" title=\"{source.title}\">{LINK_ICON}</a>"
     return result + "</sup>"
 
-def age_str(individual: Individual, event: EventDetails) -> str:
+def age_str(individual: Individual, event: EventDetail) -> str:
     return f"oud {s(individual.age(event.date))} jaar"
 
 def lifespan_str(individual: Individual) -> str:

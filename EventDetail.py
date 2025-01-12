@@ -4,7 +4,7 @@ from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from SourcesMixin import SourcesMixin
 
-class EventDetails(SourcesMixin):
+class EventDetail(SourcesMixin):
     def __init__(self):
         super().__init__()
 
@@ -15,7 +15,7 @@ class EventDetails(SourcesMixin):
         self.__address: str | None = None  # Add address property
         self.__type: str | None = None
         
-    def parse(self, line: GedcomLine) -> 'EventDetails': # type: ignore
+    def parse(self, line: GedcomLine) -> 'EventDetail': # type: ignore
         from GedcomTransmission import GedcomTransmission
 
         self.__value = line.value

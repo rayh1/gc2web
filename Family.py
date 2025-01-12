@@ -1,5 +1,5 @@
 from Individual import Individual
-from EventDetails import EventDetails
+from EventDetail import EventDetail
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from SourcesMixin import SourcesMixin
@@ -11,8 +11,8 @@ class Family(SourcesMixin):
         self.__husband_id: str | None = None
         self.__wife_id: str | None = None
         self.__children_ids: list[str] = []
-        self.__marriage: EventDetails = EventDetails()
-        self.__residences: list[EventDetails] = []
+        self.__marriage: EventDetail = EventDetail()
+        self.__residences: list[EventDetail] = []
         
         self.__husband_cache: Individual | None = None
         self.__wife_cache: Individual | None = None
@@ -34,9 +34,9 @@ class Family(SourcesMixin):
             elif subline.tag == GedcomTags.CHIL:
                 if subline.pointer_value: self.children_ids.append(subline.pointer_value)
             elif subline.tag == GedcomTags.MARR:
-                self.marriage = EventDetails().parse(subline)
+                self.marriage = EventDetail().parse(subline)
             elif subline.tag == GedcomTags.RESI:
-                self.residences.append(EventDetails().parse(subline))
+                self.residences.append(EventDetail().parse(subline))
         
         self.parse_sources(line)
         
@@ -75,19 +75,19 @@ class Family(SourcesMixin):
         self.__children_ids = value
 
     @property
-    def marriage(self) -> EventDetails:
+    def marriage(self) -> EventDetail:
         return self.__marriage
 
     @marriage.setter
-    def marriage(self, value: EventDetails):
+    def marriage(self, value: EventDetail):
         self.__marriage = value
 
     @property
-    def residences(self) -> list[EventDetails]:
+    def residences(self) -> list[EventDetail]:
         return self.__residences
 
     @residences.setter
-    def residences(self, value: list[EventDetails]):
+    def residences(self, value: list[EventDetail]):
         self.__residences = value
 
 # Utility methods

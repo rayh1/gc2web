@@ -2,7 +2,7 @@ from typing import Union
 from Place import Place
 from Date import Date
 from Name import Name
-from EventDetails import EventDetails
+from EventDetail import EventDetail
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from SourcesMixin import SourcesMixin
@@ -13,9 +13,9 @@ class Location:
     """
     Represents an event of an individual itself or together with its spouse.
     """
-    def __init__(self, spouse: Union['Individual', None], event: EventDetails): # type: ignore
+    def __init__(self, spouse: Union['Individual', None], event: EventDetail): # type: ignore
         self.spouse: Union['Individual', None] = spouse
-        self.event: EventDetails = event
+        self.event: EventDetail = event
 
 class Individual(SourcesMixin, NotesMixin):
     def __init__(self):
@@ -24,16 +24,16 @@ class Individual(SourcesMixin, NotesMixin):
 
         self.__xref_id = "xref_id"
         self.__names: list[Name] = []
-        self.__birth: EventDetails = EventDetails()
-        self.__death: EventDetails = EventDetails()
-        self.__baptism: EventDetails = EventDetails()
-        self.__burial: EventDetails = EventDetails()
+        self.__birth: EventDetail = EventDetail()
+        self.__death: EventDetail = EventDetail()
+        self.__baptism: EventDetail = EventDetail()
+        self.__burial: EventDetail = EventDetail()
         self.__fams_ids: list[str] = []
         self.__famc_id: str | None = None
         self.__sex: str | None = None
-        self.__occupations: list[EventDetails] = []
-        self.__residences: list[EventDetails] = []
-        self.__facts: list[EventDetails] = []
+        self.__occupations: list[EventDetail] = []
+        self.__residences: list[EventDetail] = []
+        self.__facts: list[EventDetail] = []
 
         self.__fams_cache: list['Family'] | None = None # type: ignore
         self.__famc_cache: 'Family' | None = None # type: ignore
@@ -51,9 +51,9 @@ class Individual(SourcesMixin, NotesMixin):
             if subline.tag == GedcomTags.NAME:
                 self.add_name(Name().parse(subline))
             elif subline.tag == GedcomTags.BIRT:
-                self.birth = EventDetails().parse(subline)
+                self.birth = EventDetail().parse(subline)
             elif subline.tag == GedcomTags.DEAT:
-                self.death = EventDetails().parse(subline)
+                self.death = EventDetail().parse(subline)
             elif subline.tag == GedcomTags.FAMS:
                 if subline.pointer_value: self.fams_ids.append(subline.pointer_value)
             elif subline.tag == GedcomTags.FAMC:
@@ -61,15 +61,15 @@ class Individual(SourcesMixin, NotesMixin):
             elif subline.tag == GedcomTags.SEX:
                 self.sex = subline.value
             elif subline.tag == GedcomTags.CHR:
-                self.baptism = EventDetails().parse(subline)
+                self.baptism = EventDetail().parse(subline)
             elif subline.tag == GedcomTags.BURI:
-                self.burial = EventDetails().parse(subline)
+                self.burial = EventDetail().parse(subline)
             elif subline.tag == GedcomTags.OCCU:
-                self.add_occupation(EventDetails().parse(subline))
+                self.add_occupation(EventDetail().parse(subline))
             elif subline.tag == GedcomTags.RESI:
-                self.add_residence(EventDetails().parse(subline))
+                self.add_residence(EventDetail().parse(subline))
             elif subline.tag == GedcomTags.FACT:
-                self.add_fact(EventDetails().parse(subline))
+                self.add_fact(EventDetail().parse(subline))
 
         self.parse_sources(line)
         self.parse_notes(line)
@@ -96,35 +96,35 @@ class Individual(SourcesMixin, NotesMixin):
         self.__names.append(value)
 
     @property
-    def birth(self) -> EventDetails:
+    def birth(self) -> EventDetail:
         return self.__birth
 
     @birth.setter
-    def birth(self, value: EventDetails):
+    def birth(self, value: EventDetail):
         self.__birth = value
 
     @property
-    def death(self) -> EventDetails:
+    def death(self) -> EventDetail:
         return self.__death
 
     @death.setter
-    def death(self, value: EventDetails):
+    def death(self, value: EventDetail):
         self.__death = value
 
     @property
-    def baptism(self) -> EventDetails:
+    def baptism(self) -> EventDetail:
         return self.__baptism
 
     @baptism.setter
-    def baptism(self, value: EventDetails):
+    def baptism(self, value: EventDetail):
         self.__baptism = value
 
     @property
-    def burial(self) -> EventDetails:
+    def burial(self) -> EventDetail:
         return self.__burial
 
     @burial.setter
-    def burial(self, value: EventDetails):
+    def burial(self, value: EventDetail):
         self.__burial = value
 
     @property
@@ -152,24 +152,24 @@ class Individual(SourcesMixin, NotesMixin):
         self.__sex = value
 
     @property
-    def occupations(self) -> list[EventDetails]:
+    def occupations(self) -> list[EventDetail]:
         return self.__occupations
 
-    def add_occupation(self, value: EventDetails):
+    def add_occupation(self, value: EventDetail):
         self.__occupations.append(value)
 
     @property
-    def residences(self) -> list[EventDetails]:
+    def residences(self) -> list[EventDetail]:
         return self.__residences
     
-    def add_residence(self, value: EventDetails):
+    def add_residence(self, value: EventDetail):
         self.__residences.append(value)
 
     @property
-    def facts(self) -> list[EventDetails]:
+    def facts(self) -> list[EventDetail]:
         return self.__facts
 
-    def add_fact(self, value: EventDetails):
+    def add_fact(self, value: EventDetail):
         self.__facts.append(value)
 
 # Utility methods
@@ -232,11 +232,11 @@ class Individual(SourcesMixin, NotesMixin):
         return self.__sex not in ['M', 'F']
     
     @property
-    def start_life(self) -> EventDetails:
+    def start_life(self) -> EventDetail:
         return self.birth if self.birth.date.value else self.baptism
 
     @property
-    def end_life(self) -> EventDetails:
+    def end_life(self) -> EventDetail:
         return self.death if self.death.date.value else self.burial
 
     def age(self, at_date: Date) -> int | None:
