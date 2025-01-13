@@ -27,6 +27,6 @@ const tagCollection = defineCollection({
 });
 
 export const collections = {
-  'blog': blogCollection,
+  'entity': blogCollection,
   'tag': tagCollection 
 };

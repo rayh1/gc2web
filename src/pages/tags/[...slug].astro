@@ -15,7 +15,7 @@ type Props = CollectionEntry<"tag">;
 const tag = Astro.props;
 const { Content } = await tag.render();
 
-const posts = await getCollection("blog");
+const posts = await getCollection("entity");
 const tagPosts = posts
   .filter((post) => post.data.draft === false)
   .filter((post) => post.data.tags.includes(tag.slug))

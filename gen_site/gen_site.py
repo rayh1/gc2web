@@ -16,7 +16,7 @@ from Source import Source
 from EventDetail import EventDetail
 
 PLANTUML_BASE_URL: str = "https://www.plantuml.com/plantuml/svg"
-CONTENT_DIR: Path = Path("/workspaces/gc2web/src/content/blog")
+CONTENT_DIR: Path = Path("/workspaces/gc2web/src/content/entity")
 LINK_ICON: str = ":link:"
 HEADER_PREFIX: str = "###"
 

@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import Post from "./Post.astro";
 
 interface Props {
-  posts: CollectionEntry<"blog">[];
+  posts: CollectionEntry<"entity">[];
 };
 
 const { posts } = Astro.props;
