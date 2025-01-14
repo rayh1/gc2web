@@ -1,12 +1,16 @@
+import yaml
+
 from Place import Place
 from Date import Date
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from SourcesMixin import SourcesMixin
+from NotesMixin import NotesMixin
 
-class EventDetail(SourcesMixin):
+class EventDetail(SourcesMixin, NotesMixin):
     def __init__(self):
         super().__init__()
+        NotesMixin.__init__(self)
 
         self.__value: str | None = None
 
@@ -14,6 +18,7 @@ class EventDetail(SourcesMixin):
         self.__place = Place()
         self.__address: str | None = None  # Add address property
         self.__type: str | None = None
+        self.__timestamp: str | None = None
         
     def parse(self, line: GedcomLine) -> 'EventDetail': # type: ignore
         from GedcomTransmission import GedcomTransmission
@@ -31,9 +36,25 @@ class EventDetail(SourcesMixin):
                 self.type = subline.value
 
         self.parse_sources(line)
+        self.parse_notes(line)
+        for note in self.notes:
+            timestamp = self.parse_timestamp(note.value)
+            if timestamp:
+                self.timestamp = timestamp
                
         return self
-        
+    
+    def parse_timestamp(self, value: str | None) -> str | None:
+        if not value:
+            return None
+        try:
+            note_data = yaml.safe_load(value)
+            if type(note_data) is not dict:
+                return None
+            return note_data.get('timestamp')
+        except yaml.YAMLError:
+            return None
+
     @property
     def value(self) -> str | None:
         return self.__value
@@ -73,3 +94,11 @@ class EventDetail(SourcesMixin):
     @type.setter
     def type(self, value: str | None):
         self.__type = value
+
+    @property
+    def timestamp(self) -> str | None:
+        return self.__timestamp
+
+    @timestamp.setter
+    def timestamp(self, value: str | None):
+        self.__timestamp = value
