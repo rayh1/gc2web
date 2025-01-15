@@ -18,6 +18,10 @@ class NotesMixin:
     @property
     def notes(self) -> List[Note]:
         return self.__notes
+    
+    @notes.setter
+    def notes(self, notes: List[Note]):
+        self.__notes = notes
 
     def add_note(self, note: Note):
         self.__notes.append(note)

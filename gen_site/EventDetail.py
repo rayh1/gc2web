@@ -7,6 +7,16 @@ from GedcomTags import GedcomTags
 from SourcesMixin import SourcesMixin
 from NotesMixin import NotesMixin
 
+class Witness:
+    def __init__(self, data: dict):
+        self.name = data.get('name', None)
+        self.occupation = data.get('occupation', None)
+        self.residence = data.get('residence', None)
+        self.relation = data.get('relation', None)
+
+    def __repr__(self):
+        return f"Witness(name={self.name}, occupation={self.occupation}, residence={self.residence}, relation={self.relation})"
+
 class EventDetail(SourcesMixin, NotesMixin):
     def __init__(self):
         super().__init__()
@@ -19,6 +29,7 @@ class EventDetail(SourcesMixin, NotesMixin):
         self.__address: str | None = None  # Add address property
         self.__type: str | None = None
         self.__timestamp: str | None = None
+        self.__witnesses: list[Witness] = []
         
     def parse(self, line: GedcomLine) -> 'EventDetail': # type: ignore
         from GedcomTransmission import GedcomTransmission
@@ -37,23 +48,34 @@ class EventDetail(SourcesMixin, NotesMixin):
 
         self.parse_sources(line)
         self.parse_notes(line)
-        for note in self.notes:
-            timestamp = self.parse_timestamp(note.value)
-            if timestamp:
-                self.timestamp = timestamp
+        
+        self.parse_timestamp()
+        self.parse_witnesses()
                
         return self
     
-    def parse_timestamp(self, value: str | None) -> str | None:
-        if not value:
-            return None
-        try:
-            note_data = yaml.safe_load(value)
-            if type(note_data) is not dict:
-                return None
-            return note_data.get('timestamp')
-        except yaml.YAMLError:
-            return None
+    def parse_timestamp(self):
+        for note in self.notes:
+            if not note.value:
+                continue
+            try:
+                note_data = yaml.safe_load(note.value)
+                if type(note_data) is dict and 'timestamp' in note_data:
+                    self.timestamp = note_data.get('timestamp')
+                    return
+            except yaml.YAMLError:
+                return
+
+    def parse_witnesses(self):
+        for note in self.notes:
+            if not note.value:
+                continue
+            try:
+                note_data = yaml.safe_load(note.value)
+                if type(note_data) is dict and 'witnesses' in note_data:
+                    self.__witnesses = [Witness(witness_data) for witness_data in note_data['witnesses']]
+            except yaml.YAMLError:
+                continue
 
     @property
     def value(self) -> str | None:
@@ -102,3 +124,7 @@ class EventDetail(SourcesMixin, NotesMixin):
     @timestamp.setter
     def timestamp(self, value: str | None):
         self.__timestamp = value
+
+    @property
+    def witnesses(self) -> list[Witness]:
+        return self.__witnesses

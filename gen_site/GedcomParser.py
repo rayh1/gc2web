@@ -8,7 +8,7 @@ from GedcomTags import GedcomTags
 from GedcomTransmission import GedcomTransmission
 
 class GedcomParser:
-    GEDCOM_REGEX = r"^\s*(\d+)\s+(@[^@]+@)?\s*([A-Za-z0-9_]+)\s*(@[^@]+@)?(.+)?$"
+    GEDCOM_REGEX = r"^\s*(\d+)\s+(@[^@]+@)?\s*([A-Za-z0-9_]+)\s?(@[^@]+@)?(.+)?$"
     CONT_SEP: str = "\r\n"
 
     def add_str(self, s1: str | None, s2: str | None, sep: str = "") -> str:
