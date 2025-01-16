@@ -6,16 +6,8 @@ from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from SourcesMixin import SourcesMixin
 from NotesMixin import NotesMixin
+from Witness import Witness
 
-class Witness:
-    def __init__(self, data: dict):
-        self.name = data.get('name', None)
-        self.occupation = data.get('occupation', None)
-        self.residence = data.get('residence', None)
-        self.relation = data.get('relation', None)
-
-    def __repr__(self):
-        return f"Witness(name={self.name}, occupation={self.occupation}, residence={self.residence}, relation={self.relation})"
 
 class EventDetail(SourcesMixin, NotesMixin):
     def __init__(self):

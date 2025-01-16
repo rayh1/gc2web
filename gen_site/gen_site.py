@@ -67,6 +67,15 @@ def gender_str(individual: Individual) -> str:
     else:
         return "Onbekend"
 
+def witness_str(witness) -> str:
+    return ", ".join(list(filter(None, [
+        witness.name,
+        witness.occupation, 
+        witness.residence,
+        f"{witness.age} jaar" if witness.age else "",
+        witness.relation
+    ])))
+
 def generate_individual_page(individual: Individual, filepath: Path):
     try:
         filepath.parent.mkdir(parents=True, exist_ok=True)
@@ -92,13 +101,17 @@ def generate_individual_page(individual: Individual, filepath: Path):
             content.append(f"- Geslacht: {gender_str(individual)}")
             content.append(f"- Geboren op {individual.birth.date} te {individual.birth.place}{', ' + individual.birth.address if individual.birth.address else ''} {sources_str(individual.birth)}")
             if individual.birth.timestamp: content.append(f"- Geboorte tijdstip: \"{individual.birth.timestamp}\" {sources_str(individual.birth)}")            
+            if individual.birth.witnesses:
+                content.append(f"- Geboorte getuigen: {sources_str(individual.birth)}")
+                for witness in individual.birth.witnesses:
+                    content.append(f"  - {witness_str(witness)}")
             if individual.baptism.date.value or individual.baptism.place.value: content.append(f"- Gedoopt op {individual.baptism.date} te {individual.baptism.place} {sources_str(individual.baptism)}")
             content.append(f"- Overleden op {individual.death.date} te {individual.death.place}{', ' + individual.death.address if individual.death.address else ''}, {age_str(individual, individual.end_life)} jaar {sources_str(individual.death)}")
             if individual.death.timestamp: content.append(f"- Overlijden tijdstip: \"{individual.death.timestamp}\" {sources_str(individual.death)}")            
             if individual.death.witnesses:
                 content.append(f"- Overlijden getuigen: {sources_str(individual.death)}")
                 for witness in individual.death.witnesses:
-                    content.append(f"  - {witness.name}")
+                    content.append(f"  - {witness_str(witness)}")
             if individual.burial.date.value or individual.burial.place.value: content.append(f"- Begraven op {individual.burial.date} te {individual.burial.place} {sources_str(individual.burial)}")
             if len(individual.names)  > 1:
                 content.append(f"- Alternatieve namen:")
@@ -126,9 +139,9 @@ def generate_individual_page(individual: Individual, filepath: Path):
                         content.append(f"Gehuwd met {individual_link(spouse)} {lifespan_str(spouse)} {sources_str(fams.marriage)}")
                         content.append(f"- Huwelijk op {fams.marriage.date} te {fams.marriage.place}, {age_str(individual, fams.marriage)}, partner {age_str(spouse, fams.marriage)} {sources_str(fams.marriage)}")
                         if fams.marriage.witnesses:
-                            content.append(f"- Huwelijks getuigen:  {sources_str(fams.marriage)}")
+                            content.append(f"- Huwelijk getuigen:  {sources_str(fams.marriage)}")
                             for witness in fams.marriage.witnesses:
-                                content.append(f"  - {witness.name}")
+                                content.append(f"  - {witness_str(witness)}")
                     for child in fams.children:
                         content.append(f"- Kind {individual_link(child)} {lifespan_str(child)}")
 
