@@ -108,19 +108,19 @@ class GedcomTransmission:
 
     def parse_individuals(self):
         """Parse individuals from the GedcomTransmission"""
-        for line in tqdm(list(self.iterate(tag=GedcomTags.INDI)), desc="Parsing individuals"):
+        for line in tqdm(list(self.iterate(tag=GedcomTags.INDI)), desc="Parsed individuals", bar_format='{desc}: {total_fmt}'):
             individual: Individual = Individual().parse(line)                        
             self.__individual_map[individual.xref_id] = individual
 
     def parse_families(self):
         """Parse families from the GedcomTransmission"""
-        for line in tqdm(list(self.iterate(tag=GedcomTags.FAM)), desc="Parsing families"):
+        for line in tqdm(list(self.iterate(tag=GedcomTags.FAM)), desc="Parsed families", bar_format='{desc}: {total_fmt}'):
             family = Family().parse(line)
             self.__family_map[family.xref_id] = family
 
     def parse_sources(self):
         """Parse sources from the GedcomTransmission"""
-        for line in tqdm(list(self.iterate(tag=GedcomTags.SOUR)), desc="Parsing sources"):
+        for line in tqdm(list(self.iterate(tag=GedcomTags.SOUR)), desc="Parsed sources", bar_format='{desc}: {total_fmt}'):
             if not line.xref_id:
                 continue    # Ignore SOUR line in header
             
@@ -129,13 +129,13 @@ class GedcomTransmission:
 
     def parse_repositories(self):
         """Parse repositories from the GedcomTransmission"""
-        for line in tqdm(list(self.iterate(tag=GedcomTags.REPO)), desc="Parsing repositories"):
+        for line in tqdm(list(self.iterate(tag=GedcomTags.REPO)), desc="Parsed repositories", bar_format='{desc}: {total_fmt}'):
             repository = Repository().parse(line)
             self.__repository_map[repository.xref_id] = repository
 
     def exclude_privates(self):
         """Exclude private individuals from the GedcomTransmission"""
-        for individual in tqdm(list(filter(lambda i: i.is_private(), self.individuals)), desc="Excluding private individuals"):
+        for individual in tqdm(list(filter(lambda i: i.is_private(), self.individuals)), desc="Excluded private individuals", bar_format='{desc}: {total_fmt}'):
             del self.__individual_map[individual.xref_id]
 
     def parse_gedcom(self):

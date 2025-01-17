@@ -214,7 +214,7 @@ def generate_source_page(source, filepath):
 def generate_individual_pages(transmission: GedcomTransmission, output_dir: Path):
     #logger.info(f"Generating pages for {len(transmission.individuals)} individuals")
     
-    for individual in tqdm(transmission.individuals, desc="Generating individual pages"):
+    for individual in tqdm(transmission.individuals, desc="Generated individual pages", bar_format='{desc}: {total_fmt}'):
         generate_individual_page(individual, output_dir / f"{individual.xref_id}.md")
 
     #logger.info(f"Successfully generated {len(transmission.individuals)} individual pages")
@@ -222,7 +222,7 @@ def generate_individual_pages(transmission: GedcomTransmission, output_dir: Path
 def generate_source_pages(transmission: GedcomTransmission, output_dir: Path):
     #logger.info(f"Generating pages for {len(transmission.sources)} sources")
     
-    for source in tqdm(transmission.sources, desc="Generating source pages"):
+    for source in tqdm(transmission.sources, desc="Generated source pages", bar_format='{desc}: {total_fmt}'):
         generate_source_page(source, output_dir / f"{source.xref_id}.md")
 
     #logger.info(f"Successfully generated {len(transmission.sources)} source pages")

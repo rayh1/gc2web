@@ -43,7 +43,7 @@ class GedcomParser:
         prev_parsed_line: GedcomLine | None = None
         line_num: int = 0
 
-        for line in tqdm(list(gedcom_stream), desc="Parsing file lines"):
+        for line in tqdm(list(gedcom_stream), desc="Parsed file lines", bar_format='{desc}: {total_fmt}'):
             line_num += 1
             stripped_line = line.strip()
             if stripped_line:  # Skip empty lines
