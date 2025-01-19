@@ -68,8 +68,11 @@ def gender_str(individual: Individual) -> str:
         return "Onbekend"
 
 def witness_str(witness) -> str:
+    witness_individual = None
+    if witness.xref_id:
+        witness_individual = GedcomTransmission().get_individual(witness.xref_id)
     return ", ".join(list(filter(None, [
-        witness.name,
+        individual_link(witness_individual) if witness_individual else witness.name,
         witness.occupation, 
         witness.residence,
         f"{witness.age} jaar" if witness.age else "",
