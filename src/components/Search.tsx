@@ -10,7 +10,7 @@ import {
 import { PostListItem } from "./PostListItem";
 
 const options = {
-  keys: ["data.title", "data.description", "slug"],
+  keys: ["data.title", "data.description", "id"],
   includeMatches: true,
   minMatchCharLength: 2,
   threshold: 0.5,

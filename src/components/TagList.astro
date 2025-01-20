@@ -37,10 +37,10 @@ const renderTags = tags === "all" ? allTags : tagsFromProps;
   {
     !!renderTags &&
     renderTags
-        .filter((tag) => !!tag?.slug && !!tag?.data.title)
+        .filter((tag) => !!tag?.id && !!tag?.data.title)
         .map((tag) => (
           <li>
-            <a class="mr-2 no-underline text-gray-600 hover:text-blue-400 md:mr-2 text-sm" href={`/tags/${tag?.slug}/`}>  
+            <a class="mr-2 no-underline text-gray-600 hover:text-blue-400 md:mr-2 text-sm" href={`/tags/${tag?.id}/`}>  
 
               <div class="flex">
 
