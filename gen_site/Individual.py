@@ -278,6 +278,6 @@ class Individual(SourcesMixin, NotesMixin):
         if self.famc:
             return sorted(
                     [child for child in self.famc.children if child != self],
-                    key=lambda x: x.birth.date.date() or datetime.max
+                    key=lambda x: x.start_life.date.date() or datetime.max
                 )
         return []

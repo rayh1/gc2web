@@ -2,34 +2,95 @@ import unittest
 from datetime import datetime
 from Date import Date
 
-class TestDate(unittest.TestCase):
-    def test_simple_date(self):
-        date = Date("01 JAN 2000")
-        self.assertEqual(date.date(), datetime(2000, 1, 1))
+class TestDateParseMethods(unittest.TestCase):
+
+    def test_parse_simple_date(self):
+        self.assertEqual(Date.parse_simple_date("30 JUN 1965"), "30 JUN 1965")
+        self.assertEqual(Date.parse_simple_date("JUN 1965"), "JUN 1965")
+        self.assertEqual(Date.parse_simple_date("1965"), "1965")
+        self.assertIsNone(Date.parse_simple_date("INVALID DATE"))
+
+    def test_parse_period_date(self):
+        self.assertEqual(Date.parse_period_date("FROM 30 JUN 1965"), ("30 JUN 1965", None))
+        self.assertEqual(Date.parse_period_date("TO 30 JUN 1965"), (None, "30 JUN 1965"))
+        self.assertEqual(Date.parse_period_date("FROM 30 JUN 1965 TO 1 JUL 1965"), ("30 JUN 1965", "1 JUL 1965"))
+        self.assertEqual(Date.parse_period_date("FROM JUN 1965"), ("JUN 1965", None))
+        self.assertEqual(Date.parse_period_date("TO JUN 1965"), (None, "JUN 1965"))
+        self.assertEqual(Date.parse_period_date("FROM JUN 1965 TO JUL 1965"), ("JUN 1965", "JUL 1965"))
+        self.assertEqual(Date.parse_period_date("FROM 1965"), ("1965", None))
+        self.assertEqual(Date.parse_period_date("TO 1965"), (None, "1965"))
+        self.assertEqual(Date.parse_period_date("FROM 1965 TO 1966"), ("1965", "1966"))
+        self.assertIsNone(Date.parse_period_date("INVALID DATE"))
+
+    def test_parse_range_date(self):
+        self.assertEqual(Date.parse_range_date("BET 30 JUN 1965"), "30 JUN 1965")
+        self.assertEqual(Date.parse_range_date("BET JUN 1965"), "JUN 1965")
+        self.assertEqual(Date.parse_range_date("BET 1965"), "1965")
+        self.assertIsNone(Date.parse_range_date("INVALID DATE"))
+
+    def test_parse_approximated_date(self):
+        self.assertEqual(Date.parse_approximated_date("ABT 30 JUN 1965"), "30 JUN 1965")
+        self.assertEqual(Date.parse_approximated_date("CAL JUN 1965"), "JUN 1965")
+        self.assertEqual(Date.parse_approximated_date("EST 1965"), "1965")
+        self.assertIsNone(Date.parse_approximated_date("INVALID DATE"))
+
+    def test_parse_int_date(self):
+        self.assertEqual(Date.parse_int_date("INT 30 JUN 1965"), "30 JUN 1965")
+        self.assertEqual(Date.parse_int_date("INT JUN 1965"), "JUN 1965")
+        self.assertEqual(Date.parse_int_date("INT 1965"), "1965")
+        self.assertIsNone(Date.parse_int_date("INVALID DATE"))
+
+    def test_date_simple(self):
+        date = Date("30 JUN 1965")
+        self.assertEqual(date.date(), datetime(1965, 6, 30))
+        date = Date("JUN 1965")
+        self.assertEqual(date.date(), datetime(1965, 6, 1))
+        date = Date("1965")
+        self.assertEqual(date.date(), datetime(1965, 1, 1))
 
     def test_date_period(self):
-        date = Date("FROM 01 JAN 2000 TO 31 DEC 2000")
-        self.assertEqual(date.date(), datetime(2000, 1, 1))
+        date = Date("FROM 30 JUN 1965")
+        self.assertEqual(date.date(), datetime(1965, 6, 30))
+        date = Date("TO 30 JUN 1965")
+        self.assertEqual(date.date(), None)
+        date = Date("FROM 30 JUN 1965 TO 1 JUL 1965")
+        self.assertEqual(date.date(), datetime(1965, 6, 30))
+        date = Date("FROM JUN 1965")
+        self.assertEqual(date.date(), datetime(1965, 6, 1))
+        date = Date("TO JUN 1965")
+        self.assertEqual(date.date(), None)
+        date = Date("FROM JUN 1965 TO JUL 1965")
+        self.assertEqual(date.date(), datetime(1965, 6, 1))
+        date = Date("FROM 1965")
+        self.assertEqual(date.date(), datetime(1965, 1, 1))
+        date = Date("TO 1965")
+        self.assertEqual(date.date(), None)
+        date = Date("FROM 1965 TO 1966")
+        self.assertEqual(date.date(), datetime(1965, 1, 1))
 
     def test_date_range(self):
-        date = Date("BET 01 JAN 2000 AND 31 DEC 2000")
-        self.assertEqual(date.date(), datetime(2000, 1, 1))
+        date = Date("BET 30 JUN 1965")
+        self.assertEqual(date.date(), datetime(1965, 6, 30))
+        date = Date("BET JUN 1965")
+        self.assertEqual(date.date(), datetime(1965, 6, 1))
+        date = Date("BET 1965")
+        self.assertEqual(date.date(), datetime(1965, 1, 1))
 
     def test_date_approximated(self):
-        date = Date("ABT 01 JAN 2000")
-        self.assertEqual(date.date(), datetime(2000, 1, 1))
+        date = Date("ABT 30 JUN 1965")
+        self.assertEqual(date.date(), datetime(1965, 6, 30))
+        date = Date("CAL JUN 1965")
+        self.assertEqual(date.date(), datetime(1965, 6, 1))
+        date = Date("EST 1965")
+        self.assertEqual(date.date(), datetime(1965, 1, 1))
 
     def test_date_int(self):
-        date = Date("INT 2000 (2088 - 88)")
-        self.assertEqual(date.date(), datetime(2000, 1, 1))
+        date = Date("INT 30 JUN 1965")
+        self.assertEqual(date.date(), datetime(1965, 6, 30))
+        date = Date("INT JUN 1965")
+        self.assertEqual(date.date(), datetime(1965, 6, 1))
+        date = Date("INT 1965")
+        self.assertEqual(date.date(), datetime(1965, 1, 1))
 
-    def test_invalid_date(self):
-        date = Date("invalid date")
-        self.assertIsNone(date.date())
-
-    def test_empty_date(self):
-        date = Date(None)
-        self.assertIsNone(date.date())
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

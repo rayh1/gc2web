@@ -102,25 +102,24 @@ def generate_individual_page(individual: Individual, filepath: Path):
             content.append(f"{HEADER_PREFIX} Gegevens")
             content.append(f"- Naam: {individual.name} {sources_str(individual.name)}")
             content.append(f"- Geslacht: {gender_str(individual)}")
-            content.append(f"- Geboren op {individual.birth.date} te {individual.birth.place}{', ' + individual.birth.address if individual.birth.address else ''} {sources_str(individual.birth)}")
+            content.append(f"- Geboren {individual.birth.date} te {individual.birth.place}{', ' + individual.birth.address if individual.birth.address else ''} {sources_str(individual.birth)}")
             if individual.birth.timestamp: content.append(f"- Geboorte tijdstip: \"{individual.birth.timestamp}\" {sources_str(individual.birth)}")            
             if individual.birth.witnesses:
                 content.append(f"- Geboorte getuigen: {sources_str(individual.birth)}")
                 for witness in individual.birth.witnesses:
                     content.append(f"  - {witness_str(witness)}")
-            if individual.baptism.date.value or individual.baptism.place.value: content.append(f"- Gedoopt op {individual.baptism.date} te {individual.baptism.place} {sources_str(individual.baptism)}")
-            content.append(f"- Overleden op {individual.death.date} te {individual.death.place}{', ' + individual.death.address if individual.death.address else ''}, {age_str(individual, individual.end_life)} jaar {sources_str(individual.death)}")
+            if individual.baptism.date.value or individual.baptism.place.value: content.append(f"- Gedoopt {individual.baptism.date} te {individual.baptism.place} {sources_str(individual.baptism)}")
+            content.append(f"- Overleden {individual.death.date} te {individual.death.place}{', ' + individual.death.address if individual.death.address else ''}, {age_str(individual, individual.end_life)} jaar {sources_str(individual.death)}")
             if individual.death.timestamp: content.append(f"- Overlijden tijdstip: \"{individual.death.timestamp}\" {sources_str(individual.death)}")            
             if individual.death.witnesses:
                 content.append(f"- Overlijden getuigen: {sources_str(individual.death)}")
                 for witness in individual.death.witnesses:
                     content.append(f"  - {witness_str(witness)}")
-            if individual.burial.date.value or individual.burial.place.value: content.append(f"- Begraven op {individual.burial.date} te {individual.burial.place} {sources_str(individual.burial)}")
+            if individual.burial.date.value or individual.burial.place.value: content.append(f"- Begraven {individual.burial.date} te {individual.burial.place} {sources_str(individual.burial)}")
             if len(individual.names)  > 1:
                 content.append(f"- Alternatieve namen:")
                 for name in individual.names[1:]:
                     content.append(f"  - {name} {sources_str(name)}")
-
 
             content.append("")
             content.append(f"{HEADER_PREFIX} Ouders")
@@ -134,24 +133,26 @@ def generate_individual_page(individual: Individual, filepath: Path):
             if individual.fams:
                 content.append("")
                 content.append(f"{HEADER_PREFIX} Relaties en Kinderen")
-                for fams in individual.fams:
+                sorted_fams = sorted(individual.fams, key=lambda x: x.marriage.date.date() or datetime.min)
+                for fams in sorted_fams:
                     spouse: Individual | None = fams.spouse(individual)
                     if spouse:
                         content.append(f"")
-#                       content.append(f"Gehuwd met {individual_link(spouse)} ({age_str(spouse, fams.marriage)}) op {fams.marriage.date} te {fams.marriage.place}, {age_str(individual, fams.marriage)} {sources_str(fams.marriage)}")
                         content.append(f"Gehuwd met {individual_link(spouse)} {lifespan_str(spouse)} {sources_str(fams.marriage)}")
-                        content.append(f"- Huwelijk op {fams.marriage.date} te {fams.marriage.place}, {age_str(individual, fams.marriage)}, partner {age_str(spouse, fams.marriage)} {sources_str(fams.marriage)}")
+                        content.append(f"- Huwelijk {fams.marriage.date} te {fams.marriage.place}, {age_str(individual, fams.marriage)}, partner {age_str(spouse, fams.marriage)} {sources_str(fams.marriage)}")
                         if fams.marriage.witnesses:
                             content.append(f"- Huwelijk getuigen:  {sources_str(fams.marriage)}")
                             for witness in fams.marriage.witnesses:
                                 content.append(f"  - {witness_str(witness)}")
-                    for child in fams.children:
+                    sorted_children = sorted(fams.children, key=lambda x: x.start_life.date.date() or datetime.min) 
+                    for child in sorted_children:
                         content.append(f"- Kind {individual_link(child)} {lifespan_str(child)}")
 
             if individual.siblings():
                 content.append("")
                 content.append(f"{HEADER_PREFIX} Broers en zussen")
-                for sibling in individual.siblings():
+                sorted_siblings = sorted(individual.siblings(), key=lambda x: x.start_life.date.date() or datetime.min)
+                for sibling in sorted_siblings:
                     content.append(f"- {individual_link(sibling)} {lifespan_str(sibling)}")
 
             if individual.occupations:
@@ -159,14 +160,14 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 content.append(f"{HEADER_PREFIX} Beroepen")
                 sorted_occupations = sorted(individual.occupations, key=lambda x: x.date.date() or datetime.min)
                 for occupation in sorted_occupations:
-                    content.append(f"- {occupation.value} op {occupation.date} te {occupation.place}, {age_str(individual, occupation)} {sources_str(occupation)}")
+                    content.append(f"- {occupation.value} {occupation.date} te {occupation.place}, {age_str(individual, occupation)} {sources_str(occupation)}")
 
             if individual.facts:
                 content.append("")
                 content.append(f"{HEADER_PREFIX} Feiten")
                 sorted_facts = sorted(individual.facts, key=lambda x: x.date.date() or datetime.min)
                 for fact in sorted_facts:
-                    content.append(f"- {fact.type} op {fact.date} te {fact.place}, {age_str(individual, fact)} {sources_str(fact)}")
+                    content.append(f"- {fact.type} {fact.date} te {fact.place}, {age_str(individual, fact)} {sources_str(fact)}")
 
             if individual.locations():
                 content.append("")
@@ -175,7 +176,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
                     extra_info = ""
                     if location.spouse:
                         extra_info = f"met {individual_link(location.spouse)}"
-                    content.append(f"- {location.event.place} {location.event.address if location.event.address else ""} op {location.event.date}, {age_str(individual, location.event)} {extra_info} {sources_str(location.event)}")
+                    content.append(f"- {location.event.place} {location.event.address if location.event.address else ""} {location.event.date}, {age_str(individual, location.event)} {extra_info} {sources_str(location.event)}")
 
             content.append("")
             content.append(f"{HEADER_PREFIX} Bronnen lijst")
