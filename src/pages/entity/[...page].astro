@@ -4,12 +4,9 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import PostList from "../../components/PostList.astro";
 import { PAGINATION_POSTS_PER_PAGE } from "../../consts";
-import TagList from "../../components/TagList.astro";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-  const posts = (await getCollection("entity"))
-    .filter((post) => post.data.draft === false)
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  const posts = (await getCollection("entity"));
   return paginate(posts, {
     pageSize: PAGINATION_POSTS_PER_PAGE,
   });
@@ -24,7 +21,6 @@ const { page } = Astro.props;
 
 <PageLayout
   title="Posts"
-  description="Posts."
 >
   <h2>Posts</h2>
     {page.data.length === 0 && <p>No posts yet.</p>}

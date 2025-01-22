@@ -19,6 +19,7 @@ PLANTUML_BASE_URL: str = "https://www.plantuml.com/plantuml/svg"
 CONTENT_DIR: Path = Path("/workspaces/gc2web/src/content/entity")
 LINK_ICON: str = ":link:"
 HEADER_PREFIX: str = "###"
+LAST_MODIFIED_FILE = "/workspaces/gc2web/src/last_modified.ts"
 
 logging.basicConfig(level=logging.INFO, 
                    format='%(asctime)s - %(levelname)s - %(message)s')
@@ -215,21 +216,27 @@ def generate_source_page(source, filepath):
         logger.error(f"Failed to write file {filepath}: {e}")
         raise        
 
-def generate_individual_pages(transmission: GedcomTransmission, output_dir: Path):
-    #logger.info(f"Generating pages for {len(transmission.individuals)} individuals")
-    
+def generate_individual_pages(transmission: GedcomTransmission, output_dir: Path):    
     for individual in tqdm(transmission.individuals, desc="Generated individual pages", bar_format='{desc}: {total_fmt}'):
         generate_individual_page(individual, output_dir / f"{individual.xref_id}.md")
 
-    #logger.info(f"Successfully generated {len(transmission.individuals)} individual pages")
-
 def generate_source_pages(transmission: GedcomTransmission, output_dir: Path):
-    #logger.info(f"Generating pages for {len(transmission.sources)} sources")
     
     for source in tqdm(transmission.sources, desc="Generated source pages", bar_format='{desc}: {total_fmt}'):
         generate_source_page(source, output_dir / f"{source.xref_id}.md")
 
-    #logger.info(f"Successfully generated {len(transmission.sources)} source pages")
+def generate_last_modified():
+    last_modified_path = Path(LAST_MODIFIED_FILE)
+    
+    current_time = datetime.now().astimezone().strftime("%d-%m-%Y")
+    content = f'export const LAST_MODIFIED = "{current_time}";\n'
+    
+    try:
+        with open(last_modified_path, 'w') as file:
+            file.write(content)
+    except IOError as e:
+        logger.error(f"Failed to write file {last_modified_path}: {e}")
+        raise
 
 def main(argv: List[str]):
     ap = argparse.ArgumentParser(description='Process a GEDCOM file.')
@@ -244,6 +251,7 @@ def main(argv: List[str]):
     
     generate_individual_pages(transmission, CONTENT_DIR)
     generate_source_pages(transmission, CONTENT_DIR)
+    generate_last_modified()
 
 # Example usage
 if __name__ == '__main__':

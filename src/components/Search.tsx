@@ -29,8 +29,7 @@ export default function Search({ searchList }: Props) {
     return fuse
       .search(query())
       .map((result) => result.item)
-      .slice(0, 5)
-      .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+      .slice(0, 5);
   });
 
   // initialize query from URL

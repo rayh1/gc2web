@@ -6,7 +6,6 @@ import BlogPostLayout from "../../layouts/BlogPostLayout.astro";
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getCollection("entity");
   return posts
-    .filter((post) => post.data.draft === false)
     .map((post) => ({
       params: { id: post.id },
       props: post,

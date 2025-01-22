@@ -2,9 +2,7 @@
 import { getCollection } from "astro:content";
 import Search from "./Search";
 
-const posts = (await getCollection("entity"))
-  .filter((post) => post.data.draft === false)
-  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+const posts = (await getCollection("entity"));
 ---
 
 <Search client:load searchList={posts} />

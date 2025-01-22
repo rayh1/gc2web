@@ -2,7 +2,7 @@ import type { CollectionEntry } from "astro:content";
 
 export const PostListItem = ({ post }: { post: CollectionEntry<"entity"> }) => {
   const { data, id } = post;
-  const { title, description, pubDate, tags } = data;
+  const { title } = data;
   return (
     <div class="post flex flex-row h-auto">
         <a 

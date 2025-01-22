@@ -5,21 +5,18 @@ import Footer from "../components/Footer.astro";
 
 interface Props {
   title: string;
-  description: string;
   frontmatter?: {
     title: string;
-    description: string;
   };
 };
 
 const { frontmatter } = Astro.props;
 const title = frontmatter?.title || Astro.props.title;
-const description = frontmatter?.description || Astro.props.description;
 ---
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} />
   </head>
 
   <body>
