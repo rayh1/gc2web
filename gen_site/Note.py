@@ -1,4 +1,5 @@
 from GedcomLine import GedcomLine
+import yaml
 
 class Note:
     def __init__(self):
@@ -20,3 +21,17 @@ class Note:
 
     def __repr__(self) -> str:
         return f"Note(xref_id=text={self.value})"
+    
+    def is_private(self) -> bool:
+        if not self.value:
+            return False
+        
+        try:
+            note_data = yaml.safe_load(self.value)
+            if type(note_data) is dict and 'private' in note_data:
+                return note_data['private']
+        except yaml.YAMLError:
+            pass
+        
+        return False
+

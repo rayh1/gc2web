@@ -4,8 +4,6 @@ from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 
 class NotesMixin:
-    PRIVATE = "PRIVATE"
-
     def __init__(self):
         self.__notes: List[Note] = []
 
@@ -27,4 +25,4 @@ class NotesMixin:
         self.__notes.append(note)
 
     def is_private(self) -> bool:
-        return any(note.value and note.value == self.PRIVATE for note in self.notes)
+        return any(note.is_private() for note in self.notes)
