@@ -144,7 +144,7 @@ def has_exact_phrases(s: str | None, phrases: list[str]) -> bool:
 def is_zoon2(witness: Witness) -> bool:
     return has_exact_phrases(witness.relation, ["zoon"])
 
-def find_zoon2(name: str | None, individual: Individual) -> list[Individual]:
+def find_child2(name: str | None, individual: Individual) -> list[Individual]:
     results: list[Individual] = []
     if not name:
         return results
@@ -153,6 +153,11 @@ def find_zoon2(name: str | None, individual: Individual) -> list[Individual]:
             if child.has_name(name):
                 results.append(child)
     return results
+
+### Dochter
+
+def is_dochter2(witness: Witness) -> bool:
+    return has_exact_phrases(witness.relation, ["dochter"])
 
 #### Father
 def is_father2(witness: Witness) -> bool:
@@ -178,6 +183,33 @@ def find_mother2(individual: Individual) -> list[Individual]:
 
     return results
 
+#### Sibling
+def is_sibling2(witness: Witness) -> bool:
+    return has_exact_phrases(witness.relation, ["broer", "zus", "broeder", "zuster"])
+
+def find_sibling2(name: str | None, individual: Individual) -> list[Individual]:
+    results: list[Individual] = []
+    if not name:
+        return results
+    for sibling in individual.siblings():
+        if sibling.has_name(name):
+            results.append(sibling)
+    return results
+
+#### Echtgenoot
+def is_echtgenoot2(witness: Witness) -> bool:
+    return has_exact_phrases(witness.relation, ["echtgenoot"])
+
+def find_echtgenoot2(name: str | None, individual: Individual) -> list[Individual]:
+    results: list[Individual] = []
+    if not name:
+        return results
+    for spouse in individual.spouses:
+        if spouse.has_name(name):
+            results.append(spouse)
+
+    return results
+
 def show_candidates_names(candidates: list[Individual]) -> str | list[str]:
     if len(candidates) == 0:
         return "GEEN"
@@ -195,18 +227,20 @@ def show_candidates(candidates: list[Individual]) -> str | list[str]:
     return [i.xref_id for i in candidates]
 
 def print_witnesses(witness: Witness, individuals: list[Individual]):
-    #print(f"{witness.line_num} {witness.name} {show_candidates(individuals)}")
-    print(f"{witness.line_num} {witness.relation}: {witness.name} {show_candidates_names(individuals)}")
+    print(f"{witness.line_num} {witness.name} {show_candidates(individuals)}")
+    #print(f"{witness.line_num} {witness.relation}: {witness.name} {show_candidates_names(individuals)}")
 
 def list_witnesses_relations():
+    relations = []
     for individual in GedcomTransmission().individuals:
         for event in [individual.birth, individual.baptism, individual.death, individual.burial]:
             for witness in event.witnesses:
-                #if is_identified_particular_witness2(witness):
-                #   continue
+
+                if is_identified_particular_witness2(witness):
+                   continue
                 
-                if is_mother2(witness):
-                    candidates: list[Individual] = find_mother2(individual)
+                if is_echtgenoot2(witness):
+                    candidates: list[Individual] = find_echtgenoot2(witness.name, individual)
                     print_witnesses(witness, candidates)
 
         # for fams in individual.fams:

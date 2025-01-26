@@ -5525,6 +5525,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Jan Francies Hofman
+3 CONT     xref_id: I00035
 3 CONT     occupation: werkman
 3 CONT     age: 39
 3 CONT     residence: Graauw
@@ -5904,6 +5905,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Jan Francies Hofman
+3 CONT     xref_id: I00035
 3 CONT     occupation: werkman
 3 CONT     age: 71
 3 CONT     residence: Graauw
@@ -25563,6 +25565,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Joseph van Vliembergen
+3 CONT     xref_id: I00220
 3 CONT     occupation: landarbeider
 3 CONT     age: 30
 3 CONT     residence: Graauw en Langendam
@@ -25673,6 +25676,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Gijsbrecht Johannes Buijdrogge
+3 CONT     xref_id: GEEN
 3 CONT     occupation: landarbeider
 3 CONT     age: 46
 3 CONT     residence: Graauw en Langendam
@@ -27416,6 +27420,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Alphonsus van de Voorde
+3 CONT     xref_id: I00242
 3 CONT     occupation: werkman
 3 CONT     age: 30
 3 CONT     residence: Graauw
@@ -28085,6 +28090,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Geertruida Johanna Tervoort
+3 CONT     xref_id: GEEN
 3 CONT     occupation: vroedvrouw
 3 CONT     age: 26
 3 CONT     residence: Graauw
@@ -29700,6 +29706,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Charles Ludovicus Daalman
+3 CONT     xref_id: I00258
 3 CONT     occupation: werkman
 3 CONT     age: 36
 3 CONT     residence: Graauw
