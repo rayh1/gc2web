@@ -5528,7 +5528,7 @@
 3 CONT     occupation: werkman
 3 CONT     age: 39
 3 CONT     residence: Graauw
-3 CONT     relation: vader
+3 CONT     relation: echtgenoot van de overledene
 3 CONT     attribute: Niet Kunnen Schrijven 
 3 CONT   - name: Pieter Augustinus Baart
 3 CONT     occupation: secretaris
@@ -7446,6 +7446,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Theodorus Hubertus Walters
+3 CONT     xref_id: I00075
 3 CONT     occupation: kleermaker
 3 CONT     age: 30 
 3 CONT     residence: \'s-Hertogenbosch
@@ -11053,6 +11054,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Johannes Hubertus Walters
+3 CONT     xref_id: I00079
 3 CONT     occupation: kleedermaker
 3 CONT     age: 38
 3 CONT     residence: \'s-Hertogenbosch
@@ -11080,6 +11082,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Johannes Hubertus Walters
+3 CONT     xref_id: I00079
 3 CONT     occupation: kleedermaker
 3 CONT     age: 38
 3 CONT     residence: \'s-Hertogenbosch
@@ -11173,6 +11176,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Johannes Hubertus Walters
+3 CONT     xref_id: I00079
 3 CONT     occupation: kleedermaker
 3 CONT     age: 39
 3 CONT     residence: \'s-Hertogenbosch
@@ -11209,7 +11213,6 @@
 3 CONT     occupation: aanspreker
 3 CONT     age: 69
 3 CONT     residence: \'s-Hertogenbosch
-3 CONT     relation: vader
 3 CONT   - name: Antonius Ari
 3 CONT     occupation: bode
 3 CONT     age: 56
@@ -11265,6 +11268,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Johannes Hubertus Walters
+3 CONT     xref_id: I00079
 3 CONT     occupation: kleedermaker
 3 CONT     age: 42
 3 CONT     residence: \'s-Hertogenbosch
@@ -11288,6 +11292,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Johannes Hubertus Walters
+3 CONT     xref_id: I00079
 3 CONT     occupation: kleedermaker
 3 CONT     age: 42
 3 CONT     residence: \'s-Hertogenbosch
@@ -11345,6 +11350,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Johannes Hubertus Walters
+3 CONT     xref_id: I00079
 3 CONT     occupation: kleedermaker
 3 CONT     age: 45
 3 CONT     residence: \'s-Hertogenbosch
@@ -12155,6 +12161,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00088
 3 CONT     occupation: kleermakersknecht
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     address: Beursenstraat Wijk F 279
@@ -23775,6 +23782,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Josephus Hoofman
+3 CONT     xref_id: I00025
 3 CONT     occupation: arbeider
 3 CONT     age: 37
 3 CONT     residence: \'s-Gravenhage
@@ -23876,7 +23884,6 @@
 3 CONT     occupation: vroedvrouw
 3 CONT     age: 41
 3 CONT     residence: \'s-Gravenhage
-3 CONT     relation: vader
 3 CONT   - name: Franciscus Dieber
 3 CONT     age: 51
 3 CONT     occupation: bode
@@ -23966,7 +23973,6 @@
 3 CONT     occupation: vroedvrouw
 3 CONT     age: 43
 3 CONT     residence: \'s-Gravenhage
-3 CONT     relation: vader
 3 CONT   - name: Franciscus Dieber
 3 CONT     age: 53
 3 CONT     occupation: bode
@@ -23991,7 +23997,6 @@
 3 CONT   - name: Bart van Dijk
 3 CONT     age: 23
 3 CONT     residence: \'s-Gravenhage
-3 CONT     relation: vader
 3 CONT   - name: Jean Pierre Taiferon
 3 CONT     age: 21
 3 CONT     residence: \'s-Gravenhage
@@ -24067,7 +24072,6 @@
 3 CONT     occupation: bidder
 3 CONT     age: 37
 3 CONT     residence: \'s-Gravenhage
-3 CONT     relation: vader
 3 CONT   - name: Engelbertus Heilbron
 3 CONT     age: 64
 3 CONT     occupation: zonder beroep
@@ -24115,6 +24119,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Josephus Hoofman
+3 CONT     xref_id: I00025
 3 CONT     occupation: arbeider
 3 CONT     age: 43
 3 CONT     residence: \'s-Gravenhage
@@ -24213,6 +24218,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Josephus Hoofman
+3 CONT     xref_id: I00025
 3 CONT     occupation: arbeider
 3 CONT     age: 45
 3 CONT     residence: \'s-Gravenhage
@@ -29894,6 +29900,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Daniel Maas
+3 CONT     xref_id: GEEN
 3 CONT     age: 36
 3 CONT     occupation: werkman
 3 CONT     residence: Graauw
