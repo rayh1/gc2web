@@ -2334,6 +2334,7 @@
 3 CONT     residence: Muiden
 3 CONT     relation: moeder van bruid
 3 CONT   - name: Petrus Johannes Hoofman
+3 CONT     xref_id: I00005
 3 CONT     occupation: agent van politie
 3 CONT     age: 25
 3 CONT     residence: Amsterdam
@@ -8581,7 +8582,8 @@
 3 CONT     occupation: pakhuisknecht
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader bruid
-3 CONT   - name: Hubertus Wilhemus Walters
+3 CONT   - name: Hubertus Wilhelmus Walters
+3 CONT     xref_id: I00105
 3 CONT     occupation: passementwerker
 3 CONT     age: 26
 3 CONT     residence: \'s-Hertogenbosch
@@ -9408,11 +9410,13 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Antonius Johannes Verheij
+3 CONT     xref_id: GEEN
 3 CONT     occupation: handelsreiziger
 3 CONT     age: 53
 3 CONT     residence: Rotterdam
 3 CONT     relation: vader van bruid
 3 CONT   - name: Cornelis Franciscus Walters
+3 CONT     xref_id: I00085
 3 CONT     occupation: kleermaker
 3 CONT     age: 30
 3 CONT     residence: Rotterdam
@@ -9488,16 +9492,19 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Willemijna Karremans
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     age: 62
 3 CONT     residence: Rotterdam
 3 CONT     relation: moeder van de bruid 
 3 CONT   - name: Hubertus Theodorus Walters
+3 CONT     xref_id: I00084
 3 CONT     occupation: kleermaker
 3 CONT     age: 31
 3 CONT     residence: Rotterdam
 3 CONT     relation: broeder van den bruidegom 
 3 CONT   - name: Jacobus Michiel Petrus Flipsen
+3 CONT     xref_id: GEEN
 3 CONT     occupation: chauffeur
 3 CONT     age: 23
 3 CONT     residence: Rotterdam
@@ -10060,6 +10067,7 @@
 3 CONT     relation: vader der bruidegom
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Huberdina van Kessel
+3 CONT     xref_id: I00151
 3 CONT     occupation: mutsenwaschter
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: moeder van den bruid
@@ -11620,10 +11628,12 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Laurens Jacobus Hendrikus van Hemert
+3 CONT     xref_id: GEEN
 3 CONT     occupation: klerk
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader van bruid
 3 CONT   - name: Anna Maria de Swart
+3 CONT     xref_id: GEEN
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: moeder van bruid
 3 CONT   - name: Joannes Blank
@@ -13136,6 +13146,7 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Wilhelmus Noskens
+3 CONT     xref_id: GEEN
 3 CONT     occupation: kleermaker
 3 CONT     age: 39
 3 CONT     residence: \'s-Hertogenbosch
@@ -13261,16 +13272,19 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00088
 3 CONT     occupation: kleedermaker
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader bruidegom
 3 CONT     attribute: niet kunnen schrijven
 3 CONT   - name: Joannes Schroders
+3 CONT     xref_id: GEEN
 3 CONT     occupation: looijersknecht
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader bruid
 3 CONT     attribute: niet kunnen schrijven
 3 CONT   - name: Henrica La Vigne
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: moeder bruid
@@ -13409,6 +13423,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Henrica La Vigne
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: moeder bruid
@@ -13571,6 +13586,7 @@
 3 CONT     relation: vader bruidegom
 3 CONT     attribute: niet kunnen schrijven
 3 CONT   - name: Barbara de Falet
+3 CONT     xref_id: GEEN
 3 CONT     occupation: arbeidster
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: moeder bruid
@@ -13753,12 +13769,14 @@
 3 CONT     age: 48
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Hubertus Wilhelmus Walters
+3 CONT     xref_id: I00105
 3 CONT     occupation: passementwerker
 3 CONT     age: 32
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: broeder der bruid
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Johannes Hubertus Walters
+3 CONT     xref_id: I00079
 3 CONT     occupation: kleedermaker
 3 CONT     age: 35
 3 CONT     residence: \'s-Hertogenbosch
@@ -13874,6 +13892,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Petronella van Kessel
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: moeder van den bruidegom
@@ -13884,19 +13903,15 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader der bruid
 3 CONT     attribute: Niet Kunnen Schrijven
-3 CONT   - name: Hubertus Wilhelmus Walters
-3 CONT     occupation: passementwerker
-3 CONT     age: 35
-3 CONT     residence: \'s-Hertogenbosch
-3 CONT     relation: broer der bruidegom
-3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00107
 3 CONT     occupation: kleedermaker
 3 CONT     age: 28
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: broer der bruid
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Hubertus Wilhelmus Walters
+3 CONT     xref_id: I00105
 3 CONT     occupation: passementwerker
 3 CONT     age: 34
 3 CONT     residence: \'s-Hertogenbosch
@@ -14023,12 +14038,14 @@
 3 CONT     relation: vader der bruidegom
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Hubertus Wilhelmus Walters
+3 CONT     xref_id: I00105
 3 CONT     occupation: passementwerker
 3 CONT     age: 35
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: broer der bruidegom
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Johannes Hubertus Walters
+3 CONT     xref_id: I00079
 3 CONT     occupation: kleedermaker
 3 CONT     age: 39
 3 CONT     residence: \'s-Hertogenbosch
@@ -14284,11 +14301,13 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT  - name: Willem van den Heuvel
+3 CONT    xref_id: GEEN
 3 CONT    occupation: winkelier
 3 CONT    residence: \'s-Hertogenbosch
 3 CONT    relation: vader van bruidegom
 3 CONT    attribute: niet kunnen schrijven
 3 CONT  - name: Maria Ligtvoet
+3 CONT    xref_id: GEEN
 3 CONT    occupation: koopvrouw
 3 CONT    residence: \'s-Hertogenbosch
 3 CONT    relation: moeder van bruidegom
@@ -15660,6 +15679,7 @@
 3 CONT     relation: vader bruidegom
 3 CONT     attribute: Niet Kunnen Schrijven 
 3 CONT   - name: Hendrik van Strijp
+3 CONT     xref_id: GEEN
 3 CONT     occupation: slagtersknecht
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader bruid
@@ -21084,11 +21104,13 @@
 3 CONT     relation: moeder der bruidegom
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Catharina Boerlagen
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     residence: Nieuwer-Amstel
 3 CONT     relation: moeder der bruid
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Jacob Dijkstra
+3 CONT     xref_id: GEEN
 3 CONT     occupation: werkman
 3 CONT     age: 34
 3 CONT     residence: Nieuwer-Amstel
@@ -21605,6 +21627,7 @@
 3 CONT     residence: Utrecht
 3 CONT     relation: moeder bruidegom
 3 CONT   - name: Cornelia Jennissen
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     age: 47
 3 CONT     residence: Utrecht
@@ -23365,15 +23388,18 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Pieter Loocks
+3 CONT     xref_id: GEEN
 3 CONT     occupation: arbeider
 3 CONT     residence: Zaandam
 3 CONT     relation: vader bruid
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Anna Maria de Meijer
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     residence: Zaandam
 3 CONT     relation: moeder bruid
 3 CONT   - name: Jacobus Hoofman
+3 CONT     xref_id: I00072
 3 CONT     occupation: arbeider
 3 CONT     age: 24
 3 CONT     residence: Graauw
@@ -24375,16 +24401,19 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Josephus Hoofman
+3 CONT     xref_id: I00025
 3 CONT     age: 52
 3 CONT     occupation: zonder beroep
 3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: vader bruid
 3 CONT   - name: Mathilda Loocks
+3 CONT     xref_id: I00194
 3 CONT     age: 44
 3 CONT     occupation: zonder beroep
 3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: moeder bruid
 3 CONT   - name: Jacobus Adrianus Hazebroek
+3 CONT     xref_id: GEEN
 3 CONT     age: 28
 3 CONT     occupation: melkhandelaar
 3 CONT     residence: \'s-Gravenhage
@@ -24486,6 +24515,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Mathilda Loocks
+3 CONT     xref_id: I00194
 3 CONT     occupation: zonder beroep
 3 CONT     age: 52
 3 CONT     residence: \'s-Gravenhage
@@ -24494,12 +24524,12 @@
 3 CONT     occupation: zonder beroep
 3 CONT     age: 50
 3 CONT     residence: \'s-Gravenhage
-3 CONT     relation: moeder bruideg
 3 CONT   - name: Gerardus Antonius Hazebroek
 3 CONT     occupation: lantaarnopsteker
 3 CONT     age: 31
 3 CONT     residence: \'s-Gravenhage
 3 CONT   - name: Eduard Hoofman
+3 CONT     xref_id: I00198
 3 CONT     occupation: brievenbesteller
 3 CONT     age: 22
 3 CONT     residence: \'s-Gravenhage
@@ -24584,11 +24614,13 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Jan Barend van Dijk
+3 CONT     xref_id: GEEN
 3 CONT     occupation: bosarbeider
 3 CONT     age: 52
 3 CONT     residence: Tiel
 3 CONT     relation: vader bruid
 3 CONT   - name: Maria Clasina van Gelderen
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     age: 53
 3 CONT     residence: Tiel
@@ -24677,16 +24709,19 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Dirk Pronk
+3 CONT     xref_id: GEEN
 3 CONT     occupation: kuiper
 3 CONT     age: 58
 3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: vader bruidegom
 3 CONT   - name: Johanna Schaap
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     age: 54
 3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: moeder bruidegom
 3 CONT   - name: Mathilda Loocks
+3 CONT     xref_id: I00194
 3 CONT     occupation: zonder beroep
 3 CONT     age: 58
 3 CONT     residence: \'s-Gravenhage
@@ -24696,6 +24731,7 @@
 3 CONT     age: 24
 3 CONT     residence: \'s-Gravenhage
 3 CONT   - name: Petrus Augustinus Hoofman
+3 CONT     xref_id: I00195
 3 CONT     occupation: chauffeur
 3 CONT     age: 33
 3 CONT     residence: \'s-Gravenhage
@@ -26000,11 +26036,13 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Carolus Ludovicus van Vliembergen
+3 CONT     xref_id: GEEN
 3 CONT     occupation: landarbeider
 3 CONT     age: 62
 3 CONT     residence: Graauw
 3 CONT     relation: vader echtgenoot
 3 CONT   - name: Anna Catharina Geldmeijer
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     age: 58
 3 CONT     residence: Graauw
@@ -26016,6 +26054,7 @@
 3 CONT     residence: Graauw
 3 CONT     relation: vader echtgenote
 3 CONT   - name: Franciscus van Vliembergen
+3 CONT     xref_id: GEEN
 3 CONT     occupation: landarbeider
 3 CONT     age: 30
 3 CONT     residence: Clinge
@@ -26136,11 +26175,13 @@
 3 CONT     residence: Graauw en Langendam
 3 CONT     relation: vader echtgenoot
 3 CONT   - name: Petrus Cornelis Schelfhout
+3 CONT     xref_id: GEEN
 3 CONT     occupation: landarbeider
 3 CONT     age: 63
 3 CONT     residence: Graauw en Langendam
 3 CONT     relation: vader echtgenote
 3 CONT   - name: Apolonia Staal
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     age: 63
 3 CONT     residence: Graauw en Langendam
@@ -26246,6 +26287,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Josephus Theodorus Hoofman
+3 CONT     xref_id: I00218
 3 CONT     occupation: landarbeider
 3 CONT     age: 29
 3 CONT     residence: Graauw en Langendam
@@ -27659,11 +27701,13 @@
 3 CONT     relation: moeder van de echtgenoot
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Anna Maria van Bragt
+3 CONT     xref_id: GEEN
 3 CONT     occupation: werkvrouw
 3 CONT     residence: Graauw
 3 CONT     relation: moeder van de echtgenoote
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Petrus Daalman
+3 CONT     xref_id: I00228
 3 CONT     occupation: werkman
 3 CONT     age: 23
 3 CONT     residence: Graauw
@@ -27921,6 +27965,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Petrus Josephus Reijns
+3 CONT     xref_id: GEEN
 3 CONT     occupation: werkman
 3 CONT     residence: Hulst
 3 CONT     relation: vader van de echtgenoot
@@ -28204,16 +28249,19 @@
 3 CONT     relation: moeder van de echtgenoot
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Apolonia Spiessens
+3 CONT     xref_id: GEEN
 3 CONT     occupation: veldarbeidster
 3 CONT     residence: Graauw
 3 CONT     relation: moeder van de echtgenoote
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Franciscus Daalman
+3 CONT     xref_id: I00227
 3 CONT     occupation: werkman
 3 CONT     age: 42
 3 CONT     residence: Graauw
 3 CONT     relation: broeder van den echtgenoot
 3 CONT   - name: Petrus Daalman
+3 CONT     xref_id: I00228
 3 CONT     occupation: werkman
 3 CONT     age: 40
 3 CONT     residence: Graauw
@@ -28337,11 +28385,13 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Jan Francies van de Voorde
+3 CONT     xref_id: GEEN
 3 CONT     occupation: werkman
 3 CONT     residence: Graauw
 3 CONT     relation: vader van de echtgenoot
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Rosalia van Poorten
+3 CONT     xref_id: GEEN
 3 CONT     occupation: werkvrouw
 3 CONT     residence: Graauw
 3 CONT     relation: moeder van de echtgenoot
@@ -28354,6 +28404,7 @@
 3 CONT     relation: vader van de echtgenoote
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Franciscus Daalman
+3 CONT     xref_id: I00227
 3 CONT     occupation: werkman
 3 CONT     age: 42
 3 CONT     residence: Graauw
@@ -29842,11 +29893,13 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Isabella Cambeen
+3 CONT     xref_id: GEEN
 3 CONT     occupation: werkvrouw
 3 CONT     residence: Graauw
 3 CONT     relation: moeder bruidegom
 3 CONT     attribute: Niet Kunnen Schrijven 
 3 CONT   - name: Jan Francies Hofman
+3 CONT     xref_id: I00035
 3 CONT     occupation: werkman
 3 CONT     residence: Graauw
 3 CONT     relation: vader bruid
@@ -30010,11 +30063,13 @@
 3 CONT     relation: vader bruidegom
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Daniel Maas
+3 CONT     xref_id: GEEN
 3 CONT     occupation: werkman
 3 CONT     residence: Graauw
 3 CONT     relation: vader bruid
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Maria Christina de Poorter
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     residence: Graauw
 3 CONT     relation: moeder bruid
@@ -30214,6 +30269,7 @@
 3 CONT     relation: moeder bruidegom
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Elisabeth van Swaal
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     residence: Hontenisse
 3 CONT     relation: moeder bruid
@@ -30230,6 +30286,7 @@
 3 CONT     relation: stiefvader van de echtgenoote
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Eduardus Tieleman
+3 CONT     xref_id: GEEN
 3 CONT     occupation: veldarbeider
 3 CONT     age: 30
 3 CONT     residence: Graauw
@@ -30540,19 +30597,23 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Jan Francies Hofman
+3 CONT     xref_id: I00035
 3 CONT     occupation: werkman
 3 CONT     residence: Graauw
 3 CONT     relation: vader bruidegom
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Hendrik van Liempt
+3 CONT     xref_id: GEEN
 3 CONT     occupation: arbeider
 3 CONT     residence: Haarlemmermeer
 3 CONT     relation: vader bruid
 3 CONT   - name: Jannetje Groeneveld
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     residence: Haarlemmermeer
 3 CONT     relation: moeder bruid
 3 CONT   - name: Jan Francies Hofman
+3 CONT     xref_id: I00246
 3 CONT     occupation: polderwerker
 3 CONT     age: 29
 3 CONT     residence: Amsterdam
@@ -30743,11 +30804,13 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Aalbert Nuijen
+3 CONT     xref_id: GEEN
 3 CONT     occupation: ploegbaas
 3 CONT     age: 56
 3 CONT     residence: Rotterdam
 3 CONT     relation: vader der bruidegom
 3 CONT   - name: Jannetje van de Pol
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     age: 49
 3 CONT     residence: Rotterdam
@@ -30769,6 +30832,7 @@
 3 CONT     age: 42
 3 CONT     residence: Amsterdam
 3 CONT   - name: Jacob Nuijen
+3 CONT     xref_id: GEEN
 3 CONT     occupation: rangeerder
 3 CONT     age: 27
 3 CONT     residence: Rotterdam
@@ -31196,11 +31260,13 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Alouisius Maenhout
+3 CONT     xref_id: GEEN
 3 CONT     age: 54
 3 CONT     occupation: landarbeider
 3 CONT     residence: Graauw
 3 CONT     relation: vader echtgenoote
 3 CONT   - name: Rosalia de Feber
+3 CONT     xref_id: GEEN
 3 CONT     age: 58
 3 CONT     occupation: zonder beroep
 3 CONT     residence: Graauw
@@ -31212,11 +31278,13 @@
 3 CONT     residence: Clinge
 3 CONT     relation: vader echtgenoot
 3 CONT   - name: Gerardus Daniel Hofman
+3 CONT     xref_id: I00264
 3 CONT     age: 24
 3 CONT     occupation: landarbeider
 3 CONT     residence: Clinge
 3 CONT     relation: broeder van den echtgenoot
 3 CONT   - name: Petrus Johannes Maenhout
+3 CONT     xref_id: GEEN
 3 CONT     age: 25
 3 CONT     occupation: colporteur
 3 CONT     residence: Graauw
@@ -31301,6 +31369,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Charles Louis Dansaert
+3 CONT     xref_id: GEEN
 3 CONT     age: 68
 3 CONT     occupation: landbouwer
 3 CONT     residence: Clinge
@@ -31386,11 +31455,12 @@
 4 LONG W4.0
 2 NOTE ---
 3 CONT witnesses:
-3 CONT   - name: Josephus Franciscus
+3 CONT   - name: Josephus Franciscus Hofman
 3 CONT     age: 43
 3 CONT     occupation: landarbeider
 3 CONT     residence: Graauw en Langendam
 3 CONT     relation: broeder van den bruidegom
+3 CONT     xref_id: I00263
 3 CONT   - name: Joseph Peter Kouijzer
 3 CONT     age: 41
 3 CONT     occupation: heier
@@ -31455,11 +31525,13 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Victor Josephus van den Berghe
+3 CONT     xref_id: GEEN
 3 CONT     age: 33
 3 CONT     occupation: schipper
 3 CONT     residence: Graauw
 3 CONT     relation: broeder van de bruidegom
 3 CONT   - name: Gerardus Daniel Hofman
+3 CONT     xref_id: I00264
 3 CONT     age: 42
 3 CONT     occupation: landarbeider
 3 CONT     residence: Clinge
@@ -31679,6 +31751,7 @@
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT     xref_id: I00257
 3 CONT   - name: Jacobus Gerardus Suurhoff
+3 CONT     xref_id: GEEN
 3 CONT     age: 58
 3 CONT     occupation: kantoorbediende
 3 CONT     residence: Amsterdam
@@ -31689,6 +31762,7 @@
 3 CONT     residence: Amsterdam
 3 CONT     relation: oom der bruid
 3 CONT   - name: Dirk Suurhoff
+3 CONT     xref_id: GEEN
 3 CONT     age: 25
 3 CONT     occupation: metaalbewerker
 3 CONT     residence: Amsterdam
@@ -31852,6 +31926,7 @@
 3 CONT     relation: vader der bruidegom
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Petrus de Preijker
+3 CONT     xref_id: GEEN
 3 CONT     occupation: polderwerker
 3 CONT     residence: Amsterdam
 3 CONT     relation: vader der bruid
@@ -31997,11 +32072,13 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Jan Emous
+3 CONT     xref_id: GEEN
 3 CONT     age: 64
 3 CONT     occupation: fabrieksarbeider
 3 CONT     residence: Amsterdam
 3 CONT     relation: vader der bruidegom
 3 CONT   - name: Antonetta van Elk
+3 CONT     xref_id: GEEN
 3 CONT     age: 67
 3 CONT     occupation: zonder beroep
 3 CONT     residence: Amsterdam
@@ -32014,6 +32091,7 @@
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT     xref_id: I00274
 3 CONT   - name: Jan Emous
+3 CONT     xref_id: GEEN
 3 CONT     age: 31
 3 CONT     occupation: magazijnknecht
 3 CONT     residence: Amsterdam
