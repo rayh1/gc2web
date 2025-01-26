@@ -24,5 +24,12 @@ class Name(SourcesMixin):
 
     # Utility methods
 
+    @property
+    def plain_value(self) -> str | None:
+        if not self.__value:
+            return None
+        
+        return self.__value.replace("/", "")
+
     def __str__(self) -> str:
-        return self.__value.replace("/", "") if self.__value else "?"
+        return self.plain_value if self.plain_value else "?"

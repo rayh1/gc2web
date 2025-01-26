@@ -1,5 +1,6 @@
 class Witness:
-    def __init__(self, data: dict):
+    def __init__(self, line_num: int | None, data: dict):
+        self.__line_num: int | None = line_num
         self.__name: str | None = data.get('name', None)
         self.__occupation: str | None = data.get('occupation', None)
         self.__residence: str | None = data.get('residence', None)
@@ -39,5 +40,9 @@ class Witness:
     def xref_id(self) -> str | None:
         return self.__xref_id
 
+    @property
+    def line_num(self) -> int | None:
+        return self.__line_num
+    
     def __repr__(self) -> str:
-        return f"Witness(name={self.__name}, occupation={self.__occupation}, residence={self.__residence}, relation={self.__relation}, age={self.__age}, attribute={self.__attribute}, xref_id={self.__xref_id})"
+        return f"Witness(name={self.__name}, occupation={self.__occupation}, residence={self.__residence}, relation={self.__relation}, age={self.__age}, attribute={self.__attribute}, xref_id={self.__xref_id}, line_num={self.__line_num})"

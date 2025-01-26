@@ -522,6 +522,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Petrus Johannes Hoofman
+3 CONT     xref_id: I00005
 3 CONT     occupation: agent van politie
 3 CONT     age: 28
 3 CONT     residence: Amsterdam
@@ -1174,7 +1175,7 @@
 3 CONT     occupation: hoefsmid
 3 CONT     age: 39
 3 CONT     residence: Graauw
-3 CONT   - name: Johannes Fransiscus de Vilder
+3 CONT   - name: Johannes Francies de Vilder
 3 CONT     occupation: wagenmaker
 3 CONT     age: 26
 3 CONT     residence: Graauw
@@ -1557,6 +1558,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Petrus Adrianus Hulshout
+3 CONT     xref_id: GEEN
 3 CONT     occupation: werkman
 3 CONT     age: 36
 3 CONT     residence: Graauw
@@ -2925,10 +2927,9 @@
 2 GIVN Francies
 2 SURN Hoofman
 2 SOUR @S00028@
-1 NAME Fransiscus /Hoofman/
-2 GIVN Fransiscus
+1 NAME Franciscus /Hoofman/
+2 GIVN Franciscus
 2 SURN Hoofman
-2 SOUR @S00310@
 2 SOUR @S00313@
 1 SEX M
 1 DEAT
@@ -3318,11 +3319,11 @@
 3 CONT   - name: Willem Petrus Hoogenstraaten
 3 CONT     occupation: bode
 3 CONT     age: 53
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT   - name: Jan Trump (?)
 3 CONT     occupation: bode
 3 CONT     age: 58
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT
 2 SOUR @S00345@
 2 SOUR @S00350@
@@ -4018,7 +4019,8 @@
 3 CONT
 2 NOTE ---
 3 CONT witnesses:
-3 CONT   - name: Ludovicus Fransiscus Daalman
+3 CONT   - name: Ludovicus Franciscus Daalman
+3 CONT     xref_id: I00234
 3 CONT     occupation: veldarbeider
 3 CONT     age: 47
 3 CONT     residence: Graauw
@@ -4139,7 +4141,8 @@
 3 CONT     age: 31
 3 CONT     residence: Graauw
 3 CONT     relation: schoonzoon
-3 CONT   - name: Fransiscus Daalman
+3 CONT   - name: Franciscus Daalman
+3 CONT     xref_id: I00227
 3 CONT     occupation: werkman
 3 CONT     age: 48
 3 CONT     residence: Graauw
@@ -7355,6 +7358,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Josephus Theodorus Hoofman
+3 CONT     xref_id: I00218
 3 CONT     occupation: landarbeider
 3 CONT     age: 28
 3 CONT     residence: Graauw en Langendam
@@ -7443,7 +7447,7 @@
 3 CONT     occupation: kleermaker
 3 CONT     age: 30 
 3 CONT     residence: \'s-Hertogenbosch
-3 CONT  relation: vader
+3 CONT     relation: vader
 3 CONT   - name: Cornelis Beaudoux
 3 CONT     occupation: meesterknecht eener sigarenfabriek
 3 CONT     age: 51
@@ -8087,7 +8091,7 @@
 3 CONT
 2 NOTE ---
 3 CONT witnesses:
-3 CONT   - name: Fransiscus Johannes Arnoldus Alinkhof
+3 CONT   - name: Franciscus Johannes Arnoldus Alinkhof
 3 CONT     occupation: lijkbezorger
 3 CONT     age: 46
 3 CONT     residence: Rotterdam
@@ -9400,7 +9404,7 @@
 3 CONT     age: 53
 3 CONT     residence: Rotterdam
 3 CONT     relation: vader van bruid
-3 CONT   - name: Cornelis Fransiscus Walters
+3 CONT   - name: Cornelis Franciscus Walters
 3 CONT     occupation: kleermaker
 3 CONT     age: 30
 3 CONT     residence: Rotterdam
@@ -9842,7 +9846,7 @@
 4 LONG W4.0
 2 NOTE ---
 3 CONT witnesses:
-3 CONT   - name: Fransiscus Schouten
+3 CONT   - name: Franciscus Schouten
 3 CONT   - name: Catharina Donkers
 3 CONT
 2 SOUR @S00229@
@@ -11048,16 +11052,16 @@
 3 CONT   - name: Johannes Hubertus Walters
 3 CONT     occupation: kleedermaker
 3 CONT     age: 38
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader
 3 CONT   - name: Martinus Meekers
 3 CONT     occupation: kleedermaker
 3 CONT     age: 50
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Theodorus Walters
 3 CONT     occupation: kleedermaker
 3 CONT     age: 30
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT
 2 SOUR @S00123@
 1 DEAT
@@ -11075,12 +11079,12 @@
 3 CONT   - name: Johannes Hubertus Walters
 3 CONT     occupation: kleedermaker
 3 CONT     age: 38
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader
 3 CONT   - name: Theodorus Arnoldus Meuwes
 3 CONT     occupation: agent van politie
 3 CONT     age: 42
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT
 2 SOUR @S00124@
 1 SOUR @S00123@
@@ -11168,16 +11172,16 @@
 3 CONT   - name: Johannes Hubertus Walters
 3 CONT     occupation: kleedermaker
 3 CONT     age: 39
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader
-3 CONT   - name: Antonius Fransiscus van Riel
+3 CONT   - name: Antonius Franciscus van Riel
 3 CONT     occupation: kleedermaker
 3 CONT     age: 53
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Theodorus Lambertus Walters
 3 CONT     occupation: kleedermaker
 3 CONT     age: 31
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT
 2 SOUR @S00125@
 1 OCCU Zonder beroep
@@ -11200,12 +11204,12 @@
 3 CONT   - name: Johannes Poulisse
 3 CONT     occupation: aanspreker
 3 CONT     age: 69
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader
 3 CONT   - name: Antonius Ari
 3 CONT     occupation: bode
 3 CONT     age: 56
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT
 2 SOUR @S00134@
 1 SOUR @S00125@
@@ -11259,12 +11263,12 @@
 3 CONT   - name: Johannes Hubertus Walters
 3 CONT     occupation: kleedermaker
 3 CONT     age: 42
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader
 3 CONT   - name: Mathias Spaeng
 3 CONT     occupation: muzykant
 3 CONT     age: 50
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT
 2 SOUR @S00126@
 1 DEAT
@@ -11282,12 +11286,12 @@
 3 CONT   - name: Johannes Hubertus Walters
 3 CONT     occupation: kleedermaker
 3 CONT     age: 42
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader
 3 CONT   - name: Mathias Spaeng
 3 CONT     occupation: muzykant
 3 CONT     age: 50
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT
 2 SOUR @S00126@
 1 SOUR @S00126@
@@ -11339,16 +11343,16 @@
 3 CONT   - name: Johannes Hubertus Walters
 3 CONT     occupation: kleedermaker
 3 CONT     age: 45
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader
 3 CONT   - name: Theodorus Lambertus Walters
 3 CONT     occupation: kleedermaker
 3 CONT     age: 72
-3 CONT     residence: 's-Hertogenbosch
-3 CONT   - name: Johannes Fransiscus Ackel
+3 CONT     residence: \'s-Hertogenbosch
+3 CONT   - name: Johannes Franciscus Ackel
 3 CONT     occupation: kleedermaker
 3 CONT     age: 76
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT
 2 SOUR @S00127@
 1 OCCU Sigarenmaker
@@ -11377,14 +11381,14 @@
 3 CONT
 2 NOTE ---
 3 CONT witnesses:
-3 CONT   - name: Fransiscus Kegers
+3 CONT   - name: Franciscus Kegers
 3 CONT     age: 61
 3 CONT     occupation: kuiper
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Cornelis Walters
 3 CONT     occupation: kuiper
 3 CONT     age: 51
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: bloedverwant in den tweeden graad zijdlinie van den overledene
 3 CONT
 2 SOUR @S00133@
@@ -11599,38 +11603,38 @@
 3 CONT witnesses:
 3 CONT   - name: Laurens Jacobus Hendrikus van Hemert
 3 CONT     occupation: klerk
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader van bruid
 3 CONT   - name: Anna Maria de Swart
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: moeder van bruid
 3 CONT   - name: Joannes Blank
 3 CONT     occupation: schoenmaker
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: voogd van bruidegom
 3 CONT   - name: Theodorus Lambertus Walters
 3 CONT     occupation: kleermaker
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: toeziend voogd van bruidegom
 3 CONT   - name: Cornelis Walters
 3 CONT     occupation: kuiper
 3 CONT     age: 33
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: bloedverwant in den tweeden graad zijdlinie van den eersten echtgenoot
 3 CONT   - name: Theodorus Walters
 3 CONT     occupation: kleermaker
 3 CONT     age: 32
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: bloedverwant in den tweeden graad zijdlinie van den eersten echtgenoot
-3 CONT   - name: Johannes Fransiscus van Hemert
+3 CONT   - name: Johannes Franciscus van Hemert
 3 CONT     occupation: muzikant
 3 CONT     age: 25
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: bloedverwant in den tweeden graad zijdlinie der tweeden echtgenoot
 3 CONT   - name: Johannes van den Heuvel
 3 CONT     occupation: muzikant
 3 CONT     age: 26
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT
 2 SOUR @S00132@
 1 SOUR @S00132@
@@ -12158,7 +12162,7 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     address: Wijk F 178
 3 CONT   - name: Laurens Snellaars
-3 CONT     occupation: ?
+3 CONT     occupation: \?
 3 CONT     age: 30
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     address: Wijk F 314
@@ -12477,7 +12481,7 @@
 2 ADDR Volderstraatje aan Groote Hekel Wijk F 65 (2)
 2 NOTE ---
 3 CONT witnesses:
-3 CONT  - name: Johannes Fransiscus Backers
+3 CONT  - name: Johannes Franciscus Backers
 3 CONT    occupation: kleermaker
 3 CONT    age: 28
 3 CONT    residence: \'s-Hertogenbosch
@@ -13239,37 +13243,37 @@
 3 CONT witnesses:
 3 CONT   - name: Theodorus Lambertus Walters
 3 CONT     occupation: kleedermaker
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader bruidegom
 3 CONT     attribute: niet kunnen schrijven
 3 CONT   - name: Joannes Schroders
 3 CONT     occupation: looijersknecht
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader bruid
 3 CONT     attribute: niet kunnen schrijven
 3 CONT   - name: Henrica La Vigne
 3 CONT     occupation: zonder beroep
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: moeder bruid
 3 CONT     attribute: niet kunnen schrijven
 3 CONT   - name: Johannes Coenrardus Veltman
 3 CONT     occupation: sjouwder
 3 CONT     age: 27
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     attribute: niet kunnen schrijven
 3 CONT   - name: Johannes Wilhelmus Beekwilder
 3 CONT     occupation: metselaar
 3 CONT     age: 38
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     attribute: niet kunnen schrijven
 3 CONT   - name: Joannes Theodorus Janssen
 3 CONT     occupation: koopman in lompen
 3 CONT     age: 41
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Ludovicus Janssen
 3 CONT     occupation: koopman in lompen
 3 CONT     age: 33
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT
 2 SOUR @S00148@
 1 RESI
@@ -13796,11 +13800,11 @@
 3 CONT  - name: Wilhelmus Haps
 3 CONT    occupation: klerk in het gasthuis
 3 CONT    age: 37
-3 CONT    residence: 's-Hertogenbosch
+3 CONT    residence: \'s-Hertogenbosch
 3 CONT  - name: Jacob Dijkstra
 3 CONT    occupation: knecht in het gasthuis
 3 CONT    age: 54
-3 CONT    residence: 's-Hertogenbosch
+3 CONT    residence: \'s-Hertogenbosch
 3 CONT
 2 SOUR @S00225@
 1 RESI
@@ -14156,7 +14160,7 @@
 3 CONT     occupation: steenhouwer
 3 CONT     age: 38
 3 CONT     residence: \'s-Hertogenbosch
-3 CONT  relation: zwager van bruidegom
+3 CONT     relation: zwager van bruidegom
 3 CONT   - name: Henricus van Boekel
 3 CONT     occupation: slagter
 3 CONT     age: 38
@@ -14278,7 +14282,7 @@
 3 CONT    occupation: zonder beroep
 3 CONT    age: 41
 3 CONT    residence: \'s-Hertogenbosch
-3 CONT  - name: Fransiscus Deckers
+3 CONT  - name: Franciscus Deckers
 3 CONT    occupation: landbouwer
 3 CONT    age: 36
 3 CONT    residence: \'s-Hertogenbosch
@@ -14986,11 +14990,11 @@
 3 CONT   - name: Johannes Pleek
 3 CONT     occupation: directeur in het zieken gasthuis
 3 CONT     age: 66
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Henricus van Bremen
 3 CONT     occupation: portier in het zieken gasthuis
 3 CONT     age: 62
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT
 2 SOUR @S00177@
 1 FAMS @F00052@
@@ -15465,7 +15469,7 @@
 3 CONT     age: 60
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Petrus Johannes Leytens
-3 CONT     occupation: ? en doodgraver
+3 CONT     occupation: \? en doodgraver
 3 CONT     age: 66
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT
@@ -16574,13 +16578,13 @@
 3 CONT   - name: Jean Lakenberg
 3 CONT     occupation: journalier
 3 CONT     age: 64
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: voisin
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Pierre van Ooijen
 3 CONT     occupation: jardinier
 3 CONT     age: 49
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: voisin
 2 NOTE ---
 3 CONT timestamp: deux heures du matin
@@ -17915,8 +17919,8 @@
 2 DATE 8 JUN 2023
 3 TIME 20:05:07
 0 @I00150@ INDI
-1 NAME Joannes Fransiscus /Van De Weijer/
-2 GIVN Joannes, Fransiscus
+1 NAME Joannes Franciscus /Van De Weijer/
+2 GIVN Joannes, Franciscus
 2 SURN Van De Weijer
 2 SOUR @S00136@
 1 SEX M
@@ -20480,11 +20484,11 @@
 3 CONT   - name: Jean Broggio
 3 CONT     age: 47
 3 CONT     occupation: cordonnier
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Joseph Klijn
 3 CONT     age: 47
 3 CONT     occupation: journalier
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT
 2 NOTE ---
 3 CONT timestamp: une heure et demi de l'apres midi
@@ -20500,7 +20504,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Joseph Klijn
-3 CONT     occupation: ?
+3 CONT     occupation: \?
 3 CONT     age: 47
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: buur
@@ -20593,12 +20597,12 @@
 3 CONT   - name: Petrus van Dijk
 3 CONT     occupation: koopman
 3 CONT     age: 42
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     address: Wijk C 37
 3 CONT   - name: Wilhelmus Jainfen
 3 CONT     occupation: meestersmid
 3 CONT     age: 41
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     address: Wijk C 45
 3 CONT
 2 SOUR @S00296@
@@ -20657,12 +20661,12 @@
 3 CONT   - name: Johannes Marcus Bezet
 3 CONT     occupation: kleermakersknecht
 3 CONT     age: 21
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     address: Wijk A 97
 3 CONT   - name: Johannes Junde (?) Medicus
 3 CONT     occupation: kleermakersknecht
 3 CONT     age: 36 (?)
-3 CONT     residence: 's-Hertogenbosch
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT     address: Wijk F (?) 14
 3 CONT
 2 SOUR @S00297@
@@ -22019,6 +22023,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Albertus Petrus Boogaert
+3 CONT     xref_id: I00192
 3 CONT     occupation: landarbeider
 3 CONT     age: 26
 3 CONT     residence: Graauw
@@ -22355,7 +22360,7 @@
 3 CONT     age: 62
 3 CONT     residence: Graauw
 3 CONT     relation: vader
-3 CONT   - name: Petrus Fransiscus van Walle
+3 CONT   - name: Petrus Franciscus van Walle
 3 CONT     occupation: landbouwer
 3 CONT     age: 36
 3 CONT     residence: Graauw
@@ -22610,7 +22615,7 @@
 3 CONT     occupation: werkman
 3 CONT     age: 46
 3 CONT     residence: Graauw
-3 CONT   - name: Fransiscus van Eerdenburgh
+3 CONT   - name: Franciscus van Eerdenburgh
 3 CONT     occupation: landbouwer
 3 CONT     age: 38
 3 CONT     residence: Graauw
@@ -22874,7 +22879,7 @@
 3 CONT     occupation: koster
 3 CONT     age: 45
 3 CONT     residence: Graauw
-3 CONT   - name: Petrus Fransiscus van Waterschoot
+3 CONT   - name: Petrus Franciscus van Waterschoot
 3 CONT     occupation: korenmolenaar
 3 CONT     age: 33
 3 CONT     residence: Graauw
@@ -23106,7 +23111,7 @@
 3 CONT   - name: Johannes de Groot
 3 CONT     occupation: begravenisbedienaar
 3 CONT     age: 74
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT
 2 SOUR @S00349@
 1 RESI
@@ -23349,7 +23354,7 @@
 3 CONT     age: 24
 3 CONT     residence: Graauw
 3 CONT     relation: broeder van den bruidegom
-3 CONT   - name: Fransiscus Bouwens
+3 CONT   - name: Franciscus Bouwens
 3 CONT     occupation: arbeider
 3 CONT     age: 30
 3 CONT     residence: Zaandam
@@ -23665,7 +23670,7 @@
 3 CONT     age: 35
 3 CONT     residence: Heemstede
 3 CONT     relation: vader
-3 CONT   - name: Antonius Fransiscus Bot
+3 CONT   - name: Antonius Franciscus Bot
 3 CONT     age: 46
 3 CONT     occupation: degenmaker
 3 CONT     residence: Heemstede
@@ -23767,16 +23772,16 @@
 3 CONT   - name: Josephus Hoofman
 3 CONT     occupation: arbeider
 3 CONT     age: 37
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: vader
-3 CONT   - name: Fransiscus Dieber
+3 CONT   - name: Franciscus Dieber
 3 CONT     age: 49
 3 CONT     occupation: bode
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT   - name: Engelbertus Heilbron
 3 CONT     age: 59
 3 CONT     occupation: zonder beroep
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT
 2 SOUR @S00336@
 1 DEAT
@@ -23793,11 +23798,11 @@
 3 CONT   - name: Theodorus Blokhuijsen
 3 CONT     age: 61
 3 CONT     occupation: bediende
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT   - name: Engelbertus Heilbron
 3 CONT     age: 59
 3 CONT     occupation: zonder beroep
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT
 2 SOUR @S00335@
 1 FAMC @F00064@
@@ -23865,16 +23870,16 @@
 3 CONT   - name: Augusta Krufs
 3 CONT     occupation: vroedvrouw
 3 CONT     age: 41
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: vader
-3 CONT   - name: Fransiscus Dieber
+3 CONT   - name: Franciscus Dieber
 3 CONT     age: 51
 3 CONT     occupation: bode
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT   - name: Engelbertus Heilbron
 3 CONT     age: 61
 3 CONT     occupation: zonder beroep
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT
 2 SOUR @S00337@
 2 SOUR @S00350@
@@ -23955,16 +23960,16 @@
 3 CONT   - name: Augusta Krufs
 3 CONT     occupation: vroedvrouw
 3 CONT     age: 43
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: vader
-3 CONT   - name: Fransiscus Dieber
+3 CONT   - name: Franciscus Dieber
 3 CONT     age: 53
 3 CONT     occupation: bode
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT   - name: Engelbertus Heilbron
 3 CONT     age: 63
 3 CONT     occupation: zonder beroep
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT
 2 SOUR @S00338@
 1 DEAT
@@ -23980,11 +23985,11 @@
 3 CONT witnesses:
 3 CONT   - name: Bart van Dijk
 3 CONT     age: 23
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: vader
 3 CONT   - name: Jean Pierre Taiferon
 3 CONT     age: 21
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT
 2 SOUR @S00339@
 1 FAMC @F00064@
@@ -24056,12 +24061,12 @@
 3 CONT   - name: Arie Versteeg
 3 CONT     occupation: bidder
 3 CONT     age: 37
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: vader
 3 CONT   - name: Engelbertus Heilbron
 3 CONT     age: 64
 3 CONT     occupation: zonder beroep
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT
 2 SOUR @S00340@
 1 FAMC @F00064@
@@ -24107,16 +24112,16 @@
 3 CONT   - name: Josephus Hoofman
 3 CONT     occupation: arbeider
 3 CONT     age: 43
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: vader
 3 CONT   - name: Bernard Liefting
 3 CONT     age: 36
 3 CONT     occupation: bode
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT   - name: Engelbertus Heilbron
 3 CONT     age: 66
 3 CONT     occupation: zonder beroep
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT
 2 SOUR @S00341@
 1 DEAT
@@ -24133,11 +24138,11 @@
 3 CONT   - name: Adrianus Engh
 3 CONT     age: 40
 3 CONT     occupation: bidder
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT   - name: Engelbertus Heilbron
 3 CONT     age: 66
 3 CONT     occupation: zonder beroep
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT
 2 SOUR @S00342@
 1 FAMC @F00064@
@@ -24205,16 +24210,16 @@
 3 CONT   - name: Josephus Hoofman
 3 CONT     occupation: arbeider
 3 CONT     age: 45
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: vader
 3 CONT   - name: Fredericus Blogtius Nulle
 3 CONT     age: 75
 3 CONT     occupation: bode
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT   - name: Amelis Jan Jalink
 3 CONT     age: 59
 3 CONT     occupation: congierge
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT
 2 SOUR @S00343@
 2 SOUR @S00350@
@@ -24349,22 +24354,22 @@
 3 CONT   - name: Josephus Hoofman
 3 CONT     age: 52
 3 CONT     occupation: zonder beroep
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: vader bruid
 3 CONT   - name: Mathilda Loocks
 3 CONT     age: 44
 3 CONT     occupation: zonder beroep
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: moeder bruid
 3 CONT   - name: Jacobus Adrianus Hazebroek
 3 CONT     age: 28
 3 CONT     occupation: melkhandelaar
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: broeder van de bruidegom
-3 CONT   - name: Fransiscus Cornelis van der Kleij
+3 CONT   - name: Franciscus Cornelis van der Kleij
 3 CONT     age: 41
 3 CONT     occupation: ploegbaas
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: oom van de bruidegom
 3 CONT
 2 SOUR @S00344@
@@ -24460,21 +24465,21 @@
 3 CONT   - name: Mathilda Loocks
 3 CONT     occupation: zonder beroep
 3 CONT     age: 52
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: moeder bruidegom
 3 CONT   - name: Catharina Gesina Petronella Vuur
 3 CONT     occupation: zonder beroep
 3 CONT     age: 50
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: moeder bruideg
 3 CONT   - name: Gerardus Antonius Hazebroek
 3 CONT     occupation: lantaarnopsteker
 3 CONT     age: 31
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT   - name: Eduard Hoofman
 3 CONT     occupation: brievenbesteller
 3 CONT     age: 22
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: broeder van de bruidegom
 3 CONT
 2 SOUR @S00346@
@@ -24570,10 +24575,10 @@
 3 CONT     age: 45
 3 CONT     residence: Kapel-Avezaath
 3 CONT     relation: oom der bruid
-3 CONT   - name: Hendricus Fransiscus Butten
+3 CONT   - name: Hendricus Franciscus Butten
 3 CONT     occupation: autohandelaar
 3 CONT     age: 50
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT
 2 SOUR @S00347@
 2 SOUR @S00350@
@@ -24651,26 +24656,26 @@
 3 CONT   - name: Dirk Pronk
 3 CONT     occupation: kuiper
 3 CONT     age: 58
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: vader bruidegom
 3 CONT   - name: Johanna Schaap
 3 CONT     occupation: zonder beroep
 3 CONT     age: 54
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: moeder bruidegom
 3 CONT   - name: Mathilda Loocks
 3 CONT     occupation: zonder beroep
 3 CONT     age: 58
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: moeder bruid
 3 CONT   - name: Cornelis de Bruin
 3 CONT     occupation: kantoorbediende
 3 CONT     age: 24
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT   - name: Petrus Augustinus Hoofman
 3 CONT     occupation: chauffeur
 3 CONT     age: 33
-3 CONT     residence: 's-Gravenhage
+3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: broeder der bruid
 3 CONT
 2 SOUR @S00348@
@@ -24731,16 +24736,16 @@
 2 CONT Voornaam: Maria Johanna Catharina
 2 CONT Tussenvoegsel: van der
 2 CONT Achternaam: Meer
-2 CONT Geboorteplaats: 's-Gravenhage
+2 CONT Geboorteplaats: \'s-Gravenhage
 2 CONT Geboortedatum: 08-11-1901
 2 CONT
 2 CONT Maria Josepha Hoofman  
 2 CONT Voornaam: Maria Josepha
 2 CONT Achternaam: Hoofman
-2 CONT Geboorteplaats: 's-Gravenhage
+2 CONT Geboorteplaats: \'s-Gravenhage
 2 CONT Geboortedatum: 16-06-1935
 2 CONT
-2 CONT Akteplaats: 's-Gravenhage
+2 CONT Akteplaats: \'s-Gravenhage
 2 CONT Toegangsnummer: 0354-01 Bevolkingsregister gemeente Den Haag
 2 CONT Inventarisnummer: 760
 2 CONT
@@ -24773,7 +24778,7 @@
 1 TEXT Eduard Hoofman  
 2 CONT Voornaam: Eduard
 2 CONT Achternaam: Hoofman
-2 CONT Geboorteplaats: 's-Gravenhage
+2 CONT Geboorteplaats: \'s-Gravenhage
 2 CONT Geboortedatum: 05-12-1904
 2 CONT
 2 CONT Maria van Dijk
@@ -24786,10 +24791,10 @@
 2 CONT Mathilda Marie Hoofman  
 2 CONT Voornaam: Mathilda Marie
 2 CONT Achternaam: Hoofman
-2 CONT Geboorteplaats: 's-Gravenhage
+2 CONT Geboorteplaats: \'s-Gravenhage
 2 CONT Geboortedatum: 16-02-1928
 2 CONT
-2 CONT Akteplaats: 's-Gravenhage
+2 CONT Akteplaats: \'s-Gravenhage
 2 CONT Toegangsnummer: 0354-01 Bevolkingsregister gemeente Den Haag
 2 CONT Inventarisnummer: 760
 2 CONT
@@ -25985,7 +25990,7 @@
 3 CONT     age: 60
 3 CONT     residence: Graauw
 3 CONT     relation: vader echtgenote
-3 CONT   - name: Fransiscus van Vliembergen
+3 CONT   - name: Franciscus van Vliembergen
 3 CONT     occupation: landarbeider
 3 CONT     age: 30
 3 CONT     residence: Clinge
@@ -26544,7 +26549,7 @@
 3 CONT
 2 NOTE ---
 3 CONT witnesses:
-3 CONT   - name: Fransiscus Ludovicus Daalman
+3 CONT   - name: Franciscus Ludovicus Daalman
 3 CONT     xref_id: I00029
 3 CONT     occupation: werkman
 3 CONT     age: 29
@@ -26674,7 +26679,7 @@
 3 CONT
 2 NOTE ---
 3 CONT witnesses:
-3 CONT   - name: Ludovicus Fransiscus Daalman
+3 CONT   - name: Ludovicus Franciscus Daalman
 3 CONT     xref_id: I00029
 3 CONT     occupation: werkman
 3 CONT     age: 29
@@ -27504,6 +27509,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Emile Petrus Daalman
+3 CONT     xref_id: GEEN
 3 CONT     occupation: landarbeider
 3 CONT     age: 24
 3 CONT     residence: Graauw
@@ -28175,7 +28181,7 @@
 3 CONT     residence: Graauw
 3 CONT     relation: moeder van de echtgenoote
 3 CONT     attribute: Niet Kunnen Schrijven
-3 CONT   - name: Fransiscus Daalman
+3 CONT   - name: Franciscus Daalman
 3 CONT     occupation: werkman
 3 CONT     age: 42
 3 CONT     residence: Graauw
@@ -28320,7 +28326,7 @@
 3 CONT     residence: Graauw
 3 CONT     relation: vader van de echtgenoote
 3 CONT     attribute: Niet Kunnen Schrijven
-3 CONT   - name: Fransiscus Daalman
+3 CONT   - name: Franciscus Daalman
 3 CONT     occupation: werkman
 3 CONT     age: 42
 3 CONT     residence: Graauw
@@ -29804,7 +29810,7 @@
 4 LONG W4.0
 2 NOTE ---
 3 CONT witnesses:
-3 CONT   - Isabella Cambeen
+3 CONT   - name: Isabella Cambeen
 3 CONT     occupation: werkvrouw
 3 CONT     residence: Graauw
 3 CONT     relation: moeder bruidegom
@@ -30505,7 +30511,7 @@
 3 CONT     occupation: werkman
 3 CONT     residence: Graauw
 3 CONT     relation: vader bruidegom
-3 CONT  attribute: Niet Kunnen Schrijven
+3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Hendrik van Liempt
 3 CONT     occupation: arbeider
 3 CONT     residence: Haarlemmermeer

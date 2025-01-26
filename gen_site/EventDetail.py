@@ -65,8 +65,9 @@ class EventDetail(SourcesMixin, NotesMixin):
             try:
                 note_data = yaml.safe_load(note.value)
                 if type(note_data) is dict and 'witnesses' in note_data:
-                    self.__witnesses = [Witness(witness_data) for witness_data in note_data['witnesses']]
+                    self.__witnesses = [Witness(note.line_num, witness_data) for witness_data in note_data['witnesses']]
             except yaml.YAMLError:
+                print(f"Error parsing witnesses: {note.value}") 
                 continue
 
     @property

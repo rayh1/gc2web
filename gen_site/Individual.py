@@ -211,7 +211,6 @@ class Individual(SourcesMixin, NotesMixin):
                     self.__spouses_cache.append(family.wife)
         return self.__spouses_cache
 
-    @property # type: ignore
     def children(self, spouse: 'Individual') -> list['Individual']:
         children = []
         for family in self.fams:
@@ -281,3 +280,6 @@ class Individual(SourcesMixin, NotesMixin):
                     key=lambda x: x.start_life.date.date() or datetime.max
                 )
         return []
+    
+    def has_name(self, name: str) -> bool:
+        return any([name == n.plain_value for n in self.names])
