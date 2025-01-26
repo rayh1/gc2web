@@ -1617,6 +1617,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Jan Makkinje
+3 CONT     xref_id: I00183
 3 CONT     occupation: werkman
 3 CONT     age: 49
 3 CONT     residence: Muiden
@@ -1797,6 +1798,7 @@
 3 CONT     residence: Muiden
 3 CONT     relation: vader
 3 CONT   - name: Cornelis Makkinje
+3 CONT     xref_id: GEEN
 3 CONT     occupation: metselaar
 3 CONT     age: 26
 3 CONT     residence: Muiden
@@ -10515,6 +10517,7 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader van kind 
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00088
 3 CONT     occupation: kleedermaker
 3 CONT     age: 52
 3 CONT     residence: \'s-Hertogenbosch
@@ -10598,6 +10601,7 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader van kind 
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00088
 3 CONT     occupation: kleedermaker
 3 CONT     age: 59
 3 CONT     residence: \'s-Hertogenbosch
@@ -10623,6 +10627,7 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader van kind 
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00088
 3 CONT     occupation: kleedermaker
 3 CONT     age: 59
 3 CONT     residence: \'s-Hertogenbosch
@@ -10789,6 +10794,7 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00107
 3 CONT     occupation: kleedermaker
 3 CONT     age: 24
 3 CONT     residence: \'s-Hertogenbosch
@@ -14774,8 +14780,10 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Klaas Jansen
+3 CONT     xref_id: GEEN
 3 CONT     relation: oom van het kint
 3 CONT   - name: Barbera den Uijl
+3 CONT     xref_id: GEEN
 3 CONT     relation: grootmoeder van het kint
 3 CONT
 2 SOUR @S00185@
@@ -19960,6 +19968,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Elisabeth Maria Dirks
+3 CONT     xref_id: GEEN
 3 CONT     relation: oma
 2 SOUR @S00282@
 1 FAMC @F00049@
@@ -22375,6 +22384,7 @@
 3 CONT     residence: Graauw
 3 CONT     relation: vader
 3 CONT   - name: Petrus Franciscus van Walle
+3 CONT     xref_id: GEEN
 3 CONT     occupation: landbouwer
 3 CONT     age: 36
 3 CONT     residence: Graauw
