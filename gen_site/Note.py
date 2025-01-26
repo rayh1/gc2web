@@ -32,16 +32,22 @@ class Note:
     def __repr__(self) -> str:
         return f"Note(xref_id=text={self.value}, line_num={self.__line_num})"
     
-    def is_private(self) -> bool:
+    def parse_yaml(self) -> dict | None:
         if not self.value:
-            return False
-        
+            return None
+        if not self.value.strip().startswith('---'):
+            return None
         try:
-            note_data = yaml.safe_load(self.value)
-            if type(note_data) is dict and 'private' in note_data:
-                return note_data['private']
+            data = yaml.safe_load(self.value)
+            return data
         except yaml.YAMLError:
-            pass
-        
+            print(f"Error parsing yaml: {self.value}") 
+            return None
+    
+    def is_private(self) -> bool:
+        data = self.parse_yaml()
+        if data and 'private' in data:
+            return data['private']
+
         return False
 

@@ -1,5 +1,3 @@
-import yaml
-
 from Place import Place
 from Date import Date
 from GedcomLine import GedcomLine
@@ -48,27 +46,19 @@ class EventDetail(SourcesMixin, NotesMixin):
     
     def parse_timestamp(self):
         for note in self.notes:
-            if not note.value:
-                continue
-            try:
-                note_data = yaml.safe_load(note.value)
-                if type(note_data) is dict and 'timestamp' in note_data:
-                    self.timestamp = note_data.get('timestamp')
-                    return
-            except yaml.YAMLError:
+            note_data: dict | None = note.parse_yaml()
+
+            if note_data and 'timestamp' in note_data:
+                self.timestamp = note_data['timestamp']
                 return
 
     def parse_witnesses(self):
         for note in self.notes:
-            if not note.value:
-                continue
-            try:
-                note_data = yaml.safe_load(note.value)
-                if type(note_data) is dict and 'witnesses' in note_data:
-                    self.__witnesses = [Witness(note.line_num, witness_data) for witness_data in note_data['witnesses']]
-            except yaml.YAMLError:
-                print(f"Error parsing witnesses: {note.value}") 
-                continue
+            note_data: dict | None = note.parse_yaml()
+
+            if note_data and 'witnesses' in note_data:
+                self.__witnesses = [Witness(note.line_num, witness_data) for witness_data in note_data['witnesses']]
+                return
 
     @property
     def value(self) -> str | None:

@@ -5354,7 +5354,8 @@
 2 NOTE ---
 3 CONT timestamp: ten half vijf ure des voormiddags
 3 CONT
-2 NOTE witnesses:
+2 NOTE ---
+3 CONT witnesses:
 3 CONT   - name: Charles Ludovicus Daalman
 3 CONT     occupation: werkman
 3 CONT     age: 33
@@ -5900,7 +5901,8 @@
 4 LONG W4.0
 2 NOTE ---
 3 CONT timestamp: ten half zes ure den middags
-2 NOTE witnesses:
+2 NOTE ---
+3 CONT witnesses:
 3 CONT   - name: Jan Francies Hofman
 3 CONT     occupation: werkman
 3 CONT     age: 71
@@ -9144,7 +9146,8 @@
 2 ADDR Grobbendonckstraat Wijk O 127
 2 NOTE ---
 3 CONT timestamp: tien ure des namiddags
-2 NOTE witnesses:
+2 NOTE ---
+3 CONT witnesses:
 3 CONT   - name: Theodorus Hubertus Walters
 3 CONT     xref_id: I00075
 3 CONT     occupation: kleermaker
@@ -11200,7 +11203,8 @@
 2 NOTE ---
 3 CONT timestamp: tien ure des namiddags
 3 CONT
-2 NOTE witnesses:
+2 NOTE ---
+3 CONT witnesses:
 3 CONT   - name: Johannes Poulisse
 3 CONT     occupation: aanspreker
 3 CONT     age: 69
@@ -22018,7 +22022,8 @@
 3 MAP
 4 LATI N45.0
 4 LONG W4.0
-2 NOTE timestamp: des voormiddags ten elf ure
+2 NOTE ---
+3 CONT timestamp: des voormiddags ten elf ure
 3 CONT
 2 NOTE ---
 3 CONT witnesses:
@@ -28625,7 +28630,8 @@
 2 NOTE ---
 3 CONT timestamp: te twaalf uur dertig minuten
 3 CONT
-2 NOTE witnesses:
+2 NOTE ---
+3 CONT witnesses:
 3 CONT   - name: Jan Francies Adriaansen
 3 CONT     occupation: landarbeider
 3 CONT     age: 56
@@ -29288,7 +29294,8 @@
 2 NOTE ---
 3 CONT timestamp: te veertien uur dertig minuten
 3 CONT
-2 NOTE witnesses:
+2 NOTE ---
+3 CONT witnesses:
 3 CONT   - name: Joseph Franciscus Hofman
 3 CONT     occupation: landarbeider
 3 CONT     age: 50
@@ -29684,7 +29691,8 @@
 2 NOTE ---
 3 CONT timestamp: ten tien ure des voormiddags
 3 CONT
-2 NOTE witnesses:
+2 NOTE ---
+3 CONT witnesses:
 3 CONT   - name: Charles Ludovicus Daalman
 3 CONT     occupation: werkman
 3 CONT     age: 36
