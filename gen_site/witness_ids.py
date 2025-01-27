@@ -252,16 +252,10 @@ def find_uncle2(name: str | None, individual: Individual) -> list[Individual]:
     results: list[Individual] = []
     if not name:
         return results
-
-    for parent in [individual.father, individual.mother]:
-        if not parent:
-            continue
-        for sibling in parent.siblings():
-            if sibling.has_name(name):
-                results.append(sibling)
-            for spouse in sibling.spouses:
-                if spouse.has_name(name):
-                    results.append(spouse)
+    
+    for ua in individual.uncles_aunts():
+        if ua.has_name(name):
+            results.append(ua)
 
     return results
 
@@ -381,6 +375,66 @@ def is_uncle_bride2(witness: Witness) -> bool:
                                                 "oom der bruid", 
                                                 "oom van den echtgenoote"])
 
+#### Brother-in-law
+#zwager van den echtgenoot
+#zwager der bruidegom
+#zwager van bruidegom
+#behuwdneef van den echtgenoot
+#zwager van de echtgenoote
+#zwager der bruid
+#schoonbroeder van de echtgenoote
+#schoonbroeder
+
+def is_brother_in_law2(witness: Witness) -> bool:
+    return has_exact_phrases(witness.relation, ["zwager van den echtgenoot", 
+                                                "zwager der bruidegom", 
+                                                "zwager van bruidegom", 
+                                                "behuwdneef van den echtgenoot", 
+                                                "zwager van de echtgenoote", 
+                                                "zwager der bruid", 
+                                                "schoonbroeder van de echtgenoote", 
+                                                "schoonbroeder"])
+
+def find_brother_in_law2(name: str | None, individual: Individual) -> list[Individual]:
+    results: list[Individual] = []
+    if not name:
+        return results
+    for sibling in individual.siblings():
+        for spouse in sibling.spouses:
+            if spouse.has_name(name):
+                results.append(spouse)
+    return results
+
+#### Something
+#voogd van bruidegom
+#toeziend voogd van bruidegom
+#toeziende voogd bruid
+#voogd bruid
+#bekende der bruid
+#bloedverwant in den tweeden graad zijdlinie van den eersten echtgenoot
+#bloedverwant in den tweeden graad zijdlinie der tweeden echtgenoot
+#bloedverwant in den vierden graad zijdlinie van den eersten echtgenoot
+#aangehuwde in den eersten graad nederdalende linie der tweede echtgenoot
+#aangehuwde in den tweeden graad zijdlinie der tweede echtgenoot
+#bloedverwant in dentweede graad zijdlinieder tweede echtgenoot
+#stiefvader van de echtgenoote
+
+def is_something_of_groom2(witness: Witness) -> bool:
+    return has_exact_phrases(witness.relation, ["voogd van bruidegom", 
+                                                "toeziend voogd van bruidegom", 
+                                                "bloedverwant in den tweeden graad zijdlinie van den eersten echtgenoot", 
+                                                "bloedverwant in den vierden graad zijdlinie van den eersten echtgenoot"])
+
+def is_something_of_bride2(witness: Witness) -> bool:
+    return has_exact_phrases(witness.relation, ["toeziende voogd bruid", 
+                                                "voogd bruid", 
+                                                "bekende der bruid", 
+                                                "bloedverwant in den tweeden graad zijdlinie der tweeden echtgenoot", 
+                                                "aangehuwde in den eersten graad nederdalende linie der tweede echtgenoot", 
+                                                "aangehuwde in den tweeden graad zijdlinie der tweede echtgenoot", 
+                                                "bloedverwant in dentweede graad zijdlinieder tweede echtgenoot", 
+                                                "stiefvader van de echtgenoote"])
+
 def show_candidates_names(candidates: list[Individual]) -> str | list[str]:
     if len(candidates) == 0:
         return "GEEN"
@@ -398,8 +452,8 @@ def show_candidates(candidates: list[Individual]) -> str | list[str]:
     return [i.xref_id for i in candidates]
 
 def print_witnesses(witness: Witness, individuals: list[Individual], individual: Individual):
-    print(f"{witness.line_num} {witness.name} {show_candidates(individuals)}")
-    #print(f"{witness.line_num} {witness.relation}: {witness.name} = {show_candidates_names(individuals)} --> {individual.name} {individual.xref_id}")
+    #print(f"{witness.line_num} {witness.name} {show_candidates(individuals)}")
+    print(f"{witness.line_num} {witness.relation}: {witness.name} = {show_candidates_names(individuals)} --> {individual.name} {individual.xref_id}")
 
 def list_witnesses_relations():
     for individual in GedcomTransmission().individuals:
@@ -445,7 +499,7 @@ def list_witnesses_relations():
 
                 if is_brother_bride2(witness):
                     candidates: list[Individual] = find_sibling2(witness.name, fams.wife)
-                    print_witnesses(witness, candidates, fams.husband)
+                    print_witnesses(witness, candidates, fams.wife)
 
                 if is_uncle_groom2(witness):
                     candidates: list[Individual] = find_uncle2(witness.name, fams.husband)
@@ -453,7 +507,21 @@ def list_witnesses_relations():
 
                 if is_uncle_bride2(witness):
                     candidates: list[Individual] = find_uncle2(witness.name, fams.wife)
+                    print_witnesses(witness, candidates, fams.wife)
+
+                if is_brother_in_law2(witness):
+                    candidates: list[Individual] = find_brother_in_law2(witness.name, fams.husband)
                     print_witnesses(witness, candidates, fams.husband)
+
+                if is_brother_in_law2(witness):
+                    candidates: list[Individual] = find_brother_in_law2(witness.name, fams.husband)
+                    print_witnesses(witness, candidates, fams.wife)
+
+                if is_something_of_groom2(witness):
+                    print_witnesses(witness, [], fams.husband)
+
+                if is_something_of_bride2(witness):
+                    print_witnesses(witness, [], fams.wife)
 
 def main(argv):
     ap = argparse.ArgumentParser(description='Set witness IDs in a GEDCOM file.')

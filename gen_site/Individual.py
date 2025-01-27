@@ -281,5 +281,17 @@ class Individual(SourcesMixin, NotesMixin):
                 )
         return []
     
+    def uncles_aunts(self) -> list['Individual']:
+        result: list['Individual'] = []
+        for parent in [self.father, self.mother]:
+            if not parent:
+                continue
+            for sibling in parent.siblings():
+                result.append(sibling)
+                for spouse in sibling.spouses:
+                    result.append(spouse)
+
+        return result
+    
     def has_name(self, name: str) -> bool:
         return any([name == n.plain_value for n in self.names])

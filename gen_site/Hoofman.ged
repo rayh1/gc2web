@@ -2156,6 +2156,7 @@
 3 CONT     residence: Muiden
 3 CONT     relation: moeder van bruid
 3 CONT   - name: Josephus Eggermond
+3 CONT     xref_id: GEEN
 3 CONT     occupation: grondwerker
 3 CONT     age: 40
 3 CONT     residence: Velsen
@@ -2341,6 +2342,7 @@
 3 CONT     residence: Amsterdam
 3 CONT     relation: broeder van de echtgenoote
 3 CONT   - name: Nicolaas Brandjes
+3 CONT     xref_id: GEEN
 3 CONT     occupation: smid
 3 CONT     age: 44
 3 CONT     residence: Muiden
@@ -5699,10 +5701,12 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Pieter Veras
+3 CONT     xref_id: GEEN
 3 CONT     occupation: timmerman
 3 CONT     residence: Graauw
 3 CONT     relation: voogd bruid
 3 CONT   - name: Jan Francis Buijssrogge
+3 CONT     xref_id: GEEN
 3 CONT     occupation: landman
 3 CONT     residence: Graauw
 3 CONT     relation: toeziende voogd bruid
@@ -7922,11 +7926,13 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Cornelis Walters
+3 CONT     xref_id: I00094
 3 CONT     occupation: kuiper
 3 CONT     age: 31
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: bloedverwant in den tweeden graad zijdlinie van den eersten echtgenoot
 3 CONT   - name: Johannes Gits
+3 CONT     xref_id: GEEN
 3 CONT     occupation: muzikant
 3 CONT     age: 40
 3 CONT     residence: Breda
@@ -11554,12 +11560,14 @@
 3 CONT     occupation: kleermaker
 3 CONT     age: 44
 3 CONT     residence: \'s-Hertogenbosch
-3 CONT   - name: Huberus Wilhelmus Walters
+3 CONT   - name: Hubertus Wilhelmus Walters
+3 CONT     xref_id: I00152
 3 CONT     occupation: passementwerker
 3 CONT     age: 34
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: bloedverwant in den vierden graad zijdlinie van den eersten echtgenoot
 3 CONT   - name: Theodorus Walters
+3 CONT     xref_id: I00075
 3 CONT     occupation: kleermaker
 3 CONT     age: 31
 3 CONT     residence: \'s-Hertogenbosch
@@ -11640,24 +11648,29 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: moeder van bruid
 3 CONT   - name: Joannes Blank
+3 CONT     xref_id: GEEN
 3 CONT     occupation: schoenmaker
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: voogd van bruidegom
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00107
 3 CONT     occupation: kleermaker
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: toeziend voogd van bruidegom
 3 CONT   - name: Cornelis Walters
+3 CONT     xref_id: I00094
 3 CONT     occupation: kuiper
 3 CONT     age: 33
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: bloedverwant in den tweeden graad zijdlinie van den eersten echtgenoot
 3 CONT   - name: Theodorus Walters
+3 CONT     xref_id: I00075
 3 CONT     occupation: kleermaker
 3 CONT     age: 32
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: bloedverwant in den tweeden graad zijdlinie van den eersten echtgenoot
 3 CONT   - name: Johannes Franciscus van Hemert
+3 CONT     xref_id: GEEN
 3 CONT     occupation: muzikant
 3 CONT     age: 25
 3 CONT     residence: \'s-Hertogenbosch
@@ -14054,11 +14067,13 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: broer der bruidegom
 3 CONT   - name: Charles Cornelis van Mulcken
+3 CONT     xref_id: GEEN
 3 CONT     occupation: schipper
 3 CONT     age: 26
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: zwager der bruidegom
 3 CONT   - name: Adrianus Wilhelmus Spierings
+3 CONT     xref_id: GEEN
 3 CONT     occupation: ijzergieter
 3 CONT     age: 24
 3 CONT     residence: \'s-Hertogenbosch
@@ -14196,6 +14211,7 @@
 3 CONT     age: 67
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Carolus Cornelis van Mulcken
+3 CONT     xref_id: GEEN
 3 CONT     occupation: steenhouwer
 3 CONT     age: 38
 3 CONT     residence: \'s-Hertogenbosch
@@ -14328,6 +14344,7 @@
 3 CONT    age: 36
 3 CONT    residence: \'s-Hertogenbosch
 3 CONT  - name: Johannes van Liempd
+3 CONT    xref_id: GEEN
 3 CONT    occupation: arbeider
 3 CONT    age: 48
 3 CONT    relation: zwager der bruid
@@ -14434,16 +14451,19 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Johannes Wilhelmus van Elten
+3 CONT     xref_id: GEEN
 3 CONT     occupation: sigarenmaker
 3 CONT     age: 33
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: aangehuwde in den eersten graad nederdalende linie der tweede echtgenoot
 3 CONT   - name: Hubertus van den Heuvel
+3 CONT     xref_id: I00118
 3 CONT     occupation: koopman
 3 CONT     age: 42
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: aangehuwde in den tweeden graad zijdlinie der tweede echtgenoot
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00107
 3 CONT     occupation: kleermaker
 3 CONT     age: 62
 3 CONT     residence: \'s-Hertogenbosch
@@ -22223,6 +22243,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Augustinus van Walle
+3 CONT     xref_id: GEEN
 3 CONT     occupation: landbouwer
 3 CONT     age: 62
 3 CONT     residence: Graauw
@@ -23409,16 +23430,19 @@
 3 CONT     residence: Graauw
 3 CONT     relation: broeder van den bruidegom
 3 CONT   - name: Franciscus Bouwens
+3 CONT     xref_id: GEEN
 3 CONT     occupation: arbeider
 3 CONT     age: 30
 3 CONT     residence: Zaandam
 3 CONT     relation: bekende der bruid
 3 CONT   - name: Johannes Schoen
+3 CONT     xref_id: GEEN
 3 CONT     occupation: broodbakker
 3 CONT     age: 23
 3 CONT     residence: Zaandam
 3 CONT     relation: bekende der bruid
 3 CONT   - name: Hermanus Muda
+3 CONT     xref_id: GEEN
 3 CONT     occupation: broodbakker
 3 CONT     age: 38
 3 CONT     residence: Zaandam
@@ -27724,6 +27748,7 @@
 3 CONT     residence: Graauw
 3 CONT     relation: broeder van den echtgenoot
 3 CONT   - name: Cornelis de Bilde
+3 CONT     xref_id: GEEN
 3 CONT     occupation: schipper
 3 CONT     age: 31
 3 CONT     residence: Graauw
@@ -27886,6 +27911,7 @@
 3 CONT     age: 42
 3 CONT     residence: Graauw
 3 CONT   - name: Joannes Martens
+3 CONT     xref_id: GEEN
 3 CONT     occupation: wagenmaker
 3 CONT     age: 45
 3 CONT     residence: Graauw
@@ -28080,11 +28106,13 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Petrus Lossier
+3 CONT     xref_id: GEEN
 3 CONT     occupation: herbergier
 3 CONT     age: 39
 3 CONT     residence: Graauw
 3 CONT     relation: zwager van den echtgenoot
 3 CONT   - name: Alphonsus Bernardus van den Eeckhout
+3 CONT     xref_id: GEEN
 3 CONT     occupation: winkelier
 3 CONT     age: 49
 3 CONT     residence: Graauw
@@ -30285,11 +30313,13 @@
 3 CONT     relation: moeder bruid
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Jacob Adriaansens
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     age: 42
 3 CONT     residence: Graauw
 3 CONT     relation: schoonbroeder
 3 CONT   - name: Josephus de Blok
+3 CONT     xref_id: GEEN
 3 CONT     occupation: veldarbeider
 3 CONT     age: 64
 3 CONT     residence: Hontenisse

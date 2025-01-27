@@ -14,6 +14,7 @@ from Individual import Individual
 from SourcesMixin import SourcesMixin
 from Source import Source
 from EventDetail import EventDetail
+from Witness import Witness
 
 PLANTUML_BASE_URL: str = "https://www.plantuml.com/plantuml/svg"
 CONTENT_DIR: Path = Path("/workspaces/gc2web/src/content/entity")
@@ -31,11 +32,17 @@ def s(value) -> str: # type: ignore
 def individual_url(individual: Individual) -> str:
     return f"../{individual.xref_id.lower()}/"
 
+def witness_url(witness: Witness) -> str:
+    return f"../{witness.xref_id.lower()}/"
+
 def source_url(source: Source) -> str:
     return f"../{source.xref_id.lower()}/"
 
 def individual_link(individual: Individual) -> str:
     return f"[{individual.name}]({individual_url(individual)})"
+
+def witness_link(witness: Witness) -> str:
+    return f"[{witness.name}]({witness_url(witness)})"
 
 def source_link(source: Source) -> str:
     return f"[{source.title}]({source_url(source)})"
@@ -73,7 +80,7 @@ def witness_str(witness) -> str:
     if witness.xref_id:
         witness_individual = GedcomTransmission().get_individual(witness.xref_id)
     return ", ".join(list(filter(None, [
-        individual_link(witness_individual) if witness_individual else witness.name,
+        witness_link(witness) if witness_individual else witness.name,
         witness.occupation, 
         witness.residence,
         f"{witness.age} jaar" if witness.age else "",
