@@ -259,6 +259,9 @@ def find_uncle2(name: str | None, individual: Individual) -> list[Individual]:
         for sibling in parent.siblings():
             if sibling.has_name(name):
                 results.append(sibling)
+            for spouse in sibling.spouses:
+                if spouse.has_name(name):
+                    results.append(spouse)
 
     return results
 
@@ -358,6 +361,26 @@ def is_brother_bride2(witness: Witness) -> bool:
                                                 "broeder van den echtgenoote", 
                                                 "broeder van de bruid"])
 
+#### Uncle Groom
+#oom van de bruidegom
+#oom van den echtgenoot
+#oom echtgenoot
+
+def is_uncle_groom2(witness: Witness) -> bool:
+    return has_exact_phrases(witness.relation, ["oom van de bruidegom", 
+                                                "oom van den echtgenoot", 
+                                                "oom echtgenoot"])
+
+#### Uncle Bride
+#oom van de echtgenoote
+#oom der bruid
+#oom van den echtgenoote
+
+def is_uncle_bride2(witness: Witness) -> bool:
+    return has_exact_phrases(witness.relation, ["oom van de echtgenoote", 
+                                                "oom der bruid", 
+                                                "oom van den echtgenoote"])
+
 def show_candidates_names(candidates: list[Individual]) -> str | list[str]:
     if len(candidates) == 0:
         return "GEEN"
@@ -385,6 +408,10 @@ def list_witnesses_relations():
 
                 if is_identified_witness2(witness):
                    continue
+
+                if is_uncle2(witness):
+                    candidates: list[Individual] = find_uncle2(witness.name, individual)
+                    print_witnesses(witness, candidates, individual)
                 
                 if is_grandmother2(witness):
                     candidates: list[Individual] = find_grandmother2(witness.name, individual)
@@ -418,6 +445,14 @@ def list_witnesses_relations():
 
                 if is_brother_bride2(witness):
                     candidates: list[Individual] = find_sibling2(witness.name, fams.wife)
+                    print_witnesses(witness, candidates, fams.husband)
+
+                if is_uncle_groom2(witness):
+                    candidates: list[Individual] = find_uncle2(witness.name, fams.husband)
+                    print_witnesses(witness, candidates, fams.husband)
+
+                if is_uncle_bride2(witness):
+                    candidates: list[Individual] = find_uncle2(witness.name, fams.wife)
                     print_witnesses(witness, candidates, fams.husband)
 
 def main(argv):

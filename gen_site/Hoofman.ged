@@ -581,6 +581,7 @@
 3 CONT     age: 29
 3 CONT     residence: Muiden
 3 CONT   - name: Antonie Hasenaar
+3 CONT     xref_id: GEEN
 3 CONT     occupation: mandenmaker
 3 CONT     age: 23
 3 CONT     residence: Muiden
@@ -4447,6 +4448,7 @@
 3 CONT     age: 56
 3 CONT     residence: Graauw
 3 CONT   - name: Cornelis Vleeskens
+3 CONT     xref_id: GEEN
 3 CONT     occupation: metselaar
 3 CONT     age: 56
 3 CONT     residence: Graauw
@@ -5716,6 +5718,7 @@
 3 CONT     age: 61
 3 CONT     residence: Graauw
 3 CONT   - name: Cornelis Vleeskens
+3 CONT     xref_id: GEEN
 3 CONT     occupation: metselaar
 3 CONT     age: 59
 3 CONT     residence: Graauw
@@ -22225,6 +22228,7 @@
 3 CONT     residence: Graauw
 3 CONT     relation: zwager van den echtgenoot
 3 CONT   - name: Ludovicus Daalman
+3 CONT     xref_id: I00029
 3 CONT     occupation: werkman
 3 CONT     age: 66
 3 CONT     residence: Graauw
@@ -24419,6 +24423,7 @@
 3 CONT     residence: \'s-Gravenhage
 3 CONT     relation: broeder van de bruidegom
 3 CONT   - name: Franciscus Cornelis van der Kleij
+3 CONT     xref_id: GEEN
 3 CONT     age: 41
 3 CONT     occupation: ploegbaas
 3 CONT     residence: \'s-Gravenhage
@@ -24626,6 +24631,7 @@
 3 CONT     residence: Tiel
 3 CONT     relation: moeder bruid
 3 CONT   - name: Johannes van Dijk
+3 CONT     xref_id: GEEN
 3 CONT     occupation: arbeider
 3 CONT     age: 45
 3 CONT     residence: Kapel-Avezaath
@@ -24992,11 +24998,13 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Jacobus Elias
+3 CONT     xref_id: GEEN
 3 CONT     age: 29
 3 CONT     occupation: werkman
 3 CONT     residence: Graauw
 3 CONT     relation: neef van den echtgenoot
 3 CONT   - name: Petrus van Duijlse
+3 CONT     xref_id: GEEN
 3 CONT     age: 33
 3 CONT     occupation: timmerman
 3 CONT     residence: Graauw
@@ -26060,6 +26068,7 @@
 3 CONT     residence: Clinge
 3 CONT     relation: broeder van den echtgenoot
 3 CONT   - name: Ludovicus Carolus van Vliembergen
+3 CONT     xref_id: GEEN
 3 CONT     occupation: landarbeider
 3 CONT     age: 58
 3 CONT     residence: Graauw
@@ -26187,11 +26196,13 @@
 3 CONT     residence: Graauw en Langendam
 3 CONT     relation: moeder echtgenote
 3 CONT   - name: Carolus Ludovicus de Block
+3 CONT     xref_id: GEEN
 3 CONT     occupation: landarbeider
 3 CONT     age: 60
 3 CONT     residence: Graauw en Langendam
 3 CONT     relation: oom van den echtgenoot
 3 CONT   - name: Camillus Ferdinandus Schelfhout
+3 CONT     xref_id: GEEN
 3 CONT     occupation: landarbeider
 3 CONT     age: 61
 3 CONT     residence: Graauw en Langendam
@@ -28127,10 +28138,6 @@
 2 SURN van Dosselaar
 2 SOUR @S00398@
 2 SOUR @S00397@
-1 NAME Anna Maria /Daalman/
-2 GIVN Anna, Maria
-2 SURN Daalman
-2 SOUR @S00398@
 1 SEX F
 1 BIRT
 2 DATE 28 MAY 1890
@@ -28149,7 +28156,6 @@
 3 CONT     occupation: vroedvrouw
 3 CONT     age: 26
 3 CONT     residence: Graauw
-3 CONT     relation: zwager van den echtgenoot
 3 CONT   - name: Pieter Augustinus Baart
 3 CONT     occupation: gemeente secretaris
 3 CONT     age: 43
@@ -28267,11 +28273,13 @@
 3 CONT     residence: Graauw
 3 CONT     relation: broeder van den echtgenoot
 3 CONT   - name: Pieter Francies de Bilde
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     age: 78
 3 CONT     residence: Hontenisse
 3 CONT     relation: grootvader van den echtgenoote
 3 CONT   - name: Adriants de Bilde
+3 CONT     xref_id: GEEN
 3 CONT     occupation: schipper
 3 CONT     age: 45
 3 CONT     residence: Graauw
@@ -30075,11 +30083,13 @@
 3 CONT     relation: moeder bruid
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Pieter Veras
+3 CONT     xref_id: GEEN
 3 CONT     occupation: zonder beroep
 3 CONT     age: 79
 3 CONT     residence: Graauw
 3 CONT     relation: oom echtgenoot
 3 CONT   - name: Ludovicus Daalman
+3 CONT     xref_id: I00029
 3 CONT     occupation: werkman
 3 CONT     age: 71
 3 CONT     residence: Graauw
@@ -31757,6 +31767,7 @@
 3 CONT     residence: Amsterdam
 3 CONT     relation: vader van de bruid
 3 CONT   - name: Gerardus Johannes Suurhoff
+3 CONT     xref_id: GEEN
 3 CONT     age: 45
 3 CONT     occupation: vertegenwoordiger
 3 CONT     residence: Amsterdam
@@ -31932,6 +31943,7 @@
 3 CONT     relation: vader der bruid
 3 CONT     attribute: Niet Kunnen Schrijven
 3 CONT   - name: Gijsbertus de Preijker
+3 CONT     xref_id: GEEN
 3 CONT     occupation: lapper
 3 CONT     age: 51
 3 CONT     residence: Amsterdam
