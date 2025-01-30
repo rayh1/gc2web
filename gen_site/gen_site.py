@@ -229,6 +229,11 @@ def generate_source_page(source, filepath):
             for publication in source.publications:
                 content.append(f"- {publication}")
 
+            if source.text:
+                content.append(f"")
+                content.append(f"{HEADER_PREFIX} Tekst")
+                content.append(f"{source.text}")
+
             file.writelines("\n".join(content))
     except IOError as e:
         logger.error(f"Failed to write file {filepath}: {e}")
