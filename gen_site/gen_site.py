@@ -134,6 +134,12 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 for name in individual.names[1:]:
                     content.append(f"  - {name} {sources_str(name)}")
 
+            if len(individual.descriptions) > 0:
+                content.append(f"- Beschrijvingen:")
+                for description in individual.descriptions:
+                    description_date_str: str = f" ({description.date})" if description.date.date() else ""
+                    content.append(f"  - {description.value} {description_date_str} {sources_str(description)}")
+
             content.append("")
             content.append(f"{HEADER_PREFIX} Ouders")
             father: Individual | None = individual.father

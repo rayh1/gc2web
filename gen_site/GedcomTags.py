@@ -52,3 +52,4 @@ class GedcomTags:
     NOTE: str = "NOTE"
     RELA: str = "RELA"
     ASSO: str = "ASSO"
+    DSCR: str = "DSCR"

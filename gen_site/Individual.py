@@ -35,6 +35,7 @@ class Individual(SourcesMixin, NotesMixin):
         self.__residences: list[EventDetail] = []
         self.__facts: list[EventDetail] = []
         self.__associations: list[Association] = []
+        self.__descriptions: list[EventDetail] = []
 
         self.__fams_cache: list['Family'] | None = None # type: ignore
         self.__famc_cache: 'Family' | None = None # type: ignore
@@ -71,6 +72,8 @@ class Individual(SourcesMixin, NotesMixin):
                 self.add_residence(EventDetail().parse(subline))
             elif subline.tag == GedcomTags.FACT:
                 self.add_fact(EventDetail().parse(subline))
+            elif subline.tag == GedcomTags.DSCR:
+                self.add_description(EventDetail().parse(subline))
 
         # Parse associations
         for subline in GedcomTransmission().iterate(line, tag=GedcomTags.ASSO):
@@ -176,6 +179,13 @@ class Individual(SourcesMixin, NotesMixin):
 
     def add_fact(self, value: EventDetail):
         self.__facts.append(value)
+
+    @property
+    def descriptions(self) -> list[EventDetail]:
+        return self.__descriptions
+
+    def add_description(self, value: EventDetail):
+        self.__descriptions.append(value)
 
     @property
     def associations(self) -> list[Association]:
