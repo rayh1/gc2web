@@ -6,12 +6,6 @@ from GedcomTransmission import GedcomTransmission
 from Individual import Individual
 from Witness import Witness
 
-def parse_gedom(gedcom_file: str):
-    with open(gedcom_file, 'r') as gedcom_stream:
-        parser = GedcomParser()
-        transmission = parser.parse(gedcom_stream)
-        transmission.parse_gedcom()
-
 #def has_same_name(witness: Witness, individual: Individual) -> bool:
 #    return witness.name == individual.name.value.replace("/", "")
 
@@ -455,7 +449,7 @@ def print_witnesses(witness: Witness, individuals: list[Individual], individual:
     #print(f"{witness.line_num} {witness.name} {show_candidates(individuals)}")
     print(f"{witness.line_num} {witness.relation}: {witness.name} = {show_candidates_names(individuals)} --> {individual.name} {individual.xref_id}")
 
-def list_witnesses_relations():
+def identify_witnesses():
     for individual in GedcomTransmission().individuals:
         for event in [individual.birth, individual.baptism, individual.death, individual.burial]:
             for witness in event.witnesses:
@@ -528,9 +522,8 @@ def main(argv):
     ap.add_argument('file', type=str, help='Path to the GEDCOM file')
     
     args = ap.parse_args(argv[1:])
-    parse_gedom(args.file)
-    #process_witnesses()
-    list_witnesses_relations()
+    GedcomParser.parse_file(args.file)
+    identify_witnesses()
 
 if __name__ == '__main__':
     main(sys.argv)

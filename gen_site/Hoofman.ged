@@ -488,9 +488,11 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Petrus Hoofman
+3 CONT     xref_id: I00013
 3 CONT     occupation: werkman
 3 CONT     age: 27
 3 CONT     residence: Graauw
+3 CONT     relation: vader
 3 CONT   - name: Jan Francies van Dosselaar
 3 CONT     occupation: werkman
 3 CONT     age: 33
@@ -3057,6 +3059,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Pieter Hoofman
+3 CONT     xref_id: I00013
 3 CONT     occupation: werkman
 3 CONT     age: 28
 3 CONT     residence: Graauw
@@ -3256,6 +3259,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Pieter Hoofman
+3 CONT     xref_id: I00013
 3 CONT     occupation: werkman
 3 CONT     age: 31
 3 CONT     residence: Graauw
@@ -3277,6 +3281,13 @@
 4 LONG W4.0
 2 NOTE ---
 3 CONT timestamp: te drie en twintig uur
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Petrus Jacobus Boogaert
+3 CONT     xref_id: I00191
+3 CONT     occupation: landarbeider
+3 CONT     age: 42
+3 CONT     residence: Graauw en Langendam
 2 SOUR @S00033@
 1 FAMS @F00063@
 1 SOUR @S00029@
@@ -3498,6 +3509,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Pieter Hoofman
+3 CONT     xref_id: I00013
 3 CONT     occupation: werkman
 3 CONT     age: 34
 3 CONT     residence: Graauw   
@@ -3609,7 +3621,7 @@
 3 CONT witnesses:
 3 CONT   - name: Pieter Hoofman
 3 CONT     xref_id: I00013
-3 CONT     age: 25
+3 CONT     age: 35
 3 CONT     occupation: werkman
 3 CONT     residence: Graauw
 3 CONT     relation: vader
@@ -4143,6 +4155,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Alphonsus van de Voorde
+3 CONT     xref_id: I00242
 3 CONT     occupation: werkman
 3 CONT     age: 31
 3 CONT     residence: Graauw
@@ -5364,6 +5377,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Charles Ludovicus Daalman
+3 CONT     xref_id: I00258
 3 CONT     occupation: werkman
 3 CONT     age: 33
 3 CONT     residence: Graauw
@@ -7460,7 +7474,7 @@
 3 CONT   - name: Theodorus Hubertus Walters
 3 CONT     xref_id: I00075
 3 CONT     occupation: kleermaker
-3 CONT     age: 30 
+3 CONT     age: 32
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader
 3 CONT   - name: Cornelis Beaudoux
@@ -7732,10 +7746,12 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader
 3 CONT   - name: Theodorus Walters
+3 CONT     xref_id: I00088
 3 CONT     occupation: kleedermaker
 3 CONT     age: 63
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00107
 3 CONT     occupation: kleedermaker
 3 CONT     age: 27
 3 CONT     residence: \'s-Hertogenbosch
@@ -9062,6 +9078,25 @@
 3 CONT timestamp: vijf ure des voormiddags
 2 SOUR @S00102@
 2 SOUR @S00235@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Theodorus Hubertus Walters
+3 CONT     xref_id: I00075
+3 CONT     age: 30
+3 CONT     occupation: kleermaker
+3 CONT     residence: \'s-Hertogenbosch
+3 CONT     relation: vader
+3 CONT   - name: Cornelis Walters
+3 CONT     xref_id: I00094
+3 CONT     age: 32
+3 CONT     occupation: kuiper
+3 CONT     residence: \'s-Hertogenbosch
+3 CONT   - name: Hubertus Wilhelmus Walters
+3 CONT     xref_id: I00152
+3 CONT     age: 33
+3 CONT     occupation: passementwerker
+3 CONT     residence: \'s-Hertogenbosch
+3 CONT
 1 SOUR @S00102@
 1 SOUR @S00235@
 1 ASSO @I00075@
@@ -10505,6 +10540,7 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader van kind 
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00088
 3 CONT     occupation: kleedermaker
 3 CONT     age: 52
 3 CONT     residence: \'s-Hertogenbosch
@@ -10536,7 +10572,7 @@
 3 CONT   - name: Theodorus Lambertus Walters
 3 CONT     xref_id: I00088
 3 CONT     occupation: kleedermaker
-3 CONT     age: 52
+3 CONT     age: 57
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: grootvader van kind 
 3 CONT     attribute: Niet Kunnen Schrijven
@@ -10784,10 +10820,12 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader
 3 CONT   - name: Wilhelmus Walters
+3 CONT     xref_id: I00127
 3 CONT     occupation: kleedermaker
 3 CONT     age: 55
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00107
 3 CONT     occupation: kleedermaker
 3 CONT     age: 23
 3 CONT     residence: \'s-Hertogenbosch
@@ -10925,6 +10963,7 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00107
 3 CONT     occupation: kleedermaker
 3 CONT     age: 25
 3 CONT     residence: \'s-Hertogenbosch
@@ -11089,6 +11128,7 @@
 3 CONT     age: 50
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Theodorus Walters
+3 CONT     xref_id: I00107
 3 CONT     occupation: kleedermaker
 3 CONT     age: 30
 3 CONT     residence: \'s-Hertogenbosch
@@ -11211,6 +11251,7 @@
 3 CONT     age: 53
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00107
 3 CONT     occupation: kleedermaker
 3 CONT     age: 31
 3 CONT     residence: \'s-Hertogenbosch
@@ -11381,6 +11422,7 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: vader
 3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00088
 3 CONT     occupation: kleedermaker
 3 CONT     age: 72
 3 CONT     residence: \'s-Hertogenbosch
@@ -11421,6 +11463,7 @@
 3 CONT     occupation: kuiper
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Cornelis Walters
+3 CONT     xref_id: I00094
 3 CONT     occupation: kuiper
 3 CONT     age: 51
 3 CONT     residence: \'s-Hertogenbosch
@@ -12858,6 +12901,12 @@
 3 CONT timestamp: twaalf uren des nachts
 2 NOTE ---
 3 CONT witnesses:
+3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00088
+3 CONT     occupation: kleedermakersknecht
+3 CONT     age: 39
+3 CONT     residence: \'s-Hertogenbosch
+3 CONT     relation: vader
 3 CONT   - name: Johannes Hendricus Schopf
 3 CONT     occupation: schoenmaker
 3 CONT     age: 40
@@ -12878,6 +12927,11 @@
 2 ADDR Vondelstraatje Wijk F 65 (2)
 2 NOTE ---
 3 CONT witnesses:
+3 CONT   - name: Theodorus Lambertus Walters
+3 CONT     xref_id: I00088
+3 CONT     occupation: kleedermaker
+3 CONT     age: 40
+3 CONT     residence: \'s-Hertogenbosch
 3 CONT   - name: Johannes Hendricus Schopf
 3 CONT     occupation: schoenmaker
 3 CONT     age: 41
@@ -16261,6 +16315,7 @@
 3 CONT   - name: Albertus Walters
 3 CONT     relation: peter
 3 CONT   - name: Allegonda Somers
+3 CONT     xref_id: I00142
 3 CONT     relation: peetje
 3 CONT
 2 SOUR @S00182@
@@ -19288,7 +19343,9 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Antoni Walters
+3 CONT     xref_id: I00131
 3 CONT   - name: Koba Labarté
+3 CONT     xref_id: I00132
 3 CONT
 2 SOUR @S00265@
 1 FAMC @F00043@
@@ -19641,6 +19698,11 @@
 4 LONG W4.0
 2 ADDR Grote Kerk
 2 SOUR @S00273@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Antonius Walters
+3 CONT     xref_id: I00131
+3 CONT
 1 BURI
 2 DATE 26 AUG 1778
 2 PLAC , 's-Hertogenbosch, , , , 
@@ -19884,7 +19946,9 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Hendrikus Walters
+3 CONT     xref_id: I00139
 3 CONT   - name: Wilhelmina Menge
+3 CONT     xref_id: I00162
 3 CONT
 2 SOUR @S00274@
 1 BURI
@@ -20073,6 +20137,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Willem Walters
+3 CONT     xref_id: I00120
 3 CONT     relation: peter
 2 SOUR @S00283@
 1 FAMC @F00049@
@@ -22404,6 +22469,12 @@
 3 CONT timestamp: des namiddags te half zes ure
 2 NOTE ---
 3 CONT witnesses:
+3 CONT   - name: Theodorus Boogaert
+3 CONT     xref_id: I00186
+3 CONT     occupation: werkman
+3 CONT     age: 42
+3 CONT     residence: Graauw
+3 CONT     relation: vader
 3 CONT   - name: Pieter Augustinus Baart
 3 CONT     occupation: gemeente secretaris
 3 CONT     age: 50
@@ -22684,9 +22755,11 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Theodorus Boogaert
+3 CONT     xref_id: I00186
 3 CONT     occupation: werkman
 3 CONT     age: 46
 3 CONT     residence: Graauw
+3 CONT     relation: vader
 3 CONT   - name: Franciscus van Eerdenburgh
 3 CONT     occupation: landbouwer
 3 CONT     age: 38
@@ -22709,9 +22782,11 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Theodorus Boogaert
+3 CONT     xref_id: I00186
 3 CONT     occupation: werkman
 3 CONT     age: 46
 3 CONT     residence: Graauw
+3 CONT     relation: vader
 3 CONT   - name: Alosius Bracke
 3 CONT     occupation: koster
 3 CONT     age: 37
@@ -22785,9 +22860,11 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Theodorus Boogaert
+3 CONT     xref_id: I00186
 3 CONT     occupation: werkman
 3 CONT     age: 49
 3 CONT     residence: Graauw
+3 CONT     relation: vader
 3 CONT   - name: Petrus de Bakker
 3 CONT     occupation: schoenmaker
 3 CONT     age: 48
@@ -22885,6 +22962,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Theodorus Boogaert
+3 CONT     xref_id: I00186
 3 CONT     occupation: werkman
 3 CONT     age: 49
 3 CONT     residence: Graauw
@@ -22944,9 +23022,11 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Theodorus Boogaert
+3 CONT     xref_id: I00186
 3 CONT     occupation: werkman
 3 CONT     age: 54
 3 CONT     residence: Graauw
+3 CONT     relation: vader
 3 CONT   - name: Aloisius Bracke
 3 CONT     occupation: koster
 3 CONT     age: 45
@@ -22969,6 +23049,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Petrus Jacobus Boogaert
+3 CONT     xref_id: I00191
 3 CONT     occupation: landarbeider
 3 CONT     age: 25
 3 CONT     residence: Graauw
@@ -25754,7 +25835,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Gijsbrecht Johannes Buijdrogge
-3 CONT     xref_id: GEEN
+3 CONT     xref_id: I00222
 3 CONT     occupation: landarbeider
 3 CONT     age: 46
 3 CONT     residence: Graauw en Langendam
@@ -25922,6 +26003,25 @@
 2 ADDR Wijk D Nummer 66
 2 NOTE ---
 3 CONT timestamp: des nachts te half een ure
+3 CONT
+2 SOUR @S00366@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Jacobus Hoofman
+3 CONT     xref_id: I00072
+3 CONT     occupation: werkman
+3 CONT     age: 37
+3 CONT     residence: Graauw
+3 CONT     relation: vader
+3 CONT   - name: Theodorus Boogaert
+3 CONT     xref_id: I00186
+3 CONT     occupation: werkman
+3 CONT     age: 55
+3 CONT     residence: Graauw
+3 CONT   - name: Alosius Bracke
+3 CONT     occupation: koster
+3 CONT     age: 46
+3 CONT     residence: Graauw
 3 CONT
 2 SOUR @S00366@
 1 FAMC @F00072@
@@ -29406,6 +29506,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Joseph Franciscus Hofman
+3 CONT     xref_id: I00263
 3 CONT     occupation: landarbeider
 3 CONT     age: 50
 3 CONT     residence: Graauw en Langendam
@@ -30977,9 +31078,6 @@
 2 SOUR @S00432@
 1 FAMC @F00086@
 1 FAMS @F00091@
-1 ASSO @I00251@
-2 RELA Vader @#INDI:BIRT@
-2 SOUR @S00439@
 1 CHAN
 2 DATE 31 AUG 2024
 3 TIME 22:05:55
@@ -31072,9 +31170,6 @@
 2 SOUR @S00446@
 1 FAMC @F00086@
 1 FAMS @F00092@
-1 ASSO @I00251@
-2 RELA Vader @#INDI:BIRT@
-2 SOUR @S00440@
 1 CHAN
 2 DATE 31 AUG 2024
 3 TIME 21:58:52
@@ -31159,9 +31254,6 @@
 2 SOUR @S00447@
 1 FAMC @F00086@
 1 FAMS @F00093@
-1 ASSO @I00251@
-2 RELA Vader @#INDI:BIRT@
-2 SOUR @S00441@
 1 CHAN
 2 DATE 1 SEP 2024
 3 TIME 10:02:39
@@ -31203,6 +31295,7 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Ludovicus Hofman
+3 CONT     xref_id: I00251
 3 CONT     age: 36
 3 CONT     occupation: veldarbeider
 3 CONT     residence: Clinge

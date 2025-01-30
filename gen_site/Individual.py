@@ -8,6 +8,7 @@ from GedcomTags import GedcomTags
 from SourcesMixin import SourcesMixin
 from datetime import datetime
 from NotesMixin import NotesMixin
+from Association import Association
 
 class Location:
     """
@@ -16,7 +17,6 @@ class Location:
     def __init__(self, spouse: Union['Individual', None], event: EventDetail): # type: ignore
         self.spouse: Union['Individual', None] = spouse
         self.event: EventDetail = event
-
 class Individual(SourcesMixin, NotesMixin):
     def __init__(self):
         super().__init__()
@@ -34,6 +34,7 @@ class Individual(SourcesMixin, NotesMixin):
         self.__occupations: list[EventDetail] = []
         self.__residences: list[EventDetail] = []
         self.__facts: list[EventDetail] = []
+        self.__associations: list[Association] = []
 
         self.__fams_cache: list['Family'] | None = None # type: ignore
         self.__famc_cache: 'Family' | None = None # type: ignore
@@ -70,6 +71,10 @@ class Individual(SourcesMixin, NotesMixin):
                 self.add_residence(EventDetail().parse(subline))
             elif subline.tag == GedcomTags.FACT:
                 self.add_fact(EventDetail().parse(subline))
+
+        # Parse associations
+        for subline in GedcomTransmission().iterate(line, tag=GedcomTags.ASSO):
+            if subline.pointer_value: self.__associations.append(Association().parse(subline))
 
         self.parse_sources(line)
         self.parse_notes(line)
@@ -171,6 +176,10 @@ class Individual(SourcesMixin, NotesMixin):
 
     def add_fact(self, value: EventDetail):
         self.__facts.append(value)
+
+    @property
+    def associations(self) -> list[Association]:
+        return self.__associations
 
 # Utility methods
 

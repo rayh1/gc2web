@@ -50,3 +50,5 @@ class GedcomTags:
     FACT: str = "FACT"
     TYPE: str = "TYPE"
     NOTE: str = "NOTE"
+    RELA: str = "RELA"
+    ASSO: str = "ASSO"

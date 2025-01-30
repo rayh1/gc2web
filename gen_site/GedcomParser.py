@@ -97,3 +97,14 @@ class GedcomParser:
                     exit(1)
         
         return transmission
+    
+    @classmethod
+    def parse_file(cls, gedcom_file: str) -> GedcomTransmission:
+        with open(gedcom_file, 'r') as gedcom_stream:
+            parser = cls()
+            transmission = parser.parse(gedcom_stream)
+            transmission.parse_gedcom()
+            
+            return transmission
+
+

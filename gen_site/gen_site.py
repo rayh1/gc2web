@@ -116,7 +116,12 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 content.append(f"- Geboorte getuigen: {sources_str(individual.birth)}")
                 for witness in individual.birth.witnesses:
                     content.append(f"  - {witness_str(witness)}")
-            if individual.baptism.date.value or individual.baptism.place.value: content.append(f"- Gedoopt {individual.baptism.date} te {individual.baptism.place} {sources_str(individual.baptism)}")
+            if individual.baptism.date.value or individual.baptism.place.value: 
+                content.append(f"- Gedoopt {individual.baptism.date} te {individual.baptism.place}{', ' + individual.baptism.address if individual.baptism.address else ''} {sources_str(individual.baptism)}")
+                if individual.baptism.witnesses:
+                    content.append(f"- Doop getuigen: {sources_str(individual.baptism)}")
+                    for witness in individual.baptism.witnesses:
+                        content.append(f"  - {witness_str(witness)}")
             content.append(f"- Overleden {individual.death.date} te {individual.death.place}{', ' + individual.death.address if individual.death.address else ''}, {age_str(individual, individual.end_life)} jaar {sources_str(individual.death)}")
             if individual.death.timestamp: content.append(f"- Overlijden tijdstip: \"{individual.death.timestamp}\" {sources_str(individual.death)}")            
             if individual.death.witnesses:
@@ -223,13 +228,13 @@ def generate_source_page(source, filepath):
         logger.error(f"Failed to write file {filepath}: {e}")
         raise        
 
-def generate_individual_pages(transmission: GedcomTransmission, output_dir: Path):    
-    for individual in tqdm(transmission.individuals, desc="Generated individual pages", bar_format='{desc}: {total_fmt}'):
+def generate_individual_pages(output_dir: Path):    
+    for individual in tqdm(GedcomTransmission().individuals, desc="Generated individual pages", bar_format='{desc}: {total_fmt}'):
         generate_individual_page(individual, output_dir / f"{individual.xref_id}.md")
 
-def generate_source_pages(transmission: GedcomTransmission, output_dir: Path):
+def generate_source_pages(output_dir: Path):
     
-    for source in tqdm(transmission.sources, desc="Generated source pages", bar_format='{desc}: {total_fmt}'):
+    for source in tqdm(GedcomTransmission().sources, desc="Generated source pages", bar_format='{desc}: {total_fmt}'):
         generate_source_page(source, output_dir / f"{source.xref_id}.md")
 
 def generate_last_modified():
@@ -251,13 +256,10 @@ def main(argv: List[str]):
     
     args = ap.parse_args(argv[1:])
 
-    with open(args.file, 'r') as gedcom_stream:
-        parser = GedcomParser()
-        transmission = parser.parse(gedcom_stream)
-        transmission.parse_gedcom()
+    GedcomParser.parse_file(args.file)
     
-    generate_individual_pages(transmission, CONTENT_DIR)
-    generate_source_pages(transmission, CONTENT_DIR)
+    generate_individual_pages(CONTENT_DIR)
+    generate_source_pages(CONTENT_DIR)
     generate_last_modified()
 
 # Example usage
