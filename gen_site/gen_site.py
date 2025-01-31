@@ -26,6 +26,21 @@ logging.basicConfig(level=logging.INFO,
                    format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+class ChronologyEvent:
+    def __init__(self, event: EventDetail, description: str):
+        self.event: EventDetail = event
+        d = event.date.date()
+        if not d:
+            d = datetime.min
+        self.date: datetime = d
+        self.description = description
+
+    def __lt__(self, other: 'ChronologyEvent'):
+        return self.date < other.date
+
+    def __str__(self):
+        return f"[{self.description}] happens on {self.date}"
+
 def s(value) -> str: # type: ignore
     return str(value) if value != None else "?" # type: ignore
 
@@ -58,6 +73,24 @@ def sources_str(sources: SourcesMixin | None) -> str:
 def age_str(individual: Individual, event: EventDetail) -> str:
     return f"oud {s(individual.age(event.date))} jaar"
 
+def sun_daughter_str(individual: Individual | None) -> str:
+    if not individual: 
+        return "kind"
+    return "zoon" if individual.sex == "M" else ("dochter" if individual.sex == "F" else "kind") 
+
+def brother_sister_str(individual: Individual | None) -> str:
+    if not individual: 
+        return "familielid"
+    return "broer" if individual.sex == "M" else ("zus" if individual.sex == "F" else "familielid")
+
+def is_in_lifetime(individual: Individual, event: EventDetail) -> bool:
+    if not event.is_defined: return False
+    
+    if not individual.start_life.is_defined or not individual.end_life.is_defined:
+        return False
+
+    return individual.start_life.date.date() <= event.date.date() <= individual.end_life.date.date() # type: ignore
+
 def lifespan_str(individual: Individual) -> str:
     start_date = individual.start_life.date.date()
     start_year = start_date.year if start_date and start_date.year else "?"
@@ -86,6 +119,43 @@ def witness_str(witness) -> str:
         f"{witness.age} jaar" if witness.age else "",
         witness.relation
     ])))
+
+def generate_chronology(individual: Individual, content: list[str]):
+    events: list[ChronologyEvent] = []
+    if individual.father and individual.father.end_life.date.value:
+        events.append(ChronologyEvent(individual.father.end_life, f"Overlijden vader {individual.father.name}")) 
+    if individual.mother and individual.mother.end_life.date.value:
+        events.append(ChronologyEvent(individual.mother.end_life, f"Overlijden moeder {individual.mother.name}"))
+    if individual.birth.date.value:
+        events.append(ChronologyEvent(individual.birth, f"Geboorte te {individual.birth.place}"))
+    if individual.baptism.date.value:
+        events.append(ChronologyEvent(individual.baptism, f"Doop te {individual.baptism.place}"))
+    if individual.death.date.value:
+        events.append(ChronologyEvent(individual.death, f"Overlijden te {individual.death.place}"))
+    if individual.burial.date.value:
+        events.append(ChronologyEvent(individual.burial, f"Begraven te {individual.burial.place}"))
+    for family in individual.fams:
+        if family.marriage:
+            events.append(ChronologyEvent(family.marriage, f"Huwelijk met {family.spouse(individual).name}"))
+            if family.spouse(individual).end_life.date.value:
+                events.append(ChronologyEvent(family.spouse(individual).end_life, f"Overlijden partner {family.spouse(individual).name}"))
+            for child in family.children:
+                if child.start_life.is_defined:
+                    events.append(ChronologyEvent(child.start_life, f"Geboorte {sun_daughter_str(child)} {child.name}"))
+                if is_in_lifetime(individual, child.end_life):
+                    events.append(ChronologyEvent(child.end_life, f"Overlijden {sun_daughter_str(child)} {child.name}"))
+    for sibling in individual.siblings():
+        if is_in_lifetime(individual, sibling.start_life):
+            events.append(ChronologyEvent(sibling.start_life, f"Geboorte {brother_sister_str(sibling)} {sibling.name}"))
+        if is_in_lifetime(individual, sibling.end_life):
+            events.append(ChronologyEvent(sibling.end_life, f"Overlijden {brother_sister_str(sibling)} {sibling.name}"))
+
+    events.sort()
+    content.append("")
+    content.append(f"{HEADER_PREFIX} Chronologie")
+    for event in events:
+        age = f" (<i>{individual.age(event.event.date)}</i>)" if is_in_lifetime(individual, event.event) else ""
+        content.append(f"- {event.date.strftime("%d-%m-%Y")}{age}: {event.description}")
 
 def generate_individual_page(individual: Individual, filepath: Path):
     try:
@@ -173,6 +243,8 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 sorted_siblings = sorted(individual.siblings(), key=lambda x: x.start_life.date.date() or datetime.min)
                 for sibling in sorted_siblings:
                     content.append(f"- {individual_link(sibling)} {lifespan_str(sibling)}")
+
+            generate_chronology(individual, content)
 
             if individual.occupations:
                 content.append("")

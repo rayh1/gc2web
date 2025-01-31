@@ -76,7 +76,7 @@ class Date:
                 return parsed_value
 
         return None
-
+    
     @staticmethod
     def parse_simple_date(value: str) -> str | None:
         match = re.search(Date.DATE_FORMAT_RE, value)

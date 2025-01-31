@@ -111,3 +111,7 @@ class EventDetail(SourcesMixin, NotesMixin):
     @property
     def witnesses(self) -> list[Witness]:
         return self.__witnesses
+    
+    @property
+    def is_defined(self) -> bool:
+        return self.date.value is not None
