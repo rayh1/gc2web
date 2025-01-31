@@ -24,8 +24,12 @@ body {
   margin: auto;
 }
 
-a {
-  @apply text-link;
+.prose a {
+  color: #3a5fcd;
+  text-decoration: none;
+}
+.prose a:hover {
+  color: #0000ff; /* Brighter blue color on hover */
 }
 main {
   @apply mt-8;

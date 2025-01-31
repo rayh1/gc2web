@@ -123,9 +123,9 @@ def witness_str(witness) -> str:
 def generate_chronology(individual: Individual, content: list[str]):
     events: list[ChronologyEvent] = []
     if individual.father and individual.father.end_life.date.value:
-        events.append(ChronologyEvent(individual.father.end_life, f"Overlijden vader {individual.father.name}")) 
+        events.append(ChronologyEvent(individual.father.end_life, f"Overlijden vader {individual_link(individual.father)}")) 
     if individual.mother and individual.mother.end_life.date.value:
-        events.append(ChronologyEvent(individual.mother.end_life, f"Overlijden moeder {individual.mother.name}"))
+        events.append(ChronologyEvent(individual.mother.end_life, f"Overlijden moeder {individual_link(individual.mother)}"))
     if individual.birth.date.value:
         events.append(ChronologyEvent(individual.birth, f"Geboorte te {individual.birth.place}"))
     if individual.baptism.date.value:
@@ -136,19 +136,19 @@ def generate_chronology(individual: Individual, content: list[str]):
         events.append(ChronologyEvent(individual.burial, f"Begraven te {individual.burial.place}"))
     for family in individual.fams:
         if family.marriage:
-            events.append(ChronologyEvent(family.marriage, f"Huwelijk met {family.spouse(individual).name}"))
+            events.append(ChronologyEvent(family.marriage, f"Huwelijk met {individual_link(family.spouse(individual))}"))
             if family.spouse(individual).end_life.date.value:
-                events.append(ChronologyEvent(family.spouse(individual).end_life, f"Overlijden partner {family.spouse(individual).name}"))
+                events.append(ChronologyEvent(family.spouse(individual).end_life, f"Overlijden partner {individual_link(family.spouse(individual))}"))
             for child in family.children:
                 if child.start_life.is_defined:
-                    events.append(ChronologyEvent(child.start_life, f"Geboorte {sun_daughter_str(child)} {child.name}"))
+                    events.append(ChronologyEvent(child.start_life, f"Geboorte {sun_daughter_str(child)} {individual_link(child)}"))
                 if is_in_lifetime(individual, child.end_life):
-                    events.append(ChronologyEvent(child.end_life, f"Overlijden {sun_daughter_str(child)} {child.name}"))
+                    events.append(ChronologyEvent(child.end_life, f"Overlijden {sun_daughter_str(child)} {individual_link(child)}"))
     for sibling in individual.siblings():
         if is_in_lifetime(individual, sibling.start_life):
-            events.append(ChronologyEvent(sibling.start_life, f"Geboorte {brother_sister_str(sibling)} {sibling.name}"))
+            events.append(ChronologyEvent(sibling.start_life, f"Geboorte {brother_sister_str(sibling)} {individual_link(sibling)}"))
         if is_in_lifetime(individual, sibling.end_life):
-            events.append(ChronologyEvent(sibling.end_life, f"Overlijden {brother_sister_str(sibling)} {sibling.name}"))
+            events.append(ChronologyEvent(sibling.end_life, f"Overlijden {brother_sister_str(sibling)} {individual_link(sibling)}"))
 
     events.sort()
     content.append("")
