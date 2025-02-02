@@ -1,16 +1,20 @@
 from GedcomLine import GedcomLine
 from SourcesMixin import SourcesMixin
+from NotesMixin import NotesMixin
 
-class Name(SourcesMixin):
+class Name(SourcesMixin, NotesMixin):
     def __init__(self):
         super().__init__()
+        NotesMixin.__init__(self)
         
         self.__value: str | None = None
 
     def parse(self, line: GedcomLine) -> 'Name':
         """Parse a name from a GEDCOM line"""
         self.__value = line.value
-        self.parse_sources(line)        
+        self.parse_sources(line)     
+
+        self.parse_notes(line)   
         
         return self
 

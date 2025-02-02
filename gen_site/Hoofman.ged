@@ -3,13 +3,13 @@
 2 VERS 5.5.1
 2 FORM LINEAGE-LINKED
 1 SOUR ANCESTRIS
-2 VERS 13.0.13229
+2 VERS 13.0.13258
 2 NAME Ancestris
 2 CORP Ancestris team
 3 ADDR https://www.ancestris.org
 1 DEST ANY
-1 DATE 23 JAN 2025
-2 TIME 10:50:03
+1 DATE 2 FEB 2025
+2 TIME 12:52:06
 1 SUBM @B00001@
 1 FILE Hoofman.ged
 1 CHAR UTF-8
@@ -305,7 +305,7 @@
 2 DATE 17 AUG 1918
 2 PLAC , Amsterdam, , , , 
 2 ADDR Albert Cuypstraat 55-II
-2 NOTE Deze datum staat op de kaart behalve bij het adres ook bij de persoon Wilhelmina Johanna Voorbraak (I00006), dus waarschijnlijk zijn ze op deze datum gaan samen wonen. Op 14 augustus waren ze getrouwd.
+2 NOTE Deze datum staat op de kaart behalve bij het adres ook bij de persoon [Wilhelmina Johanna Voorbraak](../i00006), dus waarschijnlijk zijn ze op deze datum gaan samen wonen. Op 14 augustus waren ze getrouwd.
 2 SOUR @S00020@
 2 SOUR @S00210@
 2 SOUR @S00213@
@@ -315,10 +315,8 @@
 2 ADDR Balistraat 123 huis links
 2 NOTE t/h van: huis rechts
 2 NOTE Op de gezinskaart S00020 staat "huis rechts" maar op de woningkaart van huis links staan ze vermeld. Later zijn links en rechts samengevoegd:
-3 CONT
-3 CONT Samengevoegd met 123 hs rechts Besch B&Wt Nr.79 dd.1-4-81
-3 CONT
-3 CONT Zie https://archief.amsterdam/indexen/deeds/9853344a-8f36-56a3-e053-b784100ade19?person=9853344a-8f37-56a3-e053-b784100ade19
+3 CONT "Samengevoegd met 123 hs rechts Besch B&Wt Nr.79 dd.1-4-81"
+3 CONT Zie [hier](https://archief.amsterdam/indexen/deeds/9853344a-8f36-56a3-e053-b784100ade19?person=9853344a-8f37-56a3-e053-b784100ade19)
 2 SOUR @S00020@
 2 SOUR @S00209@
 2 SOUR @S00220@
@@ -1311,15 +1309,9 @@
 2 NICK Dina
 2 SURN Engels
 2 SOUR @S00024@
-2 NOTE In "Huwelijk Judocus Franciscus Hulshout en Constantia Engels 07-06-1878" (S00337):
-3 CONT
-3 CONT op de beeedigd verklaring van de aanstaande echtgenoote, dat haren voornaam in de overlijdensacte van haren vorigen echtgenoot abusievelijk is geschreven "Dina" in plaats van "Constantia" zooals die teregt in hare geboorte acte voorkomt
-3 CONT
-3 CONT Het gaat om 
-3 CONT
-3 CONT Dina in "Overlijden Pieter Hoofman 31-12-1874" (S00026)
-3 CONT Constantia in ???
-3 CONT
+2 NOTE In [Huwelijk Judocus Franciscus Hulshout en Constantia Engels 07-06-1878](../s00337):
+3 CONT "op de beeedigd verklaring van de aanstaande echtgenoote, dat haren voornaam in de overlijdensacte van haren vorigen echtgenoot abusievelijk is geschreven "Dina" in plaats van "Constantia" zooals die teregt in hare geboorte acte voorkomt."
+3 CONT Het gaat om Dina in [Overlijden Pieter Hoofman 31-12-1874](../s00026) en Constantia in ???
 1 NAME Dina /Engels/
 2 GIVN Dina
 2 SURN Engels
@@ -1663,9 +1655,9 @@
 1 PUBL https://hdl.handle.net/21.12102/58D20631BDEC4DF189FBF3C03765B1EE
 2 CONT https://www.wiewaswie.nl/en/detail/36240613
 1 TEXT Heden den Elfden January ACHTIENHONDERD NEGENTIG, verschenen voor ons, Ambtenaar van den burgelijken stand der gemeente Muiden, Jan Makkinje van beroep werkman oud negen en veertig jaren, wonende te Muiden, grootvader van de na te noemen overlede
-2 CONC ne, en Dirk Klok van beroep nachtwacht oud drie en zestig jaren, wonende te Muiden, geen bloedverwant van de overledene, die verklaarden, dat op den tienden january dezes jaars des morgens ten elf ure, binnen deze gemeente in het huis staande al
-2 CONC hier Spakenburg in den ouderdom van twee jaren is overleden Petrus Johannes Hoofman van beroep zonder geboren te Muiden en wonende te Muiden, zoon van Augustus Hoofman, van beroep werkman en van Grietje Makkinje, zonder beroep, beiden wonende t
-2 CONC e Muiden. En hebben wij hiervan opgemaakt deze akte, welke na voorlezing, door ons is onderteekend. alsmede door de aangever J. Makkinje D Klok De ambenaar voornoemd ???
+2 CONC ne, en Dirk Klok van beroep nachtwacht oud drie en zestig jaren, wonende te Muiden, geen bloedverwant van de overledene, die verklaarden, dat op den tienden january dezes jaars des morgens ten elf ure, binnen deze gemeente in het huis staande alh
+2 CONC ier Spakenburg in den ouderdom van twee jaren is overleden Petrus Johannes Hoofman van beroep zonder geboren te Muiden en wonende te Muiden, zoon van Augustus Hoofman, van beroep werkman en van Grietje Makkinje, zonder beroep, beiden wonende te M
+2 CONC uiden. En hebben wij hiervan opgemaakt deze akte, welke na voorlezing, door ons is onderteekend. alsmede door de aangever J. Makkinje D Klok De ambenaar voornoemd ???
 1 OBJE @M00005@
 1 REPO @R00004@
 1 CHAN
@@ -2418,29 +2410,6 @@
 2 GIVN Pierre
 2 SURN Hofman
 2 SOUR @S00038@
-2 NOTE Geboorteakte Pieter Hoofman 9-03-1833 (S00025) -> Pieter Hoofman
-3 CONT Overlijden Pieter Hofman 13-11-1853 (S00048) -> Pieter Hofman
-3 CONT
-3 CONT Beide I00021 
-3 CONT
-3 CONT In "Huwelijk Pieter Hoofman en Constantia Engels 25-06-1860" (S00024) dat gaat over Pieter Hoofman (I00013):
-3 CONT
-3 CONT "op de verklaring der partijen en getuigen dat het een en dezelfde persoon is, voorkomende op het geboorte extract des contractants onder de naam van Pieter Hoofman en op het doodextract onder dien van Pieter Hofman en dus de vader des contractan
-3 CONC ts is"
-3 CONT
-3 CONT Hier staat dus dat de vader van Pieter Hoofman (I00013) genoemd wordt als volgt in de volgende bronnen:
-3 CONT
-3 CONT - Geboorteakte Pieter Hoofman 9-03-1833 (S00025) -> Pieter Hoofman
-3 CONT - Overlijden Pieter Hofman 13-11-1853 (S00048) -> Pieter Hofman
-3 CONT
-3 CONT De genoemde persoon is dus beide I00021.
-3 CONT
-3 CONT
-2 NOTE In "Huwelijk Apolonia Hoofman en Ludovicus Daelman 31-12-1857" (S00037) staat:
-3 CONT
-3 CONT "op de verklaring onder eede, van de na te melden getuigen, dat de naam van Pieter Hoofman, voorkomende op het geboorte extract der contractante, op het doodsextract, onder dien van Pieter Hofman, dezelfde persoon is"
-3 CONT
-3 CONT
 1 NAME Pieter /Hoofman/
 2 GIVN Pieter
 2 SURN Hoofman
@@ -2527,6 +2496,25 @@
 2 TYPE Niet kunnen schrijven
 2 DATE 18 JAN 1837
 2 SOUR @S00046@
+1 NOTE - [Geboorteakte Pieter Hoofman 9-03-1833](../s00025) -> Pieter Hoofman
+2 CONT - [Overlijden Pieter Hofman 13-11-1853](../s00048) -> Pieter Hofman
+2 CONT
+2 CONT Beide I00021 
+2 CONT
+2 CONT In [Huwelijk Pieter Hoofman en Constantia Engels 25-06-1860](../s00024) dat gaat over [Pieter Hoofman](../i00013):
+2 CONT
+2 CONT "op de verklaring der partijen en getuigen dat het een en dezelfde persoon is, voorkomende op het geboorte extract des contractants onder de naam van Pieter Hoofman en op het doodextract onder dien van Pieter Hofman en dus de vader des contractan
+2 CONC ts is"
+2 CONT
+2 CONT Hier staat dus dat de vader van [Pieter Hoofman](../i00013) genoemd wordt als volgt in de volgende bronnen:
+2 CONT
+2 CONT - In [Geboorteakte Pieter Hoofman 9-03-1833](../s00025) -> Pieter Hoofman
+2 CONT - In [Overlijden Pieter Hofman 13-11-1853](../s00048) -> Pieter Hofman
+2 CONT
+2 CONT De genoemde persoon is dus beide [deze](../i00021).
+2 CONT
+2 CONT
+1 NOTE In [Huwelijk Apolonia Hoofman en Ludovicus Daelman 31-12-1857](../s00037) staat: "op de verklaring onder eede, van de na te melden getuigen, dat de naam van Pieter Hoofman, voorkomende op het geboorte extract der contractante, op het doodsextract, onder dien van Pieter Hofman, dezelfde persoon is"
 1 FAMC @F00011@
 1 BIRT
 2 DATE 6 FEB 1804
@@ -2542,18 +2530,13 @@
 3 MAP
 4 LATI N45.0
 4 LONG W4.0
-2 NOTE Niet helemaal zeker: in de akte klopt niet:
-3 CONT - de leeftijd: 52, terwijl het 49 is 
-3 CONT - naam moeder: Maria Hofman, terwijl het Petronella Hofman is
+2 NOTE Niet helemaal zeker: want in de akte klopt niet de leeftijd (52, terwijl het 49 is) en de naam moeder (Maria Hofman, terwijl het Petronella Hofman is). Wel klopt de naam partner (Neeve, eigenlijk Neve) en de dag erna overlijdt dochter (cholera?).
 3 CONT
-3 CONT Wel klopt:
-3 CONT - naam partner (Neeve, eigenlijk Neve)
-3 CONT - dag erna overlijdt dochter (chiolera?)
 2 SOUR @S00048@
 1 NOTE Buitenechtelijk kind. Geboren als Pierre Hofman, later Pieter Hofman of Pieter Hoofman.
 1 CHAN
-2 DATE 2 AUG 2024
-3 TIME 09:34:29
+2 DATE 2 FEB 2025
+3 TIME 12:52:04
 1 SOUR @S00025@
 1 SOUR @S00024@
 1 SOUR @S00026@
@@ -4983,8 +4966,7 @@
 3 MAP
 4 LATI N45.0
 4 LONG W4.0
-2 NOTE Naam staat in akte als Anna Maria, twerwijl ze Marianna heet. Leeftijd uit akte is 22, terwijl het 21
-3 CONT is. Wel kloppen ouders (Neeve versus Neve).
+2 NOTE Naam staat in akte als Anna Maria, twerwijl ze Marianna heet. Leeftijd uit akte is 22, terwijl het 21 is. Wel kloppen ouders (Neeve versus Neve).
 2 NOTE ---
 3 CONT timestamp: te een ure des middags
 3 CONT
@@ -10293,7 +10275,7 @@
 3 MAP
 4 LATI N45.0
 4 LONG W4.0
-2 NOTE Petronella van de Weijer is overleden in 1849. Ze wordt desondanks vermeld als aanwezige vrouw van Theodorus Lambertus Walters in de huwelijksakte (S00151) van Joanna Walters en Charles van Mulcken in 19-09-1868. Waarschijnlijk wordt ze verward m
+2 NOTE Petronella van de Weijer is overleden in 1849. Ze wordt desondanks vermeld als aanwezige vrouw van Theodorus Lambertus Walters in de [huwelijksakte](../s00151) van Joanna Walters en Charles van Mulcken in 19-09-1868. Waarschijnlijk wordt ze verward m
 3 CONC et Joanna Noskens, de tweede vrouw van Theodorus Lambertus Walters. Dan gaat dit attribuut dus over Joanna Noskens.
 2 SOUR @S00151@
 1 OCCU Zonder beroep
@@ -10341,7 +10323,7 @@
 1 FACT
 2 TYPE Niet kunnen schrijven
 2 DATE 19 SEP 1868
-2 NOTE Petronella van de Weijer is overleden in 1849. Ze wordt desondanks vermeld als aanwezige vrouw van Theodorus Lambertus Walters in de huwelijksakte (S00151) van Joanna Walters en Charles van Mulcken in 19-09-1868. Waarschijnlijk wordt ze verward m
+2 NOTE Petronella van de Weijer is overleden in 1849. Ze wordt desondanks vermeld als aanwezige vrouw van Theodorus Lambertus Walters in de [huwelijksakte](../s00151) van Joanna Walters en Charles van Mulcken in 19-09-1868. Waarschijnlijk wordt ze verward m
 3 CONC et Joanna Noskens, de tweede vrouw van Theodorus Lambertus Walters. Dan gaat dit attribuut dus over Joanna Noskens.
 2 SOUR @S00151@
 1 FACT
@@ -11676,9 +11658,7 @@
 3 MAP
 4 LATI N45.0
 4 LONG W4.0
-2 NOTE Johannes Blank en Theodorus Lambertus Walters (I00107) zijn voogt en toeziende voogd van de bruidegom.
-3 CONT
-3 CONT Zie Source S00132.
+2 NOTE Johannes Blank en [Theodorus Lambertus Walters](../i00107) zijn voogt en toeziende voogd van de bruidegom. Zie [hier](../s00132).
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Laurens Jacobus Hendrikus van Hemert
@@ -14133,9 +14113,7 @@
 3 CONT     residence: \'s-Hertogenbosch
 3 CONT     relation: zwager der bruidegom
 3 CONT
-2 NOTE De getuige Adrianus Wilhelmus Spierings is getrouwd met Wilhelmina Aleida Gerritse, een zus van Agnes Joanna Gerritse. Theodorus  Lambertus Walters was getuige op hun huwelijk. 
-3 CONT
-3 CONT Source S00223
+2 NOTE De getuige Adrianus Wilhelmus Spierings is getrouwd met Wilhelmina Aleida Gerritse, een zus van Agnes Joanna Gerritse. Theodorus  Lambertus Walters was getuige op hun huwelijk. Zie [hier](../s00223).
 1 SOUR @S00153@
 1 SOUR @S00153@
 1 SOUR @S00155@
@@ -14477,8 +14455,8 @@
 2 TYPE Niet kunnen schrijven
 2 DATE 19 AUG 1904
 2 SOUR @S00159@
-1 NOTE Wenuwnaar Hendrina van Esch (S00159).
-1 NOTE Zoon van Johannes Koppers en Maria Henriette Luyters (S00159).
+1 NOTE Wenuwnaar Hendrina van Esch, zie [hier](../s00159).
+1 NOTE Zoon van Johannes Koppers en Maria Henriette Luyters, zie [hier](../s00159).
 1 FAMS @F00042@
 1 BIRT
 2 DATE INT 1845 (1904 - 59)
@@ -14670,7 +14648,6 @@
 4 LONG W4.0
 2 ADDR Groot Ziekengasthuis
 2 NOTE De leeftijd staat vermeld als 23 jaar? De echte leeftijd is 46 jaar. Is het wel dezelfde Willem Walters?
-3 CONT
 3 CONT Misschien is er verwarring met Willem Wijnant's zoon Wijnandus Walters? De zoon is namelijk
 3 CONT geboren in 1776 en dus wel 23 in 1799.
 3 CONT
@@ -14690,15 +14667,11 @@
 3 MAP
 4 LATI N45.0
 4 LONG W4.0
-2 NOTE In de bronnen S00184, S00259, en S00260 staat de leeftijd vermeld als 23 jaar (echte leeftijd is 46 jaar).
+2 NOTE In [bron1](../s00184), [bron2](../s00259), en [bron3](../s00260) staat de leeftijd vermeld als 23 jaar (echte leeftijd is 46 jaar).
 3 CONT Is het wel dezelfde Willem Walters?
-3 CONT
 3 CONT Misschien is er verwarring met Willem Wijnant's zoon Wijnandus Walters? De zoon is namelijk
-3 CONT geboren in 1776 en dus wel 23 in 1799. De zoon is echter zeker niet overleden i8n 1799, maar in 
-3 CONT 1832. Dus het gaat waarschijnlijk hier wel echt om in Willem Walters.
-3 CONT
-3 CONT In bron S00163 staat wel ook dezelfde overlijdens datum.
-3 CONT
+3 CONT geboren in 1776 en dus wel 23 in 1799. De zoon is echter zeker niet overleden in 1799, maar in 1832. Dus het gaat waarschijnlijk hier wel echt om Willem Walters.
+3 CONT In [deze bron](../s00163) staat wel ook dezelfde overlijdens datum.
 3 CONT
 2 SOUR @S00163@
 2 SOUR @S00184@
@@ -16691,7 +16664,7 @@
 3 MAP
 4 LATI N45.0
 4 LONG W4.0
-2 NOTE Volgens bron S00272 zou het overlijden ook op 15 januari 1797 kunnen zijn.
+2 NOTE Volgens [deze bron](../00272) zou het overlijden ook op 15 januari 1797 kunnen zijn.
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Jean Lakenberg
@@ -19601,9 +19574,8 @@
 4 LATI N45.0
 4 LONG W4.0
 2 ADDR Rue de Hintham (Hinhamerstraat) section C cent quatre vingt cinq
-2 NOTE In de akte S00295 staat Guelelmine (Willemijn) Clijmen, maar deze is voor 30 juli 1782 overleden
-3 CONT en Hendrikus Walters is hertrouwd met Willemijna Menge. Het moet dus wel over deze laatste 
-3 CONT gaan.
+2 NOTE In de [akte](../s00295) staat Guelelmine (Willemijn) Clijmen, maar deze is voor 30 juli 1782 overleden
+3 CONT en Hendrikus Walters is hertrouwd met Willemijna Menge. Het moet dus wel over deze laatste gaan.
 2 SOUR @S00295@
 1 SOUR @S00271@
 1 SOUR @S00295@
@@ -20378,7 +20350,7 @@
 4 LONG W4.0
 2 SOUR @S00289@
 2 SOUR @S00290@
-1 NOTE Tweeling met Jacoba Walters (I00170).
+1 NOTE Tweeling met [Jacoba Walters](../i00170).
 1 FAMC @F00054@
 1 SOUR @S00287@
 1 SOUR @S00289@
@@ -20417,7 +20389,7 @@
 4 LONG W4.0
 2 NOTE Staat in begraving vermeld als Jacobus ipv Jacoba zoals in de doop akte.
 2 SOUR @S00289@
-1 NOTE Tweeling met Wilhelmus Walters (I00169).
+1 NOTE Tweeling met [Wilhelmus Walters](../i00169).
 1 FAMC @F00054@
 1 SOUR @S00288@
 1 SOUR @S00289@

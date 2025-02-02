@@ -26,3 +26,8 @@ class NotesMixin:
 
     def is_private(self) -> bool:
         return any(note.is_private() for note in self.notes)
+    
+    @property
+    def plain_notes(self) -> List[Note]:
+        # Return a list of all notes that are not yaml
+        return [note for note in self.notes if not note.is_yaml()]

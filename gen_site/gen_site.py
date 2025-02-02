@@ -4,7 +4,7 @@ import sys
 import logging
 from pathlib import Path
 from typing import List
-from tqdm import tqdm
+from tqdm import tqdm # type: ignore
 
 import PlantUMLEncoder
 import PlantUMLCreator
@@ -15,6 +15,7 @@ from SourcesMixin import SourcesMixin
 from Source import Source
 from EventDetail import EventDetail
 from Witness import Witness
+from Footnote import Footnote
 
 PLANTUML_BASE_URL: str = "https://www.plantuml.com/plantuml/svg"
 CONTENT_DIR: Path = Path("/workspaces/gc2web/src/content/entity")
@@ -48,6 +49,7 @@ def individual_url(individual: Individual) -> str:
     return f"../{individual.xref_id.lower()}/"
 
 def witness_url(witness: Witness) -> str:
+    if not witness.xref_id: return ""
     return f"../{witness.xref_id.lower()}/"
 
 def source_url(source: Source) -> str:
@@ -178,37 +180,37 @@ def generate_individual_page(individual: Individual, filepath: Path):
             
             content.append(f"")
             content.append(f"{HEADER_PREFIX} Gegevens")
-            content.append(f"- Naam: {individual.name} {sources_str(individual.name)}")
+            content.append(f"- Naam: {individual.name} {Footnote().add(individual.name)}{sources_str(individual.name)}")
             content.append(f"- Geslacht: {gender_str(individual)}")
-            content.append(f"- Geboren {individual.birth.date} te {individual.birth.place}{', ' + individual.birth.address if individual.birth.address else ''} {sources_str(individual.birth)}")
+            content.append(f"- Geboren {individual.birth.date} te {individual.birth.place}{', ' + individual.birth.address if individual.birth.address else ''} {Footnote().add(individual.birth)}{sources_str(individual.birth)}")
             if individual.birth.timestamp: content.append(f"- Geboorte tijdstip: \"{individual.birth.timestamp}\" {sources_str(individual.birth)}")            
             if individual.birth.witnesses:
                 content.append(f"- Geboorte getuigen: {sources_str(individual.birth)}")
                 for witness in individual.birth.witnesses:
                     content.append(f"  - {witness_str(witness)}")
             if individual.baptism.date.value or individual.baptism.place.value: 
-                content.append(f"- Gedoopt {individual.baptism.date} te {individual.baptism.place}{', ' + individual.baptism.address if individual.baptism.address else ''} {sources_str(individual.baptism)}")
+                content.append(f"- Gedoopt {individual.baptism.date} te {individual.baptism.place}{', ' + individual.baptism.address if individual.baptism.address else ''} {Footnote().add(individual.baptism)}{sources_str(individual.baptism)}")
                 if individual.baptism.witnesses:
                     content.append(f"- Doop getuigen: {sources_str(individual.baptism)}")
                     for witness in individual.baptism.witnesses:
                         content.append(f"  - {witness_str(witness)}")
-            content.append(f"- Overleden {individual.death.date} te {individual.death.place}{', ' + individual.death.address if individual.death.address else ''}, {age_str(individual, individual.end_life)} jaar {sources_str(individual.death)}")
+            content.append(f"- Overleden {individual.death.date} te {individual.death.place}{', ' + individual.death.address if individual.death.address else ''}, {age_str(individual, individual.end_life)} jaar {Footnote().add(individual.death)}{sources_str(individual.death)}")
             if individual.death.timestamp: content.append(f"- Overlijden tijdstip: \"{individual.death.timestamp}\" {sources_str(individual.death)}")            
             if individual.death.witnesses:
                 content.append(f"- Overlijden getuigen: {sources_str(individual.death)}")
                 for witness in individual.death.witnesses:
                     content.append(f"  - {witness_str(witness)}")
-            if individual.burial.date.value or individual.burial.place.value: content.append(f"- Begraven {individual.burial.date} te {individual.burial.place} {sources_str(individual.burial)}")
+            if individual.burial.date.value or individual.burial.place.value: content.append(f"- Begraven {individual.burial.date} te {individual.burial.place} {Footnote().add(individual.burial)}{sources_str(individual.burial)}")
             if len(individual.names)  > 1:
                 content.append(f"- Alternatieve namen:")
                 for name in individual.names[1:]:
-                    content.append(f"  - {name} {sources_str(name)}")
+                    content.append(f"  - {name} {Footnote().add(name)}{sources_str(name)}")
 
             if len(individual.descriptions) > 0:
                 content.append(f"- Beschrijvingen:")
                 for description in individual.descriptions:
                     description_date_str: str = f" ({description.date})" if description.date.date() else ""
-                    content.append(f"  - {description.value} {description_date_str} {sources_str(description)}")
+                    content.append(f"  - {description.value} {description_date_str} {Footnote().add(description)}{sources_str(description)}")
 
             content.append("")
             content.append(f"{HEADER_PREFIX} Ouders")
@@ -227,7 +229,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
                     spouse: Individual | None = fams.spouse(individual)
                     if spouse:
                         content.append(f"")
-                        content.append(f"Gehuwd met {individual_link(spouse)} {lifespan_str(spouse)} {sources_str(fams.marriage)}")
+                        content.append(f"Gehuwd met {individual_link(spouse)} {lifespan_str(spouse)} {Footnote().add(fams.marriage)}{sources_str(fams.marriage)}")
                         content.append(f"- Huwelijk {fams.marriage.date} te {fams.marriage.place}, {age_str(individual, fams.marriage)}, partner {age_str(spouse, fams.marriage)} {sources_str(fams.marriage)}")
                         if fams.marriage.witnesses:
                             content.append(f"- Huwelijk getuigen:  {sources_str(fams.marriage)}")
@@ -251,14 +253,14 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 content.append(f"{HEADER_PREFIX} Beroepen")
                 sorted_occupations = sorted(individual.occupations, key=lambda x: x.date.date() or datetime.min)
                 for occupation in sorted_occupations:
-                    content.append(f"- {occupation.value} {occupation.date} te {occupation.place}, {age_str(individual, occupation)} {sources_str(occupation)}")
+                    content.append(f"- {occupation.value} {occupation.date} te {occupation.place}, {age_str(individual, occupation)} {Footnote().add(occupation)}{sources_str(occupation)}")
 
             if individual.facts:
                 content.append("")
                 content.append(f"{HEADER_PREFIX} Feiten")
                 sorted_facts = sorted(individual.facts, key=lambda x: x.date.date() or datetime.min)
                 for fact in sorted_facts:
-                    content.append(f"- {fact.type} {fact.date} te {fact.place}, {age_str(individual, fact)} {sources_str(fact)}")
+                    content.append(f"- {fact.type} {fact.date} te {fact.place}, {age_str(individual, fact)} {Footnote().add(fact)}{sources_str(fact)}")
 
             if individual.locations():
                 content.append("")
@@ -267,12 +269,25 @@ def generate_individual_page(individual: Individual, filepath: Path):
                     extra_info = ""
                     if location.spouse:
                         extra_info = f"met {individual_link(location.spouse)}"
-                    content.append(f"- {location.event.place} {location.event.address if location.event.address else ""} {location.event.date}, {age_str(individual, location.event)} {extra_info} {sources_str(location.event)}")
+                    content.append(f"- {location.event.place} {location.event.address if location.event.address else ""} {location.event.date}, {age_str(individual, location.event)} {extra_info} {Footnote().add(location.event)}{sources_str(location.event)}")
 
             content.append("")
             content.append(f"{HEADER_PREFIX} Bronnen lijst")
             for source in individual.sources:
                 content.append(f"- {source_link(source)}")
+
+            if len(individual.plain_notes) > 0:
+                content.append("")
+                content.append(f"{HEADER_PREFIX} Notities")
+                for note in individual.plain_notes:
+                    if note.value:
+                        content.append(f"> {note.value.replace('\n', '\n> ')}")
+                        content.append("")
+
+            if Footnote().num > 0:
+                content.append("")
+                content.append(f"{HEADER_PREFIX} Voetnoten")
+                Footnote().gen(content)
 
             file.writelines("\n".join(content))
     except IOError as e:

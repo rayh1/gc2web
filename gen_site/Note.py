@@ -1,5 +1,5 @@
 from GedcomLine import GedcomLine
-import yaml
+import yaml # type: ignore
 
 class Note:
     def __init__(self):
@@ -32,13 +32,16 @@ class Note:
     def __repr__(self) -> str:
         return f"Note(xref_id=text={self.value}, line_num={self.__line_num})"
     
-    def parse_yaml(self) -> dict | None:
+    def is_yaml(self) -> bool:
         if not self.value:
-            return None
-        if not self.value.strip().startswith('---'):
+            return False
+        return self.value.strip().startswith('---')
+    
+    def parse_yaml(self) -> dict | None:
+        if not self.is_yaml():
             return None
         try:
-            data = yaml.safe_load(self.value)
+            data = yaml.safe_load(self.value) # type: ignore
             return data
         except yaml.YAMLError:
             print(f"Error parsing yaml: {self.value}") 

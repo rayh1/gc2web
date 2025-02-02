@@ -3,9 +3,12 @@ from EventDetail import EventDetail
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from SourcesMixin import SourcesMixin
-class Family(SourcesMixin):
+from NotesMixin import NotesMixin
+
+class Family(SourcesMixin, NotesMixin):
     def __init__(self):
         super().__init__()
+        NotesMixin.__init__(self)
 
         self.__xref_id: str = ""
         self.__husband_id: str | None = None
@@ -39,6 +42,7 @@ class Family(SourcesMixin):
                 self.residences.append(EventDetail().parse(subline))
         
         self.parse_sources(line)
+        self.parse_notes(line)
         
         return self
 

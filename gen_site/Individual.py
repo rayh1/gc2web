@@ -314,3 +314,4 @@ class Individual(SourcesMixin, NotesMixin):
     
     def has_name(self, name: str) -> bool:
         return any([name == n.plain_value for n in self.names])
+    
