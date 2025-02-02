@@ -9,6 +9,7 @@ from SourcesMixin import SourcesMixin
 from datetime import datetime
 from NotesMixin import NotesMixin
 from Association import Association
+from Source import Source
 
 class Location:
     """
@@ -315,3 +316,60 @@ class Individual(SourcesMixin, NotesMixin):
     def has_name(self, name: str) -> bool:
         return any([name == n.plain_value for n in self.names])
     
+    def all_events(self) -> list[EventDetail]:
+        events: list[EventDetail] = []
+        
+        events.append(self.birth)
+        events.append(self.death)
+        events.append(self.baptism)
+        events.append(self.burial)
+
+        for family in self.fams:
+            events.append(family.marriage)
+            for e in family.residences:
+                events.append(e)
+
+        events.extend(self.occupations)
+        events.extend(self.residences)
+        events.extend(self.facts)
+        events.extend(self.descriptions)
+    
+        return events
+
+    def all_sources(self) -> list[Source]:
+        sources = list(self.sources)
+
+        for event in self.all_events():
+            sources.extend(event.sources)        
+            
+        for family in self.fams:
+            sources.extend(family.sources)
+        for name in self.names:
+            sources.extend(name.sources)
+        for association in self.associations:
+            sources.extend(association.sources)
+
+        for event in self.witness_of():
+            sources.extend(event.sources)
+
+        # Remove duplicates while preserving order
+        seen = set()
+        unique_sources = []
+        for source in sources:
+            if source not in seen:
+                unique_sources.append(source)
+                seen.add(source)
+
+        return unique_sources
+    
+    def witness_of(self) -> list['EventDetail']:
+        from GedcomTransmission import GedcomTransmission
+        
+        result: list['EventDetail'] = []
+        
+        for individual in GedcomTransmission().individuals:
+            for event in individual.all_events():
+                if event.is_witness(self):
+                    result.append(event)
+
+        return result

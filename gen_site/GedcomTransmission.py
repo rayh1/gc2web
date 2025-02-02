@@ -1,7 +1,7 @@
 import re
 from typing import List, Dict
 
-from tqdm import tqdm
+from tqdm import tqdm # type: ignore
 from GedcomLine import GedcomLine
 from GedcomTags import GedcomTags
 from Individual import Individual
@@ -162,6 +162,10 @@ class GedcomTransmission:
     @property
     def individuals(self) -> List[Individual]:
         return list(self.__individual_map.values())
+    
+    @property
+    def families(self) -> List[Family]:
+        return list(self.__family_map.values())
     
     @property
     def sources(self) -> List[Source]:

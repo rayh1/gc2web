@@ -273,7 +273,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
 
             content.append("")
             content.append(f"{HEADER_PREFIX} Bronnen lijst")
-            for source in individual.sources:
+            for source in individual.all_sources():
                 content.append(f"- {source_link(source)}")
 
             if len(individual.plain_notes) > 0:
