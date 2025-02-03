@@ -6,16 +6,16 @@ from pathlib import Path
 from typing import List
 from tqdm import tqdm # type: ignore
 
-import PlantUMLEncoder
-import PlantUMLCreator
-from GedcomTransmission import GedcomTransmission
-from GedcomParser import GedcomParser
-from Individual import Individual
-from SourcesMixin import SourcesMixin
-from Source import Source
-from EventDetail import EventDetail
-from Witness import Witness
-from Footnote import Footnote
+import util.PlantUMLEncoder as PlantUMLEncoder
+import util.PlantUMLCreator as PlantUMLCreator
+from model.GedcomTransmission import GedcomTransmission
+from parser.GedcomParser import GedcomParser
+from model.Individual import Individual
+from model.SourcesMixin import SourcesMixin
+from model.Source import Source
+from model.EventDetail import EventDetail
+from model.Witness import Witness
+from model.Footnote import Footnote
 
 PLANTUML_BASE_URL: str = "https://www.plantuml.com/plantuml/svg"
 CONTENT_DIR: Path = Path("/workspaces/gc2web/src/content/entity")
@@ -361,7 +361,7 @@ def main(argv: List[str]):
     
     args = ap.parse_args(argv[1:])
 
-    GedcomParser.parse_file(args.file)
+    GedcomTransmission().parse_file(args.file)
     
     generate_individual_pages(CONTENT_DIR)
     generate_source_pages(CONTENT_DIR)

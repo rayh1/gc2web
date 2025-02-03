@@ -1,9 +1,11 @@
-from Individual import Individual
-from EventDetail import EventDetail
-from GedcomLine import GedcomLine
-from GedcomTags import GedcomTags
-from SourcesMixin import SourcesMixin
-from NotesMixin import NotesMixin
+from parser.GedcomParser import GedcomParser
+from parser.GedcomLine import GedcomLine
+from parser.GedcomTags import GedcomTags
+
+from model.SourcesMixin import SourcesMixin
+from model.NotesMixin import NotesMixin
+from model.Individual import Individual
+from model.EventDetail import EventDetail
 
 class Family(SourcesMixin, NotesMixin):
     def __init__(self):
@@ -23,13 +25,13 @@ class Family(SourcesMixin, NotesMixin):
 
     def parse(self, line: GedcomLine) -> 'Family':
         """Parse a family from a GEDCOM line"""
-        from GedcomTransmission import GedcomTransmission
+        from model.GedcomTransmission import GedcomTransmission
 
         if not line.xref_id:
             raise ValueError(f"Family has no xref_id: {line}")
         self.__xref_id: str = line.xref_id
         
-        for subline in GedcomTransmission().iterate(line):
+        for subline in GedcomParser().iterate(line):
             if subline.tag == GedcomTags.HUSB:
                 self.husband_id = subline.pointer_value
             elif subline.tag == GedcomTags.WIFE:
@@ -98,21 +100,21 @@ class Family(SourcesMixin, NotesMixin):
 
     @property
     def husband(self) -> Individual | None:
-        from GedcomTransmission import GedcomTransmission
+        from model.GedcomTransmission import GedcomTransmission
         if self.__husband_cache is None and self.husband_id:
             self.__husband_cache = GedcomTransmission().get_individual(self.husband_id)
         return self.__husband_cache
 
     @property
     def wife(self) -> Individual | None:
-        from GedcomTransmission import GedcomTransmission
+        from model.GedcomTransmission import GedcomTransmission
         if self.__wife_cache is None and self.wife_id:
             self.__wife_cache = GedcomTransmission().get_individual(self.wife_id)
         return self.__wife_cache
     
     @property
     def children(self) -> list[Individual]:
-        from GedcomTransmission import GedcomTransmission
+        from model.GedcomTransmission import GedcomTransmission
         if self.__children_cache is None:
             self.__children_cache = list(filter(None, (GedcomTransmission().get_individual(child_id) for child_id in self.children_ids)))
         return self.__children_cache

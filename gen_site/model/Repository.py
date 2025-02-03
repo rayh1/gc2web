@@ -1,5 +1,6 @@
-from GedcomLine import GedcomLine
-from GedcomTags import GedcomTags
+from parser.GedcomLine import GedcomLine
+from parser.GedcomTags import GedcomTags
+from parser.GedcomParser import GedcomParser
 
 class Repository:
     def __init__(self):
@@ -8,14 +9,14 @@ class Repository:
         self.__www: str | None = None
 
     def parse(self, line: GedcomLine) -> 'Repository':
-        from GedcomTransmission import GedcomTransmission
+        from model.GedcomTransmission import GedcomTransmission
 
         """Parse a repository from a GEDCOM line"""
         if not line.xref_id:
             raise ValueError(f"Repository has no xref_id: {line}")
         self.__xref_id = line.xref_id
 
-        for subline in GedcomTransmission().iterate(line):
+        for subline in GedcomParser().iterate(line):
             if subline.tag == GedcomTags.NAME:
                 self.name = subline.value
             elif subline.tag == GedcomTags.WWW:

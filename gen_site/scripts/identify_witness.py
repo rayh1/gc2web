@@ -1,13 +1,12 @@
 import argparse
 import re
 import sys
-from GedcomParser import GedcomParser
-from GedcomTransmission import GedcomTransmission
-from Individual import Individual
-from Witness import Witness
 
-#def has_same_name(witness: Witness, individual: Individual) -> bool:
-#    return witness.name == individual.name.value.replace("/", "")
+from parser.GedcomParser import GedcomParser
+
+from model.GedcomTransmission import GedcomTransmission
+from model.Individual import Individual
+from model.Witness import Witness
 
 def is_related(witness: Witness, individual: Individual, rels: list[str], excl:list[str]) -> bool:
     relation = (witness.relation or "").lower()
@@ -71,7 +70,7 @@ def is_mother_in_marriage(witness: Witness, individual: Individual) -> bool:
 def print_witness(witness: Witness, individual: Individual):
     if witness.xref_id:
         return
-    print(f"{witness.line.line_num} {witness.name} {individual.xref_id}")
+    print(f"{witness.line_num} {witness.name} {individual.xref_id}")
     #print(f"{witness.line.line_num} {witness.name} {witness.relation}: xref_id={individual.xref_id}")
     #print(f"[{individual.name}] {witness.relation}: {individual.father.name}/{witness.name}")
 
@@ -522,7 +521,7 @@ def main(argv):
     ap.add_argument('file', type=str, help='Path to the GEDCOM file')
     
     args = ap.parse_args(argv[1:])
-    GedcomParser.parse_file(args.file)
+    GedcomTransmission().parse_file(args.file)
     identify_witnesses()
 
 if __name__ == '__main__':

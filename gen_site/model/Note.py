@@ -1,5 +1,6 @@
-from GedcomLine import GedcomLine
 import yaml # type: ignore
+
+from parser.GedcomLine import GedcomLine
 
 class Note:
     def __init__(self):

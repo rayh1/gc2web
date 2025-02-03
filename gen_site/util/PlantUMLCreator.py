@@ -1,6 +1,7 @@
 from typing import List
-from Individual import Individual
-from Family import Family
+
+from model.Individual import Individual
+from model.Family import Family
 
 # Constants
 COLOR_MALE = '#E3F5FB'

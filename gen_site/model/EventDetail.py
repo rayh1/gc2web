@@ -1,11 +1,12 @@
-from Place import Place
-from Date import Date
-from GedcomLine import GedcomLine
-from GedcomTags import GedcomTags
-from SourcesMixin import SourcesMixin
-from NotesMixin import NotesMixin
-from Witness import Witness
+from parser.GedcomParser import GedcomParser
+from parser.GedcomLine import GedcomLine
+from parser.GedcomTags import GedcomTags
 
+from model.SourcesMixin import SourcesMixin
+from model.NotesMixin import NotesMixin
+from model.Witness import Witness
+from model.Place import Place
+from model.Date import Date
 
 class EventDetail(SourcesMixin, NotesMixin):
     def __init__(self):
@@ -22,11 +23,11 @@ class EventDetail(SourcesMixin, NotesMixin):
         self.__witnesses: list[Witness] = []
         
     def parse(self, line: GedcomLine) -> 'EventDetail': # type: ignore
-        from GedcomTransmission import GedcomTransmission
+        from model.GedcomTransmission import GedcomTransmission
 
         self.__value = line.value
 
-        for subline in GedcomTransmission().iterate(line):
+        for subline in GedcomParser().iterate(line):
             if subline.tag == GedcomTags.DATE:
                 self.date = Date(subline.value)
             elif subline.tag == GedcomTags.PLAC:

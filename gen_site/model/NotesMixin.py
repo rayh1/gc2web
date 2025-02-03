@@ -1,16 +1,19 @@
 from typing import List
-from Note import Note
-from GedcomLine import GedcomLine
-from GedcomTags import GedcomTags
+
+from parser.GedcomLine import GedcomLine
+from parser.GedcomTags import GedcomTags
+from parser.GedcomParser import GedcomParser
+
+from model.Note import Note
 
 class NotesMixin:
     def __init__(self):
         self.__notes: List[Note] = []
 
     def parse_notes(self, line: GedcomLine):
-        from GedcomTransmission import GedcomTransmission
+        from model.GedcomTransmission import GedcomTransmission
 
-        for subline in GedcomTransmission().iterate(line, tag=GedcomTags.NOTE):
+        for subline in GedcomParser().iterate(line, tag=GedcomTags.NOTE):
             self.add_note(Note().parse(subline))
                 
     @property

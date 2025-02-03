@@ -1,8 +1,11 @@
-from NotesMixin import NotesMixin
-from SourcesMixin import SourcesMixin
-from GedcomLine import GedcomLine
-from GedcomTags import GedcomTags
 from typing import Union
+
+from parser.GedcomLine import GedcomLine
+from parser.GedcomTags import GedcomTags
+from parser.GedcomParser import GedcomParser
+
+from model.NotesMixin import NotesMixin
+from model.SourcesMixin import SourcesMixin
 
 class Association(SourcesMixin, NotesMixin):
     def __init__(self):
@@ -15,7 +18,7 @@ class Association(SourcesMixin, NotesMixin):
         self.__rel_type: str | None = None
 
     def parse(self, line: GedcomLine) -> 'Association':
-        from GedcomTransmission import GedcomTransmission
+        from model.GedcomTransmission import GedcomTransmission
 
         if not line.pointer_value:
             raise ValueError(f"Association has no pointer value: {line}")
@@ -23,7 +26,7 @@ class Association(SourcesMixin, NotesMixin):
         self.__line_num = line.line_num
         self.__individual_id = line.pointer_value
 
-        for subline in GedcomTransmission().iterate(line):
+        for subline in GedcomParser().iterate(line):
             if subline.tag == GedcomTags.RELA and subline.value:
                 parts: list[str] = subline.value.split(' ')
                 self.__rel_desc = parts[0] if len(parts) > 1 else subline.value

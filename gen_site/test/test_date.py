@@ -1,6 +1,8 @@
 import unittest
+
 from datetime import datetime
-from Date import Date
+
+from model.Date import Date
 
 class TestDateParseMethods(unittest.TestCase):
 

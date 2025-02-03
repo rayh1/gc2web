@@ -1,6 +1,7 @@
-from GedcomLine import GedcomLine
-from SourcesMixin import SourcesMixin
-from NotesMixin import NotesMixin
+from parser.GedcomLine import GedcomLine
+
+from model.SourcesMixin import SourcesMixin
+from model.NotesMixin import NotesMixin
 
 class Name(SourcesMixin, NotesMixin):
     def __init__(self):

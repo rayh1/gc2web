@@ -1,5 +1,6 @@
-from NotesMixin import NotesMixin
-from singleton import singleton
+from model.NotesMixin import NotesMixin
+
+from util.singleton import singleton
 
 @singleton
 class Footnote:

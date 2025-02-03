@@ -1,15 +1,18 @@
 from typing import Union
-from Place import Place
-from Date import Date
-from Name import Name
-from EventDetail import EventDetail
-from GedcomLine import GedcomLine
-from GedcomTags import GedcomTags
-from SourcesMixin import SourcesMixin
 from datetime import datetime
-from NotesMixin import NotesMixin
-from Association import Association
-from Source import Source
+
+from parser.GedcomLine import GedcomLine
+from parser.GedcomTags import GedcomTags
+from parser.GedcomParser import GedcomParser
+
+from model.Place import Place
+from model.SourcesMixin import SourcesMixin
+from model.NotesMixin import NotesMixin
+from model.Association import Association
+from model.Source import Source
+from model.Date import Date
+from model.Name import Name
+from model.EventDetail import EventDetail
 
 class Location:
     """
@@ -45,13 +48,13 @@ class Individual(SourcesMixin, NotesMixin):
         self.__witnessed_events_cache: list[tuple[str, 'EventDetail', list['Individual']]] | None = None
 
     def parse(self, line: GedcomLine) -> 'Individual':
-        from GedcomTransmission import GedcomTransmission
+        from model.GedcomTransmission import GedcomTransmission
 
         if not line.xref_id:
             raise ValueError(f"Individual has no xref_id: {line}")        
         self.__xref_id = line.xref_id
 
-        for subline in GedcomTransmission().iterate(line):
+        for subline in GedcomParser().iterate(line):
             if subline.tag == GedcomTags.NAME:
                 self.add_name(Name().parse(subline))
             elif subline.tag == GedcomTags.BIRT:
@@ -78,7 +81,7 @@ class Individual(SourcesMixin, NotesMixin):
                 self.add_description(EventDetail().parse(subline))
 
         # Parse associations
-        for subline in GedcomTransmission().iterate(line, tag=GedcomTags.ASSO):
+        for subline in GedcomParser().iterate(line, tag=GedcomTags.ASSO):
             if subline.pointer_value: self.__associations.append(Association().parse(subline))
 
         self.parse_sources(line)
@@ -197,14 +200,14 @@ class Individual(SourcesMixin, NotesMixin):
 
     @property
     def fams(self) -> list['Family']: # type: ignore
-        from GedcomTransmission import GedcomTransmission
+        from model.GedcomTransmission import GedcomTransmission
         if self.__fams_cache is None:
             self.__fams_cache = list(filter(None, [GedcomTransmission().get_family(fams_id) for fams_id in self.fams_ids]))
         return self.__fams_cache
 
     @property
     def famc(self) -> 'Family': # type: ignore
-        from GedcomTransmission import GedcomTransmission
+        from model.GedcomTransmission import GedcomTransmission
         if self.__famc_cache is None and self.__famc_id:
             self.__famc_cache = GedcomTransmission().get_family(self.__famc_id)
         return self.__famc_cache # type: ignore
@@ -357,7 +360,7 @@ class Individual(SourcesMixin, NotesMixin):
     
     def witnessed_events(self) -> list[tuple[str, 'EventDetail', list['Individual']]]:
         if self.__witnessed_events_cache is None:
-            from GedcomTransmission import GedcomTransmission
+            from model.GedcomTransmission import GedcomTransmission
             
             result: list[tuple[str, 'EventDetail', list['Individual']]] = []
             

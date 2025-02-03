@@ -1,7 +1,8 @@
 import unittest
-import yaml
-from EventDetail import EventDetail, Witness
-from Note import Note
+
+from model.EventDetail import EventDetail
+
+from model.Note import Note
 
 class TestEventDetail(unittest.TestCase):
     def setUp(self):

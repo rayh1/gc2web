@@ -1,5 +1,6 @@
-from threading import Lock
 from typing import Any, TypeVar, cast
+
+from threading import Lock
 
 T = TypeVar('T')
 

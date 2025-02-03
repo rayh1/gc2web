@@ -1,6 +1,8 @@
-from GedcomLine import GedcomLine
-from GedcomTags import GedcomTags
-from Repository import Repository
+from parser.GedcomParser import GedcomParser
+from parser.GedcomLine import GedcomLine
+from parser.GedcomTags import GedcomTags
+
+from model.Repository import Repository
 
 class Source:
     def __init__(self):
@@ -13,14 +15,14 @@ class Source:
         self.__repository_cache: Repository | None = None
 
     def parse(self, line: GedcomLine) -> 'Source':
-        from GedcomTransmission import GedcomTransmission
+        from model.GedcomTransmission import GedcomTransmission
 
         """Parse a source from a GEDCOM line"""
         if not line.xref_id:
             raise ValueError(f"Source has no xref_id: {line}")
         self.__xref_id = line.xref_id
 
-        for subline in GedcomTransmission().iterate(line):
+        for subline in GedcomParser().iterate(line):
             if subline.tag == GedcomTags.TITL:
                 self.title = subline.value
             elif subline.tag == GedcomTags.AUTH:
@@ -85,7 +87,7 @@ class Source:
     @property
     def repository(self) -> Repository | None:
         if self.__repository_cache is None and self.repository_id:
-            from GedcomTransmission import GedcomTransmission
+            from model.GedcomTransmission import GedcomTransmission
             self.__repository_cache = GedcomTransmission().get_repository(self.repository_id)
         return self.__repository_cache
 
@@ -94,5 +96,5 @@ class Source:
 
     @property
     def publications(self) -> list[str]:
-        from GedcomParser import GedcomParser
-        return list(filter(None, self.__publication.split(GedcomParser.CONT_SEP))) if self.__publication else []
+        from parser.GedcomParser import GedcomParser
+        return list(filter(None, self.__publication.split(GedcomParser().CONT_SEP))) if self.__publication else []

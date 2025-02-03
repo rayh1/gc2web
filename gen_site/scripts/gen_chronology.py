@@ -1,9 +1,11 @@
 from datetime import datetime
-from GedcomTransmission import GedcomTransmission
-from GedcomParser import GedcomParser
-from EventDetail import EventDetail
 import argparse
 import sys
+
+from parser.GedcomParser import GedcomParser
+
+from model.GedcomTransmission import GedcomTransmission
+from model.EventDetail import EventDetail
 
 class ChronologyEvent:
     def __init__(self, event: EventDetail, description: str):
@@ -69,7 +71,7 @@ def main(argv):
     ap.add_argument('individual', type=str, help='Id of the individual')
     
     args = ap.parse_args(argv[1:])
-    GedcomParser.parse_file(args.file)
+    GedcomTransmission().parse_file(args.file)
     gen_chronology(args.individual)
 
 if __name__ == '__main__':

@@ -1,7 +1,9 @@
 import argparse
 import sys
-from GedcomParser import GedcomParser
-from GedcomTransmission import GedcomTransmission
+
+from parser.GedcomParser import GedcomParser
+
+from model.GedcomTransmission import GedcomTransmission
 
 def witnesses_to_string(witnesses):
     if len(witnesses) == 0:
@@ -34,18 +36,18 @@ def match_assocs():
             else:
                 event = None
             if event:
-                print(f"{association.rel_type} {association.rel_desc} {association.individual().name} (id={association.individual_id}, age={association.individual().age(event.date)}, line={association.line_num})")
+                print(f"{association.rel_type} {association.rel_desc} {association.individual().name} (id={association.individual_id}, age={association.individual().age(event.date)}, line={association.line_num})") # type: ignore
                 for witness in event.witnesses:
                     if witness.xref_id == association.individual_id:
                         # Check if the age of the witness matches the age of the individual in the association. They may differ by one year due to the way ages are calculated in the GEDCOM file
-                        is_age_match = witness.age == association.individual().age(event.date) or witness.age == association.individual().age(event.date) + 1 or witness.age == association.individual().age(event.date) - 1
+                        is_age_match = witness.age == association.individual().age(event.date) or witness.age == association.individual().age(event.date) + 1 or witness.age == association.individual().age(event.date) - 1 # type: ignore
                         warning_age_match = "" if is_age_match else "XXX"
                         print(f"--> {warning_age_match}MATCH {witness.name} (id={witness.xref_id}, age={witness.age}, line={str(witness.line_num)})")
                         break
                 else:
                     print(f"--> NO MATCH ({witnesses_to_string(event.witnesses)})")
             else:
-                print(f"{association.rel_type} {association.rel_desc} {association.individual().name} (id={association.individual_id})")
+                print(f"{association.rel_type} {association.rel_desc} {association.individual().name} (id={association.individual_id})") # type: ignore
                 print(f"--> UNKNOWN EVENT")
 
 def main(argv):
@@ -53,7 +55,7 @@ def main(argv):
     ap.add_argument('file', type=str, help='Path to the GEDCOM file')
     
     args = ap.parse_args(argv[1:])
-    GedcomParser.parse_file(args.file)
+    GedcomTransmission().parse_file(args.file)
     match_assocs()
 
 if __name__ == '__main__':

@@ -1,11 +1,14 @@
-import PlantUMLCreator
+from typing import List
+
 import argparse
 import sys
 
-from typing import List
-from GedcomParser import GedcomParser
-from GedcomTransmission import GedcomTransmission
-from Individual import Individual
+from parser.GedcomParser import GedcomParser
+
+from model.GedcomTransmission import GedcomTransmission
+from model.Individual import Individual
+
+import util.PlantUMLCreator as PlantUMLCreator
 
 def main(argv: List[str]):
     ap = argparse.ArgumentParser(description='Process a GEDCOM file.')
@@ -15,11 +18,10 @@ def main(argv: List[str]):
     args = ap.parse_args(argv[1:])
 
     with open(args.file, 'r') as gedcom_stream:
-        parser = GedcomParser()
-        transmission: GedcomTransmission = parser.parse(gedcom_stream)
-        transmission.parse_gedcom()
+        GedcomParser().parse(gedcom_stream)
+        GedcomTransmission().parse_gedcom()
 
-        individual: Individual | None = transmission.get_individual(args.id)
+        individual: Individual | None = GedcomTransmission().get_individual(args.id)
         if not individual:
             raise ValueError(f"Individual {args.id} not found")
 

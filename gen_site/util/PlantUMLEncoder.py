@@ -1,5 +1,5 @@
 import zlib
-import six
+import six # type: ignore
 
 # From https://github.com/carlos-jenkins/plantweb/blob/master/lib/plantweb/plantuml.py
 
