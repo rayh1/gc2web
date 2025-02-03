@@ -334,7 +334,7 @@ class Individual(SourcesMixin, NotesMixin):
         events.extend(self.facts)
         events.extend(self.descriptions)
     
-        return events
+        return self.__remove_duplicates(events)
 
     def all_sources(self) -> list[Source]:
         sources = list(self.sources)
@@ -352,15 +352,7 @@ class Individual(SourcesMixin, NotesMixin):
         for event in self.witness_of():
             sources.extend(event.sources)
 
-        # Remove duplicates while preserving order
-        seen = set()
-        unique_sources = []
-        for source in sources:
-            if source not in seen:
-                unique_sources.append(source)
-                seen.add(source)
-
-        return unique_sources
+        return self.__remove_duplicates(sources)
     
     def witness_of(self) -> list['EventDetail']:
         from GedcomTransmission import GedcomTransmission
@@ -372,4 +364,14 @@ class Individual(SourcesMixin, NotesMixin):
                 if event.is_witness(self):
                     result.append(event)
 
-        return result
+        return self.__remove_duplicates(result)
+
+    @staticmethod    
+    def __remove_duplicates(items: list) -> list:
+        seen = set()
+        unique_items = []
+        for item in items:
+            if item not in seen:
+                unique_items.append(item)
+                seen.add(item)
+        return unique_items
