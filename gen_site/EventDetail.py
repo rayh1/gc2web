@@ -116,7 +116,7 @@ class EventDetail(SourcesMixin, NotesMixin):
     def is_defined(self) -> bool:
         return self.date.value is not None
     
-    def is_witness(self, individual: 'Individual') -> bool: # type: ignore
+    def has_witness(self, individual: 'Individual') -> bool: # type: ignore
         for witness in self.witnesses:
             if witness.xref_id and witness.xref_id == individual.xref_id:
                 return True

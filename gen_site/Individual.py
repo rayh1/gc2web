@@ -349,22 +349,37 @@ class Individual(SourcesMixin, NotesMixin):
         for association in self.associations:
             sources.extend(association.sources)
 
-        for event in self.witness_of():
+        for label, event, related_individuals in self.witnessed_events():
             sources.extend(event.sources)
 
         return self.__remove_duplicates(sources)
     
-    def witness_of(self) -> list['EventDetail']:
+    def witnessed_events(self) -> list[tuple[str, 'EventDetail', list['Individual']]]:
         from GedcomTransmission import GedcomTransmission
         
-        result: list['EventDetail'] = []
+        result: list[tuple[str, 'EventDetail', list['Individual']]] = []
         
         for individual in GedcomTransmission().individuals:
-            for event in individual.all_events():
-                if event.is_witness(self):
-                    result.append(event)
+            if individual.birth.has_witness(self):
+                result.append(("Geboorte", individual.birth, [individual]))
+            if individual.death.has_witness(self):
+                result.append(("Overlijden", individual.death, [individual]))
+            if individual.baptism.has_witness(self):
+                result.append(("Doop", individual.baptism, [individual]))
+            if individual.burial.has_witness(self):
+                result.append(("Begrafenis", individual.burial, [individual]))
 
-        return self.__remove_duplicates(result)
+            for family in individual.fams:
+                if family.marriage.has_witness(self):
+                    result.append(("Huwelijk", family.marriage, [individual, family.spouse(individual)]))
+
+        # Remove duplicates based on event
+        unique_events = {}
+        for label, event, related_individuals in result:
+            if event not in unique_events:
+                unique_events[event] = (label, event, related_individuals)
+
+        return sorted(unique_events.values(), key=lambda x: x[1].date.date() or datetime.min)
 
     @staticmethod    
     def __remove_duplicates(items: list) -> list:

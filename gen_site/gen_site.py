@@ -271,6 +271,13 @@ def generate_individual_page(individual: Individual, filepath: Path):
                         extra_info = f"met {individual_link(location.spouse)}"
                     content.append(f"- {location.event.place} {location.event.address if location.event.address else ""} {location.event.date}, {age_str(individual, location.event)} {extra_info} {Footnote().add(location.event)}{sources_str(location.event)}")
 
+            if len(individual.witnessed_events()) > 0:
+                content.append("")
+                content.append(f"{HEADER_PREFIX} Getuige bij")
+                for label, event, individuals in individual.witnessed_events():
+                    names: str = ", ".join([individual_link(individual) for individual in individuals])
+                    content.append(f"- {label} {names} op {event.date} te {event.place} {sources_str(event)}")
+
             content.append("")
             content.append(f"{HEADER_PREFIX} Bronnen lijst")
             for source in individual.all_sources():
