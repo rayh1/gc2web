@@ -1,4 +1,8 @@
 class GedcomLine:
+    """
+    A class to represent a line in a GEDCOM file.
+    """
+    
     def __init__(self, line_num: int, level: int, tag: str, xref_id: str | None, pointer_value: str | None, value: str | None):
         self.__line_num: int = line_num
         self.__level: int = level

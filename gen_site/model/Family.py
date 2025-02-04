@@ -47,6 +47,8 @@ class Family(SourcesMixin, NotesMixin):
         self.parse_notes(line)
         
         return self
+    
+# Properties
 
     @property
     def xref_id(self) -> str:
@@ -96,7 +98,7 @@ class Family(SourcesMixin, NotesMixin):
     def residences(self, value: list[EventDetail]):
         self.__residences = value
 
-# Utility methods
+# Utility
 
     @property
     def husband(self) -> Individual | None:

@@ -4,6 +4,19 @@ import re
 from parser.GedcomLine import GedcomLine
 
 class GedcomLineIterator:
+    """
+    An iterator class for iterating over a list of GedcomLine lines with optional filtering.
+
+    Attributes:
+        lines (List[GedcomLine]): The list of GedcomLine lines to iterate over.
+        tag (str | None): An optional tag to filter lines by. Only lines with this tag will be returned.
+        value_re (str | None): An optional regular expression to filter lines by their value. Only lines with values matching this regex will be returned.
+        follow_pointers (bool): A flag indicating whether to follow pointers in the Gedcom lines. Defaults to True.
+    Methods:
+        __iter__(): Returns the iterator object itself.
+        __next__(): Returns the next GedcomLine object that matches the filtering criteria. Raises StopIteration when no more lines are available.
+    """
+    
     def __init__(self, lines: List[GedcomLine], tag:str | None, value_re: str | None, follow_pointers: bool | None = True):
         self.lines: List[GedcomLine] = lines
         self.tag: str | None = tag

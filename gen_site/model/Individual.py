@@ -353,7 +353,7 @@ class Individual(SourcesMixin, NotesMixin):
         for association in self.associations:
             sources.extend(association.sources)
 
-        for label, event, related_individuals in self.witnessed_events():
+        for _, event, _ in self.witnessed_events():
             sources.extend(event.sources)
 
         return self.__remove_duplicates(sources)

@@ -37,6 +37,8 @@ class Association(SourcesMixin, NotesMixin):
 
         return self
 
+# Properties
+
     @property
     def individual_id(self) -> str | None:
         return self.__individual_id
@@ -54,6 +56,7 @@ class Association(SourcesMixin, NotesMixin):
         return self.__line_num
     
 # Utility
+
     def individual(self) -> Union['Individual', None]: # type: ignore
         from GedcomTransmission import GedcomTransmission
 
