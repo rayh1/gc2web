@@ -6,12 +6,12 @@ WORKDIR /workspaces
 
 # Install some utilities and full Python3
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends wget sudo git vim curl gpg gnupg apt-transport-https lsb-release unzip dos2unix python3-full && \
+    apt-get install -y --no-install-recommends wget sudo git vim curl gpg gnupg apt-transport-https ca-certificates lsb-release unzip dos2unix python3-full && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_${ARG_NODE_VERSION}.x | sudo -E bash - && \
-    apt install -y nodejs
+    apt-get install -y nodejs
 
 # Install Github client
 RUN mkdir -p -m 755 /etc/apt/keyrings && \
