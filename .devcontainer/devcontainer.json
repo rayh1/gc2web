@@ -1,7 +1,7 @@
 {
     "name": "gc2web",
     "dockerComposeFile": "compose.yaml",
-    "service": "gc2web",
+    "service": "main",
     "workspaceFolder": "/workspaces",
     "shutdownAction": "stopCompose",
 	

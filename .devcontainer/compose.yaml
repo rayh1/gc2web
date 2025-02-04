@@ -1,31 +1,26 @@
 volumes:
-  gc2web-data:
+  vol:
 
 networks:
-  gc2webnet:
+  net:
 
 services:
 
-  gc2web:
+  main:
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        - ARG_JDK_VERSION=21
-        - ARG_JDK_VENDOR=temurin
-        - ARG_MAVEN_VERSION=3.9.9
         - ARG_NODE_VERSION=20 
-    image: gc2web
-    container_name: gc2web
     environment:
       - GH_TOKEN
     ports:
       - 4200:4200
       - 4321:4321
     volumes:
-      - gc2web-data:/workspaces
+      - vol:/workspaces
     restart: unless-stopped
     stdin_open: true
     tty: true
     networks:
-      - gc2webnet
+      - net
