@@ -61,6 +61,8 @@ class EventDetail(SourcesMixin, NotesMixin):
                 self.__witnesses = [Witness(note.line_num, witness_data) for witness_data in note_data['witnesses']]
                 return
 
+# Properties
+
     @property
     def value(self) -> str | None:
         return self.__value
@@ -116,6 +118,8 @@ class EventDetail(SourcesMixin, NotesMixin):
     @property
     def is_defined(self) -> bool:
         return self.date.value is not None
+    
+# Utility
     
     def has_witness(self, individual: 'Individual') -> bool: # type: ignore
         for witness in self.witnesses:
