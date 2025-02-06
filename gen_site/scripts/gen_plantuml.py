@@ -5,7 +5,7 @@ import sys
 
 from parser.GedcomParser import GedcomParser
 
-from model.GedcomTransmission import GedcomTransmission
+from model.GedcomModel import GedcomModel
 from model.Individual import Individual
 
 import util.PlantUMLCreator as PlantUMLCreator
@@ -19,9 +19,9 @@ def main(argv: List[str]):
 
     with open(args.file, 'r') as gedcom_stream:
         GedcomParser().parse(gedcom_stream)
-        GedcomTransmission().parse_gedcom()
+        GedcomModel().parse_gedcom()
 
-        individual: Individual | None = GedcomTransmission().get_individual(args.id)
+        individual: Individual | None = GedcomModel().get_individual(args.id)
         if not individual:
             raise ValueError(f"Individual {args.id} not found")
 

@@ -11,7 +11,7 @@ class NotesMixin:
         self.__notes: List[Note] = []
 
     def parse_notes(self, line: GedcomLine):
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
 
         for subline in GedcomParser().iterate(line, tag=GedcomTags.NOTE):
             self.add_note(Note().parse(subline))

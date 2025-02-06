@@ -4,7 +4,7 @@ import sys
 
 from parser.GedcomParser import GedcomParser
 
-from model.GedcomTransmission import GedcomTransmission
+from model.GedcomModel import GedcomModel
 from model.EventDetail import EventDetail
 
 class ChronologyEvent:
@@ -26,7 +26,7 @@ class ChronologyEvent:
 # https://flyonui.com/docs/components/timeline/
 # https://daisyui.com/components/timeline/
 def gen_chronology(individual_id: str):
-    individual = GedcomTransmission().get_individual(individual_id)
+    individual = GedcomModel().get_individual(individual_id)
     if individual is None:
         print(f"Individual with id {individual_id} not found")
         return
@@ -71,7 +71,7 @@ def main(argv):
     ap.add_argument('individual', type=str, help='Id of the individual')
     
     args = ap.parse_args(argv[1:])
-    GedcomTransmission().parse_file(args.file)
+    GedcomModel().parse_file(args.file)
     gen_chronology(args.individual)
 
 if __name__ == '__main__':

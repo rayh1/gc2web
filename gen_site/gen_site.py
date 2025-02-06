@@ -8,7 +8,7 @@ from tqdm import tqdm # type: ignore
 
 import util.PlantUMLEncoder as PlantUMLEncoder
 import util.PlantUMLCreator as PlantUMLCreator
-from model.GedcomTransmission import GedcomTransmission
+from model.GedcomModel import GedcomModel
 from parser.GedcomParser import GedcomParser
 from model.Individual import Individual
 from model.SourcesMixin import SourcesMixin
@@ -113,7 +113,7 @@ def gender_str(individual: Individual) -> str:
 def witness_str(witness) -> str:
     witness_individual = None
     if witness.xref_id:
-        witness_individual = GedcomTransmission().get_individual(witness.xref_id)
+        witness_individual = GedcomModel().get_individual(witness.xref_id)
     return ", ".join(list(filter(None, [
         witness_link(witness) if witness_individual else witness.name,
         witness.occupation, 
@@ -334,12 +334,12 @@ def generate_source_page(source, filepath):
         raise        
 
 def generate_individual_pages(output_dir: Path):    
-    for individual in tqdm(GedcomTransmission().individuals, desc="Generated individual pages", bar_format='{desc}: {total_fmt}'):
+    for individual in tqdm(GedcomModel().individuals, desc="Generated individual pages", bar_format='{desc}: {total_fmt}'):
         generate_individual_page(individual, output_dir / f"{individual.xref_id}.md")
 
 def generate_source_pages(output_dir: Path):
     
-    for source in tqdm(GedcomTransmission().sources, desc="Generated source pages", bar_format='{desc}: {total_fmt}'):
+    for source in tqdm(GedcomModel().sources, desc="Generated source pages", bar_format='{desc}: {total_fmt}'):
         generate_source_page(source, output_dir / f"{source.xref_id}.md")
 
 def generate_last_modified():
@@ -361,7 +361,7 @@ def main(argv: List[str]):
     
     args = ap.parse_args(argv[1:])
 
-    GedcomTransmission().parse_file(args.file)
+    GedcomModel().parse_file(args.file)
     
     generate_individual_pages(CONTENT_DIR)
     generate_source_pages(CONTENT_DIR)

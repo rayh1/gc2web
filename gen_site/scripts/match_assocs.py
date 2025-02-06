@@ -3,7 +3,7 @@ import sys
 
 from parser.GedcomParser import GedcomParser
 
-from model.GedcomTransmission import GedcomTransmission
+from model.GedcomModel import GedcomModel
 
 def witnesses_to_string(witnesses):
     if len(witnesses) == 0:
@@ -21,7 +21,7 @@ def match_assocs():
 # association.rel_type == '@#INDI:CHR@' -> event is individual.baptism
 # If association.rel_type is not one of the above, just print the association and the individual it is associated with
 
-    for individual in GedcomTransmission().individuals:
+    for individual in GedcomModel().individuals:
         if len(individual.associations) == 0:
             continue
         print("")
@@ -55,7 +55,7 @@ def main(argv):
     ap.add_argument('file', type=str, help='Path to the GEDCOM file')
     
     args = ap.parse_args(argv[1:])
-    GedcomTransmission().parse_file(args.file)
+    GedcomModel().parse_file(args.file)
     match_assocs()
 
 if __name__ == '__main__':

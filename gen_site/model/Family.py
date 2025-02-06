@@ -25,7 +25,7 @@ class Family(SourcesMixin, NotesMixin):
 
     def parse(self, line: GedcomLine) -> 'Family':
         """Parse a family from a GEDCOM line"""
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
 
         if not line.xref_id:
             raise ValueError(f"Family has no xref_id: {line}")
@@ -102,23 +102,23 @@ class Family(SourcesMixin, NotesMixin):
 
     @property
     def husband(self) -> Individual | None:
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
         if self.__husband_cache is None and self.husband_id:
-            self.__husband_cache = GedcomTransmission().get_individual(self.husband_id)
+            self.__husband_cache = GedcomModel().get_individual(self.husband_id)
         return self.__husband_cache
 
     @property
     def wife(self) -> Individual | None:
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
         if self.__wife_cache is None and self.wife_id:
-            self.__wife_cache = GedcomTransmission().get_individual(self.wife_id)
+            self.__wife_cache = GedcomModel().get_individual(self.wife_id)
         return self.__wife_cache
     
     @property
     def children(self) -> list[Individual]:
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
         if self.__children_cache is None:
-            self.__children_cache = list(filter(None, (GedcomTransmission().get_individual(child_id) for child_id in self.children_ids)))
+            self.__children_cache = list(filter(None, (GedcomModel().get_individual(child_id) for child_id in self.children_ids)))
         return self.__children_cache
 
     def spouse(self, individual: Individual) -> Individual | None:

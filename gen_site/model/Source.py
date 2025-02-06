@@ -15,7 +15,7 @@ class Source:
         self.__repository_cache: Repository | None = None
 
     def parse(self, line: GedcomLine) -> 'Source':
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
 
         """Parse a source from a GEDCOM line"""
         if not line.xref_id:
@@ -87,8 +87,8 @@ class Source:
     @property
     def repository(self) -> Repository | None:
         if self.__repository_cache is None and self.repository_id:
-            from model.GedcomTransmission import GedcomTransmission
-            self.__repository_cache = GedcomTransmission().get_repository(self.repository_id)
+            from model.GedcomModel import GedcomModel
+            self.__repository_cache = GedcomModel().get_repository(self.repository_id)
         return self.__repository_cache
 
     def __repr__(self) -> str:

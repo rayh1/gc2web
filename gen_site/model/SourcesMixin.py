@@ -11,7 +11,7 @@ class SourcesMixin:
         self.__sources_cache: List[Source] | None = None
 
     def parse_sources(self, line: GedcomLine):
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
 
         for subline in GedcomParser().iterate(line, tag=GedcomTags.SOUR):
             if subline.pointer_value:
@@ -19,10 +19,10 @@ class SourcesMixin:
                 
     @property
     def sources(self) -> List[Source]:
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
 
         if self.__sources_cache is None:
-            self.__sources_cache = list(filter(None, (GedcomTransmission().get_source(source_id) for source_id in self.__source_ids)))
+            self.__sources_cache = list(filter(None, (GedcomModel().get_source(source_id) for source_id in self.__source_ids)))
         return self.__sources_cache
 
     @property

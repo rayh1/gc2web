@@ -23,7 +23,7 @@ class EventDetail(SourcesMixin, NotesMixin):
         self.__witnesses: list[Witness] = []
         
     def parse(self, line: GedcomLine) -> 'EventDetail': # type: ignore
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
 
         self.__value = line.value
 

@@ -9,7 +9,7 @@ class Repository:
         self.__www: str | None = None
 
     def parse(self, line: GedcomLine) -> 'Repository':
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
 
         """Parse a repository from a GEDCOM line"""
         if not line.xref_id:

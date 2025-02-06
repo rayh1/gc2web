@@ -48,7 +48,7 @@ class Individual(SourcesMixin, NotesMixin):
         self.__witnessed_events_cache: list[tuple[str, 'EventDetail', list['Individual']]] | None = None
 
     def parse(self, line: GedcomLine) -> 'Individual':
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
 
         if not line.xref_id:
             raise ValueError(f"Individual has no xref_id: {line}")        
@@ -200,16 +200,16 @@ class Individual(SourcesMixin, NotesMixin):
 
     @property
     def fams(self) -> list['Family']: # type: ignore
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
         if self.__fams_cache is None:
-            self.__fams_cache = list(filter(None, [GedcomTransmission().get_family(fams_id) for fams_id in self.fams_ids]))
+            self.__fams_cache = list(filter(None, [GedcomModel().get_family(fams_id) for fams_id in self.fams_ids]))
         return self.__fams_cache
 
     @property
     def famc(self) -> 'Family': # type: ignore
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
         if self.__famc_cache is None and self.__famc_id:
-            self.__famc_cache = GedcomTransmission().get_family(self.__famc_id)
+            self.__famc_cache = GedcomModel().get_family(self.__famc_id)
         return self.__famc_cache # type: ignore
 
     @property
@@ -360,11 +360,11 @@ class Individual(SourcesMixin, NotesMixin):
     
     def witnessed_events(self) -> list[tuple[str, 'EventDetail', list['Individual']]]:
         if self.__witnessed_events_cache is None:
-            from model.GedcomTransmission import GedcomTransmission
+            from model.GedcomModel import GedcomModel
             
             result: list[tuple[str, 'EventDetail', list['Individual']]] = []
             
-            for individual in GedcomTransmission().individuals:
+            for individual in GedcomModel().individuals:
                 if individual.birth.has_witness(self):
                     result.append(("Geboorte", individual.birth, [individual]))
                 if individual.death.has_witness(self):

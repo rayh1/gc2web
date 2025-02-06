@@ -18,7 +18,7 @@ class Association(SourcesMixin, NotesMixin):
         self.__rel_type: str | None = None
 
     def parse(self, line: GedcomLine) -> 'Association':
-        from model.GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
 
         if not line.pointer_value:
             raise ValueError(f"Association has no pointer value: {line}")
@@ -58,9 +58,9 @@ class Association(SourcesMixin, NotesMixin):
 # Utility
 
     def individual(self) -> Union['Individual', None]: # type: ignore
-        from GedcomTransmission import GedcomTransmission
+        from model.GedcomModel import GedcomModel
 
         if not self.individual_id:
             return None
 
-        return GedcomTransmission().get_individual(self.individual_id)
+        return GedcomModel().get_individual(self.individual_id)

@@ -4,7 +4,7 @@ import sys
 
 from parser.GedcomParser import GedcomParser
 
-from model.GedcomTransmission import GedcomTransmission
+from model.GedcomModel import GedcomModel
 from model.Individual import Individual
 from model.Witness import Witness
 
@@ -75,7 +75,7 @@ def print_witness(witness: Witness, individual: Individual):
     #print(f"[{individual.name}] {witness.relation}: {individual.father.name}/{witness.name}")
 
 def process_witnesses():
-    for individual in GedcomTransmission().individuals:
+    for individual in GedcomModel().individuals:
         for event in [individual.birth, individual.baptism, individual.death, individual.burial]:
             for witness in event.witnesses:
                 if is_father(witness, individual):
@@ -449,7 +449,7 @@ def print_witnesses(witness: Witness, individuals: list[Individual], individual:
     print(f"{witness.line_num} {witness.relation}: {witness.name} = {show_candidates_names(individuals)} --> {individual.name} {individual.xref_id}")
 
 def identify_witnesses():
-    for individual in GedcomTransmission().individuals:
+    for individual in GedcomModel().individuals:
         for event in [individual.birth, individual.baptism, individual.death, individual.burial]:
             for witness in event.witnesses:
 
@@ -521,7 +521,7 @@ def main(argv):
     ap.add_argument('file', type=str, help='Path to the GEDCOM file')
     
     args = ap.parse_args(argv[1:])
-    GedcomTransmission().parse_file(args.file)
+    GedcomModel().parse_file(args.file)
     identify_witnesses()
 
 if __name__ == '__main__':
