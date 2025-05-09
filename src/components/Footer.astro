@@ -5,6 +5,11 @@ import { LAST_MODIFIED } from "../last_modified";
 const today = new Date();
 ---
 
-<footer class="p-6 text-center text-sm text-gray-800">
-  &copy; {today.getFullYear()} {BRAND}. All rights reserved. Last updated: {LAST_MODIFIED}.
+<footer class="mt-auto py-8 bg-gray-50">
+  <div class="container">
+    <div class="text-center text-sm text-gray-600">
+      <p>&copy; {today.getFullYear()} {BRAND}. All rights reserved.</p>
+      <p class="mt-2 text-gray-500">Last updated: {LAST_MODIFIED}</p>
+    </div>
+  </div>
 </footer>

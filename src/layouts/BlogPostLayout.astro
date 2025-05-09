@@ -6,24 +6,20 @@ import Footer from "../components/Footer.astro";
 
 type Props = CollectionEntry<"entity">["data"];
 
-const { title } =
-  Astro.props;
+const { title } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <BaseHead title={title} />
   </head>
 
-  <body>
+  <body class="min-h-screen flex flex-col">
     <Header />
-    <main class="container">
-      <article class="prose">
-        <h2 class="title">{title}</h2>
-        <p/>
+    <main class="container flex-grow">
+      <article class="prose prose-lg prose-gray mx-auto">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-8">{title}</h1>
         <slot />
-        <footer>
-        </footer>
       </article>
     </main>
     <Footer />

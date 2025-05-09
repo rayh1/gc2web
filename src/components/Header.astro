@@ -3,12 +3,16 @@ import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
 ---
 
-<header class="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white py-4">
-  <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
-    <a class="flex-none text-xl font-semibold text-gray-600" href="/">{SITE_TITLE}</a>
-    <div class="flex flex-row items-center gap-5 mt-5 sm:justify-end sm:mt-0 sm:pl-5">
-      <HeaderLink href="/entity">Alles</HeaderLink>
-      <HeaderLink href="/search">Zoeken</HeaderLink>
+<header class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm shadow-sm">
+  <nav class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <a class="text-xl font-bold text-gray-800 hover:text-primary-500 transition-colors" href="/">
+        {SITE_TITLE}
+      </a>
+      <div class="flex items-center gap-8">
+        <HeaderLink href="/entity">Alles</HeaderLink>
+        <HeaderLink href="/search">Zoeken</HeaderLink>
+      </div>
     </div>
   </nav>
 </header>

@@ -16,12 +16,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.0.6",
+    "@astrojs/mdx": "^4.2.6",
     "@astrojs/rss": "^4.0.11",
-    "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/solid-js": "^5.0.3",
-    "@astrojs/tailwind": "^5.1.4",
-    "astro": "^5.1.7",
+    "@astrojs/sitemap": "^3.3.1",
+    "@astrojs/solid-js": "^5.0.10",
+    "@astrojs/tailwind": "^6.0.2",
+    "astro": "^5.7.12",
     "fuse.js": "^6.6.2",
     "remark-gemoji": "^8.0.0",
     "solid-js": "^1.7.3",

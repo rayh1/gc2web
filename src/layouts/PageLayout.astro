@@ -14,15 +14,17 @@ const { frontmatter } = Astro.props;
 const title = frontmatter?.title || Astro.props.title;
 ---
 
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <BaseHead title={title} />
   </head>
 
-  <body>
+  <body class="min-h-screen flex flex-col">
     <Header />
-    <main class="container prose">
-      <slot />
+    <main class="container flex-grow">
+      <div class="prose prose-lg prose-gray mx-auto">
+        <slot />
+      </div>
     </main>
     <Footer />
   </body>
