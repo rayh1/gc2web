@@ -1,17 +1,19 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
+import { ThemeToggle } from "./ThemeToggle";
 ---
 
-<header class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm shadow-sm">
+<header class="sticky top-0 z-50 w-full bg-white/95 dark:bg-dark-surface/95 backdrop-blur-sm shadow-sm">
   <nav class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
-      <a class="text-xl font-bold text-gray-800 hover:text-primary-500 transition-colors" href="/">
+      <a class="text-xl font-bold text-gray-800 hover:text-primary-500 transition-colors dark:text-gray-200" href="/">
         {SITE_TITLE}
       </a>
       <div class="flex items-center gap-8">
         <HeaderLink href="/entity">Alles</HeaderLink>
         <HeaderLink href="/search">Zoeken</HeaderLink>
+        <ThemeToggle client:load />
       </div>
     </div>
   </nav>

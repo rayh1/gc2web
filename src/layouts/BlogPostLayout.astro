@@ -12,13 +12,27 @@ const { title } = Astro.props;
 <html lang="en" class="scroll-smooth">
   <head>
     <BaseHead title={title} />
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
   </head>
 
   <body class="min-h-screen flex flex-col">
     <Header />
     <main class="container flex-grow">
-      <article class="prose prose-lg prose-gray mx-auto">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-8">{title}</h1>
+      <article class="prose prose-lg prose-gray mx-auto dark:prose-dark">
+        <h2 class="title text-3xl font-bold tracking-tight text-gray-900 dark:text-dark-text sm:text-4xl">{title}</h2>
         <slot />
       </article>
     </main>

@@ -17,12 +17,26 @@ const title = frontmatter?.title || Astro.props.title;
 <html lang="en" class="scroll-smooth">
   <head>
     <BaseHead title={title} />
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
   </head>
 
   <body class="min-h-screen flex flex-col">
     <Header />
     <main class="container flex-grow">
-      <div class="prose prose-lg prose-gray mx-auto">
+      <div class="prose prose-lg prose-gray mx-auto dark:prose-dark">
         <slot />
       </div>
     </main>

@@ -5,11 +5,11 @@ import { LAST_MODIFIED } from "../last_modified";
 const today = new Date();
 ---
 
-<footer class="mt-auto py-8 bg-gray-50">
+<footer class="mt-auto py-8 bg-gray-50 dark:bg-dark-surface transition-colors duration-200">
   <div class="container">
-    <div class="text-center text-sm text-gray-600">
+    <div class="text-center text-sm text-gray-600 dark:text-gray-400">
       <p>&copy; {today.getFullYear()} {BRAND}. All rights reserved.</p>
-      <p class="mt-2 text-gray-500">Last updated: {LAST_MODIFIED}</p>
+      <p class="mt-2 text-gray-500 dark:text-gray-500">Last updated: {LAST_MODIFIED}</p>
     </div>
   </div>
 </footer>
