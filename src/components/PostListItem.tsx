@@ -51,12 +51,12 @@ export const PostListItem = ({ post, matches = [] }: Props) => {
   return (
     <div class="flex flex-col gap-1">
       <a 
-        class="text-lg font-medium text-primary-500 no-underline hover:underline dark:text-primary-400"
+        class="text-base sm:text-lg font-medium text-primary-500 no-underline hover:underline dark:text-primary-400 break-words"
         href={`/entity/${id}/`}
       >
         {titleMatch ? highlightText(title, titleMatch.indices) : title}
       </a>
-      <div class="text-xs text-gray-500 dark:text-gray-500">
+      <div class="text-xs text-gray-500 dark:text-gray-500 break-all">
         ID: {id}
       </div>
     </div>

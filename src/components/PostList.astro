@@ -8,11 +8,11 @@ interface Props {
 
 const { posts } = Astro.props;
 ---
-<ul class="not-prose grid list-none gap-0 pl-0">
+<ul class="not-prose grid list-none gap-2 sm:gap-0 pl-0">
   {
     posts.map((post) => {
       return (
-        <li>
+        <li class="px-4 py-3 sm:px-0">
           <Post post={post} />
         </li>
       );

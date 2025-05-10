@@ -33,8 +33,24 @@ body {
   @apply max-w-none;
 }
 
+/* Make images responsive */
+.prose img {
+  @apply w-full max-w-full h-auto object-cover rounded-lg;
+}
+
+/* Responsive table handling */
+.prose table {
+  @apply block w-full overflow-x-auto;
+}
+
+/* Adjust link colors for better contrast */
 .prose a {
-  @apply text-primary-500 no-underline transition-colors duration-200 hover:text-primary-600 dark:text-primary-500 dark:hover:text-primary-600;
+  @apply text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300;
+}
+
+/* Better spacing for mobile */
+.prose > * + * {
+  @apply mt-4 sm:mt-6;
 }
 
 main {

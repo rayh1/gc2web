@@ -36,7 +36,7 @@ const title = frontmatter?.title || Astro.props.title;
   <body class="min-h-screen flex flex-col">
     <Header />
     <main class="container flex-grow">
-      <div class="prose prose-lg prose-gray mx-auto dark:prose-dark">
+      <div class="prose prose-lg prose-gray mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-none sm:max-w-3xl lg:max-w-4xl dark:prose-dark">
         <slot />
       </div>
     </main>

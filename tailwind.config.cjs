@@ -9,8 +9,11 @@ module.exports = {
         "header-foreground": "#000",
         link: "#2563EB",
         primary: {
+          300: "#93C5FD",  // Adding lighter shade for dark mode hover
+          400: "#60A5FA",
           500: "#2563EB",
           600: "#1D4ED8",
+          700: "#1E40AF"   // Adding darker shade for hover
         },
         "primary-foreground": "#fff",
         dark: {
