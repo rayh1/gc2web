@@ -11,7 +11,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - ARG_NODE_VERSION=20 
+        - ARG_NODE_VERSION=22
     environment:
       - GH_TOKEN
     ports:
