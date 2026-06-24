@@ -34,6 +34,7 @@ venv/
 
 # DevKit content (installed at runtime by the Refresh DevKit task)
 .github/
+.agents/
 
 # macOS-specific files
 .DS_Store
