@@ -22,6 +22,16 @@
       }
     },
     {
+      "label": "Sync Dependencies",
+      "type": "shell",
+      "command": "uv sync",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
       "label": "Install Node Dependencies",
       "type": "shell",
       "command": "npm install",

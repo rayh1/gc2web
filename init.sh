@@ -26,12 +26,6 @@ if [ -f "pyproject.toml" ]; then
   uv sync
 fi
 
-# Install Python dependencies from requirements.txt (gen_site tooling)
-if [ -f "requirements.txt" ]; then
-  echo "Installing Python dependencies..."
-  uv pip install -r requirements.txt
-fi
-
 # Install Node.js dependencies (if package.json exists)
 if [ -f "package.json" ]; then
   echo "Installing Node.js dependencies..."
