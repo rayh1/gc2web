@@ -26,6 +26,14 @@ if [ -f "pyproject.toml" ]; then
   uv sync
 fi
 
+# Install the gedq CLI from the vendored wheel (used by gen_site to query the GEDCOM).
+# Launcher is placed on PATH (/opt/venv/bin); the tool's own env stays isolated.
+gedq_wheel="$(ls vendor/gedq-*.whl 2>/dev/null | head -1)"
+if [ -n "$gedq_wheel" ]; then
+  echo "Installing gedq CLI from $gedq_wheel..."
+  UV_TOOL_BIN_DIR=/opt/venv/bin uv tool install --force "$gedq_wheel"
+fi
+
 # Install Node.js dependencies (if package.json exists)
 if [ -f "package.json" ]; then
   echo "Installing Node.js dependencies..."
