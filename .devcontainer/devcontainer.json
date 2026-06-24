@@ -1,29 +1,29 @@
 {
-    "name": "gc2web",
-    "dockerComposeFile": "compose.yaml",
-    "service": "main",
-    "workspaceFolder": "/workspaces",
-    "shutdownAction": "stopCompose",
-	
-	"customizations": {
-        "vscode": {
-            "extensions": [
-                "ms-python.vscode-pylance",  
-                "ms-python.python",  
-                "ms-python.debugpy",
-
-                "astro-build.astro-vscode",
-				
-                "dbaeumer.vscode-eslint",
-				"esbenp.prettier-vscode",
-
-                "redhat.fabric8-analytics",
-                "SanaAjani.taskrunnercode",
-                "mgmcdermott.vscode-language-babel",
-                "stylelint.vscode-stylelint",
-				"eamodio.gitlens",
-				"mhutchie.git-graph"
-            ]  
-        }
+  "name": "gc2web",
+  "dockerComposeFile": "compose.yaml",
+  "service": "main",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "postCreateCommand": "./init.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "SanaAjani.taskrunnercode",
+        "ms-python.vscode-pylance",
+        "ms-python.python",
+        "ms-python.debugpy",
+        "astro-build.astro-vscode",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "redhat.fabric8-analytics",
+        "mgmcdermott.vscode-language-babel",
+        "stylelint.vscode-stylelint",
+        "eamodio.gitlens",
+        "mhutchie.git-graph"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/venv/bin/python"
+      }
     }
+  }
 }

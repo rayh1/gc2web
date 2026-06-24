@@ -5,21 +5,23 @@ networks:
   net:
 
 services:
-
   main:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: .devcontainer/Dockerfile
       args:
-        - ARG_NODE_VERSION=22
-        - ARG_UV_VERSION=0.4.27
+        - ARG_PYTHON_VERSION=${PYTHON_VERSION}
+        - ARG_UV_VERSION=${UV_VERSION}
+        - ARG_NODE_VERSION=${NODE_VERSION}
     environment:
-      - GH_TOKEN
+      - HOST=0.0.0.0
     ports:
-      - 4200:4200
-      - 4321:4321
+      - "4321"
+      - "4200"
     volumes:
-      - vol:/workspaces
+      - vol:/workspace
+      - ${HOME}/.gitconfig:/tmp/host-gitconfig:ro
+      - ${HOME}/.config/gh:/tmp/host-gh-config:ro
     restart: unless-stopped
     stdin_open: true
     tty: true

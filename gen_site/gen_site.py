@@ -18,12 +18,12 @@ from model.Witness import Witness
 from model.Footnote import Footnote
 
 PLANTUML_BASE_URL: str = "https://www.plantuml.com/plantuml/svg"
-CONTENT_DIR: Path = Path("/workspaces/gc2web/src/content/entity")
+CONTENT_DIR: Path = Path("/workspace/src/content/entity")
 LINK_ICON: str = ":link:"
 HEADER_PREFIX: str = "###"
-LAST_MODIFIED_FILE = "/workspaces/gc2web/src/last_modified.ts"
+LAST_MODIFIED_FILE = "/workspace/src/last_modified.ts"
 
-logging.basicConfig(level=logging.INFO, 
+logging.basicConfig(level=logging.INFO,
                    format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -66,7 +66,7 @@ def source_link(source: Source) -> str:
 
 def sources_str(sources: SourcesMixin | None) -> str:
     if not sources or len(sources.sources) == 0: return ""
-    
+
     result = "<sup>"
     for source in sources.sources:
         result += f"<a href=\"{source_url(source)}\" style=\"text-decoration:none\" title=\"{source.title}\">{LINK_ICON}</a>"
@@ -76,18 +76,18 @@ def age_str(individual: Individual, event: EventDetail) -> str:
     return f"oud {s(individual.age(event.date))} jaar"
 
 def sun_daughter_str(individual: Individual | None) -> str:
-    if not individual: 
+    if not individual:
         return "kind"
-    return "zoon" if individual.sex == "M" else ("dochter" if individual.sex == "F" else "kind") 
+    return "zoon" if individual.sex == "M" else ("dochter" if individual.sex == "F" else "kind")
 
 def brother_sister_str(individual: Individual | None) -> str:
-    if not individual: 
+    if not individual:
         return "familielid"
     return "broer" if individual.sex == "M" else ("zus" if individual.sex == "F" else "familielid")
 
 def is_in_lifetime(individual: Individual, event: EventDetail) -> bool:
     if not event.is_defined: return False
-    
+
     if not individual.start_life.is_defined or not individual.end_life.is_defined:
         return False
 
@@ -99,7 +99,7 @@ def lifespan_str(individual: Individual) -> str:
     end_date = individual.end_life.date.date()
     end_year = end_date.year if end_date and end_date.year else "?"
     year_str = f"({start_year}-{end_year})"
-    
+
     return year_str
 
 def gender_str(individual: Individual) -> str:
@@ -116,7 +116,7 @@ def witness_str(witness) -> str:
         witness_individual = GedcomModel().get_individual(witness.xref_id)
     return ", ".join(list(filter(None, [
         witness_link(witness) if witness_individual else witness.name,
-        witness.occupation, 
+        witness.occupation,
         witness.residence,
         f"{witness.age} jaar" if witness.age else "",
         witness.relation
@@ -125,7 +125,7 @@ def witness_str(witness) -> str:
 def generate_chronology(individual: Individual, content: list[str]):
     events: list[ChronologyEvent] = []
     if individual.father and individual.father.end_life.date.value:
-        events.append(ChronologyEvent(individual.father.end_life, f"Overlijden vader {individual_link(individual.father)}")) 
+        events.append(ChronologyEvent(individual.father.end_life, f"Overlijden vader {individual_link(individual.father)}"))
     if individual.mother and individual.mother.end_life.date.value:
         events.append(ChronologyEvent(individual.mother.end_life, f"Overlijden moeder {individual_link(individual.mother)}"))
     if individual.birth.date.value:
@@ -177,25 +177,25 @@ def generate_individual_page(individual: Individual, filepath: Path):
             content.append(f"")
             content.append(f"![test]({PLANTUML_BASE_URL}/{PlantUMLEncoder.encode(PlantUMLCreator.create_individual_diagram(individual))})")
             content.append("</details>")
-            
+
             content.append(f"")
             content.append(f"{HEADER_PREFIX} Gegevens")
             content.append(f"- Naam: {individual.name} {Footnote().add(individual.name)}{sources_str(individual.name)}")
             content.append(f"- Geslacht: {gender_str(individual)}")
             content.append(f"- Geboren {individual.birth.date} te {individual.birth.place}{', ' + individual.birth.address if individual.birth.address else ''} {Footnote().add(individual.birth)}{sources_str(individual.birth)}")
-            if individual.birth.timestamp: content.append(f"- Geboorte tijdstip: \"{individual.birth.timestamp}\" {sources_str(individual.birth)}")            
+            if individual.birth.timestamp: content.append(f"- Geboorte tijdstip: \"{individual.birth.timestamp}\" {sources_str(individual.birth)}")
             if individual.birth.witnesses:
                 content.append(f"- Geboorte getuigen: {sources_str(individual.birth)}")
                 for witness in individual.birth.witnesses:
                     content.append(f"  - {witness_str(witness)}")
-            if individual.baptism.date.value or individual.baptism.place.value: 
+            if individual.baptism.date.value or individual.baptism.place.value:
                 content.append(f"- Gedoopt {individual.baptism.date} te {individual.baptism.place}{', ' + individual.baptism.address if individual.baptism.address else ''} {Footnote().add(individual.baptism)}{sources_str(individual.baptism)}")
                 if individual.baptism.witnesses:
                     content.append(f"- Doop getuigen: {sources_str(individual.baptism)}")
                     for witness in individual.baptism.witnesses:
                         content.append(f"  - {witness_str(witness)}")
             content.append(f"- Overleden {individual.death.date} te {individual.death.place}{', ' + individual.death.address if individual.death.address else ''}, {age_str(individual, individual.end_life)} jaar {Footnote().add(individual.death)}{sources_str(individual.death)}")
-            if individual.death.timestamp: content.append(f"- Overlijden tijdstip: \"{individual.death.timestamp}\" {sources_str(individual.death)}")            
+            if individual.death.timestamp: content.append(f"- Overlijden tijdstip: \"{individual.death.timestamp}\" {sources_str(individual.death)}")
             if individual.death.witnesses:
                 content.append(f"- Overlijden getuigen: {sources_str(individual.death)}")
                 for witness in individual.death.witnesses:
@@ -220,7 +220,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
             mother: Individual | None = individual.mother
             if mother:
                 content.append(f"- De moeder is {individual_link(mother)} {lifespan_str(mother)}")
-            
+
             if individual.fams:
                 content.append("")
                 content.append(f"{HEADER_PREFIX} Relaties en Kinderen")
@@ -235,7 +235,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
                             content.append(f"- Huwelijk getuigen:  {sources_str(fams.marriage)}")
                             for witness in fams.marriage.witnesses:
                                 content.append(f"  - {witness_str(witness)}")
-                    sorted_children = sorted(fams.children, key=lambda x: x.start_life.date.date() or datetime.min) 
+                    sorted_children = sorted(fams.children, key=lambda x: x.start_life.date.date() or datetime.min)
                     for child in sorted_children:
                         content.append(f"- Kind {individual_link(child)} {lifespan_str(child)}")
 
@@ -331,23 +331,23 @@ def generate_source_page(source, filepath):
             file.writelines("\n".join(content))
     except IOError as e:
         logger.error(f"Failed to write file {filepath}: {e}")
-        raise        
+        raise
 
-def generate_individual_pages(output_dir: Path):    
+def generate_individual_pages(output_dir: Path):
     for individual in tqdm(GedcomModel().individuals, desc="Generated individual pages", bar_format='{desc}: {total_fmt}'):
         generate_individual_page(individual, output_dir / f"{individual.xref_id}.md")
 
 def generate_source_pages(output_dir: Path):
-    
+
     for source in tqdm(GedcomModel().sources, desc="Generated source pages", bar_format='{desc}: {total_fmt}'):
         generate_source_page(source, output_dir / f"{source.xref_id}.md")
 
 def generate_last_modified():
     last_modified_path = Path(LAST_MODIFIED_FILE)
-    
+
     current_time = datetime.now().astimezone().strftime("%d-%m-%Y")
     content = f'export const LAST_MODIFIED = "{current_time}";\n'
-    
+
     try:
         with open(last_modified_path, 'w') as file:
             file.write(content)
@@ -358,11 +358,11 @@ def generate_last_modified():
 def main(argv: List[str]):
     ap = argparse.ArgumentParser(description='Process a GEDCOM file.')
     ap.add_argument('file', type=str, help='Path to the GEDCOM file')
-    
+
     args = ap.parse_args(argv[1:])
 
     GedcomModel().parse_file(args.file)
-    
+
     generate_individual_pages(CONTENT_DIR)
     generate_source_pages(CONTENT_DIR)
     generate_last_modified()

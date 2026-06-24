@@ -16,8 +16,24 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+# keep the versioned devcontainer env
+!.devcontainer/.env
+
+# Python (gen_site)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# gedq derived cache (created beside the GEDCOM)
+*.ladybug/
+.ladybug/
+*.ladybug.lease
+
+
+# DevKit content (installed at runtime by the Refresh DevKit task)
+.github/
 
 # macOS-specific files
 .DS_Store
-
-#src/content/entity
