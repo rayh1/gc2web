@@ -116,6 +116,13 @@ To force JSON:
 gedq person I00002 data.ged --json
 ```
 
+For people with repeated GEDCOM `NAME` structures, JSON exposes two related name surfaces:
+
+- `name_variants` is the summary list of raw `NAME` strings in source order
+- `names` is the canonical per-occurrence projection, one object per GEDCOM `NAME`, carrying its own `name_index`, `value`, direct `source_ids`, attached `notes`, derived `note_refs`, and `src` when `--with-src` is used
+
+Use `names` when you need first-class repeated-name identity, such as preserving name-attached notes or keeping source grouping stable across repeated `NAME` occurrences.
+
 Typical uses:
 
 ```bash
@@ -203,6 +210,7 @@ What this is good for:
 
 - `person --expand FAMC` lets you inspect the family where the person is a child
 - `person --expand FAMS` lets you inspect the family where the person is a spouse
+- `person --json` plus the `names` array lets you inspect one object per repeated GEDCOM `NAME`, including per-name citations, `NAME`-attached notes, and provenance when requested
 - `family --expand HUSB` or `family --expand WIFE` lets you inspect linked people without a second command
 - `family --expand MARR` lets you inspect a family event inline without reading the full `events` list
 - `source --expand REPO` lets you inspect linked repository-style references when they exist
