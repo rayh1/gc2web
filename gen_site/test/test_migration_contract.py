@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import subprocess
 import sys
 import unittest
@@ -16,6 +17,7 @@ CONTENT_DIR = WORKSPACE_DIR / "src/content/entity"
 GEDCOM_FILE = GEN_SITE_DIR / "Hoofman.ged"
 BASELINE_COMMIT = "eab4d3063c936fb1ba79878d24cda21b95bd5f21"
 ALLOWLIST_FILE = GEN_SITE_DIR / "test/migration_allowlist.json"
+TREE_SECTION_RE = re.compile(r"### Boom\n.*?(?=\n### |\Z)", re.DOTALL)
 
 
 def run_command(*command: str, cwd: Path = WORKSPACE_DIR) -> subprocess.CompletedProcess[str]:
@@ -42,6 +44,10 @@ def load_jsonl_output(kind: str) -> list[dict]:
 
 def schema_project(record: dict, allowed_keys: set[str]) -> dict:
     return {key: value for key, value in record.items() if key in allowed_keys}
+
+
+def normalize_tree_section(page_text: str) -> str:
+    return TREE_SECTION_RE.sub("### Boom\n\n[TREE CONTENT NORMALIZED]", page_text)
 
 
 class TestGedqMigrationContract(unittest.TestCase):
@@ -167,14 +173,15 @@ class TestGedqMigrationContract(unittest.TestCase):
 
         diff_paths = set()
         for rel_path in sorted(current_files):
-            current_bytes = (WORKSPACE_DIR / rel_path).read_bytes()
-            baseline_bytes = subprocess.run(
+            current_text = (WORKSPACE_DIR / rel_path).read_text()
+            baseline_text = subprocess.run(
                 ["git", "show", f"{BASELINE_COMMIT}:{rel_path}"],
                 cwd=WORKSPACE_DIR,
                 capture_output=True,
+                text=True,
                 check=True,
             ).stdout
-            if current_bytes != baseline_bytes:
+            if normalize_tree_section(current_text) != normalize_tree_section(baseline_text):
                 diff_paths.add(rel_path)
 
         self.assertEqual(diff_paths, self.allowlist_paths)
@@ -199,7 +206,9 @@ class TestGedqMigrationContract(unittest.TestCase):
             check=True,
         ).stdout
 
-        self.assertEqual(current, baseline)
+        self.assertEqual(normalize_tree_section(current), normalize_tree_section(baseline))
+        self.assertIn('<pre class="ascii-tree-block">', current)
+        self.assertNotIn('<details><summary>Toon</summary>', current)
         self.assertIn('- Geboorte tijdstip: "des morgens te tien ure"', current)
         self.assertIn('- Geboorte getuigen:', current)
         self.assertIn('Petrus Hoofman', current)

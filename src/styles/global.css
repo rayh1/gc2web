@@ -75,6 +75,30 @@ pre > code {
   all: unset;
 }
 
+.prose .ascii-tree-wrap {
+  @apply my-4 overflow-x-auto rounded-lg border border-gray-200 bg-gray-50 shadow-sm dark:border-gray-700 dark:bg-dark-surface;
+}
+
+.prose pre.ascii-tree-block {
+  @apply m-0 bg-transparent p-4 text-sm leading-6 text-gray-900 dark:bg-transparent dark:text-dark-text;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  white-space: pre;
+  min-width: max-content;
+}
+
+.prose .ascii-tree__focus {
+  @apply font-semibold text-primary-600 dark:text-primary-300;
+}
+
+.prose pre.ascii-tree-block .ascii-tree-link,
+.prose pre.ascii-tree-block .ascii-tree-link:link,
+.prose pre.ascii-tree-block .ascii-tree-link:visited,
+.prose pre.ascii-tree-block .ascii-tree-link:hover,
+.prose pre.ascii-tree-block .ascii-tree-link:active {
+  color: inherit;
+  text-decoration: none;
+}
+
 blockquote {
   @apply border-l-4 border-primary-500 bg-gray-50 pl-4 py-2 my-4 italic rounded-r dark:bg-dark-surface;
 }

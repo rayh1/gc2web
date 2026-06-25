@@ -6,8 +6,7 @@ from pathlib import Path
 from typing import List
 from tqdm import tqdm # type: ignore
 
-import util.PlantUMLEncoder as PlantUMLEncoder
-import util.PlantUMLCreator as PlantUMLCreator
+from util.AsciiTreeRenderer import render_ascii_tree_block
 from model.GedcomModel import GedcomModel
 from model.Individual import Individual
 from model.SourcesMixin import SourcesMixin
@@ -16,7 +15,6 @@ from model.EventDetail import EventDetail
 from model.Witness import Witness
 from model.Footnote import Footnote
 
-PLANTUML_BASE_URL: str = "https://www.plantuml.com/plantuml/svg"
 CONTENT_DIR: Path = Path("/workspace/src/content/entity")
 LINK_ICON: str = ":link:"
 HEADER_PREFIX: str = "###"
@@ -171,11 +169,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
             content.append(f"---")
             content.append(f"")
 
-            content.append(f"{HEADER_PREFIX} Boom")
-            content.append("<details><summary>Toon</summary>")
-            content.append(f"")
-            content.append(f"![test]({PLANTUML_BASE_URL}/{PlantUMLEncoder.encode(PlantUMLCreator.create_individual_diagram(individual))})")
-            content.append("</details>")
+            content.append(render_ascii_tree_block(individual))
 
             content.append(f"")
             content.append(f"{HEADER_PREFIX} Gegevens")
