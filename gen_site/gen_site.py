@@ -9,7 +9,6 @@ from tqdm import tqdm # type: ignore
 import util.PlantUMLEncoder as PlantUMLEncoder
 import util.PlantUMLCreator as PlantUMLCreator
 from model.GedcomModel import GedcomModel
-from parser.GedcomParser import GedcomParser
 from model.Individual import Individual
 from model.SourcesMixin import SourcesMixin
 from model.Source import Source

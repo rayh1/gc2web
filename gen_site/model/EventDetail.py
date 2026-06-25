@@ -1,7 +1,3 @@
-from parser.GedcomParser import GedcomParser
-from parser.GedcomLine import GedcomLine
-from parser.GedcomTags import GedcomTags
-
 from model.SourcesMixin import SourcesMixin
 from model.NotesMixin import NotesMixin
 from model.Witness import Witness
@@ -21,31 +17,9 @@ class EventDetail(SourcesMixin, NotesMixin):
         self.__type: str | None = None
         self.__timestamp: str | None = None
         self.__witnesses: list[Witness] = []
-        
-    def parse(self, line: GedcomLine) -> 'EventDetail': # type: ignore
-        from model.GedcomModel import GedcomModel
 
-        self.__value = line.value
-
-        for subline in GedcomParser().iterate(line):
-            if subline.tag == GedcomTags.DATE:
-                self.date = Date(subline.value)
-            elif subline.tag == GedcomTags.PLAC:
-                self.place = Place(subline.value)
-            elif subline.tag == GedcomTags.ADDR:
-                self.address = subline.value
-            elif subline.tag == GedcomTags.TYPE:
-                self.type = subline.value
-
-        self.parse_sources(line)
-        self.parse_notes(line)
-        
-        self.parse_timestamp()
-        self.parse_witnesses()
-               
-        return self
-    
     def parse_timestamp(self):
+        self.timestamp = None
         for note in self.notes:
             note_data: dict | None = note.parse_yaml()
 
@@ -54,6 +28,7 @@ class EventDetail(SourcesMixin, NotesMixin):
                 return
 
     def parse_witnesses(self):
+        self.__witnesses = []
         for note in self.notes:
             note_data: dict | None = note.parse_yaml()
 
@@ -70,28 +45,28 @@ class EventDetail(SourcesMixin, NotesMixin):
     @value.setter
     def value(self, value: str | None):
         self.__value = value
-    
+
     @property
     def date(self) -> Date:
         return self.__date
-        
+
     @date.setter
     def date(self, value: Date):
         self.__date = value
-        
+
     @property
     def place(self) -> Place:
         return self.__place
-        
-    @place.setter 
+
+    @place.setter
     def place(self, value: Place):
         self.__place = value
 
     @property
     def address(self) -> str | None:
         return self.__address
-        
-    @address.setter 
+
+    @address.setter
     def address(self, value: str | None):
         self.__address = value
 
@@ -114,13 +89,13 @@ class EventDetail(SourcesMixin, NotesMixin):
     @property
     def witnesses(self) -> list[Witness]:
         return self.__witnesses
-    
+
     @property
     def is_defined(self) -> bool:
         return self.date.value is not None
-    
+
 # Utility
-    
+
     def has_witness(self, individual: 'Individual') -> bool: # type: ignore
         for witness in self.witnesses:
             if witness.xref_id and witness.xref_id == individual.xref_id:

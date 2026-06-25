@@ -1,8 +1,11 @@
 from typing import List, Dict
 from tqdm import tqdm # type: ignore
 
-from parser.GedcomParser import GedcomParser
-from parser.GedcomTags import GedcomTags
+from adapter.gedq_adapter import build_families
+from adapter.gedq_adapter import build_individuals
+from adapter.gedq_adapter import build_repositories
+from adapter.gedq_adapter import build_sources
+from adapter.gedq_adapter import load_dataset
 
 from model.Individual import Individual
 from model.Family import Family
@@ -19,53 +22,17 @@ class GedcomModel:
         self.__source_map: Dict[str, Source] = {}
         self.__repository_map: Dict[str, Repository] = {}
 
-    def __parse_individuals(self):
-        """Parse individuals from the GedcomModel"""
-        for line in tqdm(list(GedcomParser().iterate(tag=GedcomTags.INDI)), desc="Parsed individuals", bar_format='{desc}: {total_fmt}'):
-            individual: Individual = Individual().parse(line)                        
-            self.__individual_map[individual.xref_id] = individual
-
-    def __parse_families(self):
-        """Parse families from the GedcomModel"""
-        for line in tqdm(list(GedcomParser().iterate(tag=GedcomTags.FAM)), desc="Parsed families", bar_format='{desc}: {total_fmt}'):
-            family = Family().parse(line)
-            self.__family_map[family.xref_id] = family
-
-    def __parse_sources(self):
-        """Parse sources from the GedcomModel"""
-        for line in tqdm(list(GedcomParser().iterate(tag=GedcomTags.SOUR)), desc="Parsed sources", bar_format='{desc}: {total_fmt}'):
-            if not line.xref_id:
-                continue    # Ignore SOUR line in header
-            
-            source = Source().parse(line)
-            self.__source_map[source.xref_id] = source
-
-    def __parse_repositories(self):
-        """Parse repositories from the GedcomModel"""
-        for line in tqdm(list(GedcomParser().iterate(tag=GedcomTags.REPO)), desc="Parsed repositories", bar_format='{desc}: {total_fmt}'):
-            repository = Repository().parse(line)
-            self.__repository_map[repository.xref_id] = repository
-
     def __exclude_privates(self):
         """Exclude private individuals from the GedcomModel"""
         for individual in tqdm(list(filter(lambda i: i.is_private(), self.individuals)), desc="Excluded private individuals", bar_format='{desc}: {total_fmt}'):
             del self.__individual_map[individual.xref_id]
 
-    def parse_gedcom(self):
-        """Parse the GedcomModel and generate all Individual, Family, Source, and Repository instances"""
-        self.__parse_sources()
-        self.__parse_individuals()
-        self.__parse_families()
-        self.__parse_repositories()
-
-        self.__exclude_privates()
-
     def get_individual(self, id: str) -> Individual | None:
         return self.__individual_map.get(id, None)
-    
+
     def get_family(self, id: str) -> Family | None:
         return self.__family_map.get(id, None)
-    
+
     def get_source(self, xref_id: str) -> Source | None:
         return self.__source_map.get(xref_id, None)
 
@@ -75,11 +42,11 @@ class GedcomModel:
     @property
     def individuals(self) -> List[Individual]:
         return list(self.__individual_map.values())
-    
+
     @property
     def families(self) -> List[Family]:
         return list(self.__family_map.values())
-    
+
     @property
     def sources(self) -> List[Source]:
         return list(self.__source_map.values())
@@ -87,12 +54,23 @@ class GedcomModel:
     @property
     def repositories(self) -> List[Repository]:
         return list(self.__repository_map.values())
-    
-    def parse_file(self, gedcom_file: str):
-        from model.GedcomModel import GedcomModel
-        
-        with open(gedcom_file, 'r') as gedcom_stream:
-            GedcomParser().parse(gedcom_stream)
-            GedcomModel().parse_gedcom()
 
-    
+    def clear(self):
+        self.__individual_map = {}
+        self.__family_map = {}
+        self.__source_map = {}
+        self.__repository_map = {}
+
+    def parse_file(self, gedcom_file: str):
+        try:
+            dataset = load_dataset(gedcom_file)
+        except RuntimeError as exc:
+            raise SystemExit(str(exc)) from exc
+
+        self.clear()
+        self.__source_map = build_sources(dataset.sources)
+        self.__repository_map = build_repositories(dataset.repositories)
+        self.__individual_map = build_individuals(dataset.individuals, dataset.sources)
+        self.__family_map = build_families(dataset.families)
+        self.__exclude_privates()
+

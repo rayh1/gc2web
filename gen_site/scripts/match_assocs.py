@@ -1,8 +1,6 @@
 import argparse
 import sys
 
-from parser.GedcomParser import GedcomParser
-
 from model.GedcomModel import GedcomModel
 
 def witnesses_to_string(witnesses):
@@ -53,7 +51,7 @@ def match_assocs():
 def main(argv):
     ap = argparse.ArgumentParser(description='Set witness IDs in a GEDCOM file.')
     ap.add_argument('file', type=str, help='Path to the GEDCOM file')
-    
+
     args = ap.parse_args(argv[1:])
     GedcomModel().parse_file(args.file)
     match_assocs()

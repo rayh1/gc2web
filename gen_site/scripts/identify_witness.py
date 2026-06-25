@@ -2,8 +2,6 @@ import argparse
 import re
 import sys
 
-from parser.GedcomParser import GedcomParser
-
 from model.GedcomModel import GedcomModel
 from model.Individual import Individual
 from model.Witness import Witness
@@ -46,7 +44,7 @@ def is_father_in_marriage(witness: Witness, individual: Individual) -> bool:
         return is_father_groom(witness, individual)
     elif individual.is_female:
         return is_father_bride(witness, individual)
-                
+
     return False
 
 def is_mother_groom(witness: Witness, individual: Individual) -> bool:
@@ -64,7 +62,7 @@ def is_mother_in_marriage(witness: Witness, individual: Individual) -> bool:
         return is_mother_groom(witness, individual)
     elif individual.is_female:
         return is_mother_bride(witness, individual)
-                
+
     return False
 
 def print_witness(witness: Witness, individual: Individual):
@@ -114,7 +112,7 @@ def is_unknown_marriage_witness(witness: Witness, individual: Individual) -> boo
         return False
     if is_mother_bride(witness, individual) and individual.is_male:
         return False
-    
+
     return True
 
 def has_exact_phrase(s: str | None, phrase: str) -> bool:
@@ -212,10 +210,10 @@ def find_grandfather2(name: str | None, individual: Individual) -> list[Individu
     if not name:
         return results
 
-    if individual.father and individual.father.father and individual.father.father.has_name(name): 
+    if individual.father and individual.father.father and individual.father.father.has_name(name):
         results.append(individual.father.father)
-    
-    if individual.mother and individual.mother.father and individual.mother.father.has_name(name): 
+
+    if individual.mother and individual.mother.father and individual.mother.father.has_name(name):
         results.append(individual.mother.father)
 
     return results
@@ -229,10 +227,10 @@ def find_grandmother2(name: str | None, individual: Individual) -> list[Individu
     if not name:
         return results
 
-    if individual.father and individual.father.mother and individual.father.mother.has_name(name): 
+    if individual.father and individual.father.mother and individual.father.mother.has_name(name):
         results.append(individual.father.mother)
-    
-    if individual.mother and individual.mother.mother and individual.mother.mother.has_name(name): 
+
+    if individual.mother and individual.mother.mother and individual.mother.mother.has_name(name):
         results.append(individual.mother.mother)
 
     return results
@@ -245,7 +243,7 @@ def find_uncle2(name: str | None, individual: Individual) -> list[Individual]:
     results: list[Individual] = []
     if not name:
         return results
-    
+
     for ua in individual.uncles_aunts():
         if ua.has_name(name):
             results.append(ua)
@@ -254,23 +252,23 @@ def find_uncle2(name: str | None, individual: Individual) -> list[Individual]:
 
 #### Father Groom
 def is_father_groom2(witness: Witness) -> bool:
-    return has_exact_phrases(witness.relation, ["vader bruidegom", 
-                                                "vader van bruidegom", 
-                                                "vader der bruidegom", 
-                                                "vader van de bruidegom", 
-                                                "vader echtgenoot", 
-                                                "vader van de echtgenoot", 
+    return has_exact_phrases(witness.relation, ["vader bruidegom",
+                                                "vader van bruidegom",
+                                                "vader der bruidegom",
+                                                "vader van de bruidegom",
+                                                "vader echtgenoot",
+                                                "vader van de echtgenoot",
                                                 "vader der echtgenoot"])
 
 #### Father Bride
 
 def is_father_bride2(witness: Witness) -> bool:
-    return has_exact_phrases(witness.relation, ["vader bruid", 
-                                                "vader van bruid", 
-                                                "vader der bruid", 
-                                                "vader echtgenote", 
-                                                "vader van de echtgenoote", 
-                                                "vader echtgenoote", 
+    return has_exact_phrases(witness.relation, ["vader bruid",
+                                                "vader van bruid",
+                                                "vader der bruid",
+                                                "vader echtgenote",
+                                                "vader van de echtgenoote",
+                                                "vader echtgenoote",
                                                 "vader van de bruid"])
 
 #### Mother Groom
@@ -284,14 +282,14 @@ def is_father_bride2(witness: Witness) -> bool:
 #moeder van de bruidegom
 
 def is_mother_groom2(witness: Witness) -> bool:
-    return has_exact_phrases(witness.relation, ["moeder bruidegom", 
-                                                "moeder van bruidegom", 
-                                                "moeder der bruidegom", 
-                                                "moeder van bruidegom", 
-                                                "moeder van den bruidegom", 
-                                                "moeder bruideg", 
-                                                "moeder echtgenoot", 
-                                                "moeder van de echtgenoot", 
+    return has_exact_phrases(witness.relation, ["moeder bruidegom",
+                                                "moeder van bruidegom",
+                                                "moeder der bruidegom",
+                                                "moeder van bruidegom",
+                                                "moeder van den bruidegom",
+                                                "moeder bruideg",
+                                                "moeder echtgenoot",
+                                                "moeder van de echtgenoot",
                                                 "moeder van de bruidegom"])
 
 #### Mother Bride
@@ -305,13 +303,13 @@ def is_mother_groom2(witness: Witness) -> bool:
 #moeder echtgenoote
 
 def is_mother_bride2(witness: Witness) -> bool:
-    return has_exact_phrases(witness.relation, ["moeder bruid", 
-                                                "moeder van bruid", 
-                                                "moeder der bruid", 
-                                                "moeder van de bruid", 
-                                                "moeder van den bruid", 
-                                                "moeder echtgenote", 
-                                                "moeder van de echtgenoote", 
+    return has_exact_phrases(witness.relation, ["moeder bruid",
+                                                "moeder van bruid",
+                                                "moeder der bruid",
+                                                "moeder van de bruid",
+                                                "moeder van den bruid",
+                                                "moeder echtgenote",
+                                                "moeder van de echtgenoote",
                                                 "moeder echtgenoote"])
 
 #### Brother Groom
@@ -324,12 +322,12 @@ def is_mother_bride2(witness: Witness) -> bool:
 #broeder des echtgenoots
 
 def is_brother_groom2(witness: Witness) -> bool:
-    return has_exact_phrases(witness.relation, ["broeder van den bruidegom", 
-                                                "broeder bruidegom", 
-                                                "broer van bruidegom", 
-                                                "broer der bruidegom", 
-                                                "broeder van de bruidegom", 
-                                                "broeder van den echtgenoot", 
+    return has_exact_phrases(witness.relation, ["broeder van den bruidegom",
+                                                "broeder bruidegom",
+                                                "broer van bruidegom",
+                                                "broer der bruidegom",
+                                                "broeder van de bruidegom",
+                                                "broeder van den echtgenoot",
                                                 "broeder des echtgenoots"])
 
 #### Brother Bride
@@ -341,11 +339,11 @@ def is_brother_groom2(witness: Witness) -> bool:
 #broeder van de bruid
 
 def is_brother_bride2(witness: Witness) -> bool:
-    return has_exact_phrases(witness.relation, ["broeder van de echtgenoote", 
-                                                "broeder der bruid", 
-                                                "broeder van den bruid", 
-                                                "broer der bruid", 
-                                                "broeder van den echtgenoote", 
+    return has_exact_phrases(witness.relation, ["broeder van de echtgenoote",
+                                                "broeder der bruid",
+                                                "broeder van den bruid",
+                                                "broer der bruid",
+                                                "broeder van den echtgenoote",
                                                 "broeder van de bruid"])
 
 #### Uncle Groom
@@ -354,8 +352,8 @@ def is_brother_bride2(witness: Witness) -> bool:
 #oom echtgenoot
 
 def is_uncle_groom2(witness: Witness) -> bool:
-    return has_exact_phrases(witness.relation, ["oom van de bruidegom", 
-                                                "oom van den echtgenoot", 
+    return has_exact_phrases(witness.relation, ["oom van de bruidegom",
+                                                "oom van den echtgenoot",
                                                 "oom echtgenoot"])
 
 #### Uncle Bride
@@ -364,8 +362,8 @@ def is_uncle_groom2(witness: Witness) -> bool:
 #oom van den echtgenoote
 
 def is_uncle_bride2(witness: Witness) -> bool:
-    return has_exact_phrases(witness.relation, ["oom van de echtgenoote", 
-                                                "oom der bruid", 
+    return has_exact_phrases(witness.relation, ["oom van de echtgenoote",
+                                                "oom der bruid",
                                                 "oom van den echtgenoote"])
 
 #### Brother-in-law
@@ -379,13 +377,13 @@ def is_uncle_bride2(witness: Witness) -> bool:
 #schoonbroeder
 
 def is_brother_in_law2(witness: Witness) -> bool:
-    return has_exact_phrases(witness.relation, ["zwager van den echtgenoot", 
-                                                "zwager der bruidegom", 
-                                                "zwager van bruidegom", 
-                                                "behuwdneef van den echtgenoot", 
-                                                "zwager van de echtgenoote", 
-                                                "zwager der bruid", 
-                                                "schoonbroeder van de echtgenoote", 
+    return has_exact_phrases(witness.relation, ["zwager van den echtgenoot",
+                                                "zwager der bruidegom",
+                                                "zwager van bruidegom",
+                                                "behuwdneef van den echtgenoot",
+                                                "zwager van de echtgenoote",
+                                                "zwager der bruid",
+                                                "schoonbroeder van de echtgenoote",
                                                 "schoonbroeder"])
 
 def find_brother_in_law2(name: str | None, individual: Individual) -> list[Individual]:
@@ -413,19 +411,19 @@ def find_brother_in_law2(name: str | None, individual: Individual) -> list[Indiv
 #stiefvader van de echtgenoote
 
 def is_something_of_groom2(witness: Witness) -> bool:
-    return has_exact_phrases(witness.relation, ["voogd van bruidegom", 
-                                                "toeziend voogd van bruidegom", 
-                                                "bloedverwant in den tweeden graad zijdlinie van den eersten echtgenoot", 
+    return has_exact_phrases(witness.relation, ["voogd van bruidegom",
+                                                "toeziend voogd van bruidegom",
+                                                "bloedverwant in den tweeden graad zijdlinie van den eersten echtgenoot",
                                                 "bloedverwant in den vierden graad zijdlinie van den eersten echtgenoot"])
 
 def is_something_of_bride2(witness: Witness) -> bool:
-    return has_exact_phrases(witness.relation, ["toeziende voogd bruid", 
-                                                "voogd bruid", 
-                                                "bekende der bruid", 
-                                                "bloedverwant in den tweeden graad zijdlinie der tweeden echtgenoot", 
-                                                "aangehuwde in den eersten graad nederdalende linie der tweede echtgenoot", 
-                                                "aangehuwde in den tweeden graad zijdlinie der tweede echtgenoot", 
-                                                "bloedverwant in dentweede graad zijdlinieder tweede echtgenoot", 
+    return has_exact_phrases(witness.relation, ["toeziende voogd bruid",
+                                                "voogd bruid",
+                                                "bekende der bruid",
+                                                "bloedverwant in den tweeden graad zijdlinie der tweeden echtgenoot",
+                                                "aangehuwde in den eersten graad nederdalende linie der tweede echtgenoot",
+                                                "aangehuwde in den tweeden graad zijdlinie der tweede echtgenoot",
+                                                "bloedverwant in dentweede graad zijdlinieder tweede echtgenoot",
                                                 "stiefvader van de echtgenoote"])
 
 def show_candidates_names(candidates: list[Individual]) -> str | list[str]:
@@ -433,7 +431,7 @@ def show_candidates_names(candidates: list[Individual]) -> str | list[str]:
         return "GEEN"
     if len(candidates) == 1:
         return str(candidates[0].name)
-    
+
     return [str(i.name) for i in candidates]
 
 def show_candidates(candidates: list[Individual]) -> str | list[str]:
@@ -441,7 +439,7 @@ def show_candidates(candidates: list[Individual]) -> str | list[str]:
         return "GEEN"
     if len(candidates) == 1:
         return candidates[0].xref_id
-    
+
     return [i.xref_id for i in candidates]
 
 def print_witnesses(witness: Witness, individuals: list[Individual], individual: Individual):
@@ -459,7 +457,7 @@ def identify_witnesses():
                 if is_uncle2(witness):
                     candidates: list[Individual] = find_uncle2(witness.name, individual)
                     print_witnesses(witness, candidates, individual)
-                
+
                 if is_grandmother2(witness):
                     candidates: list[Individual] = find_grandmother2(witness.name, individual)
                     print_witnesses(witness, candidates, individual)
@@ -519,7 +517,7 @@ def identify_witnesses():
 def main(argv):
     ap = argparse.ArgumentParser(description='Set witness IDs in a GEDCOM file.')
     ap.add_argument('file', type=str, help='Path to the GEDCOM file')
-    
+
     args = ap.parse_args(argv[1:])
     GedcomModel().parse_file(args.file)
     identify_witnesses()

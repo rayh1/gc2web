@@ -1,6 +1,4 @@
-from parser.GedcomParser import GedcomParser
-from parser.GedcomLine import GedcomLine
-from parser.GedcomTags import GedcomTags
+import re
 
 from model.Repository import Repository
 
@@ -14,36 +12,14 @@ class Source:
         self.__repository_id: str | None = None
         self.__repository_cache: Repository | None = None
 
-    def parse(self, line: GedcomLine) -> 'Source':
-        from model.GedcomModel import GedcomModel
-
-        """Parse a source from a GEDCOM line"""
-        if not line.xref_id:
-            raise ValueError(f"Source has no xref_id: {line}")
-        self.__xref_id = line.xref_id
-
-        for subline in GedcomParser().iterate(line):
-            if subline.tag == GedcomTags.TITL:
-                self.title = subline.value
-            elif subline.tag == GedcomTags.AUTH:
-                self.author = subline.value
-            elif subline.tag == GedcomTags.PUBL:
-                self.publication = subline.value
-            elif subline.tag == GedcomTags.TEXT:
-                self.text = subline.value
-            elif subline.tag == GedcomTags.REPO:
-                self.repository_id = subline.pointer_value
-
-        return self
-
     @property
     def xref_id(self) -> str:
         return self.__xref_id
-    
+
     @xref_id.setter
     def xref_id(self, value: str):
         self.__xref_id = value
-   
+
     @property
     def title(self) -> str | None:
         return self.__title
@@ -96,5 +72,4 @@ class Source:
 
     @property
     def publications(self) -> list[str]:
-        from parser.GedcomParser import GedcomParser
-        return list(filter(None, self.__publication.split(GedcomParser().CONT_SEP))) if self.__publication else []
+        return list(filter(None, re.split(r"\r?\n", self.__publication))) if self.__publication else []

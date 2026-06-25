@@ -2,8 +2,6 @@ from datetime import datetime
 import argparse
 import sys
 
-from parser.GedcomParser import GedcomParser
-
 from model.GedcomModel import GedcomModel
 from model.EventDetail import EventDetail
 
@@ -63,13 +61,13 @@ def gen_chronology(individual_id: str):
         '</div>' \
     '</div>' \
 '</section>'
-    print(FOOTER)    
+    print(FOOTER)
 
 def main(argv):
     ap = argparse.ArgumentParser(description='Set witness IDs in a GEDCOM file.')
     ap.add_argument('file', type=str, help='Path to the GEDCOM file')
     ap.add_argument('individual', type=str, help='Id of the individual')
-    
+
     args = ap.parse_args(argv[1:])
     GedcomModel().parse_file(args.file)
     gen_chronology(args.individual)

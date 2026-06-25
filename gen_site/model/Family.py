@@ -1,7 +1,3 @@
-from parser.GedcomParser import GedcomParser
-from parser.GedcomLine import GedcomLine
-from parser.GedcomTags import GedcomTags
-
 from model.SourcesMixin import SourcesMixin
 from model.NotesMixin import NotesMixin
 from model.Individual import Individual
@@ -18,36 +14,11 @@ class Family(SourcesMixin, NotesMixin):
         self.__children_ids: list[str] = []
         self.__marriage: EventDetail = EventDetail()
         self.__residences: list[EventDetail] = []
-        
+
         self.__husband_cache: Individual | None = None
         self.__wife_cache: Individual | None = None
         self.__children_cache: list[Individual] | None = None
 
-    def parse(self, line: GedcomLine) -> 'Family':
-        """Parse a family from a GEDCOM line"""
-        from model.GedcomModel import GedcomModel
-
-        if not line.xref_id:
-            raise ValueError(f"Family has no xref_id: {line}")
-        self.__xref_id: str = line.xref_id
-        
-        for subline in GedcomParser().iterate(line):
-            if subline.tag == GedcomTags.HUSB:
-                self.husband_id = subline.pointer_value
-            elif subline.tag == GedcomTags.WIFE:
-                self.wife_id = subline.pointer_value
-            elif subline.tag == GedcomTags.CHIL:
-                if subline.pointer_value: self.children_ids.append(subline.pointer_value)
-            elif subline.tag == GedcomTags.MARR:
-                self.marriage = EventDetail().parse(subline)
-            elif subline.tag == GedcomTags.RESI:
-                self.residences.append(EventDetail().parse(subline))
-        
-        self.parse_sources(line)
-        self.parse_notes(line)
-        
-        return self
-    
 # Properties
 
     @property
@@ -113,7 +84,7 @@ class Family(SourcesMixin, NotesMixin):
         if self.__wife_cache is None and self.wife_id:
             self.__wife_cache = GedcomModel().get_individual(self.wife_id)
         return self.__wife_cache
-    
+
     @property
     def children(self) -> list[Individual]:
         from model.GedcomModel import GedcomModel

@@ -1,9 +1,5 @@
 from typing import Union
 
-from parser.GedcomLine import GedcomLine
-from parser.GedcomTags import GedcomTags
-from parser.GedcomParser import GedcomParser
-
 from model.NotesMixin import NotesMixin
 from model.SourcesMixin import SourcesMixin
 
@@ -17,44 +13,40 @@ class Association(SourcesMixin, NotesMixin):
         self.__rel_desc: str | None = None
         self.__rel_type: str | None = None
 
-    def parse(self, line: GedcomLine) -> 'Association':
-        from model.GedcomModel import GedcomModel
-
-        if not line.pointer_value:
-            raise ValueError(f"Association has no pointer value: {line}")
-
-        self.__line_num = line.line_num
-        self.__individual_id = line.pointer_value
-
-        for subline in GedcomParser().iterate(line):
-            if subline.tag == GedcomTags.RELA and subline.value:
-                parts: list[str] = subline.value.split(' ')
-                self.__rel_desc = parts[0] if len(parts) > 1 else subline.value
-                self.__rel_type = parts[1] if len(parts) > 1 else None
-        
-        self.parse_sources(line)
-        self.parse_notes(line)
-
-        return self
-
 # Properties
+
+    @property
+    def line_num(self) -> int | None:
+        return self.__line_num
+
+    @line_num.setter
+    def line_num(self, value: int | None):
+        self.__line_num = value
 
     @property
     def individual_id(self) -> str | None:
         return self.__individual_id
 
+    @individual_id.setter
+    def individual_id(self, value: str | None):
+        self.__individual_id = value
+
     @property
     def rel_desc(self) -> str | None:
         return self.__rel_desc
+
+    @rel_desc.setter
+    def rel_desc(self, value: str | None):
+        self.__rel_desc = value
 
     @property
     def rel_type(self) -> str | None:
         return self.__rel_type
 
-    @property
-    def line_num(self) -> int | None:
-        return self.__line_num
-    
+    @rel_type.setter
+    def rel_type(self, value: str | None):
+        self.__rel_type = value
+
 # Utility
 
     def individual(self) -> Union['Individual', None]: # type: ignore

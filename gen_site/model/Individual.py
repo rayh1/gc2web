@@ -1,11 +1,6 @@
 from typing import Union
 from datetime import datetime
 
-from parser.GedcomLine import GedcomLine
-from parser.GedcomTags import GedcomTags
-from parser.GedcomParser import GedcomParser
-
-from model.Place import Place
 from model.SourcesMixin import SourcesMixin
 from model.NotesMixin import NotesMixin
 from model.Association import Association
@@ -46,48 +41,6 @@ class Individual(SourcesMixin, NotesMixin):
         self.__spouses_cache: list['Individual'] | None = None
         self.__locations_cache: list[Location] | None = None
         self.__witnessed_events_cache: list[tuple[str, 'EventDetail', list['Individual']]] | None = None
-
-    def parse(self, line: GedcomLine) -> 'Individual':
-        from model.GedcomModel import GedcomModel
-
-        if not line.xref_id:
-            raise ValueError(f"Individual has no xref_id: {line}")        
-        self.__xref_id = line.xref_id
-
-        for subline in GedcomParser().iterate(line):
-            if subline.tag == GedcomTags.NAME:
-                self.add_name(Name().parse(subline))
-            elif subline.tag == GedcomTags.BIRT:
-                self.birth = EventDetail().parse(subline)
-            elif subline.tag == GedcomTags.DEAT:
-                self.death = EventDetail().parse(subline)
-            elif subline.tag == GedcomTags.FAMS:
-                if subline.pointer_value: self.fams_ids.append(subline.pointer_value)
-            elif subline.tag == GedcomTags.FAMC:
-                self.famc_id = subline.pointer_value
-            elif subline.tag == GedcomTags.SEX:
-                self.sex = subline.value
-            elif subline.tag == GedcomTags.CHR:
-                self.baptism = EventDetail().parse(subline)
-            elif subline.tag == GedcomTags.BURI:
-                self.burial = EventDetail().parse(subline)
-            elif subline.tag == GedcomTags.OCCU:
-                self.add_occupation(EventDetail().parse(subline))
-            elif subline.tag == GedcomTags.RESI:
-                self.add_residence(EventDetail().parse(subline))
-            elif subline.tag == GedcomTags.FACT:
-                self.add_fact(EventDetail().parse(subline))
-            elif subline.tag == GedcomTags.DSCR:
-                self.add_description(EventDetail().parse(subline))
-
-        # Parse associations
-        for subline in GedcomParser().iterate(line, tag=GedcomTags.ASSO):
-            if subline.pointer_value: self.__associations.append(Association().parse(subline))
-
-        self.parse_sources(line)
-        self.parse_notes(line)
-        
-        return self
 
     @property
     def xref_id(self) -> str:
@@ -174,7 +127,7 @@ class Individual(SourcesMixin, NotesMixin):
     @property
     def residences(self) -> list[EventDetail]:
         return self.__residences
-    
+
     def add_residence(self, value: EventDetail):
         self.__residences.append(value)
 
@@ -253,7 +206,7 @@ class Individual(SourcesMixin, NotesMixin):
     @property
     def is_unknown_sex(self) -> bool:
         return self.__sex not in ['M', 'F']
-    
+
     @property
     def start_life(self) -> EventDetail:
         return self.birth if self.birth.date.value else self.baptism
@@ -265,38 +218,38 @@ class Individual(SourcesMixin, NotesMixin):
     def age(self, at_date: Date) -> int | None:
         if not self.start_life.date:
             return None
-        
+
         start_life_date_value = self.start_life.date.date()
         at_date_value = at_date.date()
         if not start_life_date_value or not at_date_value:
             return None
         return (at_date_value - start_life_date_value).days // 365
-    
-    def is_born(self, at_date: Date) -> bool:        
+
+    def is_born(self, at_date: Date) -> bool:
         start_life_date = self.start_life.date.date()
         at_date_value = at_date.date()
 
         if start_life_date is None or at_date_value is None:
             return False
-        
+
         return start_life_date <= at_date_value
 
     def locations(self) -> list[Location]:
         if self.__locations_cache is None:
-        
+
             locations: list[Location] = []
-                                
+
             for residence in self.residences:
                 locations.append(Location(None, residence))
 
             for family in self.fams:
                 for residence in family.residences:
                     locations.append(Location(family.spouse(self), residence))
-                    
+
             self.__locations_cache = sorted(locations, key=lambda x: x.event.date.date() or datetime.min)
 
         return self.__locations_cache
-    
+
     def siblings(self) -> list['Individual']:
         if self.famc:
             return sorted(
@@ -304,7 +257,7 @@ class Individual(SourcesMixin, NotesMixin):
                     key=lambda x: x.start_life.date.date() or datetime.max
                 )
         return []
-    
+
     def uncles_aunts(self) -> list['Individual']:
         result: list['Individual'] = []
         for parent in [self.father, self.mother]:
@@ -316,13 +269,13 @@ class Individual(SourcesMixin, NotesMixin):
                     result.append(spouse)
 
         return result
-    
+
     def has_name(self, name: str) -> bool:
         return any([name == n.plain_value for n in self.names])
-    
+
     def all_events(self) -> list[EventDetail]:
         events: list[EventDetail] = []
-        
+
         events.append(self.birth)
         events.append(self.death)
         events.append(self.baptism)
@@ -337,15 +290,15 @@ class Individual(SourcesMixin, NotesMixin):
         events.extend(self.residences)
         events.extend(self.facts)
         events.extend(self.descriptions)
-    
+
         return self.__remove_duplicates(events)
 
     def all_sources(self) -> list[Source]:
         sources = list(self.sources)
 
         for event in self.all_events():
-            sources.extend(event.sources)        
-            
+            sources.extend(event.sources)
+
         for family in self.fams:
             sources.extend(family.sources)
         for name in self.names:
@@ -357,13 +310,13 @@ class Individual(SourcesMixin, NotesMixin):
             sources.extend(event.sources)
 
         return self.__remove_duplicates(sources)
-    
+
     def witnessed_events(self) -> list[tuple[str, 'EventDetail', list['Individual']]]:
         if self.__witnessed_events_cache is None:
             from model.GedcomModel import GedcomModel
-            
+
             result: list[tuple[str, 'EventDetail', list['Individual']]] = []
-            
+
             for individual in GedcomModel().individuals:
                 if individual.birth.has_witness(self):
                     result.append(("Geboorte", individual.birth, [individual]))
@@ -388,7 +341,7 @@ class Individual(SourcesMixin, NotesMixin):
 
         return self.__witnessed_events_cache
 
-    @staticmethod    
+    @staticmethod
     def __remove_duplicates(items: list) -> list:
         seen = set()
         unique_items = []
