@@ -2,7 +2,7 @@
 name = "gc2web"
 version = "0.1.0"
 description = "Generate a static genealogy website from a GEDCOM file."
-requires-python = ">=3.14"
+requires-python = ">=3.11"
 dependencies = [
     "tqdm>=4.67.1",
     "pyyaml>=6.0.2",
