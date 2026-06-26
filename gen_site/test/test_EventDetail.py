@@ -23,7 +23,7 @@ witnesses:
   - name: Anna Maria Gruijters
     occupation: zonder beroep
     residence: Muiden
-    relation: moeder 
+    relation: moeder
                 """
         note: Note = Note()
         note.value = note_value
@@ -32,7 +32,26 @@ witnesses:
 
         self.assertEqual(len(self.event_detail.witnesses), 3)
         self.assertEqual(self.event_detail.witnesses[0].name, "Constantina Engels")
-    
+
+        def test_parse_witnesses_with_bare_gedcom_xref(self):
+                note_value = """
+---
+witnesses:
+    - name: Theodorus Friethof
+        xref_id: @I00282@
+        occupation: schoenmakerknecht
+        age: 30
+        residence: Prinsenstraat J. 211
+        relation: vader
+                                """
+                note: Note = Note()
+                note.value = note_value
+                self.event_detail.notes = [note]
+                self.event_detail.parse_witnesses()
+
+                self.assertEqual(len(self.event_detail.witnesses), 1)
+                self.assertEqual(self.event_detail.witnesses[0].xref_id, "@I00282@")
+
     def test_parse_timestamp_with_valid_data(self):
         note_value = """
 ---
@@ -42,7 +61,7 @@ timestamp: "2023-01-01 12:00:00"
         note.value = note_value
         self.event_detail.notes = [note]
         self.event_detail.parse_timestamp()
-        
+
         self.assertEqual(self.event_detail.timestamp, "2023-01-01 12:00:00")
 
     def test_parse_timestamp_with_invalid_yaml(self):
@@ -51,7 +70,7 @@ timestamp: "2023-01-01 12:00:00"
         note.value = note_value
         self.event_detail.notes = [note]
         self.event_detail.parse_timestamp()
-        
+
         self.assertIsNone(self.event_detail.timestamp)
 
     def test_parse_timestamp_with_missing_timestamp(self):
@@ -63,7 +82,7 @@ other_field: "some value"
         note.value = note_value
         self.event_detail.notes = [note]
         self.event_detail.parse_timestamp()
-        
+
         self.assertIsNone(self.event_detail.timestamp)
 
     def test_parse_timestamp_with_empty_note(self):
@@ -71,13 +90,13 @@ other_field: "some value"
         note.value = None
         self.event_detail.notes = [note]
         self.event_detail.parse_timestamp()
-        
+
         self.assertIsNone(self.event_detail.timestamp)
 
     def test_parse_timestamp_without_notes(self):
         self.event_detail.notes = []
         self.event_detail.parse_timestamp()
-        
+
         self.assertIsNone(self.event_detail.timestamp)
 
     def test_parse_timestamp_problem(self):
@@ -89,7 +108,7 @@ timestamp: "4:00"
         note.value = note_value
         self.event_detail.notes = [note]
         self.event_detail.parse_timestamp()
-        
+
         print(self.event_detail.timestamp)
         self.assertEqual(self.event_detail.timestamp, "4:00")
 

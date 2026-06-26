@@ -1,4 +1,8 @@
+import re
 import yaml # type: ignore
+
+
+GEDCOM_XREF_VALUE_RE = re.compile(r'(:\s*)(@[^@\s\n]+@)(?=\s*(?:#.*)?$)', re.MULTILINE)
 
 class Note:
     def __init__(self):
@@ -33,7 +37,8 @@ class Note:
         if not self.is_yaml():
             return None
         try:
-            data = yaml.safe_load(self.value) # type: ignore
+            normalized_value = GEDCOM_XREF_VALUE_RE.sub(r'\1"\2"', self.value)
+            data = yaml.safe_load(normalized_value) # type: ignore
             return data
         except yaml.YAMLError:
             print(f"Error parsing yaml: {self.value}")
