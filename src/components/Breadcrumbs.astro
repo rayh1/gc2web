@@ -1,0 +1,29 @@
+---
+import { normalizeBreadcrumbs, type Crumb } from "./headerState";
+
+interface Props {
+  items?: Crumb[];
+}
+
+const { items = [] } = Astro.props;
+const crumbs = normalizeBreadcrumbs(items);
+---
+
+{
+  crumbs.length > 0 && (
+    <nav aria-label="Breadcrumb" class="border-t border-archive-line/70 px-4 py-3 text-sm text-archive-muted dark:border-archive-dark-line/70 dark:text-archive-dark-muted sm:px-6 lg:px-8">
+      <ol class="flex flex-wrap items-center gap-2">
+        {crumbs.map((item, index) => (
+          <li class="flex items-center gap-2">
+            {index > 0 && <span aria-hidden="true" class="text-archive-line dark:text-archive-dark-line">/</span>}
+            {item.href ? (
+              <a class="transition-colors hover:text-archive-accent dark:hover:text-archive-dark-accent" href={item.href}>{item.label}</a>
+            ) : (
+              <span class="font-medium text-archive-ink dark:text-archive-dark-ink">{item.label}</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}

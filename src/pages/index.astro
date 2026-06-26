@@ -5,19 +5,77 @@ import { Image } from "astro:assets";
 import heroImage from "../../public/banner.webp";
 ---
 
-<PageLayout title={SITE_TITLE}>
-  <Image
-    width={668}
-    src={heroImage}
-    alt="Mindspark"
-  />
-  <p>
-    Genealogie van mijn familie, van de 18de eeuw tot vandaag.
-  </p>
-  <p>
-    Startpunten:
-    <ul>
-      <li>Familie Hoofman: <a href="/entity/i00005/">Petrus Johannes Hoofman</a> (mijn opa aan vaderszijde)</li>
-      <li>Familie Walters: <a href="/entity/i00073/">Josephus Reinerus Walters</a> (mijn opa aan moederszijde)</li>
-  </p>
+<PageLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <section class="not-prose grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+    <div class="space-y-6">
+      <p class="text-sm font-semibold uppercase tracking-[0.24em] text-archive-accent dark:text-archive-dark-accent">
+        Familie-archief
+      </p>
+      <div class="space-y-4">
+        <h1 class="font-display text-4xl font-semibold leading-tight text-archive-ink dark:text-archive-dark-ink sm:text-5xl lg:text-6xl">
+          Mijn voorouders
+        </h1>
+        <p class="max-w-2xl text-lg leading-8 text-archive-muted dark:text-archive-dark-muted">
+          Verken personen, bronnen en familieverbanden van de 18de eeuw tot vandaag. Begin met zoeken, blader door alle personen, of stap rechtstreeks in een familietak.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a class="btn" href="/search">Zoeken in personen en bronnen</a>
+        <a class="inline-flex items-center rounded-full border border-archive-line px-5 py-2.5 font-medium text-archive-ink transition-colors hover:border-archive-accent hover:text-archive-accent dark:border-archive-dark-line dark:text-archive-dark-ink dark:hover:border-archive-dark-accent dark:hover:text-archive-dark-accent" href="/entity">
+          Alles bekijken
+        </a>
+      </div>
+    </div>
+
+    <div class="rounded-[1.5rem] border border-archive-line/80 bg-archive-paper/80 p-3 shadow-[0_30px_80px_-48px_rgba(47,36,29,0.6)] dark:border-archive-dark-line/80 dark:bg-archive-dark-paper/80">
+      <Image
+        width={668}
+        src={heroImage}
+        alt="Historische familiefoto uit het Hoofman-archief"
+        class="h-full w-full rounded-[1.2rem] object-cover"
+      />
+    </div>
+  </section>
+
+  <section class="not-prose mt-10 space-y-4">
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 class="font-display text-3xl font-semibold text-archive-ink dark:text-archive-dark-ink">Begin bij een familietak</h2>
+      <span class="text-sm text-archive-muted dark:text-archive-dark-muted">Twee vertrouwde startpunten</span>
+    </div>
+    <div class="grid gap-4 md:grid-cols-2">
+      <article class="rounded-[1.5rem] border border-archive-line bg-archive-paper p-6 dark:border-archive-dark-line dark:bg-archive-dark-paper">
+        <p class="text-sm uppercase tracking-[0.22em] text-archive-accent dark:text-archive-dark-accent">Familie Hoofman</p>
+        <h3 class="mt-3 font-display text-2xl font-semibold text-archive-ink dark:text-archive-dark-ink">Petrus Johannes Hoofman</h3>
+        <p class="mt-3 text-archive-muted dark:text-archive-dark-muted">Start bij de familie van vaderszijde en volg relaties, chronologie en bronnen vanuit een centrale persoon.</p>
+        <a class="mt-5 inline-flex font-medium text-archive-accent hover:text-archive-ink dark:text-archive-dark-accent dark:hover:text-archive-dark-ink" href="/entity/i00005/">Open het startpunt</a>
+      </article>
+
+      <article class="rounded-[1.5rem] border border-archive-line bg-archive-paper p-6 dark:border-archive-dark-line dark:bg-archive-dark-paper">
+        <p class="text-sm uppercase tracking-[0.22em] text-archive-accent dark:text-archive-dark-accent">Familie Walters</p>
+        <h3 class="mt-3 font-display text-2xl font-semibold text-archive-ink dark:text-archive-dark-ink">Josephus Reinerus Walters</h3>
+        <p class="mt-3 text-archive-muted dark:text-archive-dark-muted">Stap in de familie van moederszijde en gebruik dezelfde bronnen- en persoonsstructuur om verbanden te volgen.</p>
+        <a class="mt-5 inline-flex font-medium text-archive-accent hover:text-archive-ink dark:text-archive-dark-accent dark:hover:text-archive-dark-ink" href="/entity/i00073/">Open het startpunt</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="not-prose mt-10 grid gap-4 lg:grid-cols-3">
+    <article class="rounded-[1.5rem] border border-archive-line bg-white/70 p-6 dark:border-archive-dark-line dark:bg-white/5">
+      <h2 class="font-display text-2xl font-semibold text-archive-ink dark:text-archive-dark-ink">Zoeken met context</h2>
+      <p class="mt-3 text-archive-muted dark:text-archive-dark-muted">Gebruik de zoekpagina om snel personen en bronnen te vinden wanneer je al namen, plaatsen of relaties in gedachten hebt.</p>
+      <a class="mt-5 inline-flex font-medium text-archive-accent hover:text-archive-ink dark:text-archive-dark-accent dark:hover:text-archive-dark-ink" href="/search">Naar zoeken</a>
+    </article>
+
+    <article class="rounded-[1.5rem] border border-archive-line bg-white/70 p-6 dark:border-archive-dark-line dark:bg-white/5">
+      <h2 class="font-display text-2xl font-semibold text-archive-ink dark:text-archive-dark-ink">Bladeren door alle personen</h2>
+      <p class="mt-3 text-archive-muted dark:text-archive-dark-muted">Bekijk de volledige lijst als je liever door namen en familielijnen bladert voordat je een specifieke persoon opent.</p>
+      <a class="mt-5 inline-flex font-medium text-archive-accent hover:text-archive-ink dark:text-archive-dark-accent dark:hover:text-archive-dark-ink" href="/entity">Open de lijst</a>
+    </article>
+
+    <article class="rounded-[1.5rem] border border-archive-line bg-white/70 p-6 dark:border-archive-dark-line dark:bg-white/5">
+      <h2 class="font-display text-2xl font-semibold text-archive-ink dark:text-archive-dark-ink">Lees per persoon</h2>
+      <p class="mt-3 text-archive-muted dark:text-archive-dark-muted">Elke persoonskaart bundelt basisgegevens, relaties, chronologie en bronverwijzingen zodat je snel van overzicht naar detail kunt gaan.</p>
+      <a class="mt-5 inline-flex font-medium text-archive-accent hover:text-archive-ink dark:text-archive-dark-accent dark:hover:text-archive-dark-ink" href="/entity/i00005/">Bekijk een voorbeeld</a>
+    </article>
+  </section>
 </PageLayout>

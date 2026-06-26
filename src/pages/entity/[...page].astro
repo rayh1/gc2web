@@ -20,16 +20,21 @@ const { page } = Astro.props;
 ---
 
 <PageLayout
-  title="Posts"
+  title="Alle personen"
+  description="Blader door alle personen in het familie-archief"
+  currentContext={[
+    { label: "Home", href: "/" },
+    { label: "Alles" },
+  ]}
 >
-  <h2>Posts</h2>
-    {page.data.length === 0 && <p>No posts yet.</p>}
+  <h2>Alle personen</h2>
+    {page.data.length === 0 && <p>Nog geen personen beschikbaar.</p>}
     {page.data.length > 0 && <PostList posts={page.data} />
 
-    <div class="grid w-full grid-cols-3 justify-between">
+    <div class="mt-8 grid w-full grid-cols-3 items-center gap-3 border-t border-archive-line/70 pt-6 text-sm dark:border-archive-dark-line/70">
       {
         page.url.prev ? (
-          <a class="flex items-center gap-2 text-left" href={page.url.prev}>
+          <a class="flex items-center gap-2 text-left text-archive-accent hover:text-archive-ink dark:text-archive-dark-accent dark:hover:text-archive-dark-ink" href={page.url.prev}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -44,7 +49,7 @@ const { page } = Astro.props;
                 d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
               />
             </svg>
-            Previous
+            Vorige
           </a>
         ) : (
           <span />
@@ -52,7 +57,7 @@ const { page } = Astro.props;
       }
       {
         page.url.current && (page.url.prev || page.url.next)? (
-          <span class="text-center">Page {page.currentPage}</span>
+          <span class="text-center text-archive-muted dark:text-archive-dark-muted">Pagina {page.currentPage}</span>
         ) : (
           <span />
         )
@@ -60,10 +65,10 @@ const { page } = Astro.props;
       {
         page.url.next ? (
           <a
-            class="flex items-center justify-end gap-2 text-right"
+            class="flex items-center justify-end gap-2 text-right text-archive-accent hover:text-archive-ink dark:text-archive-dark-accent dark:hover:text-archive-dark-ink"
             href={page.url.next}
           >
-            Next
+            Volgende
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

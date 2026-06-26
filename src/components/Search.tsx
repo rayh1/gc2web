@@ -15,7 +15,16 @@ interface FuseMatch {
 }
 
 const options = {
-  keys: ["data.title", "data.description", "id"],
+  keys: [
+    "data.title",
+    "data.description",
+    "data.relationship_summary",
+    "data.branch",
+    "data.birth_place",
+    "data.death_place",
+    "data.lifespan",
+    "id",
+  ],
   includeMatches: true,
   minMatchCharLength: 2,
   threshold: 0.5,
@@ -95,7 +104,7 @@ export default function Search({ searchList }: Props) {
         </div>
         <input
           type="search"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-4 pl-10 text-sm text-gray-900 focus:border-primary-500 focus:outline-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+          class="block w-full rounded-[1.4rem] border border-archive-line bg-archive-paper p-4 pl-10 text-sm text-archive-ink focus:border-archive-accent focus:outline-none focus:ring-2 focus:ring-archive-accent/30 dark:border-archive-dark-line dark:bg-archive-dark-paper dark:text-archive-dark-ink dark:placeholder-archive-dark-muted dark:focus:border-archive-dark-accent dark:focus:ring-archive-dark-accent/30"
           placeholder="Zoek personen en bronnen..."
           required
           id="search"
@@ -109,16 +118,16 @@ export default function Search({ searchList }: Props) {
           {posts().length} resultaten gevonden voor "{query()}"
         </p>
 
-        <Show 
-          when={!isLoading()} 
+        <Show
+          when={!isLoading()}
           fallback={
             <div class="flex justify-center py-8">
               <div class="h-8 w-8 animate-spin rounded-full border-4 border-primary-500 border-t-transparent"></div>
             </div>
           }
         >
-          <Show 
-            when={posts().length > 0} 
+          <Show
+            when={posts().length > 0}
             fallback={
               <p class="text-center text-gray-600 dark:text-gray-400 py-8">
                 Geen resultaten gevonden. Probeer andere zoektermen.
@@ -127,7 +136,7 @@ export default function Search({ searchList }: Props) {
           >
             <ul class="grid list-none gap-4 p-0">
               {posts().map((result) => (
-                <li class="rounded-lg p-4 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                <li>
                   <PostListItem post={result.item} matches={result.matches} />
                 </li>
               ))}

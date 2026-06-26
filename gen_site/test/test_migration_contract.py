@@ -18,6 +18,12 @@ GEDCOM_FILE = GEN_SITE_DIR / "Hoofman.ged"
 BASELINE_COMMIT = "eab4d3063c936fb1ba79878d24cda21b95bd5f21"
 ALLOWLIST_FILE = GEN_SITE_DIR / "test/migration_allowlist.json"
 TREE_SECTION_RE = re.compile(r"### Boom\n.*?(?=\n### |\Z)", re.DOTALL)
+ASCII_TREE_BLOCK_RE = re.compile(r'<div class="ascii-tree-wrap">.*?</div>', re.DOTALL)
+FRONTMATTER_METADATA_RE = re.compile(
+    r'^(lifespan|birth_place|death_place|relationship_summary|branch): .*\n?',
+    re.MULTILINE,
+)
+SECTION_ORDER_RE = re.compile(r'^section_order:\n(?:  - .*\n)+', re.MULTILINE)
 
 
 def run_command(*command: str, cwd: Path = WORKSPACE_DIR) -> subprocess.CompletedProcess[str]:
@@ -47,7 +53,12 @@ def schema_project(record: dict, allowed_keys: set[str]) -> dict:
 
 
 def normalize_tree_section(page_text: str) -> str:
-    return TREE_SECTION_RE.sub("### Boom\n\n[TREE CONTENT NORMALIZED]", page_text)
+    text = TREE_SECTION_RE.sub("[TREE CONTENT NORMALIZED]", page_text)
+    text = ASCII_TREE_BLOCK_RE.sub("[TREE CONTENT NORMALIZED]", text)
+    text = FRONTMATTER_METADATA_RE.sub("", text)
+    text = SECTION_ORDER_RE.sub("", text)
+    text = re.sub(r"\[TREE CONTENT NORMALIZED\]\n+", "[TREE CONTENT NORMALIZED]\n", text)
+    return text
 
 
 class TestGedqMigrationContract(unittest.TestCase):

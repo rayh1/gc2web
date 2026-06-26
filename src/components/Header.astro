@@ -1,13 +1,22 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
+import Breadcrumbs from "./Breadcrumbs.astro";
+import { normalizeBreadcrumbs, type Crumb } from "./headerState";
 import { SITE_TITLE } from "../consts";
 import { ThemeToggle } from "./ThemeToggle";
+
+interface Props {
+  currentContext?: Crumb[];
+}
+
+const { currentContext = [] } = Astro.props;
+const breadcrumbs = normalizeBreadcrumbs(currentContext);
 ---
 
-<header class="sticky top-0 z-50 w-full bg-white/95 dark:bg-dark-surface/95 backdrop-blur-sm shadow-sm">
-  <nav class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
+<header class="sticky top-0 z-50 w-full border-b border-archive-line/80 bg-archive-paper/90 shadow-sm backdrop-blur-sm dark:border-archive-dark-line/80 dark:bg-archive-dark-paper/90">
+  <nav class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
-      <a class="text-xl font-bold text-gray-800 hover:text-primary-500 transition-colors dark:text-gray-200" href="/">
+      <a class="font-display text-xl font-semibold tracking-tight text-archive-ink transition-colors hover:text-archive-accent dark:text-archive-dark-ink dark:hover:text-archive-dark-accent" href="/">
         {SITE_TITLE}
       </a>
       <div class="flex items-center gap-4 sm:gap-8">
@@ -16,37 +25,24 @@ import { ThemeToggle } from "./ThemeToggle";
           <HeaderLink href="/search">Zoeken</HeaderLink>
         </div>
         <ThemeToggle client:load />
-        <button
-          type="button"
-          class="sm:hidden -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-200"
-          id="mobile-menu-button"
-          aria-expanded="false"
-        >
-          <span class="sr-only">Open main menu</span>
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
-        </button>
-      </div>
-    </div>
-    
-    <!-- Mobile menu -->
-    <div class="sm:hidden hidden" id="mobile-menu">
-      <div class="space-y-1 pb-3 pt-2">
-        <HeaderLink href="/entity" class="block px-3 py-2">Alles</HeaderLink>
-        <HeaderLink href="/search" class="block px-3 py-2">Zoeken</HeaderLink>
+        <details class="sm:hidden">
+          <summary
+            class="-m-2.5 inline-flex list-none items-center justify-center rounded-md p-2.5 text-archive-ink dark:text-archive-dark-ink"
+            id="mobile-menu-button"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </summary>
+
+          <div class="space-y-1 pb-3 pt-2" id="mobile-menu">
+            <HeaderLink href="/entity" class="block px-3 py-2">Alles</HeaderLink>
+            <HeaderLink href="/search" class="block px-3 py-2">Zoeken</HeaderLink>
+          </div>
+        </details>
       </div>
     </div>
   </nav>
+  <Breadcrumbs items={breadcrumbs} />
 </header>
-
-<script>
-  const button = document.getElementById('mobile-menu-button');
-  const menu = document.getElementById('mobile-menu');
-  
-  button?.addEventListener('click', () => {
-    const expanded = button.getAttribute('aria-expanded') === 'true';
-    button.setAttribute('aria-expanded', (!expanded).toString());
-    menu?.classList.toggle('hidden');
-  });
-</script>

@@ -3,7 +3,14 @@ import PageLayout from "../layouts/PageLayout.astro";
 import Searchbar from "../components/Searchbar.astro";
 ---
 
-<PageLayout title="Search" description="Lorem ipsum dolor sit amet">
+<PageLayout
+  title="Zoeken"
+  description="Zoek in personen en bronnen van het familie-archief"
+  currentContext={[
+    { label: "Home", href: "/" },
+    { label: "Zoeken" },
+  ]}
+>
   <h2>Zoeken</h2>
   <Searchbar />
 </PageLayout>

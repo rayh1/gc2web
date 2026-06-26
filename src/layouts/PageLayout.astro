@@ -5,18 +5,20 @@ import Footer from "../components/Footer.astro";
 
 interface Props {
   title: string;
+  description?: string;
+  currentContext?: { label: string; href?: string }[];
   frontmatter?: {
     title: string;
   };
 };
 
-const { frontmatter } = Astro.props;
+const { frontmatter, description, currentContext = [] } = Astro.props;
 const title = frontmatter?.title || Astro.props.title;
 ---
 
 <html lang="en" class="scroll-smooth">
   <head>
-    <BaseHead title={title} />
+    <BaseHead title={title} description={description} />
     <script is:inline>
       const theme = (() => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -33,11 +35,13 @@ const title = frontmatter?.title || Astro.props.title;
     </script>
   </head>
 
-  <body class="min-h-screen flex flex-col">
-    <Header />
-    <main class="container flex-grow">
-      <div class="prose prose-lg prose-gray mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-none sm:max-w-3xl lg:max-w-4xl dark:prose-dark">
-        <slot />
+  <body class="page-shell min-h-screen flex flex-col">
+    <Header currentContext={currentContext} />
+    <main class="container flex-grow py-6 sm:py-8 lg:py-10">
+      <div class="content-frame mx-auto max-w-6xl">
+        <div class="prose prose-lg mx-auto max-w-none px-5 py-6 sm:px-8 sm:py-8 lg:px-12 lg:py-10 dark:prose-dark">
+          <slot />
+        </div>
       </div>
     </main>
     <Footer />

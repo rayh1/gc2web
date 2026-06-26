@@ -6,7 +6,40 @@ import Footer from "../components/Footer.astro";
 
 type Props = CollectionEntry<"entity">["data"];
 
-const { title } = Astro.props;
+const {
+  title,
+  lifespan,
+  birth_place,
+  death_place,
+  relationship_summary,
+  branch,
+  section_order = [],
+} = Astro.props;
+
+const sectionMeta: Record<string, { label: string; href: string }> = {
+  identity: { label: "Gegevens", href: "#gegevens" },
+  parents: { label: "Ouders", href: "#ouders" },
+  relationships: { label: "Relaties", href: "#relaties-en-kinderen" },
+  siblings: { label: "Broers en zussen", href: "#broers-en-zussen" },
+  chronology: { label: "Chronologie", href: "#chronologie" },
+  occupations: { label: "Beroepen", href: "#beroepen" },
+  facts: { label: "Feiten", href: "#feiten" },
+  locations: { label: "Verblijfplaatsen", href: "#verblijfplaatsen" },
+  witnessed_events: { label: "Getuige bij", href: "#getuige-bij" },
+  sources: { label: "Bronnen", href: "#bronnen-lijst" },
+  notes: { label: "Notities", href: "#notities" },
+  footnotes: { label: "Voetnoten", href: "#voetnoten" },
+};
+
+const sectionLinks = section_order
+  .map((section: string) => sectionMeta[section])
+  .filter(Boolean);
+
+const currentContext = [
+  { label: "Home", href: "/" },
+  { label: "Alles", href: "/entity" },
+  { label: title },
+];
 ---
 
 <html lang="en" class="scroll-smooth">
@@ -28,12 +61,38 @@ const { title } = Astro.props;
     </script>
   </head>
 
-  <body class="min-h-screen flex flex-col">
-    <Header />
-    <main class="container flex-grow">
-      <article class="prose prose-lg prose-gray mx-auto px-4 sm:px-6 py-6 sm:py-8 max-w-none sm:max-w-3xl lg:max-w-4xl dark:prose-dark">
-        <h2 class="title text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-dark-text">{title}</h2>
-        <slot />
+  <body class="page-shell min-h-screen flex flex-col">
+    <Header currentContext={currentContext} />
+    <main class="container flex-grow py-6 sm:py-8 lg:py-10">
+      <article class="content-frame prose prose-lg mx-auto max-w-6xl px-5 py-6 sm:px-8 sm:py-8 lg:px-12 lg:py-10 dark:prose-dark">
+        <header class="not-prose space-y-6 border-b border-archive-line/80 pb-8 dark:border-archive-dark-line/80">
+          <div class="space-y-3">
+            {branch && <p class="text-sm font-semibold uppercase tracking-[0.22em] text-archive-accent dark:text-archive-dark-accent">Familietak {branch}</p>}
+            <h2 class="title font-display text-3xl font-semibold tracking-tight text-archive-ink dark:text-archive-dark-ink sm:text-4xl md:text-5xl">{title}</h2>
+            {relationship_summary && <p class="max-w-3xl text-lg text-archive-muted dark:text-archive-dark-muted">{relationship_summary}</p>}
+          </div>
+
+          <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {lifespan && <div class="rounded-2xl border border-archive-line bg-white/70 px-4 py-4 dark:border-archive-dark-line dark:bg-white/5"><p class="text-xs uppercase tracking-[0.18em] text-archive-muted dark:text-archive-dark-muted">Levensloop</p><p class="mt-2 font-medium text-archive-ink dark:text-archive-dark-ink">{lifespan}</p></div>}
+            {birth_place && <div class="rounded-2xl border border-archive-line bg-white/70 px-4 py-4 dark:border-archive-dark-line dark:bg-white/5"><p class="text-xs uppercase tracking-[0.18em] text-archive-muted dark:text-archive-dark-muted">Geboorteplaats</p><p class="mt-2 font-medium text-archive-ink dark:text-archive-dark-ink">{birth_place}</p></div>}
+            {death_place && <div class="rounded-2xl border border-archive-line bg-white/70 px-4 py-4 dark:border-archive-dark-line dark:bg-white/5"><p class="text-xs uppercase tracking-[0.18em] text-archive-muted dark:text-archive-dark-muted">Overlijdensplaats</p><p class="mt-2 font-medium text-archive-ink dark:text-archive-dark-ink">{death_place}</p></div>}
+            <div class="rounded-2xl border border-archive-line bg-white/70 px-4 py-4 dark:border-archive-dark-line dark:bg-white/5"><p class="text-xs uppercase tracking-[0.18em] text-archive-muted dark:text-archive-dark-muted">Structuur</p><p class="mt-2 font-medium text-archive-ink dark:text-archive-dark-ink">{sectionLinks.length} hoofdsecties</p></div>
+          </div>
+
+          {sectionLinks.length > 0 && (
+            <nav aria-label="Secties" class="flex flex-wrap gap-2">
+              {sectionLinks.map((section) => (
+                <a class="rounded-full border border-archive-line px-3 py-1.5 text-sm font-medium text-archive-muted transition-colors hover:border-archive-accent hover:text-archive-accent dark:border-archive-dark-line dark:text-archive-dark-muted dark:hover:border-archive-dark-accent dark:hover:text-archive-dark-accent" href={section.href}>
+                  {section.label}
+                </a>
+              ))}
+            </nav>
+          )}
+        </header>
+
+        <div class="entity-body pt-8">
+          <slot />
+        </div>
       </article>
     </main>
     <Footer />

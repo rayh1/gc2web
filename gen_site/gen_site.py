@@ -1,5 +1,6 @@
 import argparse
 from datetime import datetime
+import json
 import sys
 import logging
 from pathlib import Path
@@ -99,6 +100,39 @@ def lifespan_str(individual: Individual) -> str:
 
     return year_str
 
+def yaml_string(value: str | None) -> str:
+    return json.dumps(value or "", ensure_ascii=False)
+
+def branch_str(individual: Individual) -> str | None:
+    if not individual.name:
+        return None
+    parts = str(individual.name).split()
+    return parts[-1] if parts else None
+
+def relationship_summary_str(individual: Individual) -> str | None:
+    if individual.fams:
+        spouse = individual.fams[0].spouse(individual)
+        if spouse:
+            return f"Partner van {spouse.name}"
+    father = individual.father
+    mother = individual.mother
+    if father and mother:
+        return f"Kind van {father.name} en {mother.name}"
+    if father:
+        return f"Kind van {father.name}"
+    if mother:
+        return f"Kind van {mother.name}"
+    return None
+
+def place_summary(value) -> str | None: # type: ignore
+    raw = str(value).strip()
+    if not raw:
+        return None
+    parts = [part.strip() for part in raw.split(",") if part.strip()]
+    if not parts:
+        return None
+    return ", ".join(parts)
+
 def gender_str(individual: Individual) -> str:
     if individual.sex == "M":
         return "Mannelijk"
@@ -162,10 +196,44 @@ def generate_individual_page(individual: Individual, filepath: Path):
 
         with open(filepath, 'w') as file:
             content: list[str] = []
+            section_order: list[str] = ["identity", "parents"]
+            if individual.fams:
+                section_order.append("relationships")
+            if individual.siblings():
+                section_order.append("siblings")
+            section_order.append("chronology")
+            if individual.occupations:
+                section_order.append("occupations")
+            if individual.facts:
+                section_order.append("facts")
+            if individual.locations():
+                section_order.append("locations")
+            if len(individual.witnessed_events()) > 0:
+                section_order.append("witnessed_events")
+            section_order.append("sources")
+            if len(individual.plain_notes) > 0:
+                section_order.append("notes")
+
+            branch = branch_str(individual)
+            birth_place = place_summary(individual.birth.place)
+            death_place = place_summary(individual.death.place)
+            relationship_summary = relationship_summary_str(individual)
             content.append(f"---")
-            content.append(f"title: \"{individual.name} {lifespan_str(individual)}\"")
-            content.append(f"description: \"Individual\"")
-            content.append(f"pubDate: \"November 20 2024\"")
+            content.append(f"title: {yaml_string(f'{individual.name} {lifespan_str(individual)}')}")
+            content.append(f"description: {yaml_string('Individual')}")
+            content.append(f"pubDate: {yaml_string('November 20 2024')}")
+            content.append(f"lifespan: {yaml_string(lifespan_str(individual))}")
+            if birth_place:
+                content.append(f"birth_place: {yaml_string(birth_place)}")
+            if death_place:
+                content.append(f"death_place: {yaml_string(death_place)}")
+            if relationship_summary:
+                content.append(f"relationship_summary: {yaml_string(relationship_summary)}")
+            if branch:
+                content.append(f"branch: {yaml_string(branch)}")
+            content.append("section_order:")
+            for section in section_order:
+                content.append(f"  - {section}")
             content.append(f"---")
             content.append(f"")
 
