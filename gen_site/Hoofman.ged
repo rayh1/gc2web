@@ -33300,6 +33300,7 @@
 2 SOUR @S00481@
 2 SOUR @S00482@
 2 SOUR @S00480@
+2 SOUR @S00510@
 1 RESI
 2 DATE 10 APR 1820
 2 PLAC , Rotterdam, , , , 
@@ -33325,9 +33326,10 @@
 2 PLAC , Rotterdam, , , , 
 2 ADDR Botersloot H 297
 2 SOUR @S00496@
+1 SOUR @S00510@
 1 CHAN
-2 DATE 29 JUN 2026
-3 TIME 20:46:42
+2 DATE 24 JUL 2026
+3 TIME 16:52:18
 0 @I00282@ INDI
 1 NAME Theodorus /Friethoff/
 2 GIVN Theodorus
@@ -33336,9 +33338,10 @@
 2 SOUR @S00479@
 1 SEX M
 1 BIRT
-2 DATE INT 1790 ()
+2 DATE 22 MAR 1790
 2 PLAC , Rotterdam, , , , 
 2 SOUR @S00487@
+2 SOUR @S00510@
 1 FAMS @F00099@
 1 SOUR @S00464@
 1 SOUR @S00470@
@@ -33351,6 +33354,7 @@
 2 SOUR @S00481@
 2 SOUR @S00482@
 2 SOUR @S00492@
+2 SOUR @S00510@
 1 OCCU schoenmakerknecht
 2 DATE 16 DEC 1822
 2 PLAC , Rotterdam, , , , 
@@ -33429,14 +33433,41 @@
 3 CONT   - name: Joannes Friethof
 3 CONT   - name: Maria Friethof
 3 CONT
+2 SOUR @S00510@
 1 SOUR @S00493@
 1 SOUR @S00489@
 1 SOUR @S00492@
 1 SOUR @S00479@
 1 SOUR @S00496@
+1 SOUR @S00509@
+1 NAME Theodoor /Friedhof/
+2 SOUR @S00509@
+1 SOUR @S00510@
+1 OCCU schoenmakersknecht
+2 DATE 23 MAR 1825
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00510@
+1 RESI
+2 DATE 23 MAR 1825
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00510@
+1 FACT Certificaat Nummer 2418
+2 TYPE Nationale Militie
+2 DATE 12 JUN 1824
+2 NOTE Vrijgesteld wegens eenige zoon eener weduwe te zijn; lotingnummer 1080; ingeschreven 4e kanton Rotterdam; certificaat gegeven te s-Gravenhage 12 juni 1824.
+2 SOUR @S00510@
+1 DSCR Lengte: 1 el 7 palm 6 duim Aangezigt: Ovaal Voorhoofd: hoog Oogen: Blauw Neus: ordinair Mond: ordinair Kin: rond Haar: [onleesbaar] Wenkbrauwen: bruin Merkbare teekenen: pokdalig
+2 DATE 12 JUN 1824
+2 SOUR @S00510@
+1 FACT
+2 TYPE Certificaat van Onvermogen
+2 DATE 26 FEB 1825
+2 SOUR @S00510@
+1 NAME Theodorus /Friedhoff/
+2 SOUR @S00510@
 1 CHAN
-2 DATE 29 JUN 2026
-3 TIME 20:40:30
+2 DATE 24 JUL 2026
+3 TIME 16:53:04
 0 @I00283@ INDI
 1 NAME Christina Jacoba /Lammermans/
 2 GIVN Christina, Jacoba
@@ -33446,6 +33477,7 @@
 2 SOUR @S00489@
 2 SOUR @S00492@
 2 SOUR @S00479@
+2 SOUR @S00510@
 1 SEX F
 1 BIRT
 2 DATE INT 1788 ()
@@ -33506,9 +33538,27 @@
 1 SOUR @S00492@
 1 SOUR @S00479@
 1 SOUR @S00496@
+1 SOUR @S00509@
+1 NAME Jacoba Christina /Lammerse/
+2 SOUR @S00509@
+1 SOUR @S00510@
+1 CHR
+2 DATE 18 NOV 1787
+2 PLAC , 's-Hertogenbosch, , , , 
+2 SOUR @S00510@
+1 RESI
+2 DATE 23 MAR 1825
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00510@
+1 FACT
+2 TYPE Certificaat van Onvermogen
+2 DATE 26 FEB 1825
+2 SOUR @S00510@
+1 NAME Christina Jacoba /Lammerman/
+2 SOUR @S00510@
 1 CHAN
-2 DATE 29 JUN 2026
-3 TIME 20:40:30
+2 DATE 24 JUL 2026
+3 TIME 16:53:05
 0 @S00465@ SOUR
 1 TITL Geboorte Cornelis Xaverius Joseph Marie Friethoff 10-07-1897
 1 PUBL https://hdl.handle.net/21.12133/FEC9DAB8EA97425D84C34DEF6A7EEF38
@@ -34583,17 +34633,20 @@
 2 DATE 04 JUN 2026
 3 TIME 23:13:36
 0 @I00293@ INDI
-1 NAME Johannes /Lammermans/
-2 SOUR @S00478@
+1 NAME Arnoldus /Lammerman/
+2 SOUR @S00510@
 1 SEX M
 1 SOUR @S00478@
 1 DEAT
 2 PLAC , 's-Hertogenbosch, , , , 
 2 SOUR @S00478@
 1 FAMS @F00102@
+1 SOUR @S00510@
+1 NAME Johannes /Lammermans/
+2 SOUR @S00478@
 1 CHAN
-2 DATE 05 JUN 2026
-3 TIME 15:41:01
+2 DATE 24 JUL 2026
+3 TIME 17:09:30
 0 @I00294@ INDI
 1 NAME Jacoba /Witmans/
 2 SOUR @S00478@
@@ -34603,9 +34656,12 @@
 2 PLAC , 's-Hertogenbosch, , , , 
 2 SOUR @S00478@
 1 FAMS @F00102@
+1 SOUR @S00510@
+1 NAME Jacoba /Withmans/
+2 SOUR @S00510@
 1 CHAN
-2 DATE 05 JUN 2026
-3 TIME 15:41:01
+2 DATE 24 JUL 2026
+3 TIME 16:53:06
 0 @I00295@ INDI
 1 NAME Barend /van Dongen/
 2 SOUR @S00478@
@@ -34620,16 +34676,18 @@
 1 WIFE @I00294@
 1 CHIL @I00283@
 1 SOUR @S00478@
+1 SOUR @S00510@
 1 CHAN
-2 DATE 05 JUN 2026
-3 TIME 15:41:01
+2 DATE 24 JUL 2026
+3 TIME 16:52:21
 0 @F00103@ FAM
 1 HUSB @I00295@
 1 WIFE @I00283@
 1 SOUR @S00478@
+1 SOUR @S00510@
 1 CHAN
-2 DATE 05 JUN 2026
-3 TIME 15:41:04
+2 DATE 24 JUL 2026
+3 TIME 16:52:22
 0 @S00479@ SOUR
 1 TITL Huwelijk Christianus Theodorus Friethoff en Cornelia de Wilde 05-11-1873
 1 PUBL https://hdl.handle.net/21.12133/9E3FD9A6500A4FF4A2E3A07D1540A7B1
@@ -34927,9 +34985,44 @@
 2 SOUR @S00496@
 1 NAME Woutherus /Friethof/
 2 SOUR @S00496@
+1 DEAT
+2 DATE 6 JAN 1841
+2 PLAC , Rotterdam, , , , 
+2 ADDR Hoogstraat L 331
+2 SOUR @S00509@
+2 NOTE ---
+3 CONT timestamp: des middags ten twaalf ure
+3 CONT
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Bastiaan van Duijl
+3 CONT     occupation: binnenvader
+3 CONT     age: 68
+3 CONT     residence: Gasthuis
+3 CONT     relation: goede bekende
+3 CONT   - name: Evert de Roo
+3 CONT     occupation: bediende
+3 CONT     age: 38
+3 CONT     residence: Gasthuis
+3 CONT     relation: goede bekende
+3 CONT
+1 OCCU schoenmaker
+2 DATE 6 JAN 1841
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00509@
+1 RESI
+2 DATE 6 JAN 1841
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00509@
+1 FACT
+2 TYPE Ongehuwd
+2 SOUR @S00509@
+1 SOUR @S00509@
+1 NAME Wouterus /Friedhof/
+2 SOUR @S00509@
 1 CHAN
-2 DATE 29 JUN 2026
-3 TIME 20:46:42
+2 DATE 23 JUL 2026
+3 TIME 22:56:15
 0 @I00297@ INDI
 1 NAME Christianus Theodorus /Friethoff/
 2 SOUR @S00482@
@@ -35691,9 +35784,27 @@
 1 NAME Waltherus /Vriedhof/
 2 SOUR @S00494@
 1 SOUR @S00494@
+1 SOUR @S00510@
+1 NAME Waltherus /Friethof/
+2 SOUR @S00510@
+1 FAMC @F00115@
+1 CHR
+2 DATE 7 AUG 1764
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00511@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Henricus van Heel
+3 CONT     relation: peter
+3 CONT   - name: Joanna van Son
+3 CONT     relation: peetje
+3 CONT
+1 SOUR @S00511@
+1 NAME Walterus /Friethoff/
+2 SOUR @S00511@
 1 CHAN
-2 DATE 07 JUL 2026
-3 TIME 01:30:18
+2 DATE 25 JUL 2026
+3 TIME 10:53:27
 0 @I00303@ INDI
 1 NAME Cornelia /Ravesteyn/
 2 SOUR @S00487@
@@ -35730,9 +35841,10 @@
 1 SOUR @S00505@
 1 NAME Cornelia /Ravenstein/
 2 SOUR @S00505@
+1 SOUR @S00510@
 1 CHAN
-2 DATE 06 JUL 2026
-3 TIME 23:26:33
+2 DATE 24 JUL 2026
+3 TIME 16:52:20
 0 @F00104@ FAM
 1 HUSB @I00302@
 1 WIFE @I00303@
@@ -36442,9 +36554,42 @@
 2 PLAC , Rotterdam, , , , 
 2 SOUR @S00504@
 1 SOUR @S00504@
+1 SOUR @S00508@
+1 DEAT
+2 DATE 12 JAN 1845
+2 PLAC , Rotterdam, , , , 
+2 ADDR Pannekoekstraat J 114
+2 SOUR @S00508@
+2 NOTE ---
+3 CONT timestamp: des voormiddags ten negen ure
+3 CONT
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Jan van der Star
+3 CONT     occupation: sjouwer
+3 CONT     age: 35
+3 CONT     residence: Pannekoekstraat J 114
+3 CONT     relation: goede bekende
+3 CONT   - name: Johannes Versluis
+3 CONT     occupation: sjouwer
+3 CONT     age: 28
+3 CONT     residence: Pannekoekstraat J 147
+3 CONT     relation: goede bekende
+3 CONT
+1 OCCU Zonder beroep
+2 DATE 12 JAN 1845
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00508@
+1 RESI
+2 DATE 12 JAN 1845
+2 PLAC , Rotterdam, , , , 
+2 ADDR Pannekoekstraat J 114
+2 SOUR @S00508@
+1 NAME Francina /Friethoff/
+2 SOUR @S00508@
 1 CHAN
-2 DATE 05 JUL 2026
-3 TIME 21:53:54
+2 DATE 24 JUL 2026
+3 TIME 17:51:46
 0 @M00474@ OBJE
 1 FILE E:/ancestris-data/media/NL-RtSA_1-02_162_0097.jpg
 2 FORM jpg
@@ -36483,9 +36628,13 @@
 2 PLAC , Rotterdam, , , , 
 2 SOUR @S00506@
 1 SOUR @S00506@
+1 DEAT
+2 DATE 8 JUL 1794
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00506@
 1 CHAN
-2 DATE 07 JUL 2026
-3 TIME 00:26:45
+2 DATE 25 JUL 2026
+3 TIME 00:01:52
 0 @I00317@ INDI
 1 NAME Cornelius Wilhelmus /Friethof/
 2 SOUR @S00503@
@@ -36560,9 +36709,44 @@
 2 PLAC , Goes, , , , 
 2 SOUR @S00504@
 1 SOUR @S00504@
+1 DEAT
+2 DATE 3 OCT 1842
+2 PLAC , Rotterdam, , , , 
+2 ADDR Hoogstraat L 331
+2 SOUR @S00507@
+2 NOTE ---
+3 CONT timestamp: des namiddags ten zes ure
+3 CONT
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Bastiaan van Duijl
+3 CONT     occupation: binnenvader
+3 CONT     age: 70
+3 CONT     residence: Gasthuis
+3 CONT     relation: goede bekende
+3 CONT   - name: Evert de Roo
+3 CONT     occupation: bediende
+3 CONT     age: 36
+3 CONT     residence: Gasthuis
+3 CONT     relation: goede bekende
+3 CONT
+2 NOTE Overlijdensakte noemt als ouders Adrianus Rijnhout en Sophia van der Stralen, beiden te Ter Goes overleden -- afwijkend van de huwelijksakte 1818 (@S00504@): Janes Reinout en Levina van Straaten. Voornamen verschillen; achternamen zijn spellingsvar
+3 CONC ianten. Huwelijksakte aangehouden als betrouwbaarder bron; @F00112@ ongewijzigd.
+1 OCCU sjouwer
+2 DATE 3 OCT 1842
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00507@
+1 RESI
+2 DATE 3 OCT 1842
+2 PLAC , Rotterdam, , , , 
+2 ADDR Hoogstraat L 331
+2 SOUR @S00507@
+1 SOUR @S00507@
+1 NAME Hendrik /Rijnhout/
+2 SOUR @S00507@
 1 CHAN
-2 DATE 05 JUL 2026
-3 TIME 21:53:52
+2 DATE 24 JUL 2026
+3 TIME 23:24:51
 0 @I00319@ INDI
 1 NAME Janes /Reinout/
 2 SOUR @S00504@
@@ -36677,7 +36861,397 @@
 1 TITL Begraven Marinus Friethof 12-07-1794
 1 PUBL https://hdl.handle.net/21.12133/7B5DBCD7F76A4A1A899DB24D29DB954C
 1 REPO @R00003@
+1 TEXT [Index Stadsarchief Rotterdam -- Begraafinschrijvingen 1790-1799 (toegang 9999_23), geen scan beschikbaar; recordnr 23778747]
+2 CONT Begraafinschrijving Marinus N.n.
+2 CONT Inschrijvingsjaar: 1794
+2 CONT Overledene: Marinus N.n.
+2 CONT Vader/moeder: Waltherus Friethoff
+2 CONT Bron of gezindte: Begraven 1790-1799
+2 CONT Plaats begrafenis: Rotterdam
+2 CONT Begraafdatum: 12-07-1794
+2 CONT Opmerkingen: overleden 08-07-1794, overledene was 1/2 jaar, G. Weg
 1 CHAN
-2 DATE 07 JUL 2026
-3 TIME 00:26:09
+2 DATE 25 JUL 2026
+3 TIME 00:00:01
+0 @S00507@ SOUR
+1 TITL Overlijden Hendrik Reinout 03-10-1842
+1 PUBL https://hdl.handle.net/21.12133/EB73EC5D55BC4B5EBD99B34818C1DC08
+2 CONT https://hdl.handle.net/21.12133/48979F36F13C4202A61774CBF2C9FD17
+1 REPO @R00003@
+1 OBJE @M00485@
+1 TEXT Nr 2525
+2 CONT Op heden den vijfden October Achtien honderd Twee en
+2 CONT Veertig, is voor ons Lid van het Plaatselijk Bestuur der Stad Rotterdam, benoemd
+2 CONT Ambtenaar van den Burgelijken Stand, in het huis der gemeente, verschenen:
+2 CONT Bastiaan van Duijl van beroep binnenvader
+2 CONT oud zeventig jaren, wonende Gasthuis
+2 CONT goede bekende van de natenoemen overledene, en 
+2 CONT Evert de Roo van beroep bediende
+2 CONT oud zesendertig jaren, wonende Gasthuis
+2 CONT goede bekende van de natenoemen overledene, welke ons hebben
+2 CONT verklaard, dat op den Derden dezer
+2 CONT des na middags ten zes ure, in zeker huis staande
+2 CONT Hoogstraat L 331 is overleden
+2 CONT Hendrik Rijnhout oud Zestig
+2 CONT jaar zeven maanden en negentig dagen, echtge
+2 CONT noot van Francisca Friedhof, zijnde geweest
+2 CONT sjouwer geboren te Ter Goes, en gedomiliceerd
+2 CONT alhier
+2 CONT Zoon van wijlen Adrianus Rijnhout en
+2 CONT van wijle Sophia van der Stralen beiden te 
+2 CONT Ter Goes overleden
+2 CONT
+2 CONT En hebben Wij hiervan deze akte opgemaakt, weelke na voorlezing door
+2 CONT de declaranten en ons is onderteekend.
+2 CONT B van Duijl
+2 CONT E de Roo
+2 CONT Tromp
+1 CHAN
+2 DATE 24 JUL 2026
+3 TIME 22:58:36
+0 @S00508@ SOUR
+1 TITL Overlijden Francisca Friethof 12-01-1845
+1 PUBL https://hdl.handle.net/21.12133/F2C4CFAA39B7412B9D5442E86520EECD
+2 CONT https://hdl.handle.net/21.12133/B003E312441047CBAE5335464751A79E
+1 REPO @R00003@
+1 OBJE @M00484@
+1 TEXT Nr 111
+2 CONT Op heden den dertienden January Achtien honderd Vijf en
+2 CONT Veertig, zijn voor ons Lid van het Plaatselijk Bestuur der Stad Rotterdam, benoemd
+2 CONT Ambtenaar van den Burgelijken Stand, in het huis der gemeente, verschenen:
+2 CONT Jan van der Star van beroep sjouwer
+2 CONT oud vijfendertig jaren, wonende Pannekoekstraat J 114
+2 CONT goede bekende van de natenoemen overledene, en 
+2 CONT Johannes Versluis van beroep sjouwer
+2 CONT oud achtentwintig jaren, wonende Pannekoekstraat J 147
+2 CONT goede bekende van de natenoemen overledene, welke ons hebben
+2 CONT verklaard, dat op den twaalfden dezer
+2 CONT des voor middags ten negen ure, in zeker huis staande
+2 CONT Pannekoekstraat J 114 is overleden
+2 CONT Francina Friethoff oud
+2 CONT vijfenvijftig jaren weduwe van Hendrik
+2 CONT Rijnhout, zonder beroep geboren en gedomici
+2 CONT leerd alhier zijnde alle verdere aanwij
+2 CONT zingen the dezen gevorderd de declaranten
+2 CONT onbekend
+2 CONT
+2 CONT En hebben Wij hiervan deze akte opgemaakt, weelke na voorlezing door
+2 CONT de declaranten en ons is onderteekend.
+2 CONT J vd Star
+2 CONT J versluis
+2 CONT Tromp
+1 CHAN
+2 DATE 24 JUL 2026
+3 TIME 17:38:42
+0 @S00509@ SOUR
+1 TITL Overlijden Wouterus Friedhof 06-01-1841
+1 PUBL https://hdl.handle.net/21.12133/4654C0918F2040CB8A44B0A902CC8464
+2 CONT https://hdl.handle.net/21.12133/F34968CA0EE940ACAE5A3F2C713B4BBC
+1 REPO @R00003@
+1 OBJE @M00478@
+1 TEXT Op heden den Achtsten January Achttien honderd Een en
+2 CONT Veertig, is voor ons Lid van het Plaatselijk Bestuur der Stad Rotterdam, benoemd
+2 CONT Ambtenaar vahn den Burgelijken Stand, in het juis der Gemeente, verschenen:
+2 CONT Bastiaan van Duijl van beroep binnenvader
+2 CONT oud  achtenzestig jaren, wonende Gasthuis
+2 CONT goede bekende van de natenoemen overledene, en
+2 CONT Evert de Roo van beroep bediende
+2 CONT oud achtendertig jaren, wonende Gasthuis
+2 CONT goede bekende van de natenoemen overlede, welke ons hebben
+2 CONT verklaard, dat op den zesden dezer
+2 CONT des middags ten twaalf ure, in zeker huis staande
+2 CONT Hoogstraat L 331 is overleden
+2 CONT Wouterus Friedhof, oud twintig
+2 CONT jaren en negen maanden oud ongehuwd,
+2 CONT zijnde geweest schoenmaker geboren en
+2 CONT gedomiliceerd alhier.
+2 CONT Zoon van wijlen Theodoor Friedhof
+2 CONT en van wijlen Jacoba Christina Lammerse,
+2 CONT beiden alhier overleden.
+2 CONT En hebben Wij hiervan deze akte opgemaakt, welke na voorlezing door
+2 CONT declaranten nevens ons is onderteekend.
+1 CHAN
+2 DATE 23 JUL 2026
+3 TIME 22:43:14
+0 @M00478@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-09_1841A_024.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-09_1841A_024
+1 CHAN
+2 DATE 23 JUL 2026
+3 TIME 17:30:24
+0 @S00510@ SOUR
+1 TITL Huwelijk Theodorus Friethof en Christina Jacoba Lammerman 23-03-1825
+1 PUBL https://hdl.handle.net/21.12133/0D0A74042224468885FC1E91E0C532AE
+2 CONT https://hdl.handle.net/21.12133/384A68AC098C4F5D8C313DBC4D8F6A13
+2 CONT https://hdl.handle.net/21.12133/47C3BD877253401D8B767A8ACE7861A7
+2 CONT https://hdl.handle.net/21.12133/D276BEF4A16C4FFDBA0012C591C055E3
+2 CONT https://hdl.handle.net/21.12133/6D82EE84FAAB49ADBEB3B3AC33BBE04C
+2 CONT https://hdl.handle.net/21.12133/612F9AE0B9934EAFA6B0459180080F86
+1 REPO @R00003@
+1 OBJE @M00479@
+1 OBJE @M00480@
+1 OBJE @M00481@
+1 OBJE @M00482@
+1 OBJE @M00483@
+1 TEXT # Transcription NL-RtSA_999-75_220_1825A-A061v-0001.jpg
+2 CONT
+2 CONT Theodorus Friethof oud 34 jaren
+2 CONT schoenmakersknecht wonende alhier
+2 CONT zoon van Waltherus afwezend en Cor
+2 CONT nelia Ravesteijn wonende mede alhier
+2 CONT &
+2 CONT Christina Jacoba Lammerman
+2 CONT oud 37 jaren wonende alhier dochter
+2 CONT van Arnoldus afwezend en Jacoba
+2 CONT Withmans wonende mede alhier
+2 CONT wed. Barend van Dongen
+2 CONT 13, 20 Maart 1825
+2 CONT Gehuwd 23 Maart 1825
+2 CONT
+2 CONT # Transcription NL-RtSA_999-75_220_1825A-A061v-0002.jpg
+2 CONT
+2 CONT Certificaat van Onvermogen
+2 CONT
+2 CONT Burgemeester en Wethouders
+2 CONT der Stad Rotterdam, Certificeern bij dezen, op
+2 CONT getuigenis van bekende Inwoners dezer Stad, dat
+2 CONT de Personen van
+2 CONT Theodorus Friethof
+2 CONT en
+2 CONT Christina Jacoba Lammermans
+2 CONT onvermogen zijn om de kosten der Acten en
+2 CONT Instrument te kunnen betalen, benodigd tot
+2 CONT het voltrekken van derzelven Huwlijk, en dat
+2 CONT dezelve mitsdien zijn vallende in de termen der
+2 CONT Wet van Zijne Koninglijke Hoogheid, in dato
+2 CONT 9 Maart 1815, No. 13, houdende bepalingen tot
+2 CONT het wegnemen van pecuieele bezwaren bij het vol-
+2 CONT trekken der Huwlijken van behoeftigen personen.
+2 CONT
+2 CONT Rotterdam, den 26 february 1825
+2 CONT
+2 CONT
+2 CONT # Transcription NL-RtSA_999-75_220_1825A-A061v-0003.jpg
+2 CONT
+2 CONT BURGELYKE STAND
+2 CONT STAD ROTTERDAM
+2 CONT
+2 CONT PROVINCIE ZUID_HOLLAND
+2 CONT DISTRICT ROTTERDAM
+2 CONT
+2 CONT EXTRACT
+2 CONT
+2 CONT Uit het Doop Register van de RK Gemeente van de
+2 CONT Leeuwenstraat
+2 CONT is geextraheerd, dat op den tweeentwintigsten (22) maart
+2 CONT des jaars zeventien honderd negentig (1790) is
+2 CONT gedoopt
+2 CONT Theodorus
+2 CONT zoon van Waltherus Friethof
+2 CONT en Cornelia Ravesteijn
+2 CONT
+2 CONT Wij ondergeteekende WETHOUDER der Stad
+2 CONT ROTTERDAM, gedelegueerde Ambtenaar van den Bur-
+2 CONT gelijken  Stand, verklare, dat het bovenstaande Extract is
+2 CONT overeenkomstig met het bovengemeld Register.
+2 CONT Den 3 maart 1825.
+2 CONT C.V. Vollenhoven
+2 CONT
+2 CONT Wij ondergeteekenden PRESIDENT van het Tribunaal
+2 CONT van Eersten aanleg in het District Rotterdam, verklare,
+2 CONT dat de bovenstaande handtekening, is die, van den Heer
+2 CONT WETHOUDER der Stad ROTTERDAM, gede-
+2 CONT legueerd Ambtenaar van den Burglijken Stand, en dat dit
+2 CONT Extract alzoo geloog verdiend.
+2 CONT Rotterdam, den 4 maart 1825.
+2 CONT [onleesbaar]
+2 CONT
+2 CONT Friethof
+2 CONT
+2 CONT # Transcription NL-RtSA_999-75_220_1825A-A061v-0004.jpg
+2 CONT
+2 CONT Model litt, LL.
+2 CONT Art. 200 der Wet.
+2 CONT
+2 CONT Ligting van den jare
+2 CONT van 1814.
+2 CONT
+2 CONT NATIONALE MILITIE.
+2 CONT
+2 CONT PROVINCIE ZUIDHOLLAND.
+2 CONT
+2 CONT CERTIFIKAAT.
+2 CONT
+2 CONT De gouverneur van de Provincie ZUIDHOLLAND, verklaart
+2 CONT dat Theodorus Friedhoff
+2 CONT geboren te Rotterdam, den 22 Maart 1790
+2 CONT van beroep Schoenmakersknecht
+2 CONT zoon van Woutherus. - overleden
+2 CONT en van Cornelia Ravestein. wonende te Rotterdam
+2 CONT binnen de Gemeente van Rotterdam 4e Kanton voor de
+2 CONT Nationale-Militie is ingeschreven; dat aan hem, bij de loting, ten deele
+2 CONT gevallen zijnde het nommer 1080, hij vervolgens, door den Militie-Raad
+2 CONT zitting gehouden hebbende te Rotterdam
+2 CONT uit hoofde van Eenige Zoon eenen Weduwe te zijn
+2 CONT is vrijgesteld
+2 CONT Gegeven in 's Gravenhage, den 12 Juny 1824.
+2 CONT
+2 CONT De Goeverneur der Provincie,
+2 CONT [onleesbaar]
+2 CONT
+2 CONT SIGNALEMENT
+2 CONT Lengte 1 el, 7 palm, 6 duim, - streep.
+2 CONT Aangezigt Ovaal
+2 CONT Voorhoofd hoog
+2 CONT Oogen Blauw
+2 CONT Neus ordinair
+2 CONT Mond ordinair
+2 CONT Kin rond
+2 CONT Haar [onleesbaar]
+2 CONT Wenkbrauwen bruin
+2 CONT Merkbare teekenen pokdalig
+2 CONT Handteekening  T Friethof
+2 CONT Geregistreerd no 2418
+2 CONT
+2 CONT # Transcription NL-RtSA_999-75_220_1825A-A061v-0005.jpg
+2 CONT
+2 CONT PROVINCIE
+2 CONT NOORD-BRABANT.
+2 CONT
+2 CONT STAD
+2 CONT 's HERTOGENBOSCH.
+2 CONT
+2 CONT Vrij van Zegel
+2 CONT met van 9 maart
+2 CONT 1815 No 13
+2 CONT
+2 CONT Uit een REGISTER van Gedoopten
+2 CONT DER Stad 's HERTOGENBOSCH, over den jare een
+2 CONT duizend zeven honderd zeven en tachtig blijkt:
+2 CONT Dat op den achttienden November
+2 CONT 1787 in de groote of Sint Jans
+2 CONT Kerk is gedoopt: Christina
+2 CONT Jacoba, dochter van Arnoldus
+2 CONT Lammerman, en Jacoba
+2 CONT Withmans.
+2 CONT
+2 CONT Het bovenstaande verklaar ik ondergeteekende Wethouder
+2 CONT der Stad 's HERTOGENBOSCH, Ambtenaar van den Burgelijken Stand,
+2 CONT overeenkomstig aan het voormelde Register te zijn.
+2 CONT
+2 CONT 's Hertogenbosch, den 28 february 1825
+2 CONT [onleesbaar]
+2 CONT
+2 CONT Wij VOORZITTER bij de Regtbank van Eersten Aanleg, zitting houdende
+2 CONT te 's HERTOGENBOSCH, verklaren, dat de Handteekening hier boven gesteld,
+2 CONT is die van den Heer Nr 16 Van Fhye Hannes
+2 CONT Wethouder der Stad 's HERTOGENBOSCH, Beambte van den
+2 CONT Burgelijken Stand.
+2 CONT
+2 CONT 's Hertogenbosch, den 28 february 1825
+2 CONT van der Horst
+2 CONT
+2 CONT Friethof
+2 CONT
+2 CONT
+2 CONT
+1 CHAN
+2 DATE 24 JUL 2026
+3 TIME 16:05:18
+0 @M00479@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-75_220_1825A-A061v-0001.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-75_220_1825A-A061v-0001
+1 CHAN
+2 DATE 23 JUL 2026
+3 TIME 23:24:35
+0 @M00480@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-75_220_1825A-A061v-0002.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-75_220_1825A-A061v-0002
+1 CHAN
+2 DATE 23 JUL 2026
+3 TIME 23:24:37
+0 @M00481@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-75_220_1825A-A061v-0003.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-75_220_1825A-A061v-0003
+1 CHAN
+2 DATE 23 JUL 2026
+3 TIME 23:24:39
+0 @M00482@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-75_220_1825A-A061v-0004.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-75_220_1825A-A061v-0004
+1 CHAN
+2 DATE 23 JUL 2026
+3 TIME 23:24:40
+0 @M00483@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-75_220_1825A-A061v-0005.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-75_220_1825A-A061v-0005
+1 CHAN
+2 DATE 23 JUL 2026
+3 TIME 23:24:42
+0 @M00484@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-09_1845A_032.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-09_1845A_032
+1 CHAN
+2 DATE 24 JUL 2026
+3 TIME 17:27:44
+0 @M00485@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-09_1842C_146.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-09_1842C_146
+1 CHAN
+2 DATE 24 JUL 2026
+3 TIME 18:03:04
+0 @S00511@ SOUR
+1 TITL Doop Walterus Friethoff 07-08-1764
+1 PUBL https://www.familysearch.org/ark:/61903/3:1:3QS7-99QV-33DL
+1 REPO @R00003@
+1 TEXT 1764 Augusti
+2 CONT 7a baptizatus est Walterus, filius Theodori Friethoff et Mariae Theresiae van de Silver. Susceptores: Henricus van Heel et Joanna van Son.
+1 OBJE @M00486@
+1 CHAN
+2 DATE 25 JUL 2026
+3 TIME 10:43:44
+0 @M00486@ OBJE
+1 FILE E:/ancestris-data/media/005852598_00105.jpg
+2 FORM jpg
+2 TITL 005852598_00105
+1 CHAN
+2 DATE 25 JUL 2026
+3 TIME 10:43:43
+0 @I00323@ INDI
+1 NAME Theodorus /Friethoff/
+2 GIVN Theodorus
+2 SURN Friethoff
+2 SOUR @S00511@
+1 SEX M
+1 SOUR @S00511@
+1 FAMS @F00115@
+1 CHAN
+2 DATE 25 JUL 2026
+3 TIME 10:53:06
+0 @I00324@ INDI
+1 NAME Maria Theresia /van de Silver/
+2 GIVN Maria, Theresia
+2 SURN van de Silver
+2 SOUR @S00511@
+1 SEX F
+1 SOUR @S00511@
+1 FAMS @F00115@
+1 CHAN
+2 DATE 25 JUL 2026
+3 TIME 10:53:06
+0 @F00115@ FAM
+1 HUSB @I00323@
+1 WIFE @I00324@
+1 CHIL @I00302@
+1 CHAN
+2 DATE 25 JUL 2026
+3 TIME 10:53:06
 0 TRLR
