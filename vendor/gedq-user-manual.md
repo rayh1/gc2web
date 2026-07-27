@@ -11,7 +11,7 @@ At a high level, you can use it to:
 - inspect one person, family, or source record
 - search across a file by name, place, date, occupation, text, and related filters
 - walk family relationships such as ancestors, descendants, siblings, and kinship paths
-- render deterministic ASCII trees, anniversary reports, and aggregate reports when you need a compact overview
+- render deterministic ASCII trees, numbered lineage reports, anniversary reports, structural research-lead reports, and aggregate reports when you need a compact overview
 - validate data quality issues without blocking normal reads
 - make guarded file edits with atomic writes
 - run raw Cypher queries against the derived graph when you need more than the high-level commands
@@ -62,7 +62,10 @@ The top-level commands are:
 - `path`
 - `tree`
 - `analyze`
+- `gaps`
 - `anniversary`
+- `ahnentafel`
+- `register`
 - `query`
 - `schema`
 - `validate`
@@ -418,6 +421,74 @@ JSON output returns a stable envelope:
 
 If no records match, human mode prints a single "no anniversaries" line and JSON mode returns an empty `events` array.
 
+## Intermediate: Research Leads and Numbered Lineage Reports
+
+Three related commands cover compact, deterministic reports that are not record lookups.
+
+### Structural Research Leads with `gaps`
+
+`gaps` reports likely follow-up work without treating the findings as validation errors.
+
+Examples:
+
+```bash
+gedq gaps data.ged --human
+gedq gaps data.ged --json
+gedq gaps data.ged --check marriage-no-children,couple-no-marriage --json
+gedq gaps data.ged --as-of 1900 --human
+```
+
+Use it when you want deterministic leads such as:
+
+- marriages with no linked children
+- couples with children but no recorded marriage
+- deaths with no burial event
+- overdue deaths relative to the chosen reference year
+- births with no baptism event
+
+Important behavior:
+
+- `--check` accepts a comma-separated subset of `marriage-no-children`, `couple-no-marriage`, `death-no-burial`, `overdue-death`, and `birth-no-baptism`
+- `--as-of` accepts either a year or an ISO date
+- when `--as-of` is omitted, gedq uses the latest resolvable year from the file
+- unlike `validate`, this report is intended as a research queue rather than a data-integrity gate
+
+### Numbered Ancestor Reports with `ahnentafel`
+
+`ahnentafel` renders a deterministic numbered ancestor report for one person.
+
+Examples:
+
+```bash
+gedq ahnentafel data.ged I00002 --human
+gedq ahnentafel data.ged I00002 --json
+gedq ahnentafel data.ged I00002 --generations 4 --human
+```
+
+Important behavior:
+
+- the subject counts as generation 1
+- `--generations` limits report depth
+- JSON and human output are both supported
+
+### Numbered Descendant Reports with `register`
+
+`register` renders a deterministic numbered descendant report for one person.
+
+Examples:
+
+```bash
+gedq register data.ged I00002 --human
+gedq register data.ged I00002 --json
+gedq register data.ged I00002 --generations 5 --system daboville --human
+```
+
+Important behavior:
+
+- `--generations` limits report depth
+- `--system` selects `register` or `daboville`
+- JSON and human output are both supported
+
 ## Intermediate: Validate Data Quality
 
 `validate` is for data quality checks that should be reported explicitly rather than silently blocking normal reads.
@@ -518,6 +589,8 @@ file modified externally, reload first
 ```
 
 When that happens, run another read command first, then retry the edit.
+
+The same guarantees hold for a whole batch of edits at once — see [Advanced: Batch Edits](#advanced-batch-edits).
 
 ## Advanced: Add Records
 
@@ -728,6 +801,59 @@ If delete reports inbound references, inspect them first, then preview the clean
 gedq delete I90000 working-data.ged --cascade --dry-run
 ```
 
+## Advanced: Batch Edits
+
+When a research pass produces dozens of field changes, running `gedq edit` once per change means dozens of parses, dozens of writes, and dozens of chances to stop halfway with the file in an intermediate state. `gedq batch` applies them all in one invocation.
+
+```bash
+gedq batch GED_PATH OPS_FILE
+```
+
+The ops file is plain text, one operation per line. Each line is an xref followed by field operations in exactly the `gedq edit` grammar you already know — `--set`, `--add`, `--remove`, `--clear`. Blank lines and lines starting with `#` are ignored.
+
+```text
+# 2026 cleanup pass
+@I00077@ --set BIRT.PLAC=Rotterdam
+@I00077@ --add NOTE="Verified against parish register"
+@F00071@ --set MARR.DATE="12 MAR 1901"
+```
+
+Values containing spaces must be quoted. Lines are tokenized with POSIX shell quoting rules (Python's `shlex.split`), so `--set NAME="Jan /Hoofman/"` works the way it does in your shell.
+
+**Batches are all-or-nothing.** Every line is parsed and the whole batch validated before a single byte is written. If any line fails — a stale xref, bad grammar, a rejected field form — the batch exits non-zero and your GEDCOM file is byte-identical to what it was before. There is no partial-application mode, and the file is never observable in a half-applied state.
+
+Each line means exactly what the equivalent single `gedq edit` would mean, applied in file order, including validation rules and reciprocity side-effects such as family-link mirroring. Two lines touching the same field is fine: the later one wins, just as two sequential edits would.
+
+Preview first. `--dry-run` runs the full parse and validation and reports every operation's outcome without writing:
+
+```bash
+gedq batch working-data.ged ops.txt --dry-run
+```
+
+This is the way to catch one stale xref before it blocks a 50-line cleanup session. Its exit status reflects what a real run would do.
+
+Note one difference from single edits: `gedq edit --dry-run` prints a unified diff showing the exact lines that will change, while `gedq batch --dry-run` reports only a per-operation status and counts. If you need to see the literal before-and-after lines, preview that operation with `gedq edit --dry-run` instead.
+
+`--json` emits a per-operation report, one entry per operation line, plus a summary:
+
+```bash
+gedq batch working-data.ged ops.txt --dry-run --json
+```
+
+```json
+{"ops":[{"line":2,"xref":"@I00077@","status":"would_apply"}],
+ "summary":{"total":1,"applied":1,"failed":0,"not_applied":0,"not_reached":0},
+ "dry_run":true}
+```
+
+Every entry carries the ops-file line number and xref, so a failure in a 50-line batch is debuggable without bisection. A failed operation embeds the same `code` and `message` a single `gedq edit` would emit for that failure — batch introduces no new error shape. In the summary, `total = applied + failed + not_applied + not_reached`, and on any abort `applied` is 0.
+
+An empty ops file, or one containing only comments, is a valid no-op: exit 0, total 0, file untouched.
+
+After a successful batch, reads reflect every applied operation immediately — no manual cache step.
+
+Record lifecycle operations are deliberately out of scope: a batch edits existing records only. Use `gedq add` and `gedq delete` for creating and removing whole records.
+
 ## Advanced: JSON for Automation
 
 If you are scripting gedq, prefer explicit `--json` even when redirection would trigger JSON automatically. That makes your scripts easier to read and less sensitive to environment changes.
@@ -922,12 +1048,16 @@ gedq siblings ID data.ged [--expand all]
 gedq path LEFT_ID RIGHT_ID data.ged [--common-ancestor|--cousin-distance] [--expand all]
 gedq tree ID data.ged --direction up|down [--depth N] [--mode clean|annotated]
 gedq analyze data.ged [--report census,coverage,structure,duplicates] [--json|--human]
+gedq gaps data.ged [--check NAME[,NAME...]] [--as-of YYYY|YYYY-MM-DD] [--json|--human]
 gedq anniversary data.ged [--date YYYY-MM-DD|'DD MON'|--today] [--events birth[,marriage,death]] [--json|--human]
+gedq ahnentafel data.ged ID [--generations N] [--json|--human]
+gedq register data.ged ID [--generations N] [--system register|daboville] [--json|--human]
 gedq schema --mode person|family|source|event|note
 gedq validate data.ged [--entity ID] [--code CODE] [--baseline FILE] [--update-baseline]
 gedq add KIND data.ged [--set field=value] [--add field=value] [--dry-run]
 gedq edit ID data.ged [--set field[i]=value] [--add field=value] [--clear field[i]] [--remove field[i]=value] [--dry-run]
 gedq delete ID data.ged [--cascade] [--dry-run]
+gedq batch data.ged ops.txt [--dry-run] [--json|--human]
 gedq query --examples [--markdown]
 gedq query "MATCH ..." data.ged [--json|--human]
 ```
@@ -936,5 +1066,6 @@ gedq query "MATCH ..." data.ged [--json|--human]
 
 - If you are new, practice with `person`, `search`, and `validate` first.
 - If you are doing family analysis, learn `ancestors`, `descendants`, `siblings`, and `path` together.
-- If you are maintaining files, use a copy, read before you write, and verify every mutation with a follow-up lookup.
+- If you need compact overview reports, add `gaps`, `ahnentafel`, `register`, `anniversary`, and `analyze` to your working set.
+- If you are maintaining files, use a copy, read before you write, and verify every mutation with a follow-up lookup. For bulk cleanup, put the changes in an ops file and run `batch --dry-run` before committing them.
 - If you are building tooling around gedq, standardize on explicit `--json` and treat `search` and multi-row `query` as JSONL producers.
