@@ -1,0 +1,217 @@
+topic: daily birthday list on hoofman.nl
+overall_coverage: 87
+areas:
+- name: Currency mechanism & timezone
+  coverage: 90
+  facts:
+  - id: EL-1
+    text: '"Today" is computed client-side in the visitor''s browser from a shipped dataset; the site
+      remains statically built.'
+    source: area 1 / round 1
+    confidence: High
+  - id: EL-2
+    text: The governing date is the visitor's own local date, not a fixed Europe/Amsterdam or UTC date.
+    source: area 1 / round 3
+    confidence: High
+  - id: EL-3
+    text: A visitor without JavaScript, or a crawler, sees a static fallback message rather than the list.
+    source: area 1 / round 2
+    confidence: High
+  - id: EL-4
+    text: No cron or scheduled rebuild is introduced, so the silent-staleness failure mode does not apply.
+    source: area 1 / round 1
+    confidence: High
+  - id: EL-33
+    text: 'WORKED EXAMPLE (no JavaScript), confirmed verbatim: the block renders its heading and the message
+      ''Deze lijst wordt in je browser samengesteld. Zet JavaScript aan om te zien wie er vandaag geboren
+      is.'''
+    source: worked-example probe / proposal drafted by the assistant, confirmed by the user
+    confidence: High
+- name: Data path & liveness enforcement
+  coverage: 90
+  facts:
+  - id: EL-5
+    text: gen_site emits a dedicated birthday index at generation time containing only eligible people;
+      withheld individuals never enter any shipped file.
+    source: area 2 / round 2
+    confidence: High
+  - id: EL-6
+    text: The index is built by calling gedq's `anniversary --json` and filtering its output through model.Liveness.may_appear_in_aggregate.
+    source: area 2 / round 3
+    confidence: High
+  - id: EL-7
+    text: 'gedq''s own is_alive flag is NOT the liveness source: against the refined [C-2] it agrees on
+      only 12 of 36 withheld individuals, returns None for 23, and actively disagrees on 1.'
+    source: area 7 / measured
+    confidence: High
+  - id: EL-8
+    text: A property assertion over the generated index verifies that no [C-2]-withheld id appears anywhere
+      in it.
+    source: area 2 / round 4
+    confidence: High
+  - id: EL-9
+    text: 'gedq guarantees date correctness but not exclusion correctness (verified: `anniversary --date
+      ''1 JAN''` returns 1 person, not 38).'
+    source: area 7 / measured
+    confidence: High
+  - id: EL-29
+    text: 'The property assertion checks BOTH directions: no withheld id appears anywhere in the index,
+      AND every eligible deterministic-dated individual appears exactly once, on their own day.'
+    source: clarifying pass / create-cr
+    confidence: High
+  - id: EL-30
+    text: The generated index contains a key only for calendar days that have at least one eligible entry;
+      days with none are absent and the client treats a missing key as an empty day.
+    source: clarifying pass / create-cr
+    confidence: High
+- name: Eligibility & date quality
+  coverage: 85
+  facts:
+  - id: EL-10
+    text: Only day-precise birth dates may appear; the 37 year-only and 1 month-only eligible individuals
+      are excluded entirely.
+    source: area 3 / round 2
+    confidence: High
+  - id: EL-11
+    text: '[C-2] branch 2''s marriage-recency and child-recency tests apply ONLY when the birth date is
+      unknown or within 110 years; a known birth year beyond 110 is not overridden by them.'
+    source: area 3 / round 3
+    confidence: High
+  - id: EL-12
+    text: Under EL-11 the withheld set is 36 (not 55) and the day-precise birthday pool is 172 (not 158).
+    source: area 3 / measured
+    confidence: High
+  - id: EL-13
+    text: No eligible individual currently has a 29 February birthday.
+    source: area 3 / measured
+    confidence: Low
+  - id: EL-14
+    text: Two of the day-precise pool carry approximate-date flags (ABT/EST/CAL/INT/BET); their disposition
+      is undecided.
+    source: area 3 / measured
+    confidence: Low
+  - id: EL-28
+    text: 'Only birth dates gedq''s anniversary command treats as deterministic may appear; interpreted
+      (INT) day-precise dates are excluded, adopting gedq''s own behaviour. Verified: I00129 (''INT 7
+      JUL 1775 (1840 - 65.12)'') and I00173 (''INT 5 MAR 1755 ()'') are not returned by gedq on 7 JUL
+      / 5 MAR.'
+    source: clarifying pass / create-cr
+    confidence: High
+  - id: EL-35
+    text: 'Individuals whose given name is a placeholder or a stillbirth marker are excluded from the
+      index. Observed forms, verbatim: ''N.N.'', ''NN'', ''N'', ''Levenloos''. User-initiated for the
+      N.N. forms; widened to ''Levenloos'' (stillbirths) after the assistant surfaced them, and confirmed.'
+    source: user, clarifying pass (Levenloos widening surfaced by the assistant and confirmed)
+    confidence: High
+  - id: EL-36
+    text: 'Measured effect of EL-35 on the gedq-realistic pool: 170 -> 162 entries (8 removed); filled
+      days 139 -> 133; empty days 227 -> 233. Six days become empty: 1 Jan, 7 Feb, 18 Mar, 6 Jun, 20 Jun,
+      29 Jul.'
+    source: measured
+    confidence: Low
+- name: Entry content, language & ordering
+  coverage: 80
+  facts:
+  - id: EL-15
+    text: Each entry shows the person's name, linked to their entity page.
+    source: area 4 / round 3
+    confidence: High
+  - id: EL-16
+    text: Each entry shows the lifespan as one parenthetical, e.g. (1890-1972); the birth year is not
+      separately repeated.
+    source: area 4 / round 4
+    confidence: High
+  - id: EL-17
+    text: The feature is in Dutch and uses neutral "born on this day" framing (e.g. "Geboren op deze dag"),
+      not "verjaardag".
+    source: area 4 / round 3
+    confidence: High
+  - id: EL-18
+    text: Ordering within a day is deliberately left to the builder.
+    source: area 4 / round 3
+    confidence: High
+  - id: EL-31
+    text: 'WORKED EXAMPLE (rendering), confirmed verbatim. Heading: ''Geboren op deze dag''. On 9 March
+      the block shows, oldest first: ''Pieter Hoofman (1833-1874)'', ''Helena Louisa Walters (1873-1922)'',
+      ''Anna Maria Christina Hoofman (1893-?)''. Lifespan is reused verbatim from the site''s existing
+      lifespan string, including the trailing ''-?'' when no death year is recorded.'
+    source: worked-example probe / proposal drafted by the assistant, confirmed by the user
+    confidence: High
+  - id: EL-34
+    text: 'Entries on a shared day are ordered oldest first (ascending birth year). This supersedes EL-18''s
+      delegation: the confirmed worked example fixes the order.'
+    source: worked-example probe / proposal drafted by the assistant, confirmed by the user
+    confidence: High
+- name: Placement & empty state
+  coverage: 90
+  facts:
+  - id: EL-19
+    text: 'The feature appears as a block on the homepage only: no dedicated route, not in site navigation.'
+    source: area 5 / round 3
+    confidence: High
+  - id: EL-20
+    text: A day with no eligible birthday renders a plain "no birthdays today" line rather than hiding
+      the block.
+    source: area 5 / round 2
+    confidence: High
+  - id: EL-21
+    text: 226 of 366 days (62%) have no eligible birthday, so the empty state is the common case.
+    source: area 5 / measured
+    confidence: High
+  - id: EL-32
+    text: 'WORKED EXAMPLE (empty day), confirmed verbatim: the block still renders its heading and the
+      line ''Vandaag is er niemand uit deze stamboom geboren.'''
+    source: worked-example probe / proposal drafted by the assistant, confirmed by the user
+    confidence: High
+- name: Scope fence / non-goals
+  coverage: 90
+  facts:
+  - id: EL-22
+    text: No marriage anniversaries, even though gedq returns MARR events for the same day.
+    source: area 6 / round 3
+    confidence: High
+  - id: EL-23
+    text: No death anniversaries, even though gedq returns DEAT events for the same day.
+    source: area 6 / round 3
+    confidence: High
+  - id: EL-24
+    text: No upcoming or recent window; strictly today only.
+    source: area 6 / round 3
+    confidence: High
+  - id: EL-25
+    text: No notifications, emails, reminders, or RSS items.
+    source: area 6 / round 3
+    confidence: High
+- name: gedq interaction
+  coverage: 85
+  facts:
+  - id: EL-26
+    text: gc2web already sources GEDCOM data through gedq via gen_site/adapter/gedq_adapter.py (subprocess
+      + JSON).
+    source: area 7 / codebase
+    confidence: Low
+  - id: EL-27
+    text: gedq's anniversary command returns BIRT/MARR/DEAT events for one calendar day with --json, including
+      lifespan and display name.
+    source: area 7 / verified
+    confidence: High
+contradictions:
+- resolved: true
+  description: Both 'birth year' and 'lifespan (both years)' were selected as entry fields, but the lifespan
+    already contains the birth year.
+  resolution: Lifespan only, as a single parenthetical - see EL-16.
+- resolved: true
+  description: '[C-2] branch 2 as filed fires if ANY condition applies, so marriage/child recency marks
+    someone LIVING/PRIVATE even when a known birth year puts them at 114+ (19 such people, born 1892-1912).'
+  resolution: 'Refined reading adopted: marriage/child tests apply only when birth is unknown or within
+    110 years - see EL-11. This SUPERSEDES [C-2] as currently filed in specs/constitution.md.'
+- resolved: true
+  description: 'EL-3 vs EL-5: a visitor without JavaScript is shown a fallback message, while the complete
+    birthday index ships publicly and is readable in view-source. The protection is presentational only.'
+  resolution: 'Stands as accepted: the fallback message is presentational only and the index is public
+    either way, which [C-1] already governs. Carried into the CR as a named invariant.'
+open_questions: []
+assumptions:
+- EL-13
+- EL-14
+- EL-26
