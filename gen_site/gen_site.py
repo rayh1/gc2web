@@ -8,6 +8,8 @@ from typing import List
 from tqdm import tqdm # type: ignore
 
 from util.AsciiTreeRenderer import render_ascii_tree_block
+from util.Lifespan import lifespan_str
+from birthday_index import generate_birthday_index
 from model.GedcomModel import GedcomModel
 from model.Individual import Individual
 from model.SourcesMixin import SourcesMixin
@@ -16,10 +18,19 @@ from model.EventDetail import EventDetail
 from model.Witness import Witness
 from model.Footnote import Footnote
 
-CONTENT_DIR: Path = Path("/workspace/src/content/entity")
+# Every output path is derived from this file's own location, never hardcoded — the
+# checkout is not always at /workspace, and an absolute guess writes the whole generated
+# site outside the repo.
+REPO_ROOT: Path = Path(__file__).resolve().parent.parent
+
+CONTENT_DIR: Path = REPO_ROOT / "src/content/entity"
 LINK_ICON: str = ":link:"
 HEADER_PREFIX: str = "###"
-LAST_MODIFIED_FILE = "/workspace/src/last_modified.ts"
+LAST_MODIFIED_FILE = str(REPO_ROOT / "src/last_modified.ts")
+
+# `src/data/` holds build-time data the Astro pages import; `src/content/` is reserved
+# for the content collections.
+BIRTHDAY_INDEX_FILE: Path = REPO_ROOT / "src/data/birthday-index.json"
 
 logging.basicConfig(level=logging.INFO,
                    format='%(asctime)s - %(levelname)s - %(message)s')
@@ -90,15 +101,6 @@ def is_in_lifetime(individual: Individual, event: EventDetail) -> bool:
         return False
 
     return individual.start_life.date.date() <= event.date.date() <= individual.end_life.date.date() # type: ignore
-
-def lifespan_str(individual: Individual) -> str:
-    start_date = individual.start_life.date.date()
-    start_year = start_date.year if start_date and start_date.year else "?"
-    end_date = individual.end_life.date.date()
-    end_year = end_date.year if end_date and end_date.year else "?"
-    year_str = f"({start_year}-{end_year})"
-
-    return year_str
 
 def yaml_string(value: str | None) -> str:
     return json.dumps(value or "", ensure_ascii=False)
@@ -426,6 +428,12 @@ def main(argv: List[str]):
 
     generate_individual_pages(CONTENT_DIR)
     generate_source_pages(CONTENT_DIR)
+    generate_birthday_index(
+        args.file,
+        GedcomModel(),
+        datetime.now().year,
+        BIRTHDAY_INDEX_FILE,
+    )
     generate_last_modified()
 
 # Example usage

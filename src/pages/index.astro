@@ -1,5 +1,6 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
+import BirthdayBlock from "../components/BirthdayBlock.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { Image } from "astro:assets";
 import heroImage from "../../public/banner.webp";
@@ -36,6 +37,8 @@ import heroImage from "../../public/banner.webp";
       />
     </div>
   </section>
+
+  <BirthdayBlock />
 
   <section class="not-prose mt-10 space-y-4">
     <div class="flex items-baseline justify-between gap-4">
