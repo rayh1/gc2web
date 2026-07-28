@@ -120,7 +120,7 @@ all, so the empty state is the common path rather than an edge case. <!-- from E
   from the index. The forms present in the corpus, verbatim: `N.N.`, `NN`, `N`,
   `Levenloos`. A birthday entry is never rendered for one of them.
 - AC (property): no entry in the index has a name beginning with any of those four tokens.
-  <!-- observed: scan of the 170-entry gedq-realistic pool -> 8 matches (I00091, I00097, I00128 'N Walters', I00247/49/50/52 'Levenloos Hofman', I00288 'NN Nillissen') -->
+  <!-- observed: scan of the gedq-realistic pool -> the same 8 matches (I00091, I00097, I00128 'N Walters', I00247/49/50/52 'Levenloos Hofman', I00288 'NN Nillissen') at both anchors; pool size 170 at 5042ca9, 171 at de5371a -->
 - AC: 1 January, 7 February, 18 March, 6 June, 20 June and 29 July lose their only entry to
   this rule and therefore render the [R-4] empty state.
   <!-- from EL-36 -->
@@ -148,20 +148,35 @@ all, so the empty state is the common path rather than an edge case. <!-- from E
 - Entries sharing a day are ordered **oldest first** (ascending birth year). This
   supersedes `EL-18`'s original delegation — the confirmed worked example in [R-2] fixes
   the order, so it is no longer the builder's choice. <!-- from EL-34 -->
+- The Dutch wording of all three block strings is fixed verbatim, not merely framed:
+  the heading by [R-3], the empty-state line by [R-4], and the no-JS fallback by [R-5].
+  This supersedes `EL-17`'s original delegation — `EL-31`, `EL-32` and `EL-33` are
+  user-confirmed worked examples that fix the sentences themselves, so they are no
+  longer the builder's choice, exactly as happened to the ordering above.
+  <!-- from EL-31 --> <!-- from EL-32 --> <!-- from EL-33 -->
 
 **Delegated — deliberately left to the builder**
 
 - *(none remaining for ordering — see Locked. `EL-18` originally delegated it; the
   confirmed worked example in [R-2] fixed it, so it moved.)*
+- *(none remaining for the Dutch wording — see Locked. `EL-17` originally delegated the
+  sentences; the confirmed worked examples fixed them, so they moved. A builder must not
+  author its own phrasing: three acceptance criteria specify the strings
+  character-for-character.)*
 - The index file's name, location, and serialization format. The input fixes that it is
   generated and what it must and must not contain, not how it is spelled. <!-- from EL-5 -->
-- The exact Dutch wording of the heading, the empty-state line, and the no-JS fallback.
-  [R-3] fixes the framing and the forbidden word, not the sentences. <!-- from EL-17 -->
 
 ## 4. Invariants and edge cases
 
-- No individual for whom `may_appear_in_aggregate` returns False appears in any shipped
-  artifact — not merely hidden at render time. <!-- from EL-5 --> <!-- from EL-8 -->
+- No individual for whom `may_appear_in_aggregate` returns False appears in the birthday
+  index, or in any other aggregate output this change adds — filtered out before the file
+  is written, not merely hidden at render time. **Scoped to newly added aggregate output,
+  matching `[C-1]`.** An unscoped "any shipped artifact" reading would be false of the
+  site as it stands: `[C-1]` deliberately exempts the per-person entity pages, the search
+  index, the RSS feed and the paginated entity index, all of which predate the rule and
+  do publish withheld individuals.
+  <!-- from EL-5 --> <!-- from EL-8 -->
+  <!-- observed: specs/constitution.md [C-1] exemption clause; withheld I00122, I00323, I00324 each have a committed src/content/entity page and a built dist/entity/ route -->
 - 232 of 366 days carry no entry once [R-7] and [R-10] are applied, so [R-4]'s empty state
   is the ordinary path, not an edge case. The index pool is 163 entries across 134 days.
   Counts are as of `de5371a`; at `5042ca9` they were 233 / 162 / 133, and moved when that
