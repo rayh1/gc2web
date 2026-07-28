@@ -144,6 +144,27 @@ class TestLivenessThresholds(unittest.TestCase):
         )
         self.assertEqual(self.classify(individual), LivenessStatus.LIVING_PRIVATE)
 
+    # The rule says "a child was born 95 years ago or less" — ANY child, in any family.
+    # Both tests below put the OLD child first on purpose: a traversal that stops at the
+    # first family or the first child reads 1890, calls the individual PRESUMED DECEASED,
+    # and publishes them. Added 2026-07-28 after a calibration re-audit found that plant
+    # passing 22/22 — the marriage branch was covered across families, this one was not.
+
+    def test_the_most_recent_child_decides_across_families(self):
+        individual = FakeIndividual(
+            fams=[
+                FakeFamily(children=[child_born(1890)]),
+                FakeFamily(children=[child_born(1935)]),
+            ],
+        )
+        self.assertEqual(self.classify(individual), LivenessStatus.LIVING_PRIVATE)
+
+    def test_the_most_recent_child_decides_within_one_family(self):
+        individual = FakeIndividual(
+            fams=[FakeFamily(children=[child_born(1890), child_born(1935)])],
+        )
+        self.assertEqual(self.classify(individual), LivenessStatus.LIVING_PRIVATE)
+
     # Branch 2 — the proxy scoping itself: a KNOWN birth year settles the question and
     # a late marriage or child does not override it. This is the 19-person cohort in
     # Hoofman.ged (born 1892–1912) that the earlier reading withheld at age 114+.

@@ -15,10 +15,7 @@ agent-behaviour guidance in `CLAUDE.md` — none of those belong here.
   pages, the search index (`Searchbar.astro`), the RSS feed (`rss.xml.js`), and the paginated
   entity index (`entity/[...page].astro`) predate this rule and are deliberately in scope for
   publication.
-  Check: (reviewer-assisted) run `(cd gen_site && env -u VIRTUAL_ENV uv run python scripts/list_living_private.py)`
-  to list the withheld xref ids, then for each aggregate page, list, or feed the change adds,
-  reviewer confirms none of those individuals is selected and that the selection routes through
-  `model.Liveness.may_appear_in_aggregate` or its page-layer equivalent.
+  Check: (CI-mechanical) `bash -c 'npm run build --silent && cd gen_site && env -u VIRTUAL_ENV uv run python -m pytest test/test_aggregate_privacy.py'` exits 0.
 
 - [C-2] An individual is classified DECEASED when any death or burial evidence exists (a dated
   event, a place, or a source citation). Otherwise they are LIVING/PRIVATE when born 110 years
@@ -27,6 +24,14 @@ agent-behaviour guidance in `CLAUDE.md` — none of those belong here.
   birth year beyond 110 years settles the question as PRESUMED DECEASED, and a later marriage
   or child does not override it.
   Check: (CI-mechanical) `bash -c 'cd gen_site && env -u VIRTUAL_ENV uv run python -m pytest test/test_liveness.py'` exits 0.
+
+- [C-3] Aggregate output selects individuals through `model.Liveness.may_appear_in_aggregate`
+  or its page-layer equivalent, never by a hand-rolled filter that reproduces the classification
+  independently.
+  Check: (reviewer-assisted) `grep -rn 'getCollection("entity")' src/` and
+  `grep -rn 'may_appear_in_aggregate' gen_site/ --include=*.py` list every selection site;
+  reviewer confirms each site the change adds routes through the classifier — directly, or by
+  consuming an artifact the classifier already filtered — rather than re-deriving liveness itself.
 
 ## Revision Notes
 
@@ -121,3 +126,58 @@ agent-behaviour guidance in `CLAUDE.md` — none of those belong here.
   each revert. Plant B deliberately targets the new scoping rather than a threshold, so the
   change itself — not just the numbers — is guarded. Testability screen unchanged: 2 rules,
   1 CI-mechanical, 1 reviewer-assisted, 0 advisory. No `Why:`/`Example:` added.
+
+- 2026-07-28 — Promoted `[C-1]` to CI-mechanical, split `[C-3]` out of it, and repaired `[C-2]`'s
+  test. Surfaced by a `tend-constitution` sweep. Testability screen: 3 rules, **2 CI-mechanical,
+  1 reviewer-assisted, 0 advisory**. Pedagogical density: 3 rules, 0 carry `Why:` (1 new rule
+  skipped with reason: no user-authored rationale supplied), 0 carry `Example:` (same reason),
+  0 category preambles — unchanged practice from the entries above.
+
+  `[C-1]`'s promotion trigger, filed 2026-07-26 as "once the birthday feature settles how liveness
+  reaches the page layer", is met: liveness now reaches it as a Python-generated aggregate
+  (`src/data/birthday-index.json`, written by `gen_site/birthday_index.py`). The new check is the
+  **general** form the genesis entry proposed — assert over the built site that no non-entity route
+  in `dist/` references an id from the ineligible set — implemented at
+  `gen_site/test/test_aggregate_privacy.py`. A per-feature assertion was rejected: it would guard
+  only the surface it was written for, so the next aggregate page escapes silently, which is the
+  no-narrowing objection that kept `[C-1]` reviewer-assisted in the first place. The test therefore
+  scans everything and carries an explicit exemption list of exactly the four surfaces `[C-1]` names
+  as predating the rule, plus the sitemaps, which mirror those routes rather than selecting anyone.
+  Adding an exemption is a visible edit to that list.
+  Calibration gate, all four arms run: plant A (a NEW unfiltered aggregate route,
+  `src/pages/living.astro`) FAILED 1/3, exit 1; plant B (the liveness filter deleted from
+  `gen_site/birthday_index.py`, index regenerated) FAILED 1/3, exit 1; baseline 3 passed, exit 0;
+  compliant probe (a new aggregate route consuming the filtered index) 3 passed, exit 0. The two
+  plants differ in **both file and construct form**, so the same-file deviation named for `[C-2]`
+  does not apply here. Tree verified byte-identical by sha256 after each revert.
+  `[C-1]`'s `Check:` is wrapped in `bash -c '…'` for the same reason `[C-2]`'s is, and the reason is
+  now sharper: the CI runner's system-tool list is
+  `{git, grep, ls, find, diff, cmp, cat, test, sh, bash}`, so `npm` and a `(cd …)` subshell both get
+  prefixed with `uv run` and fail spuriously. The previous `[C-1]` Check used exactly that
+  parenthesised form — harmless while the runner skipped reviewer-assisted rules, a false violation
+  the moment it did not.
+
+  **`[C-3]` is a split, not a new obligation.** The retired `[C-1]` Check carried two clauses: that
+  no withheld individual is selected, and that the selection *routes through*
+  `may_appear_in_aggregate`. The `dist/` scan decides the first mechanically and generally but
+  cannot see the second — a page hand-rolling its own correct filter passes the scan while bypassing
+  the single selection path. Rather than let the promotion silently drop that clause to inflate the
+  CI-mechanical count, it is preserved in scope as `[C-3]`, reviewer-assisted, with a grep assist
+  over both the Astro and the Python selection sites.
+
+  **`[C-2]`'s rule text is unchanged; its test was repaired.** The mandatory calibration re-audit
+  found `[C-2]` **uncalibrated**: a realistic plant restricting `_child_birth_years` to the first
+  child of the first family passed all 22 tests, exit 0. That is not a hygiene defect — the rule
+  says "a child was born 95 years ago or less", meaning *any* child, so under the plant someone
+  whose first child was born 1890 and second in 1935 is classified PRESUMED DECEASED and published.
+  The 2026-07-27 audit missed it because both its plants targeted `classify`'s threshold and control
+  flow; neither touched the helper traversal, and the suite exercised `_marriage_years` across two
+  families but `_child_birth_years` only with one family holding one child. Two tests were added
+  (`test_the_most_recent_child_decides_across_families`,
+  `test_the_most_recent_child_decides_within_one_family`), both placing the OLD child first so a
+  truncating traversal is caught. Re-calibration on touch, all four arms: plant A (constant
+  `EVENT_RECENCY_YEARS` `95` -> `85`) FAILED 6/24, exit 1; plant B (the previously-escaping
+  traversal truncation) FAILED 2/24, exit 1; baseline 24 passed, exit 0; compliant probe 24 passed,
+  exit 0; tree byte-identical by sha256 after each revert. Named deviation, carried forward
+  unchanged: `[C-2]`'s two plants differ in construct form but NOT in file, because this rule
+  governs exactly one module.
