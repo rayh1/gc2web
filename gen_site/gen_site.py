@@ -431,7 +431,6 @@ def main(argv: List[str]):
     generate_birthday_index(
         args.file,
         GedcomModel(),
-        datetime.now().year,
         BIRTHDAY_INDEX_FILE,
     )
     generate_last_modified()
@@ -439,4 +438,3 @@ def main(argv: List[str]):
 # Example usage
 if __name__ == '__main__':
     main(sys.argv)
-

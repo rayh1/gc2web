@@ -11,7 +11,7 @@ from jsonschema import Draft202012Validator
 from model.GedcomModel import GedcomModel
 
 
-WORKSPACE_DIR = Path("/workspace")
+WORKSPACE_DIR = Path(__file__).resolve().parents[2]
 GEN_SITE_DIR = WORKSPACE_DIR / "gen_site"
 CONTENT_DIR = WORKSPACE_DIR / "src/content/entity"
 GEDCOM_FILE = GEN_SITE_DIR / "Hoofman.ged"
@@ -59,6 +59,26 @@ def normalize_tree_section(page_text: str) -> str:
     text = SECTION_ORDER_RE.sub("", text)
     text = re.sub(r"\[TREE CONTENT NORMALIZED\]\n+", "[TREE CONTENT NORMALIZED]\n", text)
     return text
+
+
+def raw_individual_ids_by_privacy(gedcom_file: Path) -> tuple[set[str], set[str]]:
+    private_ids: set[str] = set()
+    all_ids: set[str] = set()
+    current_id: str | None = None
+
+    for line in gedcom_file.read_text(encoding="utf-8-sig").splitlines():
+        record = re.match(r"^0 @(\w+)@ INDI", line)
+        if record:
+            current_id = record.group(1)
+            all_ids.add(current_id)
+            continue
+        if line.startswith("0 "):
+            current_id = None
+            continue
+        if current_id and "private: true" in line:
+            private_ids.add(current_id)
+
+    return private_ids, all_ids - private_ids
 
 
 class TestGedqMigrationContract(unittest.TestCase):
@@ -200,11 +220,18 @@ class TestGedqMigrationContract(unittest.TestCase):
     def test_private_people_are_excluded(self):
         individual_files = sorted(CONTENT_DIR.glob("I*.md"))
         source_files = sorted(CONTENT_DIR.glob("S*.md"))
+        model_ids = {individual.xref_id for individual in self.model.individuals}
+        private_ids, public_ids = raw_individual_ids_by_privacy(GEDCOM_FILE)
 
         self.assertEqual(len(individual_files), len(self.model.individuals))
         self.assertEqual(len(source_files), len(self.model.sources))
-        self.assertEqual(len(individual_files) + len(source_files), 731)
+        self.assertGreater(len(private_ids), 0)
+        self.assertTrue(model_ids.isdisjoint(private_ids))
+
+        retained_public_id = sorted(public_ids)[0]
+        self.assertIn(retained_public_id, model_ids)
         self.assertFalse((CONTENT_DIR / "I00001.md").exists())
+        self.assertTrue((CONTENT_DIR / f"{retained_public_id}.md").exists())
 
     def test_known_witness_and_timestamp_match_baseline(self):
         path = CONTENT_DIR / "I00007.md"

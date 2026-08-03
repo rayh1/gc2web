@@ -95,6 +95,13 @@
       "name": "Maria Rosalia Hoofman"
     }
   ],
+  "02-12": [
+    {
+      "id": "I00181",
+      "lifespan": "(1918-?)",
+      "name": "Anthonie Van Rooijen"
+    }
+  ],
   "02-13": [
     {
       "id": "I00190",
@@ -112,6 +119,13 @@
       "id": "I00106",
       "lifespan": "(1839-1918)",
       "name": "Joanna Walters"
+    }
+  ],
+  "02-16": [
+    {
+      "id": "I00209",
+      "lifespan": "(1928-?)",
+      "name": "Mathilda Marie Hoofman"
     }
   ],
   "02-19": [
@@ -368,6 +382,11 @@
       "id": "I00174",
       "lifespan": "(1863-1932)",
       "name": "Wiebrigje Dijkstra"
+    },
+    {
+      "id": "I00185",
+      "lifespan": "(1919-?)",
+      "name": "Augustinus Van Rooijen"
     }
   ],
   "05-17": [
@@ -448,6 +467,11 @@
       "id": "I00216",
       "lifespan": "(1905-1934)",
       "name": "Louisa Phelomina Maria Hoofman"
+    },
+    {
+      "id": "I00208",
+      "lifespan": "(1935-?)",
+      "name": "Maria Josepha Hoofman"
     }
   ],
   "06-17": [
@@ -786,6 +810,13 @@
       "id": "I00194",
       "lifespan": "(1874-1966)",
       "name": "Mathilda Loocks"
+    }
+  ],
+  "09-26": [
+    {
+      "id": "I00179",
+      "lifespan": "(1920-?)",
+      "name": "Adrianus Van Rooijen"
     }
   ],
   "09-30": [

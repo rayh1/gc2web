@@ -10,28 +10,11 @@ agent-behaviour guidance in `CLAUDE.md` — none of those belong here.
 
 ## Privacy & Publication Policy
 
-- [C-1] Any newly added aggregate output — a page, list, or feed that selects a set of
-  individuals — excludes individuals classified LIVING/PRIVATE by [C-2]. The per-person entity
-  pages, the search index (`Searchbar.astro`), the RSS feed (`rss.xml.js`), and the paginated
-  entity index (`entity/[...page].astro`) predate this rule and are deliberately in scope for
-  publication.
-  Check: (CI-mechanical) `bash -c 'npm run build --silent && cd gen_site && env -u VIRTUAL_ENV uv run python -m pytest test/test_aggregate_privacy.py'` exits 0.
-
-- [C-2] An individual is classified DECEASED when any death or burial evidence exists (a dated
-  event, a place, or a source citation). Otherwise they are LIVING/PRIVATE when born 110 years
-  ago or less, or — only when no birth year can be parsed — when married 95 years ago or less,
-  when a child was born 95 years ago or less, or when no date at all can be parsed. A known
-  birth year beyond 110 years settles the question as PRESUMED DECEASED, and a later marriage
-  or child does not override it.
-  Check: (CI-mechanical) `bash -c 'cd gen_site && env -u VIRTUAL_ENV uv run python -m pytest test/test_liveness.py'` exits 0.
-
-- [C-3] Aggregate output selects individuals through `model.Liveness.may_appear_in_aggregate`
-  or its page-layer equivalent, never by a hand-rolled filter that reproduces the classification
-  independently.
-  Check: (reviewer-assisted) `grep -rn 'getCollection("entity")' src/` and
-  `grep -rn 'may_appear_in_aggregate' gen_site/ --include=*.py` list every selection site;
-  reviewer confirms each site the change adds routes through the classifier — directly, or by
-  consuming an artifact the classifier already filtered — rather than re-deriving liveness itself.
+- [C-1] The only publication redaction is the manual `private: true` note: an individual
+  carrying `private: true` in a note is excluded from all output — per-person entity pages and
+  every aggregate output alike. No automatic liveness inference is applied; the source GEDCOM
+  is internet-sourced data already subject to upstream privacy restrictions.
+  Check: (CI-mechanical) `bash -c 'cd gen_site && env -u VIRTUAL_ENV uv run python -m pytest test/test_migration_contract.py -k test_private_people_are_excluded'` exits 0.
 
 ## Revision Notes
 
@@ -181,3 +164,11 @@ agent-behaviour guidance in `CLAUDE.md` — none of those belong here.
   exit 0; tree byte-identical by sha256 after each revert. Named deviation, carried forward
   unchanged: `[C-2]`'s two plants differ in construct form but NOT in file, because this rule
   governs exactly one module.
+
+- 2026-08-03 — Replaced Privacy & Publication Policy `[C-1]`/`[C-2]`/`[C-3]` with one positive
+  rule: the only publication redaction is the manual `private: true` note, and no automatic
+  liveness inference is applied. The liveness classifier module, its aggregate-selection caller,
+  and its dedicated tests were removed in the same build; the surviving privacy guard is now
+  `gen_site/test/test_migration_contract.py -k test_private_people_are_excluded`. Testability
+  screen: 1 rule, 1 CI-mechanical, 0 reviewer-assisted, 0 advisory. Pedagogical density: 1 rule,
+  0 carry `Why:`, 0 carry `Example:`, 0 category preambles.

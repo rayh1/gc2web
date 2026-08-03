@@ -7,18 +7,13 @@ without a daily rebuild. Instead this module emits an index of every calendar da
 has at least one eligible individual, and the homepage block picks today's key out of
 it in the visitor's own browser.
 
-Three filters decide who reaches the file, in this order:
+Two filters decide who reaches the file, in this order:
 
 1. **Date determinism — gedq's call, not ours.** A day's candidates are exactly the
    `BIRT` rows `gedq anniversary --date "<D> <MON>" --json` returns for it. Year-only,
    month-only and interpreted (`INT`) dates are therefore absent because gedq already
    excludes them ([R-7]). gc2web deliberately does not reimplement that judgement.
-2. **Liveness — `model.Liveness.may_appear_in_aggregate`.** The single selection path
-   constitution rule [C-1] requires every aggregate output to route through. Note that
-   the manually flagged private individuals never even reach this step: they are
-   removed from the model at parse time by `GedcomModel.__exclude_privates`, so a gedq
-   row with no matching individual is dropped ([R-6], invariant § 4).
-3. **Placeholder and stillbirth names — [R-10].** Records whose given name is one of
+2. **Placeholder and stillbirth names — [R-10].** Records whose given name is one of
    `N.N.`, `NN`, `N` or `Levenloos` are not people the block should name.
 
 Days that end up with nobody are left out of the file entirely ([R-8]); the client
@@ -33,7 +28,6 @@ from pathlib import Path
 
 from model.GedcomModel import GedcomModel
 from model.Individual import Individual
-from model.Liveness import may_appear_in_aggregate
 from util.Lifespan import lifespan_str
 
 # Every calendar day is queried, 29 February included — [R-9] requires generation to
@@ -98,7 +92,6 @@ def _birth_year(individual: Individual) -> int:
 def build_birthday_index(
     gedcom_file: str,
     model: GedcomModel,
-    reference_year: int,
 ) -> dict[str, list[dict[str, str]]]:
     """Build the index: `MM-DD` -> entries, oldest first, content-bearing days only."""
     by_xref_id = {individual.xref_id: individual for individual in model.individuals}
@@ -112,8 +105,6 @@ def build_birthday_index(
                 individual = by_xref_id.get(xref_id)
                 if individual is None:
                     # Manually flagged private: already removed from the model.
-                    continue
-                if not may_appear_in_aggregate(individual, reference_year):
                     continue
 
                 name = str(individual.name)
@@ -144,11 +135,10 @@ def build_birthday_index(
 def generate_birthday_index(
     gedcom_file: str,
     model: GedcomModel,
-    reference_year: int,
     output_path: Path,
 ) -> dict[str, list[dict[str, str]]]:
     """Build the index and write it, returning what was written."""
-    index = build_birthday_index(gedcom_file, model, reference_year)
+    index = build_birthday_index(gedcom_file, model)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(
@@ -173,7 +163,7 @@ def main(argv: list[str]) -> int:
     model = GedcomModel()
     model.parse_file(gedcom_file)
 
-    index = generate_birthday_index(gedcom_file, model, date.today().year, output_path)
+    index = generate_birthday_index(gedcom_file, model, output_path)
 
     entries = sum(len(day) for day in index.values())
     print(

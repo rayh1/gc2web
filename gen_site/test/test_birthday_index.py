@@ -2,13 +2,13 @@
 
 Everything here reads the generated index file plus the model and the raw GEDCOM
 directly — no browser, no Astro build — so it runs in the same suite as
-`test_liveness.py` ([R-6]).
+the birthday-index generation code itself.
 
 Two kinds of assertion live here, and the difference matters:
 
-* The **both-direction test** ([R-6]) re-derives what the index should hold from gedq
-  plus `may_appear_in_aggregate`. It checks the written artifact end to end: day keys,
-  ordering, serialization, staleness.
+* The **both-direction test** re-derives what the index should hold from gedq plus the
+  manual `private: true` removal in `GedcomModel`. It checks the written artifact end
+  to end: day keys, ordering, serialization, staleness.
 * The **property tests** ([R-7], [R-10]) never consult gedq. They read the raw GEDCOM
   and assert that whole classes of record are absent whatever gedq decides. That is
   deliberate: [R-7] adopts gedq's current exclusion of interpreted (`INT`) dates, which
@@ -24,22 +24,23 @@ import unittest
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
 from birthday_index import (
     DAYS_IN_MONTH,
     MONTH_TAGS,
+    build_birthday_index,
     day_key,
     is_placeholder_name,
 )
 from model.GedcomModel import GedcomModel
-from model.Liveness import may_appear_in_aggregate
 from util.Lifespan import lifespan_str
 
 GEN_SITE_DIR = Path(__file__).resolve().parent.parent
 GEDCOM_FILE = GEN_SITE_DIR / "Hoofman.ged"
 INDEX_FILE = GEN_SITE_DIR.parent / "src/data/birthday-index.json"
 
-REFERENCE_YEAR = date.today().year
 LIFESPAN_PATTERN = re.compile(r"^\((\d{4})-(\d{4}|\?)\)$")
 # A GEDCOM date carrying an actual calendar day, e.g. `7 JUL 1881`.
 DAY_AND_MONTH_PATTERN = re.compile(r"\b\d{1,2}\s+[A-Z]{3}\s+\d{4}\b")
@@ -158,8 +159,8 @@ class BirthdayIndexTestCase(unittest.TestCase):
     def expected_placement(self) -> dict[str, str]:
         """Who the index should hold, and under which day key.
 
-        gedq decides which dates are deterministic; `may_appear_in_aggregate` decides
-        who may be published; [R-10] drops placeholder and stillbirth records.
+        gedq decides which dates are deterministic; the model has already removed every
+        manually private individual; [R-10] drops placeholder and stillbirth records.
         """
         placement: dict[str, str] = {}
         for (month, day), xref_ids in self.gedq_by_day.items():
@@ -167,8 +168,6 @@ class BirthdayIndexTestCase(unittest.TestCase):
                 individual = self.by_xref_id.get(xref_id)
                 if individual is None:
                     continue  # manually flagged private; removed at parse time
-                if not may_appear_in_aggregate(individual, REFERENCE_YEAR):
-                    continue
                 if is_placeholder_name(str(individual.name)):
                     continue
                 placement[xref_id] = day_key(month, day)
@@ -176,31 +175,10 @@ class BirthdayIndexTestCase(unittest.TestCase):
 
 
 class TestBothDirections(BirthdayIndexTestCase):
-    """[R-6] — the index holds everyone eligible, and nobody withheld."""
-
-    def test_no_withheld_individual_appears_anywhere(self):
-        """(a) Nobody `may_appear_in_aggregate` rejects is anywhere in the file."""
-        withheld = [
-            individual.xref_id
-            for individual in self.model.individuals
-            if not may_appear_in_aggregate(individual, REFERENCE_YEAR)
-        ]
-        self.assertGreater(len(withheld), 0, "no withheld individuals — check the model")
-
-        for xref_id in withheld:
-            self.assertNotIn(
-                xref_id,
-                self.index_text,
-                f"withheld individual {xref_id} appears in the shipped index",
-            )
+    """The index holds everyone eligible, and nobody manually private."""
 
     def test_no_manually_private_individual_appears_anywhere(self):
-        """(a, continued) The manual `private: true` flag is upheld too.
-
-        These never reach `may_appear_in_aggregate` — the model drops them at parse
-        time — so they need their own assertion. gedq still sees them, which is what
-        makes this a real check rather than a tautology.
-        """
+        """The manual `private: true` flag is upheld in aggregate output."""
         seen_by_gedq = {
             xref_id for xref_ids in self.gedq_by_day.values() for xref_id in xref_ids
         }
@@ -228,7 +206,7 @@ class TestBothDirections(BirthdayIndexTestCase):
         self.assertEqual(
             sorted(actual),
             sorted(expected),
-            "the index and gedq+liveness disagree about who belongs in it",
+            "the index and gedq disagree about who belongs in it",
         )
         for xref_id, keys in actual.items():
             self.assertEqual(
@@ -236,6 +214,34 @@ class TestBothDirections(BirthdayIndexTestCase):
                 [expected[xref_id]],
                 f"{xref_id} should appear exactly once, under {expected[xref_id]}",
             )
+
+    def test_manual_private_is_the_only_redaction(self):
+        """A manual private note still hides one person while a living public person stays."""
+        def fake_event(year: int | None):
+            return SimpleNamespace(
+                date=SimpleNamespace(
+                    value=str(year) if year is not None else "",
+                    date=lambda year=year: SimpleNamespace(year=year) if year is not None else None,
+                )
+            )
+
+        public_individual = SimpleNamespace(
+            xref_id="I00002",
+            name="Public Person",
+            start_life=fake_event(1991),
+            end_life=fake_event(None),
+        )
+        model = SimpleNamespace(individuals=[public_individual])
+
+        def fake_birth_ids(_gedcom_file: str, month_index: int, day: int) -> list[str]:
+            return ["I00001", "I00002"] if (month_index, day) == (6, 7) else []
+
+        with patch("birthday_index._birth_ids_on", side_effect=fake_birth_ids):
+            index = build_birthday_index("fixture.ged", model)
+
+        july_seventh = index["07-07"]
+        self.assertEqual([entry["id"] for entry in july_seventh], ["I00002"])
+        self.assertEqual(july_seventh[0]["name"], "Public Person")
 
 
 class TestDateDeterminism(BirthdayIndexTestCase):
