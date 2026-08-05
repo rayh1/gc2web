@@ -11,7 +11,9 @@ At a high level, you can use it to:
 - inspect one person, family, or source record
 - search across a file by name, place, date, occupation, text, and related filters
 - walk family relationships such as ancestors, descendants, siblings, and kinship paths
-- render deterministic ASCII trees, numbered lineage reports, anniversary reports, structural research-lead reports, and aggregate reports when you need a compact overview
+- render deterministic ASCII trees, numbered lineage reports, anniversary reports, local
+  co-occurrence clusters, structural research-lead reports, and aggregate reports when you need a
+  compact overview
 - validate data quality issues without blocking normal reads
 - make guarded file edits with atomic writes
 - run raw Cypher queries against the derived graph when you need more than the high-level commands
@@ -63,6 +65,7 @@ The top-level commands are:
 - `tree`
 - `analyze`
 - `gaps`
+- `neighbors`
 - `anniversary`
 - `ahnentafel`
 - `register`
@@ -79,6 +82,8 @@ Before using the commands, understand one important default:
 
 - when output goes to a terminal, gedq defaults to human-readable output
 - when output is piped or redirected, gedq defaults to JSON output
+- `neighbors` is the exception: it defaults to human output everywhere; pass `--json` explicitly
+  for its machine-readable report
 
 You can always override that with:
 
@@ -387,6 +392,7 @@ Traversal person elements use `entity_id`, not `id`, so one jq path such as `.el
 ## Intermediate: On This Day Reports
 
 `anniversary` answers the day-specific question "which recorded events fall on this calendar day?"
+With `--all-days`, it instead returns the populated anniversary days across the whole year in one pass.
 
 Examples:
 
@@ -395,6 +401,7 @@ gedq anniversary data.ged --human
 gedq anniversary data.ged --json
 gedq anniversary data.ged --date 2026-06-23 --json
 gedq anniversary data.ged --date '23 JUN' --events birth,marriage,death --human
+gedq anniversary data.ged --all-days --events birth,marriage,death --json
 ```
 
 Important defaults:
@@ -403,6 +410,7 @@ Important defaults:
 - `--today` is the explicit form of that same default and cannot be combined with `--date`
 - if you omit `--events`, only birthdays are reported
 - `--events` accepts a comma-separated subset of `birth`, `marriage`, and `death`
+- `--all-days` is additive whole-year mode and cannot be combined with `--date` or `--today`
 
 Matching rules:
 
@@ -412,18 +420,46 @@ Matching rules:
 - Feb 29 only matches on Feb 29; gedq does not silently shift leap-day anniversaries to Feb 28 or Mar 1
 
 Human output prints one line per event with the event tag, the identifying person or spouse pair, the owning GEDCOM ID, the original event date, and an anniversary-style ordinal when the year is known.
+With `--all-days`, human output groups those same lines under ascending `MM-DD` headings and prints `no anniversaries` when the year has no populated exact dates.
 
-JSON output returns a stable envelope:
+Single-day JSON output returns a stable envelope:
 
 ```json
 {"query_date":"2026-06-23","events":[...]}
 ```
 
+`--all-days --json` instead returns an object keyed by populated `MM-DD` values in ascending order. Each value reuses the same event-row shape as the single-day `events` array.
+
 If no records match, human mode prints a single "no anniversaries" line and JSON mode returns an empty `events` array.
 
 ## Intermediate: Research Leads and Numbered Lineage Reports
 
-Three related commands cover compact, deterministic reports that are not record lookups.
+Four related commands cover compact, deterministic reports that are not record lookups.
+
+### Local Co-occurrence Research with `neighbors`
+
+`neighbors` reports people who are structurally connected to one subject through associations,
+shared source citations, family or place/year events, and optionally matching residences.
+
+Examples:
+
+```bash
+gedq neighbors data.ged I00002
+gedq neighbors data.ged I00002 --json
+gedq neighbors data.ged I00002 --via witness,source,event,address --json
+gedq neighbors data.ged I00002 --exclude-kin
+```
+
+Important behavior:
+
+- the default channels are `witness,source,event`; exact residence place/year matching is opt-in as
+  `address`
+- `event` excludes `RESI`, keeping residence matching exclusive to `address`
+- `--exclude-kin` removes parents, children, spouses, and siblings
+- repeated anchors merge into one row per person; `connection_count` counts distinct channels
+- output is ordered by descending `connection_count`, then ascending entity ID
+- matching is structural only: no name similarity or prose matching
+- the command is read-only and never acts as a validation gate
 
 ### Structural Research Leads with `gaps`
 
@@ -1048,8 +1084,9 @@ gedq siblings ID data.ged [--expand all]
 gedq path LEFT_ID RIGHT_ID data.ged [--common-ancestor|--cousin-distance] [--expand all]
 gedq tree ID data.ged --direction up|down [--depth N] [--mode clean|annotated]
 gedq analyze data.ged [--report census,coverage,structure,duplicates] [--json|--human]
+gedq neighbors data.ged ID [--via witness,source,event,address] [--exclude-kin] [--json]
 gedq gaps data.ged [--check NAME[,NAME...]] [--as-of YYYY|YYYY-MM-DD] [--json|--human]
-gedq anniversary data.ged [--date YYYY-MM-DD|'DD MON'|--today] [--events birth[,marriage,death]] [--json|--human]
+gedq anniversary data.ged [--date YYYY-MM-DD|'DD MON'|--today|--all-days] [--events birth[,marriage,death]] [--json|--human]
 gedq ahnentafel data.ged ID [--generations N] [--json|--human]
 gedq register data.ged ID [--generations N] [--system register|daboville] [--json|--human]
 gedq schema --mode person|family|source|event|note
@@ -1066,6 +1103,7 @@ gedq query "MATCH ..." data.ged [--json|--human]
 
 - If you are new, practice with `person`, `search`, and `validate` first.
 - If you are doing family analysis, learn `ancestors`, `descendants`, `siblings`, and `path` together.
-- If you need compact overview reports, add `gaps`, `ahnentafel`, `register`, `anniversary`, and `analyze` to your working set.
+- If you need compact overview reports, add `neighbors`, `gaps`, `ahnentafel`, `register`,
+  `anniversary`, and `analyze` to your working set.
 - If you are maintaining files, use a copy, read before you write, and verify every mutation with a follow-up lookup. For bulk cleanup, put the changes in an ops file and run `batch --dry-run` before committing them.
 - If you are building tooling around gedq, standardize on explicit `--json` and treat `search` and multi-row `query` as JSONL producers.
