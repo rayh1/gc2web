@@ -33355,6 +33355,7 @@
 2 SOUR @S00482@
 2 SOUR @S00492@
 2 SOUR @S00510@
+2 SOUR @S00493@
 1 OCCU schoenmakerknecht
 2 DATE 16 DEC 1822
 2 PLAC , Rotterdam, , , , 
@@ -33431,7 +33432,10 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Joannes Friethof
+3 CONT     xref_id: I00325
+3 CONT     relation: peter
 3 CONT   - name: Maria Friethof
+3 CONT     relation: peetje
 3 CONT
 2 SOUR @S00510@
 1 SOUR @S00493@
@@ -33465,9 +33469,13 @@
 2 SOUR @S00510@
 1 NAME Theodorus /Friedhoff/
 2 SOUR @S00510@
+1 OCCU schoenmakersknecht
+2 DATE 12 JUN 1824
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00510@
 1 CHAN
-2 DATE 24 JUL 2026
-3 TIME 16:53:04
+2 DATE 30 JUL 2026
+3 TIME 17:12:11
 0 @I00283@ INDI
 1 NAME Christina Jacoba /Lammermans/
 2 GIVN Christina, Jacoba
@@ -35780,6 +35788,8 @@
 1 DEAT
 2 PLAC , Rotterdam, , , , 
 2 SOUR @S00487@
+2 DATE BEF 12 JUN 1824
+2 SOUR @S00510@
 1 FAMS @F00104@
 1 NAME Waltherus /Vriedhof/
 2 SOUR @S00494@
@@ -35787,6 +35797,9 @@
 1 SOUR @S00510@
 1 NAME Waltherus /Friethof/
 2 SOUR @S00510@
+2 SOUR @S00493@
+2 SOUR @S00502@
+2 SOUR @S00503@
 1 FAMC @F00115@
 1 CHR
 2 DATE 7 AUG 1764
@@ -35802,9 +35815,17 @@
 1 SOUR @S00511@
 1 NAME Walterus /Friethoff/
 2 SOUR @S00511@
+1 SOUR @S00506@
+1 SOUR @S00518@
+1 SOUR @S00493@
+1 NAME Woutherus /Friethof/
+2 SOUR @S00501@
+1 SOUR @S00501@
+1 SOUR @S00502@
+1 SOUR @S00503@
 1 CHAN
-2 DATE 25 JUL 2026
-3 TIME 10:53:27
+2 DATE 30 JUL 2026
+3 TIME 17:12:08
 0 @I00303@ INDI
 1 NAME Cornelia /Ravesteyn/
 2 SOUR @S00487@
@@ -35816,6 +35837,10 @@
 1 FAMS @F00104@
 1 NAME Cornelia /Ravesteijn/
 2 SOUR @S00494@
+2 SOUR @S00493@
+2 SOUR @S00502@
+2 SOUR @S00503@
+2 SOUR @S00510@
 1 SOUR @S00494@
 1 FAMC @F00114@
 1 DEAT
@@ -35842,9 +35867,16 @@
 1 NAME Cornelia /Ravenstein/
 2 SOUR @S00505@
 1 SOUR @S00510@
+1 SOUR @S00493@
+1 NAME Cornelia /Ravestein/
+2 SOUR @S00501@
+2 SOUR @S00510@
+1 SOUR @S00501@
+1 SOUR @S00502@
+1 SOUR @S00503@
 1 CHAN
-2 DATE 24 JUL 2026
-3 TIME 16:52:20
+2 DATE 30 JUL 2026
+3 TIME 17:12:09
 0 @F00104@ FAM
 1 HUSB @I00302@
 1 WIFE @I00303@
@@ -35857,9 +35889,21 @@
 1 CHIL @I00315@
 1 CHIL @I00316@
 1 CHIL @I00317@
+1 RESI
+2 DATE 12 JUL 1794
+2 PLAC , Rotterdam, , , , 
+2 ADDR G. Weg.
+2 SOUR @S00506@
+1 SOUR @S00506@
+1 SOUR @S00518@
+1 RESI
+2 DATE 9 DEC 1797
+2 PLAC , Rotterdam, , , , 
+2 ADDR Frankestraat over Diaconie School.
+2 SOUR @S00518@
 1 CHAN
-2 DATE 05 JUL 2026
-3 TIME 15:17:06
+2 DATE 28 JUL 2026
+3 TIME 08:55:39
 0 @M00458@ OBJE
 1 FILE E:/ancestris-data/media/NL-RtSA_1-02_162_0048.jpg
 2 FORM jpg
@@ -36544,7 +36588,10 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Simon van Duister
+3 CONT     relation: peter
 3 CONT   - name: Francisca van der Horst
+3 CONT     xref_id: I00322
+3 CONT     relation: peetje
 3 CONT
 1 SOUR @S00501@
 1 FAMC @F00104@
@@ -36588,8 +36635,8 @@
 1 NAME Francina /Friethoff/
 2 SOUR @S00508@
 1 CHAN
-2 DATE 24 JUL 2026
-3 TIME 17:51:46
+2 DATE 28 JUL 2026
+3 TIME 11:26:09
 0 @M00474@ OBJE
 1 FILE E:/ancestris-data/media/NL-RtSA_1-02_162_0097.jpg
 2 FORM jpg
@@ -36619,7 +36666,11 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Theodorus Friethof
+3 CONT     xref_id: I00323
+3 CONT     relation: peter
 3 CONT   - name: Maria Theresia van den Zilver
+3 CONT     xref_id: I00324
+3 CONT     relation: peetje
 3 CONT
 1 SOUR @S00502@
 1 FAMC @F00104@
@@ -36632,9 +36683,12 @@
 2 DATE 8 JUL 1794
 2 PLAC , Rotterdam, , , , 
 2 SOUR @S00506@
+1 ASSO @I00302@
+2 RELA Informant @#INDI:BIRT@
+2 SOUR @S00502@
 1 CHAN
-2 DATE 25 JUL 2026
-3 TIME 00:01:52
+2 DATE 28 JUL 2026
+3 TIME 11:26:10
 0 @I00317@ INDI
 1 NAME Cornelius Wilhelmus /Friethof/
 2 SOUR @S00503@
@@ -36650,13 +36704,32 @@
 2 NOTE ---
 3 CONT witnesses:
 3 CONT   - name: Jacobus Meijer
+3 CONT     relation: peter
 3 CONT   - name: Francisca van der Horst
+3 CONT     xref_id: I00322
+3 CONT     relation: peetje
 3 CONT
 1 SOUR @S00503@
 1 FAMC @F00104@
+1 SOUR @S00518@
+1 BURI
+2 DATE 9 DEC 1797
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00518@
+1 DEAT
+2 DATE 7 DEC 1797
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00518@
+1 FACT
+2 TYPE Roomsdiaken
+2 DATE 9 DEC 1797
+2 SOUR @S00518@
+1 ASSO @I00302@
+2 RELA Informant @#INDI:BIRT@
+2 SOUR @S00503@
 1 CHAN
-2 DATE 05 JUL 2026
-3 TIME 15:17:06
+2 DATE 28 JUL 2026
+3 TIME 11:26:11
 0 @S00504@ SOUR
 1 TITL Huwelijk Hendrik Reinout en Francisca Friethof 11-11-1818
 1 PUBL https://hdl.handle.net/21.12133/5CF5EA682A3D4F49830E686D95109482
@@ -36860,19 +36933,18 @@
 0 @S00506@ SOUR
 1 TITL Begraven Marinus Friethof 12-07-1794
 1 PUBL https://hdl.handle.net/21.12133/7B5DBCD7F76A4A1A899DB24D29DB954C
+2 CONT https://www.familysearch.org/ark:/61903/3:1:3Q9M-CS1Y-P95F-9
 1 REPO @R00003@
-1 TEXT [Index Stadsarchief Rotterdam -- Begraafinschrijvingen 1790-1799 (toegang 9999_23), geen scan beschikbaar; recordnr 23778747]
-2 CONT Begraafinschrijving Marinus N.n.
-2 CONT Inschrijvingsjaar: 1794
-2 CONT Overledene: Marinus N.n.
-2 CONT Vader/moeder: Waltherus Friethoff
-2 CONT Bron of gezindte: Begraven 1790-1799
-2 CONT Plaats begrafenis: Rotterdam
-2 CONT Begraafdatum: 12-07-1794
-2 CONT Opmerkingen: overleden 08-07-1794, overledene was 1/2 jaar, G. Weg
+1 TEXT [Extractkaart Gemeentearchief Rotterdam, "Extract uit de Registers der doden te Rotterdam", formulier E.D. 29 25000 1-'59 -- secundaire fiche, niet het begraafregister van 1794 zelf; onderliggend register: Stadsarchief Rotterdam toegang 9999_23, Be
+2 CONC graven 1790-1799; A2A recordnr 23778747]
+2 CONT Datum: 12 Juli 1794  (Overl. 8 Juli.)
+2 CONT Begraven: Marinus.
+2 CONT Kind van: Friethoff Waltherus.    (G. Weg.)
+2 CONT Oud: ½ j.
+1 OBJE @M00493@
 1 CHAN
-2 DATE 25 JUL 2026
-3 TIME 00:00:01
+2 DATE 28 JUL 2026
+3 TIME 00:58:58
 0 @S00507@ SOUR
 1 TITL Overlijden Hendrik Reinout 03-10-1842
 1 PUBL https://hdl.handle.net/21.12133/EB73EC5D55BC4B5EBD99B34818C1DC08
@@ -37230,28 +37302,1605 @@
 2 GIVN Theodorus
 2 SURN Friethoff
 2 SOUR @S00511@
+2 SOUR @S00512@
+2 SOUR @S00513@
+2 SOUR @S00514@
+2 SOUR @S00515@
+2 SOUR @S00516@
+2 SOUR @S00526@
+2 SOUR @S00527@
+2 SOUR @S00528@
 1 SEX M
 1 SOUR @S00511@
 1 FAMS @F00115@
+1 DEAT
+2 DATE 9 NOV 1802
+2 SOUR @S00512@
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00523@
+1 BURI
+2 DATE 13 NOV 1802
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00512@
+1 SOUR @S00512@
+1 SOUR @S00513@
+1 SOUR @S00514@
+1 SOUR @S00515@
+1 FACT 4 meerderjarige kinderen
+2 TYPE Nalatende kinderen
+2 DATE 13 NOV 1802
+2 SOUR @S00512@
+1 SOUR @S00516@
+1 RESI
+2 DATE 13 NOV 1802
+2 PLAC , Rotterdam, , , , 
+2 ADDR Vogelezang midde
+2 SOUR @S00512@
+1 SOUR @S00523@
+1 NAME Theodorus /Friedhoff/
+2 GIVN Theodorus
+2 SURN Friedhoff
+2 SOUR @S00523@
+2 SOUR @S00529@
+1 SOUR @S00526@
+1 SOUR @S00527@
+1 BIRT
+2 PLAC , Kleve, , , , Duitsland
+2 SOUR @S00527@
+1 SOUR @S00528@
+1 SOUR @S00529@
 1 CHAN
-2 DATE 25 JUL 2026
-3 TIME 10:53:06
+2 DATE 03 AUG 2026
+3 TIME 01:15:52
 0 @I00324@ INDI
 1 NAME Maria Theresia /van de Silver/
 2 GIVN Maria, Theresia
 2 SURN van de Silver
 2 SOUR @S00511@
+2 SOUR @S00526@
+2 SOUR @S00528@
 1 SEX F
 1 SOUR @S00511@
 1 FAMS @F00115@
+1 NAME Maria Therezia /van den Zilver/
+2 GIVN Maria, Therezia
+2 SURN van den Zilver
+2 SOUR @S00512@
+1 SOUR @S00512@
+1 SOUR @S00513@
+1 NAME Maria Theresia /van den Silver/
+2 GIVN Maria, Theresia
+2 SURN van den Silver
+2 SOUR @S00513@
+1 SOUR @S00514@
+1 NAME Maria /van den Silver/
+2 GIVN Maria
+2 SURN van den Silver
+2 SOUR @S00514@
+1 SOUR @S00515@
+1 NAME Maria /van de Silver/
+2 GIVN Maria
+2 SURN van de Silver
+2 SOUR @S00515@
+1 SOUR @S00516@
+1 NAME Maria /de Silver/
+2 GIVN Maria
+2 SURN de Silver
+2 SOUR @S00516@
+1 SOUR @S00523@
+1 DEAT
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00523@
+1 NAME Maria /van de Zilver/
+2 GIVN Maria
+2 SURN van de Zilver
+2 SOUR @S00523@
+1 SOUR @S00526@
+1 SOUR @S00527@
+1 BIRT
+2 PLAC , Tilburg, , , , 
+2 SOUR @S00527@
+1 NAME Maria Theresia /van de Zilver/
+2 GIVN Maria, Theresia
+2 SURN van de Zilver
+2 SOUR @S00527@
+2 SOUR @S00529@
+1 SOUR @S00528@
+1 SOUR @S00529@
 1 CHAN
-2 DATE 25 JUL 2026
-3 TIME 10:53:06
+2 DATE 03 AUG 2026
+3 TIME 01:15:53
 0 @F00115@ FAM
 1 HUSB @I00323@
 1 WIFE @I00324@
 1 CHIL @I00302@
+1 SOUR @S00512@
+1 CHIL @I00325@
+1 CHIL @I00326@
+1 CHIL @I00327@
+1 CHIL @I00328@
+1 RESI
+2 DATE 1 OCT 1773
+2 PLAC , Rotterdam, , , , 
+2 ADDR L. Lijnstraat midde.
+2 SOUR @S00517@
+1 SOUR @S00517@
+1 SOUR @S00523@
+1 MARR
+2 DATE 27 MAY 1761
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00526@
+2 SOUR @S00527@
+1 CHIL @I00338@
 1 CHAN
-2 DATE 25 JUL 2026
-3 TIME 10:53:06
+2 DATE 03 AUG 2026
+3 TIME 01:05:09
+0 @S00512@ SOUR
+1 TITL Begravene Theodorus Friethoff 13-11-1802
+1 PUBL https://hdl.handle.net/21.12133/6ABCF192C164451D9E08510B4B3FAC52
+2 CONT https://www.familysearch.org/ark:/61903/3:1:3Q9M-CS1Y-P9FM-Q
+1 REPO @R00003@
+1 TEXT [Extractkaart Gemeentearchief Rotterdam, "Extract uit de Registers der doden te Rotterdam", formulier E.D. 29a 20000 9-'57 -- secundaire fiche, niet het begraafregister van 1802 zelf; onderliggend register: Stadsarchief Rotterdam toegang 9999_24, B
+2 CONC egraven 1800-1809]
+2 CONT Datum: 13 Nov 1802  (Overl 9 Nov.)
+2 CONT Begraven: Friethoff, Theodorus.
+2 CONT     Wed. v. Maria Therezia Van den Zilver.
+2 CONT Woonplaats: Vogelezang midde
+2 CONT Mind. kind: [leeg]
+2 CONT Meerd. kind: 4
+1 OBJE @M00492@
+1 CHAN
+2 DATE 27 JUL 2026
+3 TIME 23:51:23
+0 @S00513@ SOUR
+1 TITL Doop Joannes Friethoff 07-03-1762
+1 PUBL https://hdl.handle.net/21.12133/01E0E4C3F43B42A185D9271877F68C25
+2 CONT https://hdl.handle.net/21.12133/CAA96BDD85F743C693F3C0669F42E4E9
+1 REPO @R00003@
+1 OBJE @M00487@
+1 TEXT 1762 Maart
+2 CONT 7a baptus est Joannes, Filius Theodori Friethoff et
+2 CONT Marie Theresie van den Silver, Suse: Joan Friethoff
+2 CONT et Joanna van Son.
+1 CHAN
+2 DATE 27 JUL 2026
+3 TIME 08:32:40
+0 @M00487@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_151_0094a.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_151_0094a
+1 CHAN
+2 DATE 27 JUL 2026
+3 TIME 08:16:09
+0 @I00325@ INDI
+1 NAME Joannes /Friethoff/
+2 GIVN Joannes
+2 SURN Friethoff
+2 SOUR @S00513@
+1 SEX M
+1 SOUR @S00513@
+1 CHR
+2 DATE 7 MAR 1762
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00513@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Joan Friethoff
+3 CONT     relation: peter
+3 CONT   - name: Joanna van Son
+3 CONT     relation: peetje
+3 CONT
+1 FAMC @F00115@
+1 SOUR @S00520@
+1 NAME Joannes /Friethof/
+2 GIVN Joannes
+2 SURN Friethof
+2 SOUR @S00520@
+2 SOUR @S00519@
+2 SOUR @S00524@
+2 SOUR @S00530@
+1 FAMS @F00116@
+1 SOUR @S00519@
+1 SOUR @S00524@
+1 SOUR @S00525@
+1 NAME Johannes /Friethof/
+2 SOUR @S00525@
+1 FACT sedert 20 jaren afwezig
+2 TYPE Afwezig
+2 DATE 30 JUL 1820
+2 SOUR @S00525@
+1 SOUR @S00530@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 01:24:10
+0 @S00514@ SOUR
+1 TITL Doop Cornelia Friethoff 10-12-1768
+1 PUBL https://hdl.handle.net/21.12133/0915810F2528416C9CD3D637D0D01A74
+2 CONT https://hdl.handle.net/21.12133/22BDA37C07F442C7B947A79AF374A7C1
+1 REPO @R00003@
+1 OBJE @M00488@
+1 TEXT 1768 December
+2 CONT 10a bapta est Cornelia, Filia Theodori Friethoff
+2 CONT et Marie van den Silver, Suse: Adrianus
+2 CONT van den Silver, et Joanna van Son.
+1 CHAN
+2 DATE 27 JUL 2026
+3 TIME 13:01:52
+0 @M00488@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_151_0120.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_151_0120
+1 CHAN
+2 DATE 27 JUL 2026
+3 TIME 13:01:50
+0 @I00326@ INDI
+1 NAME Cornelia /Friethoff/
+2 GIVN Cornelia
+2 SURN Friethoff
+2 SOUR @S00514@
+1 SEX F
+1 SOUR @S00514@
+1 CHR
+2 DATE 10 DEC 1768
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00514@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Adrianus van den Silver
+3 CONT     relation: peter
+3 CONT   - name: Joanna van Son
+3 CONT     relation: peetje
+3 CONT
+1 FAMC @F00115@
+1 SOUR @S00523@
+1 DEAT
+2 DATE 5 MAR 1839
+2 PLAC , Rotterdam, , , , 
+2 ADDR in het Stads armen huis
+2 SOUR @S00523@
+2 NOTE ---
+3 CONT timestamp: des avonds ten zeven uur
+3 CONT
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Hendrik van den Heuvel
+3 CONT     age: 57
+3 CONT     residence: Stads Armenhuis, Rotterdam
+3 CONT   - name: Adriaan de Vooght
+3 CONT     age: 66
+3 CONT     residence: Stads Armenhuis, Rotterdam
+3 CONT
+1 OCCU Zonder beroep
+2 DATE 5 MAR 1839
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00523@
+1 RESI
+2 DATE 5 MAR 1839
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00523@
+1 BIRT
+2 DATE INT 1768 ()
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00523@
+2 SOUR @S00521@
+1 NAME Cornelia /Friedhoff/
+2 GIVN Cornelia
+2 SURN Friedhoff
+2 SOUR @S00523@
+2 SOUR @S00521@
+2 SOUR @S00522@
+1 FAMS @F00117@
+1 SOUR @S00521@
+1 RESI
+2 DATE 25 JUN 1796
+2 PLAC , Rotterdam, , , , 
+2 ADDR Vogelenzang
+2 SOUR @S00521@
+1 FACT
+2 TYPE Ongehuwd
+2 DATE 25 JUN 1796
+2 SOUR @S00521@
+1 FACT
+2 TYPE Pro Deo
+2 DATE 10 JUL 1796
+2 SOUR @S00521@
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 09:29:30
+0 @S00515@ SOUR
+1 TITL Doop Josina Clara Friethoff 13-03-1771
+1 PUBL https://hdl.handle.net/21.12133/B5EEEE9F245145B9BB7972924563C97F
+2 CONT https://hdl.handle.net/21.12133/308D9465492B4FB69EA24E3464E5F96B
+1 REPO @R00003@
+1 OBJE @M00489@
+1 TEXT 1771 Maart
+2 CONT 13a bapta est Josina Clara, Filia Theodori
+2 CONT Friethoff, et Marie van de Silver, Suse: Casper
+2 CONT Sipermeyer et Josina de Wolff.
+1 CHAN
+2 DATE 27 JUL 2026
+3 TIME 16:15:05
+0 @M00489@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_151_0129.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_151_0129
+1 CHAN
+2 DATE 27 JUL 2026
+3 TIME 16:08:13
+0 @I00327@ INDI
+1 NAME Josina Clara /Friethoff/
+2 GIVN Josina, Clara
+2 SURN Friethoff
+2 SOUR @S00515@
+2 NICK Jesijntie
+2 SOUR @S00517@
+1 SEX F
+1 SOUR @S00515@
+1 CHR
+2 DATE 13 MAR 1771
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00515@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Casper Sipermeyer
+3 CONT     relation: peter
+3 CONT   - name: Josina de Wolff
+3 CONT     relation: peetje
+3 CONT
+1 FAMC @F00115@
+1 BURI
+2 DATE 1 OCT 1773
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00517@
+1 SOUR @S00517@
+1 CHAN
+2 DATE 27 JUL 2026
+3 TIME 23:08:14
+0 @S00516@ SOUR
+1 TITL Doop Catharina Josina Friethoff 15-02-1774
+1 PUBL https://hdl.handle.net/21.12133/32AB795F2BA94882A6029654DF6B7326
+2 CONT https://hdl.handle.net/21.12133/FD2EB709090646F384B7357FBE04CCCD
+1 REPO @R00003@
+1 OBJE @M00490@
+1 TEXT 1774 Februarij
+2 CONT 15a bapta est Catharina Josina, Filia
+2 CONT Theodori Friethoff, et Marie de Silver, Suse:
+2 CONT Jasper Diepermeijer, et Josina de Wolff.
+1 CHAN
+2 DATE 27 JUL 2026
+3 TIME 20:46:10
+0 @M00490@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_151_0141.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_151_0141
+1 CHAN
+2 DATE 27 JUL 2026
+3 TIME 18:03:31
+0 @I00328@ INDI
+1 NAME Catharina Josina /Friethoff/
+2 GIVN Catharina, Josina
+2 SURN Friethoff
+2 SOUR @S00516@
+1 SEX F
+1 SOUR @S00516@
+1 CHR
+2 DATE 15 FEB 1774
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00516@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Jasper Diepermeijer
+3 CONT     relation: peter
+3 CONT   - name: Josina de Wolff
+3 CONT     relation: peetje
+3 CONT
+1 FAMC @F00115@
+1 CHAN
+2 DATE 27 JUL 2026
+3 TIME 21:08:11
+0 @S00517@ SOUR
+1 TITL Begraven Jesijntie Friethoff 01-10-1773
+1 PUBL https://hdl.handle.net/21.12133/E6242A51F9F14F3FBEE251AE125BAADD
+2 CONT https://www.familysearch.org/ark:/61903/3:1:3Q9M-CS1Y-P9XB-F
+1 REPO @R00003@
+1 OBJE @M00491@
+1 TEXT [Extractkaart Gemeentearchief Rotterdam, "Extract uit de Registers der doden te Rotterdam", formulier E.D. 29 20000 3-'60 -- secundaire fiche, niet het begraafregister van 1773 zelf; onderliggend register: Stadsarchief Rotterdam toegang 9999_21, Be
+2 CONC graven 1770-1779; A2A recordnr 4748312727]
+2 CONT Datum: 1 Octr. 1773
+2 CONT Begraven: Jesijntie
+2 CONT Kind van: Friethoff, Theodorus    (L. Lijnstraat midde.)
+2 CONT Oud: 2 j.
+1 CHAN
+2 DATE 28 JUL 2026
+3 TIME 01:00:36
+0 @M00491@ OBJE
+1 FILE E:/ancestris-data/media/008431888_05905.jpg
+2 FORM jpg
+2 TITL 008431888_05905
+1 CHAN
+2 DATE 27 JUL 2026
+3 TIME 22:20:53
+0 @M00492@ OBJE
+1 FILE E:/ancestris-data/media/008431888_05906.jpg
+2 FORM jpg
+2 TITL 008431888_05906
+1 CHAN
+2 DATE 27 JUL 2026
+3 TIME 23:20:31
+0 @M00493@ OBJE
+1 FILE E:/ancestris-data/media/008431888_05907.jpg
+2 FORM jpg
+2 TITL 008431888_05907
+1 CHAN
+2 DATE 28 JUL 2026
+3 TIME 00:26:16
+0 @S00518@ SOUR
+1 TITL Begraven Cornelis Friethof 09-12-1797
+1 PUBL https://hdl.handle.net/21.12133/EB8FCE3F65CE4D65A955865E4378AC87
+2 CONT https://www.familysearch.org/ark:/61903/3:1:3Q9M-CS1Y-P97R-Z
+1 REPO @R00003@
+1 OBJE @M00494@
+1 TEXT [Extractkaart Gemeentearchief Rotterdam, "Extract uit de Registers der doden te Rotterdam", formulier E.D. 29 25000 5-'58 -- secundaire fiche, niet het begraafregister van 1797 zelf; onderliggend register: Stadsarchief Rotterdam toegang 9999_23, Be
+2 CONC graven 1790-1799; A2A recordnr 2285734928]
+2 CONT Datum: 9 Dec. 1797  (Overl. 7 Dec.)
+2 CONT Begraven: Cornelis.
+2 CONT Kind van: Friedhoff, Wouter.    (Frankestraat over Diaconie School.)
+2 CONT Roomsdiaken.
+2 CONT Oud: 2½ j.
+1 CHAN
+2 DATE 28 JUL 2026
+3 TIME 01:25:01
+0 @M00494@ OBJE
+1 FILE E:/ancestris-data/media/008431888_05912.jpg
+2 FORM jpg
+2 TITL 008431888_05912
+1 CHAN
+2 DATE 28 JUL 2026
+3 TIME 01:22:09
+0 @S00519@ SOUR
+1 TITL Trouwen Joannes Friethof en Agnes Janse 04-05-1783
+1 PUBL https://hdl.handle.net/21.12133/09BD348AFB674B67883E2BCD65B9DEA6
+2 CONT https://hdl.handle.net/21.12133/FCE96883D8D2481CBB931CDA464F5A2C
+1 REPO @R00003@
+1 OBJE @M00495@
+1 TEXT 1783
+2 CONT 4. Mey.
+2 CONT Joannes Friethof, et Agnes Janse
+2 CONT Testes
+2 CONT Maria Guttenaar, et Anna den Bult.
+1 CHAN
+2 DATE 28 JUL 2026
+3 TIME 16:41:50
+0 @M00495@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_166_0018.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_166_0018
+1 CHAN
+2 DATE 28 JUL 2026
+3 TIME 16:24:01
+0 @S00520@ SOUR
+1 TITL Doop Marinus Friethof 15-05-1789
+1 PUBL https://hdl.handle.net/21.12133/74989FEB1F3846F18FBF343039AEE3C1
+2 CONT https://hdl.handle.net/21.12133/99038FC0E79D46D3A361B100EE43D9E8
+1 REPO @R00003@
+1 OBJE @M00496@
+1 TEXT 1789
+2 CONT 15. Mey
+2 CONT Joannes Friethof, en Agnes Janssen
+2 CONT Marinus
+2 CONT Waltherus Friethof, en Cornelia Friethof
+1 CHAN
+2 DATE 28 JUL 2026
+3 TIME 17:59:35
+0 @M00496@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_162_0037.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_162_0037
+1 CHAN
+2 DATE 28 JUL 2026
+3 TIME 17:52:40
+0 @I00329@ INDI
+1 NAME Agnes /Janssen/
+2 GIVN Agnes
+2 SURN Janssen
+2 SOUR @S00520@
+2 SOUR @S00524@
+1 SEX F
+1 SOUR @S00520@
+1 FAMS @F00116@
+1 NAME Agnes /Janse/
+2 GIVN Agnes
+2 SURN Janse
+2 SOUR @S00519@
+1 SOUR @S00519@
+1 SOUR @S00524@
+1 SOUR @S00525@
+1 NAME Agnietje /Jansen/
+2 SOUR @S00525@
+1 SOUR @S00530@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 01:24:11
+0 @I00330@ INDI
+1 NAME Marinus /Friethof/
+2 GIVN Marinus
+2 SURN Friethof
+2 SOUR @S00520@
+1 SEX M
+1 SOUR @S00520@
+1 CHR
+2 DATE 15 MAY 1789
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00520@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Waltherus Friethof
+3 CONT     xref_id: I00302
+3 CONT     relation: peter
+3 CONT   - name: Cornelia Friethof
+3 CONT     xref_id: I00326
+3 CONT     relation: peetje
+3 CONT
+1 FAMC @F00116@
+1 CHAN
+2 DATE 28 JUL 2026
+3 TIME 18:09:41
+0 @F00116@ FAM
+1 HUSB @I00325@
+1 WIFE @I00329@
+1 CHIL @I00330@
+1 MARR
+2 DATE 4 MAY 1783
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00519@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Maria Guttenaar
+3 CONT   - name: Anna den Bult
+3 CONT
+1 SOUR @S00519@
+1 CHIL @I00332@
+1 CHIL @I00333@
+1 SOUR @S00525@
+1 CHIL @I00340@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 01:24:08
+0 @S00521@ SOUR
+1 TITL Trouwen Willem Arons en Cornelia Friedhoff 10-07-1796
+1 PUBL https://hdl.handle.net/21.12133/C69D4F4EF112462A95E6292AD8A33DC8
+2 CONT https://hdl.handle.net/21.12133/6486DB2F35CD4399B5A4DB6ED5215023
+1 REPO @R00003@
+1 OBJE @M00497@
+1 TEXT Pro Deo
+2 CONT
+2 CONT WY [doorgehaald: Burgermeesteren, en Regeerders] [boven toegevoegd: Wethouders] der Stadt Rotterdam,
+2 CONT authoriseren by desen onsen gesworen Kamer-bewaerder, af
+2 CONT te kondigen drie Houwelyksche proclamatien, te doen ter Peuye
+2 CONT van 't Raedt-huis alhier, op drie achter-een-volgende Sondagen,
+2 CONT tusschen Willem Arons J Man geb: te
+2 CONT Roermonde, woon: op de Nieuwemarkt
+2 CONT met Cornelia Friedhoff Jonge d= geb: alhier,
+2 CONT woon: in de vogelen Zang Waer van 't eerste Gebodt sal wor-
+2 CONT den gedaen den 26 Juny 1796, omme daer
+2 CONT na, volgens de Politique Ordonnantie, in den Echten-staet be-
+2 CONT vestigt te werden. Actum den 25 Juny 1796
+2 CONT præsent
+2 CONT
+2 CONT Getrouwt
+2 CONT 10 July 1796
+2 CONT
+2 CONT Ter Ordonnantie van deselve als
+2 CONT Secretaris
+2 CONT [onleesbaar]
+2 CONT
+2 CONT Dat de drie Houwelyksche Proclamatien tusschen de Personen hier boven ge-
+2 CONT roert zyn gedaen ter Peuye van 't Raedthuys deser Stede, invoegen als hier
+2 CONT voren is verhaelt, attestere ik ondergeschreve Kamer-bewaerder van de
+2 CONT [doorgehaald: Heeren Burgermeesteren; toegevoegd: Wethouders].
+2 CONT Actum den 10 July 1796, het 2e Jaar
+2 CONT der Bataavse vryheyd
+2 CONT
+2 CONT A. Oerberg
+1 CHAN
+2 DATE 29 JUL 2026
+3 TIME 23:35:32
+0 @S00522@ SOUR
+1 TITL Trouwen Wilhelmus Arons en Cornelia Friedhoff 10-07-1796
+1 PUBL https://hdl.handle.net/21.12133/E9B013FC14C649E9AFBF6AF6B85EB7CC
+2 CONT https://hdl.handle.net/21.12133/2C04F8660C5349DC8847425FFB207CDF
+1 REPO @R00003@
+1 OBJE @M00498@
+1 TEXT 1796 Julii
+2 CONT 10. Contraxit Wilhelmus Arons, cum Cornelia Friedhoff
+2 CONT Ancillis testibus
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 00:09:14
+0 @S00523@ SOUR
+1 TITL Overlijden Cornelia Friedhoff 05-03-1839
+1 PUBL https://hdl.handle.net/21.12133/C8E545E13A8949D19042144BD1D1AFA9
+2 CONT https://hdl.handle.net/21.12133/C1626FF8EAAA4C50BA38A7027E09862F
+1 REPO @R00003@
+1 OBJE @M00499@
+1 TEXT [marge:] N. 644
+2 CONT
+2 CONT In het jaar een duizend acht honderd negenendertig, den zevenden
+2 CONT Maart, compareerden voor ons, Lid van het Plaatselijk
+2 CONT Bestuur der Stad Rotterdam, benoemd Ambtenaar
+2 CONT van den Burgerlijken Stand:
+2 CONT
+2 CONT Hendrik van den Heuvel,
+2 CONT oud zevenenvijftig jaren en
+2 CONT Adriaan de Vooght, oud
+2 CONT zesenzestig jaren, beiden wonende in het Stads
+2 CONT Armenhuis.
+2 CONT dewelken verklaarden dat den vijfden
+2 CONT dezer, des avonds ten zeven uur, in het
+2 CONT Stads armen huis is overleden
+2 CONT Cornelia Friedhoff, oud
+2 CONT zeventig jaren, weduwe van Wilhel
+2 CONT mus Arons, zonder beroep, geboren en
+2 CONT gedomicilieerd alhier,
+2 CONT dochter van wijlen Theodorus Friedhoff
+2 CONT en van wijle Maria van de Zilver,
+2 CONT beiden alhier overleden.
+2 CONT En hebben de declaranten deze acte
+2 CONT na voorlezing nevens ons geteekend.
+2 CONT
+2 CONT [marge:] Tavenraat.
+2 CONT
+2 CONT [onleesbaar]    A. de Vooght
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 00:30:40
+0 @M00497@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-01_1073_0241.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-01_1073_0241
+1 CHAN
+2 DATE 29 JUL 2026
+3 TIME 22:30:59
+0 @M00498@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_153_0174.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_153_0174
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 00:02:24
+0 @M00499@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-09_1839A_177.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-09_1839A_177
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 00:22:24
+0 @I00331@ INDI
+1 NAME Willem /Arons/
+2 GIVN Willem
+2 SURN Arons
+2 SOUR @S00521@
+1 SEX M
+1 SOUR @S00521@
+1 BIRT
+2 PLAC , Roermond, , , , 
+2 SOUR @S00521@
+1 RESI
+2 DATE 25 JUN 1796
+2 PLAC , Rotterdam, , , , 
+2 ADDR Nieuwemarkt
+2 SOUR @S00521@
+1 FACT
+2 TYPE Ongehuwd
+2 DATE 25 JUN 1796
+2 SOUR @S00521@
+1 FACT
+2 TYPE Pro Deo
+2 DATE 10 JUL 1796
+2 SOUR @S00521@
+1 FAMS @F00117@
+1 NAME Wilhelmus /Arons/
+2 GIVN Wilhelmus
+2 SURN Arons
+2 SOUR @S00522@
+2 SOUR @S00523@
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 09:45:12
+0 @F00117@ FAM
+1 HUSB @I00331@
+1 WIFE @I00326@
+1 SOUR @S00521@
+1 MARR
+2 DATE 10 JUL 1796
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00521@
+2 SOUR @S00522@
+2 SOUR @S00523@
+1 MARB
+2 DATE 26 JUN 1796
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00521@
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 09:45:10
+0 @S00524@ SOUR
+1 TITL Doop Hendrik Friethof 31-03-1792
+1 PUBL https://hdl.handle.net/21.12133/DD70F75A01854405808C814C4A4F557B
+2 CONT https://hdl.handle.net/21.12133/3CF789AB80D0444BAE3E855320FD86E8
+1 REPO @R00003@
+1 OBJE @M00500@
+1 TEXT 1792
+2 CONT 31 maart
+2 CONT Joannes Friethof, en Agnes Janssen
+2 CONT Hendrik
+2 CONT Joannes Janssen, en Anna Friethof
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 15:35:23
+0 @S00525@ SOUR
+1 TITL Huwelijk Cornelis Friethof en Maria Josepha Voort 09-08-1820
+1 PUBL https://hdl.handle.net/21.12133/0F2758B6A7CB467CA75DE37BD2E89C23
+2 CONT https://hdl.handle.net/21.12133/1C310E1041A44FD69E1CA6804F0BB089
+2 CONT https://hdl.handle.net/21.12133/87E84E68C37842989D20CCB7E1B6E083
+2 CONT https://hdl.handle.net/21.12133/F2154AC0B66D43978D59E6DCECF2E264
+2 CONT https://hdl.handle.net/21.12133/D9A9464B24154A708C07E85FEC63A415
+2 CONT https://hdl.handle.net/21.12133/C691C861B2D5472188A6E7AA4FD23FD5
+1 REPO @R00003@
+1 OBJE @M00501@
+1 OBJE @M00502@
+1 OBJE @M00503@
+1 OBJE @M00504@
+1 OBJE @M00505@
+1 TEXT # Transcription NL-RtSA_999-75_131_1820B-B041v-0001.jpg
+2 CONT Cornelis Friethof, oud 26
+2 CONT jaren metselaarsknecht wonende
+2 CONT alhier Zoon van Johannes Friet
+2 CONT hof sedert 20 jaren afwezig, en van
+2 CONT Agnietje Jansen wonende alhier
+2 CONT &
+2 CONT Maria Josepha van der
+2 CONT Voort, oud 20 jaren wonende alhier
+2 CONT dochter van wijlen Joseph van der
+2 CONT Voort, en van Maria Tielen, wonende
+2 CONT alhier
+2 CONT
+2 CONT 30 July 26 aug 1820
+2 CONT
+2 CONT [In margin]
+2 CONT 20 Juny
+2 CONT 1794 alhier
+2 CONT gedoopt
+2 CONT
+2 CONT weduwnaar
+2 CONT van Elizabeth
+2 CONT Pijpers
+2 CONT
+2 CONT [onleesbaar]
+2 CONT 27 november
+2 CONT 1799 alhier
+2 CONT gedoopt
+2 CONT
+2 CONT # Transcription NL-RtSA_999-75_131_1820B-B041v-0002.jpg
+2 CONT
+2 CONT Model litt. LL.
+2 CONT Art. 200 der Wet.
+2 CONT
+2 CONT Ligting van den jare
+2 CONT van 1817
+2 CONT
+2 CONT NATIONALE-MILITIE.
+2 CONT
+2 CONT PROVINCIE ZUID-HOLLAND.
+2 CONT
+2 CONT CERTIFIKAAT.
+2 CONT
+2 CONT De gouverneur van de Provincie ZUID-HOLLAND
+2 CONT verklaart, dat Cornelis Friethof
+2 CONT geboren te Rotterdam, den 20 Juny 1794
+2 CONT van beroep Metselaarsknecht
+2 CONT zoon van Johannes. afwezig
+2 CONT en van Agnietje Jansen wonende te Rotterdam
+2 CONT binnen de Gemeente van Rotterdam 14e Kanton voor de
+2 CONT Nationale-Militie is ingeschreven; dat aan hem, bij de loting, ten
+2 CONT deele gevallen zijnde het nommer 35, hij vervolgens, door den
+2 CONT Militie-Raad, zitting gehouden hebbende te Rotterdam
+2 CONT uit hoofde van dezelfde huwelijk, [onleesbaar]
+2 CONT is vrijgesteld
+2 CONT
+2 CONT Gegeven te 's Gravenhage, den 27 Juny 1820.
+2 CONT
+2 CONT De Goeverneur der Provincie,
+2 CONT [onleesbaar]
+2 CONT
+2 CONT SIGNALEMENT
+2 CONT Lengte 5 voet, - duim, - streep.
+2 CONT Aangezigt ovaal
+2 CONT Voorhoofd hoog
+2 CONT Oogen bruin
+2 CONT Neus matig
+2 CONT Mond matig
+2 CONT Kin rond
+2 CONT Haar bruin
+2 CONT Wenkbrauwen bruin
+2 CONT Merkbare teekenen [onleesbaar]
+2 CONT Handteekening [onleesbaar] Johannes
+2 CONT Geregistreerd no 2082
+2 CONT
+2 CONT # Transcription NL-RtSA_999-75_131_1820B-B041v-0004.jpg
+2 CONT
+2 CONT BURGERLYKE STAND.
+2 CONT
+2 CONT PROVINCIE
+2 CONT ZUID-HOLLAND.
+2 CONT
+2 CONT DISTRICT ROTTERDAM
+2 CONT STAD ROTTERDAM.
+2 CONT
+2 CONT EXTRACT.
+2 CONT
+2 CONT Uit het - Register van overlijden van den Jare 1819
+2 CONT is geextraheerd, dat op den twintigsten (20) february
+2 CONT des jaars achtien honderd negentien (1819) is overleden
+2 CONT Elizabeth Pijpers
+2 CONT huisvrouw van Cornelis Friedhof
+2 CONT
+2 CONT Wij ondergeteekende BURGEMEESTER der STAD
+2 CONT ROTTERDAM, Ambtenaar van den Burgelijken Stand,
+2 CONT verklare, dat het bovenstaande Extract is overeenkomstig met
+2 CONT het bovengemeld Register.
+2 CONT Den 24 July 1820.
+2 CONT T. L. Prins
+2 CONT
+2 CONT Wij ondergeteekenden PRESIDENT van het Tribunaal
+2 CONT van Eersten aanleg in het District Rotterdam, verklare,
+2 CONT dat de bovenstaande handtekening, is die, van den Heer
+2 CONT BURGEMEESTER der Stad ROTTERDAM,
+2 CONT Ambtenaar van den Burglijken Stand, en dat dit Extract
+2 CONT alzoo geloof verdiend.
+2 CONT Rotterdam, den 28 July 1820.
+2 CONT A. van der Heim,
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 21:29:09
+0 @M00500@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_162_0076.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_162_0076
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 15:27:52
+0 @I00332@ INDI
+1 NAME Hendrik /Friethof/
+2 GIVN Hendrik
+2 SURN Friethof
+2 SOUR @S00524@
+1 SEX M
+1 SOUR @S00524@
+1 CHR
+2 DATE 31 MAR 1792
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00524@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Joannes Janssen
+3 CONT     relation: peter
+3 CONT   - name: Anna Friethof
+3 CONT     relation: peetje
+3 CONT
+1 FAMC @F00116@
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 15:46:40
+0 @M00501@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-75_131_1820B-B041v-0001.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-75_131_1820B-B041v-0001
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 16:24:54
+0 @M00502@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-75_131_1820B-B041v-0002.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-75_131_1820B-B041v-0002
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 16:24:56
+0 @M00503@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-75_131_1820B-B041v-0004.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-75_131_1820B-B041v-0004
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 16:24:58
+0 @M00504@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-75_131_1820B-B041v-0005.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-75_131_1820B-B041v-0005
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 16:24:59
+0 @M00505@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-75_131_1820B-B041v-0006.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-75_131_1820B-B041v-0006
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 16:25:01
+0 @I00333@ INDI
+1 NAME Cornelis /Friethof/
+2 GIVN Cornelis
+2 SURN Friethof
+2 SOUR @S00525@
+1 SEX M
+1 SOUR @S00525@
+1 BIRT
+2 DATE 20 JUN 1794
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00525@
+1 CHR
+2 DATE 20 JUN 1794
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00525@
+1 OCCU metselaarsknecht
+2 DATE 9 AUG 1820
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00525@
+1 RESI
+2 DATE 9 AUG 1820
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00525@
+1 DSCR Lengte: 5 voet - duim - streep Aangezigt: ovaal Voorhoofd: hoog Oogen: bruin Neus: matig Mond: matig Kin: rond Haar: bruin Wenkbrauwen: bruin Merkbare teekenen: [onleesbaar]
+2 DATE 27 JUN 1820
+2 SOUR @S00525@
+1 FACT Certificaat Nummer 2082
+2 TYPE Nationale Militie
+2 DATE 27 JUN 1820
+2 SOUR @S00525@
+2 NOTE Vrijgesteld uit hoofde van dezelfde huwelijk [onleesbaar]; lotingnummer 35; ingeschreven 14e kanton Rotterdam; ligting van den jare 1817; certificaat gegeven te 's-Gravenhage 27 juni 1820.
+1 OCCU Metselaarsknecht
+2 DATE 27 JUN 1820
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00525@
+1 FAMC @F00116@
+1 FAMS @F00118@
+1 FAMS @F00120@
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 22:14:25
+0 @I00334@ INDI
+1 NAME Maria Josepha /van der Voort/
+2 GIVN Maria, Josepha
+2 SURN van der Voort
+2 SOUR @S00525@
+1 SEX F
+1 SOUR @S00525@
+1 CHR
+2 DATE 27 NOV 1799
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00525@
+1 RESI
+2 DATE 9 AUG 1820
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00525@
+1 FAMS @F00118@
+1 FAMC @F00119@
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 22:14:23
+0 @I00335@ INDI
+1 NAME Joseph /van der Voort/
+2 GIVN Joseph
+2 SURN van der Voort
+2 SOUR @S00525@
+1 SEX M
+1 SOUR @S00525@
+1 DEAT
+2 DATE BEF 9 AUG 1820
+2 SOUR @S00525@
+1 FAMS @F00119@
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 22:14:23
+0 @I00336@ INDI
+1 NAME Maria /Tielen/
+2 GIVN Maria
+2 SURN Tielen
+2 SOUR @S00525@
+1 SEX F
+1 SOUR @S00525@
+1 FAMS @F00119@
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 22:14:23
+0 @I00337@ INDI
+1 NAME Elizabeth /Pijpers/
+2 GIVN Elizabeth
+2 SURN Pijpers
+2 SOUR @S00525@
+1 SEX F
+1 SOUR @S00525@
+1 DEAT
+2 DATE 20 FEB 1819
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00525@
+1 FAMS @F00120@
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 22:14:25
+0 @F00118@ FAM
+1 HUSB @I00333@
+1 WIFE @I00334@
+1 MARR
+2 DATE 9 AUG 1820
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00525@
+1 SOUR @S00525@
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 22:14:22
+0 @F00119@ FAM
+1 HUSB @I00335@
+1 WIFE @I00336@
+1 CHIL @I00334@
+1 SOUR @S00525@
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 22:14:24
+0 @F00120@ FAM
+1 HUSB @I00333@
+1 WIFE @I00337@
+1 SOUR @S00525@
+1 CHAN
+2 DATE 30 JUL 2026
+3 TIME 22:14:26
+0 @S00526@ SOUR
+1 TITL Trouwen Theodorus Friethoff en Maria Theresia van de Silver 27-05-1761
+1 PUBL https://hdl.handle.net/21.12133/E577C659B52A48EAB6019C2BCCC3F4D3
+2 CONT https://hdl.handle.net/21.12133/42912F1A478C4880A35850E178A4A514
+1 REPO @R00003@
+1 OBJE @M00506@
+1 TEXT 1761
+2 CONT Meij
+2 CONT 27a Contrapit Theodorus Friethoff cum Mariâ
+2 CONT Thereciâ vande Silver, Testes Ancillæ.
+1 CHAN
+2 DATE 02 AUG 2026
+3 TIME 15:20:13
+0 @S00527@ SOUR
+1 TITL Trouwen Theodorus Friethoff en Maria Theresia van de Zilver 27-05-1761 (Stadstrouw)
+1 PUBL https://hdl.handle.net/21.12133/6D08047E832A4F96820021E9257C9F2D
+2 CONT https://hdl.handle.net/21.12133/63941388E8FE4694862E507F7833C8B8
+1 REPO @R00003@
+1 OBJE @M00507@
+1 TEXT WY Burgermeesteren, ende Regeerders der Stadt Rotterdam,
+2 CONT authoriseren by desen onsen gesworen Kamer-bewaerder, af
+2 CONT te kondigen drie Houwelyksche proclamatien, te doen ter Peuye
+2 CONT van 't Raedt-huis alhier, op drie achter-een-volgende Sondagen,
+2 CONT tusschen Theodorus Friethoff J:m geb:
+2 CONT te Kleeff
+2 CONT met Maria Theresia Van de Zilver j:d:
+2 CONT geb: te Tilburg & Woon: beijde alhier
+2 CONT Waer van 't eerste Gebodt sal wor-
+2 CONT den gedaen den 3 Meij 1761, omme daer
+2 CONT na, volgens de Politique Ordonnantie, in den Echten-staet be-
+2 CONT vestigt te werden. Actum den 2 Meij 1761.
+2 CONT præsent alle de Heere dempto Prins.
+2 CONT
+2 CONT Ter Ordonnantie van deselve als
+2 CONT Secretaris
+2 CONT H:H: Van Berckel
+2 CONT
+2 CONT Dat de drie Houwelyksche Proclamatien tusschen de Personen hier boven ge-
+2 CONT roert zyn gedaen ter Peuye van 't Raedthuys deser Stede, invoegen als hier
+2 CONT voren is verhaelt, attestere ik ondergeschreve Kamer-bewaerder van de
+2 CONT Heeren Burgermeesteren. Actum den 27 Meij 1761
+2 CONT H: Van Lier
+2 CONT
+2 CONT [In margine:]
+2 CONT Pro Deo
+2 CONT hij is schuldig de dood brief van zijn ouders die
+2 CONT door het 2 gebod moet vertoont worden, het
+2 CONT 2 gebod niet gehadt, het 2 in 3 gebod geconsenteert
+2 CONT door de Heere, zijn getrouwt den 27 Meij 1761.
+1 CHAN
+2 DATE 02 AUG 2026
+3 TIME 15:56:31
+0 @S00528@ SOUR
+1 TITL Doop Anna Vriethoff 30-09-1766
+1 PUBL https://hdl.handle.net/21.12133/8631F73AD8414DD88FE5A3C88969AABF
+2 CONT https://hdl.handle.net/21.12133/E4E40185E8FD4882B50C5915FA29541C
+1 REPO @R00003@
+1 OBJE @M00508@
+1 TEXT septemb:1766
+2 CONT 30a bapta est Anna, Filia Theodori Friethoff et
+2 CONT Marie Theresiae vande Silver, susc: Wilhelmus
+2 CONT Friethoff, et Anna van Meverde
+1 CHAN
+2 DATE 02 AUG 2026
+3 TIME 16:14:47
+0 @S00529@ SOUR
+1 TITL Overlijden Anna Friedhoff 26-08-1839
+1 PUBL https://hdl.handle.net/21.12133/F1186ED058DD40BA9448CFB1CF03F9EC
+2 CONT https://hdl.handle.net/21.12133/0C60D2990E6243E5B0DDEBC0C1020B5F
+1 REPO @R00003@
+1 OBJE @M00509@
+1 TEXT N 1947
+2 CONT In het jaar eenduizend acht honderd negen en dertig den
+2 CONT zevententwintigsten augustus compareerden voor ons Lid
+2 CONT van het Plaatselijk Bestuur der Stad Rotterdam benoemd
+2 CONT Ambtenaar van den Burgerlijken Stand
+2 CONT Adriaan Vishoek, oud zeven en
+2 CONT tachtig jaren
+2 CONT Hendrik van den Heuvel,
+2 CONT oud zeven en vijftig jaren beiden wonende in
+2 CONT het Stads Armenhuis.
+2 CONT dewelken verklaarden dat den zesentwin
+2 CONT tigsten dezer des nachts ten een uur, in het
+2 CONT Stads armen huis is overleden
+2 CONT Anna Friedhoff, oud drieen
+2 CONT zeventig jaren, weduwe van Hendrik Sentrop
+2 CONT zonder beroep, geboren en gedomicilieerd
+2 CONT alhier, dochter van wijlen Theodorus
+2 CONT Friedhoff en van wijle Maria Theresia
+2 CONT van de Zilver, beiden alhier overleden.
+2 CONT En hebben de declaranten deze acte na
+2 CONT voorlezing nevens ons geteekend.
+1 CHAN
+2 DATE 02 AUG 2026
+3 TIME 21:57:51
+0 @S00530@ SOUR
+1 TITL Doop Theodorus Vriethof 29-01-1784
+1 PUBL https://hdl.handle.net/21.12133/34EE4075EA2C40DF8680E99246C6133D
+2 CONT https://hdl.handle.net/21.12133/77715DB2CDF84A93B8DF12C2C2F880D2
+1 REPO @R00003@
+1 OBJE @M00510@
+1 TEXT 1784
+2 CONT 29. January
+2 CONT Joannes Friethof, et Agnes Jansen.
+2 CONT Theodorus
+2 CONT Theodorus Friethof, et Maria Theresia Van de Silver.
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 00:15:45
+0 @S00531@ SOUR
+1 TITL Doop Maria Theresia Jansen 10-09-1793
+1 PUBL https://hdl.handle.net/21.12133/CA5D28E2A81A458D95516F6D421CFEEA
+2 CONT https://hdl.handle.net/21.12133/481E92ADB1AF469888C02B305F44AECB
+1 REPO @R00003@
+1 OBJE @M00511@
+1 TEXT 1793
+2 CONT 10
+2 CONT Bapta est Maria Theresia, filia Leg Joannes
+2 CONT Jansen et Johanna Vrijthoft Susc: Theodorus
+2 CONT Vrijthoft et Maria Theresia vanden Silver
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 00:28:06
+0 @M00506@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_151_0176.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_151_0176
+1 CHAN
+2 DATE 02 AUG 2026
+3 TIME 15:17:24
+0 @M00507@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-01_1066_0280.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-01_1066_0280
+1 CHAN
+2 DATE 02 AUG 2026
+3 TIME 15:52:09
+0 @M00508@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_151_0111.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_151_0111
+1 CHAN
+2 DATE 02 AUG 2026
+3 TIME 16:10:26
+0 @M00509@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-09_1839B_265.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-09_1839B_265
+1 CHAN
+2 DATE 02 AUG 2026
+3 TIME 21:41:24
+0 @M00510@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_161_0151.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_161_0151
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 00:10:36
+0 @M00511@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_153_0009.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_153_0009
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 00:23:44
+0 @I00338@ INDI
+1 NAME Anna /Friethoff/
+2 GIVN Anna
+2 SURN Friethoff
+2 SOUR @S00528@
+1 SEX F
+1 SOUR @S00528@
+1 CHR
+2 DATE 30 SEP 1766
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00528@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Wilhelmus Friethoff
+3 CONT     relation: peter
+3 CONT   - name: Anna van Meverde
+3 CONT     relation: peetje
+3 CONT
+1 FAMC @F00115@
+1 FAMS @F00121@
+1 SOUR @S00529@
+1 DEAT
+2 DATE 26 AUG 1839
+2 PLAC , Rotterdam, , , , 
+2 ADDR Stads Armenhuis
+2 SOUR @S00529@
+2 NOTE ---
+3 CONT timestamp: des nachts ten een uur
+3 CONT
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Adriaan Vishoek
+3 CONT     age: 87
+3 CONT     residence: Stads Armenhuis
+3 CONT   - name: Hendrik van den Heuvel
+3 CONT     age: 57
+3 CONT     residence: Stads Armenhuis
+3 CONT
+1 OCCU Zonder beroep
+2 DATE 26 AUG 1839
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00529@
+1 NAME Anna /Friedhoff/
+2 GIVN Anna
+2 SURN Friedhoff
+2 SOUR @S00529@
+1 SOUR @S00531@
+1 NAME Johanna /Vrijthoft/
+2 GIVN Johanna
+2 SURN Vrijthoft
+2 SOUR @S00531@
+1 FAMS @F00122@
+1 FACT
+2 TYPE Pro Deo
+2 DATE 27 MAY 1787
+2 SOUR @S00556@
+1 SOUR @S00556@
+1 CHAN
+2 DATE 04 AUG 2026
+3 TIME 17:03:33
+0 @I00339@ INDI
+1 NAME Hendrik /Sentrop/
+2 GIVN Hendrik
+2 SURN Sentrop
+2 SOUR @S00529@
+1 SEX M
+1 SOUR @S00529@
+1 FAMS @F00121@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 01:15:31
+0 @F00121@ FAM
+1 HUSB @I00339@
+1 WIFE @I00338@
+1 SOUR @S00529@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 01:15:31
+0 @I00340@ INDI
+1 NAME Theodorus /Friethof/
+2 GIVN Theodorus
+2 SURN Friethof
+2 SOUR @S00530@
+1 SEX M
+1 SOUR @S00530@
+1 CHR
+2 DATE 29 JAN 1784
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00530@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Theodorus Friethof
+3 CONT     relation: peter
+3 CONT     xref_id: "@I00323@"
+3 CONT   - name: Maria Theresia Van de Silver
+3 CONT     relation: peetje
+3 CONT     xref_id: "@I00324@"
+3 CONT
+1 FAMC @F00116@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 01:24:09
+0 @S00532@ SOUR
+1 TITL Doop Joannes Henricus Freidhof 30-03-1776
+1 PUBL https://hdl.handle.net/21.12133/AFAEE2CBE6934220AB9023023623E63D
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:36
+0 @S00533@ SOUR
+1 TITL Doop Theodorus Jansen 15-11-1791
+1 PUBL https://hdl.handle.net/21.12133/9F02C7DE13FF4CEB81EF382C4BB9EC21
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:37
+0 @S00534@ SOUR
+1 TITL Doop Adrianus Janssen 20-07-1798
+1 PUBL https://hdl.handle.net/21.12133/88A812DADCAB4662838CDD8F572DEF59
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:38
+0 @S00535@ SOUR
+1 TITL Doop Philippus Jansen 11-09-1795
+1 PUBL https://hdl.handle.net/21.12133/55720F2EED1A43DE894A7A7541F7B34A
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:39
+0 @S00536@ SOUR
+1 TITL Doop Joannes Philippus Vriethof 18-08-1786
+1 PUBL https://hdl.handle.net/21.12133/0C9CC82F4AAA4724AB258BA1A6F16C31
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:40
+0 @S00537@ SOUR
+1 TITL Begraven Jan Janssen 11-03-1799
+1 PUBL https://hdl.handle.net/21.12133/95949006BAA64A5EA836ED5E669B57D1
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:40
+0 @S00538@ SOUR
+1 TITL Doop Joannes Sentrop 09-05-1801
+1 PUBL https://hdl.handle.net/21.12133/6CDB205EABA945A496643EA4148B6095
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:41
+0 @S00539@ SOUR
+1 TITL Doop Fredericus Senterop 04-10-1807
+1 PUBL https://hdl.handle.net/21.12133/4A857566BFCF42EBB53094DA7E266152
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:42
+0 @S00540@ SOUR
+1 TITL Huwelijk Pieter van Boles en Maria Theresia Jansen 26-06-1822
+1 PUBL https://hdl.handle.net/21.12133/F60F84B9B2634092A3194C3646513266
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:43
+0 @S00541@ SOUR
+1 TITL Geboorte Agnes Pieternella Vriethoff 13-12-1825
+1 PUBL https://hdl.handle.net/21.12133/3A779AA37097466FB22FBAEBCC2977A8
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:44
+0 @S00542@ SOUR
+1 TITL Trouwen Henricus Sentrop en Joanna Vliethof 08-12-1799
+1 PUBL https://hdl.handle.net/21.12133/3889F57502C74139ACB4A317867231B3
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:45
+0 @S00543@ SOUR
+1 TITL Doop Jacobus Mulder 18-03-1802
+1 PUBL https://hdl.handle.net/21.12133/E8E832A5B9764CD6B9AD5B72A70727B6
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:45
+0 @S00544@ SOUR
+1 TITL Doop Henricus Sentrop 30-09-1802
+1 PUBL https://hdl.handle.net/21.12133/5A74A14665AE4AE2A779536F268EC81C
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:46
+0 @S00545@ SOUR
+1 TITL Doop Cornelia Sentrop 04-01-1804
+1 PUBL https://hdl.handle.net/21.12133/7D63655D39F7401082A7D751407CA95C
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:47
+0 @S00546@ SOUR
+1 TITL Doop Anna Maria Sentrop 08-04-1805
+1 PUBL https://hdl.handle.net/21.12133/39D452EBDAB0435BB45D884ABA2912D4
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:48
+0 @S00547@ SOUR
+1 TITL Overlijden Franciscus Sentrop 1812
+1 PUBL https://hdl.handle.net/21.12133/D7DE93EECCDB4357A4ADC2A5B8D11B8D
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:49
+0 @S00548@ SOUR
+1 TITL Overlijden Hendrik Sentrop 26-04-1813
+1 PUBL https://hdl.handle.net/21.12133/086C1FFB59B042AAB92D03247744A2E5
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:50
+0 @S00549@ SOUR
+1 TITL Huwelijk Henricus Sentrop en Petronella Wessels 06-01-1836
+1 PUBL https://hdl.handle.net/21.12133/F4768949FC5F49E9A53C19ADB611E5CC
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:50
+0 @S00550@ SOUR
+1 TITL Doop Martina Zimmermans 26-04-1792
+1 PUBL https://hdl.handle.net/21.12133/E7DD5C8A7E7441E999E62A7DB1F8C944
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:51
+0 @S00551@ SOUR
+1 TITL Geboorte Anna Theresia Vliethof 27-01-1829
+1 PUBL https://hdl.handle.net/21.12133/07A0136FDB40465997CE6CCC32C24339
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:52
+0 @S00552@ SOUR
+1 TITL Overlijden Anna Theresia Vliethof 03-10-1829
+1 PUBL https://hdl.handle.net/21.12133/58729FE8F2254C85820255E9DE136934
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:53
+0 @S00553@ SOUR
+1 TITL Overlijden Maria Theresia Jansen 22-02-1857
+1 PUBL https://hdl.handle.net/21.12133/A3DF4B7CD85743B2A2BBC1F77FD3FA99
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:54
+0 @S00554@ SOUR
+1 TITL Overlijden Henricus Sentrop 05-12-1873
+1 PUBL https://hdl.handle.net/21.12133/E5A8CA6668874C999A42C08A2B946220
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 12:03:55
+0 @S00555@ SOUR
+1 TITL Trouwen Hendrik Sentrop en Johanna Vliethoff 08-12-1799 (Stadstrouw)
+1 PUBL https://hdl.handle.net/21.12133/3E06DE881A044AC58C2AC8284A61941E
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 15:39:46
+0 @S00556@ SOUR
+1 TITL Trouwen Jan Janse en Anna Friedhoff 27-05-1787 (Stadstrouw)
+1 PUBL https://hdl.handle.net/21.12133/8B4272E090964EE6A62F46727B0930BB
+2 CONT https://hdl.handle.net/21.12133/8DE2597365E44A518B662517EF6DEA3A
+1 REPO @R00003@
+1 OBJE @M00512@
+1 TEXT Pro Deo
+2 CONT
+2 CONT WY Burgermeesteren, en Regeerders der Stadt Rotterdam,
+2 CONT authoriseren by desen onsen gesworen Kamer-bewaerder, af
+2 CONT te kondigen drie Houwelyksche proclamatien, te doen ter Peuye
+2 CONT van 't Raedt-huis alhier, op drie achter-een-volgende Sondagen,
+2 CONT tusschen Jan Janse J Man
+2 CONT met Anna Friedhoff J Dogter beyde
+2 CONT gebooren alhier
+2 CONT Waer van 't eerste Gebodt sal wor-
+2 CONT den gedaen den 13 Mey 1787 omme daer
+2 CONT na, volgens de Politique Ordonnantie, in den Echten-staet be-
+2 CONT vestigt te werden. Actum den 12 Mey 1787
+2 CONT præsent Heer Reepmaker
+2 CONT
+2 CONT Ter Ordonnantie van deselve als
+2 CONT Secretaris
+2 CONT H:H: Van Berckel
+2 CONT
+2 CONT Getrouwt
+2 CONT Den 27 Mey.
+2 CONT 1787
+2 CONT
+2 CONT Dat de drie Houwelyksche Proclamatien tusschen de Personen hier boven ge-
+2 CONT roert zyn gedaen ter Peuye van 't Raedthuys deser Stede, invoegen als hier
+2 CONT voren is verhaelt, attestere ik ondergeschreve Kamer-bewaerder van de
+2 CONT Heeren Burgermeesteren. Actum den 27 Mey 1787
+2 CONT A:Oerberg
+1 CHAN
+2 DATE 04 AUG 2026
+3 TIME 16:33:20
+0 @S00557@ SOUR
+1 TITL Trouwen Joannes Jansen en Anna Friedhoff 27-05-1787
+1 PUBL https://hdl.handle.net/21.12133/976F8EDB589A416CADD6E83B34C03CC1
+1 REPO @R00003@
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 16:57:00
+0 @M00512@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-01_1071_0196.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-01_1071_0196
+1 CHAN
+2 DATE 03 AUG 2026
+3 TIME 17:08:54
+0 @I00341@ INDI
+1 NAME Joannes /Jansen/
+2 GIVN Joannes
+2 SURN Jansen
+2 SOUR @S00531@
+1 SEX M
+1 SOUR @S00531@
+1 FAMS @F00122@
+1 BIRT
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00556@
+1 SOUR @S00556@
+1 FACT
+2 TYPE Pro Deo
+2 DATE 27 MAY 1787
+2 SOUR @S00556@
+1 NAME Jan /Janse/
+2 GIVN Jan
+2 SURN Janse
+2 SOUR @S00556@
+1 CHAN
+2 DATE 04 AUG 2026
+3 TIME 17:03:36
+0 @I00342@ INDI
+1 NAME Maria Theresia /Jansen/
+2 GIVN Maria, Theresia
+2 SURN Jansen
+2 SOUR @S00531@
+1 SEX F
+1 SOUR @S00531@
+1 CHR
+2 DATE 10 SEP 1793
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00531@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Theodorus Vrijthoft
+3 CONT     xref_id: @I00323@
+3 CONT     relation: peter
+3 CONT   - name: Maria Theresia vanden Silver
+3 CONT     xref_id: @I00324@
+3 CONT     relation: peetje
+3 CONT
+1 FAMC @F00122@
+1 CHAN
+2 DATE 04 AUG 2026
+3 TIME 16:47:18
+0 @F00122@ FAM
+1 HUSB @I00341@
+1 WIFE @I00338@
+1 CHIL @I00342@
+1 MARR
+2 DATE 27 MAY 1787
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00556@
+1 MARB
+2 DATE 12 MAY 1787
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00556@
+1 SOUR @S00556@
+1 CHAN
+2 DATE 04 AUG 2026
+3 TIME 16:54:58
 0 TRLR
