@@ -22,14 +22,11 @@ import re
 import subprocess
 import unittest
 from concurrent.futures import ThreadPoolExecutor
-from datetime import date
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
 from birthday_index import (
-    DAYS_IN_MONTH,
-    MONTH_TAGS,
     build_birthday_index,
     day_key,
     is_placeholder_name,
@@ -44,6 +41,11 @@ INDEX_FILE = GEN_SITE_DIR.parent / "src/data/birthday-index.json"
 LIFESPAN_PATTERN = re.compile(r"^\((\d{4})-(\d{4}|\?)\)$")
 # A GEDCOM date carrying an actual calendar day, e.g. `7 JUL 1881`.
 DAY_AND_MONTH_PATTERN = re.compile(r"\b\d{1,2}\s+[A-Z]{3}\s+\d{4}\b")
+MONTH_TAGS: tuple[str, ...] = (
+    "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+)
+DAYS_IN_MONTH: tuple[int, ...] = (31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
 
 # Every calendar day, as gedq spells them.
 ALL_DAYS: list[tuple[int, int]] = [
@@ -177,6 +179,39 @@ class BirthdayIndexTestCase(unittest.TestCase):
 class TestBothDirections(BirthdayIndexTestCase):
     """The index holds everyone eligible, and nobody manually private."""
 
+    def test_build_issues_one_all_days_call(self):
+        public_individual = SimpleNamespace(
+            xref_id="I00002",
+            name="Public Person",
+            start_life=SimpleNamespace(
+                date=SimpleNamespace(date=lambda: SimpleNamespace(year=1991))
+            ),
+            end_life=SimpleNamespace(date=SimpleNamespace(date=lambda: None)),
+        )
+        model = SimpleNamespace(individuals=[public_individual])
+        payload = {
+            "07-07": [
+                {"event": "BIRT", "entity_id": "I00001"},
+                {"event": "BIRT", "entity_id": "I00002"},
+            ]
+        }
+
+        with patch("birthday_index.subprocess.run") as run_mock:
+            run_mock.return_value = SimpleNamespace(
+                returncode=0,
+                stdout=json.dumps(payload),
+                stderr="",
+            )
+            index = build_birthday_index("fixture.ged", model)
+
+        self.assertEqual(run_mock.call_count, 1)
+        args = run_mock.call_args.args[0]
+        self.assertEqual(args[:3], ["gedq", "anniversary", "fixture.ged"])
+        self.assertIn("--all-days", args)
+        self.assertIn("--json", args)
+        self.assertNotIn("--date", args)
+        self.assertEqual(index["07-07"][0]["id"], "I00002")
+
     def test_no_manually_private_individual_appears_anywhere(self):
         """The manual `private: true` flag is upheld in aggregate output."""
         seen_by_gedq = {
@@ -232,11 +267,19 @@ class TestBothDirections(BirthdayIndexTestCase):
             end_life=fake_event(None),
         )
         model = SimpleNamespace(individuals=[public_individual])
+        payload = {
+            "07-07": [
+                {"event": "BIRT", "entity_id": "I00001"},
+                {"event": "BIRT", "entity_id": "I00002"},
+            ]
+        }
 
-        def fake_birth_ids(_gedcom_file: str, month_index: int, day: int) -> list[str]:
-            return ["I00001", "I00002"] if (month_index, day) == (6, 7) else []
-
-        with patch("birthday_index._birth_ids_on", side_effect=fake_birth_ids):
+        with patch("birthday_index.subprocess.run") as run_mock:
+            run_mock.return_value = SimpleNamespace(
+                returncode=0,
+                stdout=json.dumps(payload),
+                stderr="",
+            )
             index = build_birthday_index("fixture.ged", model)
 
         july_seventh = index["07-07"]
