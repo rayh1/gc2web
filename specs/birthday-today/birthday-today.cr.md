@@ -201,7 +201,7 @@ all, so the empty state is the common path rather than an edge case. <!-- from E
   gedq is later corrected toward AC6, this index silently gains two people whose day was
   back-computed from an age. [R-7]'s property AC is what turns that silent change into a
   failing test.
-  <!-- observed: /workspace/gedq-change-requests/CR-059-anniversary-on-this-day.md lines 153-192 -->
+  <!-- observed: /workspace/gedq/issue/I-059-anniversary-on-this-day.md lines 153-192 -->
   **Exercised once, and it held (`72a52cd`).** gc2web upgraded the vendored gedq 2.0.1 →
   2.1.0. The behaviour did not move: `7 JUL` still returns only `I00254` and `5 MAR` still
   returns nothing, so `I00129` and `I00173` stayed out of the index. 2.1.0's additions are
