@@ -4,7 +4,7 @@
 
 @layer components {
   .btn {
-    @apply inline-block cursor-pointer rounded-md border-none bg-primary-500 px-5 py-2.5 text-base text-primary-foreground no-underline transition-all duration-200 hover:bg-primary-600 hover:shadow-md;
+    @apply inline-block cursor-pointer rounded-full border-none bg-archive-accent px-5 py-2.5 text-base font-medium text-archive-paper no-underline transition-all duration-200 hover:bg-archive-ink hover:shadow-md dark:bg-archive-dark-accent dark:text-archive-dark-canvas dark:hover:bg-archive-dark-ink;
   }
 
   .page-shell {
@@ -50,8 +50,10 @@ body {
   @apply block w-full overflow-x-auto;
 }
 
-/* Adjust link colors for better contrast */
-.prose a {
+/* Adjust link colors for better contrast. `:not(.btn)` keeps this prose link
+   rule off button-styled anchors — it outweighs `.btn` in specificity and was
+   painting the primary CTA's label with the link color. */
+.prose a:not(.btn) {
   @apply text-archive-accent hover:text-archive-ink dark:text-archive-dark-accent dark:hover:text-archive-dark-ink;
 }
 
