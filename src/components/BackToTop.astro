@@ -1,0 +1,46 @@
+---
+// Back-to-top control, shared by every page through Footer.astro.
+// Hidden (visibility + pointer-events) until the viewport has scrolled
+// down at least 300 CSS pixels, then fixed in the lower-right corner.
+---
+
+<button
+  id="back-to-top"
+  type="button"
+  aria-label="Terug naar boven"
+  class="invisible fixed bottom-6 right-6 z-50 rounded-full border border-archive-line bg-archive-paper p-3 text-archive-accent opacity-0 shadow-lg transition-opacity duration-200 pointer-events-none hover:border-archive-accent hover:text-archive-ink dark:border-archive-dark-line dark:bg-archive-dark-paper dark:text-archive-dark-accent dark:hover:border-archive-dark-accent dark:hover:text-archive-dark-ink"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="h-5 w-5"
+    aria-hidden="true"
+  >
+    <path d="M12 19V5"></path>
+    <path d="m5 12 7-7 7 7"></path>
+  </svg>
+</button>
+
+<script>
+  const button = document.getElementById("back-to-top");
+  if (button) {
+    const THRESHOLD = 300;
+    const shown = ["visible", "opacity-100", "pointer-events-auto"];
+    const hidden = ["invisible", "opacity-0", "pointer-events-none"];
+    const update = () => {
+      const show = window.scrollY >= THRESHOLD;
+      button.classList.remove(...(show ? hidden : shown));
+      button.classList.add(...(show ? shown : hidden));
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    button.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+</script>
