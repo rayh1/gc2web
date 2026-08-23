@@ -37310,6 +37310,7 @@
 2 SOUR @S00526@
 2 SOUR @S00527@
 2 SOUR @S00528@
+2 SOUR @S00560@
 1 SEX M
 1 SOUR @S00511@
 1 FAMS @F00115@
@@ -37349,9 +37350,20 @@
 2 SOUR @S00527@
 1 SOUR @S00528@
 1 SOUR @S00529@
+1 NAME Theodorus /Freidhof/
+2 GIVN Theodorus
+2 SURN Freidhof
+2 SOUR @S00532@
+1 SOUR @S00532@
+1 FAMC @F00125@
+1 CHR
+2 DATE 20 DEC 1732
+2 PLAC , Kleve, , , , Duitsland
+2 SOUR @S00560@
+1 SOUR @S00560@
 1 CHAN
-2 DATE 03 AUG 2026
-3 TIME 01:15:52
+2 DATE 22 AUG 2026
+3 TIME 09:03:10
 0 @I00324@ INDI
 1 NAME Maria Theresia /van de Silver/
 2 GIVN Maria, Theresia
@@ -37359,6 +37371,7 @@
 2 SOUR @S00511@
 2 SOUR @S00526@
 2 SOUR @S00528@
+2 SOUR @S00559@
 1 SEX F
 1 SOUR @S00511@
 1 FAMS @F00115@
@@ -37382,6 +37395,7 @@
 2 GIVN Maria
 2 SURN van de Silver
 2 SOUR @S00515@
+2 SOUR @S00532@
 1 SOUR @S00516@
 1 NAME Maria /de Silver/
 2 GIVN Maria
@@ -37407,9 +37421,21 @@
 2 SOUR @S00529@
 1 SOUR @S00528@
 1 SOUR @S00529@
+1 SOUR @S00532@
+1 FAMC @F00124@
+1 CHR
+2 DATE 30 MAR 1733
+2 PLAC , Tilburg, , , , 
+2 SOUR @S00559@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Gertrudis Hoevenaers
+3 CONT     relation: peetje
+3 CONT
+1 SOUR @S00559@
 1 CHAN
-2 DATE 03 AUG 2026
-3 TIME 01:15:53
+2 DATE 21 AUG 2026
+3 TIME 20:41:11
 0 @F00115@ FAM
 1 HUSB @I00323@
 1 WIFE @I00324@
@@ -37432,9 +37458,10 @@
 2 SOUR @S00526@
 2 SOUR @S00527@
 1 CHIL @I00338@
+1 CHIL @I00345@
 1 CHAN
-2 DATE 03 AUG 2026
-3 TIME 01:05:09
+2 DATE 19 AUG 2026
+3 TIME 17:50:16
 0 @S00512@ SOUR
 1 TITL Begravene Theodorus Friethoff 13-11-1802
 1 PUBL https://hdl.handle.net/21.12133/6ABCF192C164451D9E08510B4B3FAC52
@@ -37604,9 +37631,10 @@
 2 TYPE Pro Deo
 2 DATE 10 JUL 1796
 2 SOUR @S00521@
+1 SOUR @S00522@
 1 CHAN
-2 DATE 30 JUL 2026
-3 TIME 09:29:30
+2 DATE 16 AUG 2026
+3 TIME 11:04:27
 0 @S00515@ SOUR
 1 TITL Doop Josina Clara Friethoff 13-03-1771
 1 PUBL https://hdl.handle.net/21.12133/B5EEEE9F245145B9BB7972924563C97F
@@ -37681,6 +37709,8 @@
 2 GIVN Catharina, Josina
 2 SURN Friethoff
 2 SOUR @S00516@
+2 NICK Kaatie
+2 SOUR @S00558@
 1 SEX F
 1 SOUR @S00516@
 1 CHR
@@ -37695,9 +37725,14 @@
 3 CONT     relation: peetje
 3 CONT
 1 FAMC @F00115@
+1 BURI
+2 DATE 1 NOV 1776
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00558@
+1 SOUR @S00558@
 1 CHAN
-2 DATE 27 JUL 2026
-3 TIME 21:08:11
+2 DATE 21 AUG 2026
+3 TIME 15:55:53
 0 @S00517@ SOUR
 1 TITL Begraven Jesijntie Friethoff 01-10-1773
 1 PUBL https://hdl.handle.net/21.12133/E6242A51F9F14F3FBEE251AE125BAADD
@@ -38004,9 +38039,10 @@
 2 SURN Arons
 2 SOUR @S00522@
 2 SOUR @S00523@
+1 SOUR @S00522@
 1 CHAN
-2 DATE 30 JUL 2026
-3 TIME 09:45:12
+2 DATE 16 AUG 2026
+3 TIME 11:04:26
 0 @F00117@ FAM
 1 HUSB @I00331@
 1 WIFE @I00326@
@@ -38565,6 +38601,8 @@
 2 GIVN Anna
 2 SURN Friedhoff
 2 SOUR @S00529@
+2 SOUR @S00557@
+2 SOUR @S00548@
 1 SOUR @S00531@
 1 NAME Johanna /Vrijthoft/
 2 GIVN Johanna
@@ -38576,27 +38614,129 @@
 2 DATE 27 MAY 1787
 2 SOUR @S00556@
 1 SOUR @S00556@
+1 SOUR @S00557@
+1 NAME Anna /Vriethoff/
+2 GIVN Anna
+2 SURN Vriethoff
+2 SOUR @S00537@
+1 SOUR @S00537@
+1 SOUR @S00555@
+1 BIRT
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00555@
+1 RESI
+2 DATE 23 NOV 1799
+2 PLAC , Rotterdam, , , , 
+2 ADDR Baanstraat
+2 SOUR @S00555@
+1 FACT
+2 TYPE Weduwe
+2 DATE 23 NOV 1799
+2 SOUR @S00555@
+1 FACT
+2 TYPE Pro Deo
+2 DATE 8 DEC 1799
+2 SOUR @S00555@
+1 NAME Johanna /Vliethoff/
+2 GIVN Johanna
+2 SURN Vliethoff
+2 SOUR @S00555@
+1 NAME Joanna /Vliethof/
+2 GIVN Joanna
+2 SURN Vliethof
+2 SOUR @S00542@
+1 SOUR @S00542@
+1 SOUR @S00548@
 1 CHAN
-2 DATE 04 AUG 2026
-3 TIME 17:03:33
+2 DATE 19 AUG 2026
+3 TIME 12:50:22
 0 @I00339@ INDI
 1 NAME Hendrik /Sentrop/
 2 GIVN Hendrik
 2 SURN Sentrop
 2 SOUR @S00529@
+2 SOUR @S00555@
+2 SOUR @S00548@
 1 SEX M
 1 SOUR @S00529@
 1 FAMS @F00121@
+1 SOUR @S00555@
+1 BIRT
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00555@
+2 DATE INT 1726 (1813 - 87)
+2 SOUR @S00548@
+1 RESI
+2 DATE 23 NOV 1799
+2 PLAC , Rotterdam, , , , 
+2 ADDR Kleine Kipstraat
+2 SOUR @S00555@
+1 FACT
+2 TYPE Weduwnaar
+2 DATE 23 NOV 1799
+2 SOUR @S00555@
+1 FACT
+2 TYPE Pro Deo
+2 DATE 8 DEC 1799
+2 SOUR @S00555@
+1 NAME Henricus /Sentrop/
+2 GIVN Henricus
+2 SURN Sentrop
+2 SOUR @S00542@
+1 SOUR @S00542@
+1 SOUR @S00548@
+1 DEAT
+2 DATE 26 APR 1813
+2 PLAC , Rotterdam, , , , 
+2 ADDR Mosterdgang aan het Rozand E 240
+2 SOUR @S00548@
+2 NOTE ---
+3 CONT timestamp: des avonds ten Zeven uur
+3 CONT
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Jan Fredrik Toebart
+3 CONT     occupation: Kok
+3 CONT     age: 70
+3 CONT     residence: Mosterdgang aan het Rozand E 240
+3 CONT     relation: gebuur
+3 CONT   - name: Dirk Elderhorst
+3 CONT     occupation: Sjouwer
+3 CONT     age: 37
+3 CONT     residence: Mosterdgang aan het Rozand E 240
+3 CONT     relation: gebuur
+3 CONT
+1 OCCU Pakhuisknegt
+2 DATE 26 APR 1813
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00548@
+1 RESI
+2 DATE 26 APR 1813
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00548@
+1 FAMC @F00123@
 1 CHAN
-2 DATE 03 AUG 2026
-3 TIME 01:15:31
+2 DATE 19 AUG 2026
+3 TIME 12:50:51
 0 @F00121@ FAM
 1 HUSB @I00339@
 1 WIFE @I00338@
 1 SOUR @S00529@
+1 SOUR @S00555@
+1 MARR
+2 DATE 8 DEC 1799
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00555@
+2 SOUR @S00542@
+1 MARB
+2 DATE 23 NOV 1799
+2 PLAC , Rotterdam, , , , 
+2 NOTE In S00555 staat de authorisatie tot de drie huwelijksbekendmakingen gedaen den 23 November 1799 en de eerste afkondiging gedaen den 24 November 1799.
+2 SOUR @S00555@
+1 SOUR @S00548@
 1 CHAN
-2 DATE 03 AUG 2026
-3 TIME 01:15:31
+2 DATE 19 AUG 2026
+3 TIME 12:50:23
 0 @I00340@ INDI
 1 NAME Theodorus /Friethof/
 2 GIVN Theodorus
@@ -38624,10 +38764,17 @@
 0 @S00532@ SOUR
 1 TITL Doop Joannes Henricus Freidhof 30-03-1776
 1 PUBL https://hdl.handle.net/21.12133/AFAEE2CBE6934220AB9023023623E63D
+2 CONT https://hdl.handle.net/21.12133/608576965DC14F3C96005232958F988C
 1 REPO @R00003@
+1 OBJE @M00518@
+1 TEXT 1776
+2 CONT Maart
+2 CONT 30 Baptus Joannes Henricus filius Theodori
+2 CONT Freidhof, et Mariae van de Silver.
+2 CONT Sus. Henricus van Hees, et Joanna van Son
 1 CHAN
-2 DATE 03 AUG 2026
-3 TIME 12:03:36
+2 DATE 19 AUG 2026
+3 TIME 17:42:17
 0 @S00533@ SOUR
 1 TITL Doop Theodorus Jansen 15-11-1791
 1 PUBL https://hdl.handle.net/21.12133/9F02C7DE13FF4CEB81EF382C4BB9EC21
@@ -38660,9 +38807,17 @@
 1 TITL Begraven Jan Janssen 11-03-1799
 1 PUBL https://hdl.handle.net/21.12133/95949006BAA64A5EA836ED5E669B57D1
 1 REPO @R00003@
+1 TEXT [Open Archieven indexrecord (A2A) van Stadsarchief Rotterdam, DTB Begraven -- indexgegevens, niet het begraafregister van 1799 zelf en geen scan; onderliggend register: Stadsarchief Rotterdam archief 9999_23, Begraven 1790-1799, inschrijving 11-03-
+2 CONC 1799. A2A record-identificatie 2285743439, dataset opendata.archieven.nl 3D3BB2EE4903455BA22E6AB533E23190; laatst door de bronhouder bijgewerkt 26-05-2026.]
+2 CONT Begrafenis op 11 maart 1799 te Rotterdam
+2 CONT Overledene: Jan Janssen
+2 CONT Partner: Anna Vriethoff
+2 CONT Opmerking: overleden 08-03-1799, overledene was klapwaker en liet na 3 minderjarige kinderen, L. Baanstraat bij R. Leeuw
+2 CONT Bronvermelding: Stadsarchief Rotterdam te Rotterdam, DTB Begraven -- Begraven 1790-1799, Rotterdam, archief 9999_23, 11-03-1799
+2 CONT Permalink: https://hdl.handle.net/21.12133/95949006BAA64A5EA836ED5E669B57D1
 1 CHAN
-2 DATE 03 AUG 2026
-3 TIME 12:03:40
+2 DATE 16 AUG 2026
+3 TIME 12:07:00
 0 @S00538@ SOUR
 1 TITL Doop Joannes Sentrop 09-05-1801
 1 PUBL https://hdl.handle.net/21.12133/6CDB205EABA945A496643EA4148B6095
@@ -38694,10 +38849,15 @@
 0 @S00542@ SOUR
 1 TITL Trouwen Henricus Sentrop en Joanna Vliethof 08-12-1799
 1 PUBL https://hdl.handle.net/21.12133/3889F57502C74139ACB4A317867231B3
+2 CONT https://hdl.handle.net/21.12133/59324E23DC0646A8B8A3E2FBFEEC3564
 1 REPO @R00003@
+1 OBJE @M00515@
+1 TEXT 1799 Decembris
+2 CONT 8 Contraxit henricus Sentrop cum joanna Vliethof
+2 CONT ancillis testibus
 1 CHAN
-2 DATE 03 AUG 2026
-3 TIME 12:03:45
+2 DATE 17 AUG 2026
+3 TIME 22:43:52
 0 @S00543@ SOUR
 1 TITL Doop Jacobus Mulder 18-03-1802
 1 PUBL https://hdl.handle.net/21.12133/E8E832A5B9764CD6B9AD5B72A70727B6
@@ -38736,10 +38896,40 @@
 0 @S00548@ SOUR
 1 TITL Overlijden Hendrik Sentrop 26-04-1813
 1 PUBL https://hdl.handle.net/21.12133/086C1FFB59B042AAB92D03247744A2E5
+2 CONT https://hdl.handle.net/21.12133/098D901A3F8F44419EBFB71C8C035AA9
 1 REPO @R00003@
+1 OBJE @M00517@
+1 TEXT In het Jaar eenduizend agt honderd dertien, den Agt en
+2 CONT twintigsten April, des middags, zijn voor ons adjunct
+2 CONT Maire gedelegeerde Officier van den Burgerlijken
+2 CONT Staat der Gemeente van Rotterdam Canton
+2 CONT Rotterdam, Departement der Monden van
+2 CONT de Maas, gecompareerd:
+2 CONT Jan Fredrik Toebart, oud Zeventig Jaren,
+2 CONT Kok, en
+2 CONT Dirk Elderhorst, oud Zevenendertig Jaren, Sjouwer,
+2 CONT wonende beide in de Mosterdgang, aan het
+2 CONT Rozand, E. 240 en zijnde gebuuren van nagen
+2 CONT Hendrik Sentrop
+2 CONT dewelken ons verklaarden dat op den
+2 CONT Zes entwintigsten dezer, des avonds ten Zeven
+2 CONT uur, in het huis staande in de Mosterdgang
+2 CONT aan het Rozand E 240, in den ouderdom
+2 CONT van Zevenentagtig Jaren, is overleden
+2 CONT Hendrik Sentrop, Echtgenoot van
+2 CONT Anna Friedhoff, zijnde geweest Pakhuis
+2 CONT knegt, geboren en gedomicilieerd alhier.
+2 CONT Wiens vader Jan Sentrop, zijnde geweest
+2 CONT Kuiperknegt en wiens moeder Anna
+2 CONT Waarbenje beide alhier zijn overleden.
+2 CONT En hebben de declaranten deze acte van overlijden,
+2 CONT na voorlezinge nevens ons getekend.
+2 CONT D. Elderhorst
+2 CONT J F Toebaert
+2 CONT H van Huijlen van Zijveld
 1 CHAN
-2 DATE 03 AUG 2026
-3 TIME 12:03:50
+2 DATE 19 AUG 2026
+3 TIME 12:37:39
 0 @S00549@ SOUR
 1 TITL Huwelijk Henricus Sentrop en Petronella Wessels 06-01-1836
 1 PUBL https://hdl.handle.net/21.12133/F4768949FC5F49E9A53C19ADB611E5CC
@@ -38778,17 +38968,74 @@
 0 @S00554@ SOUR
 1 TITL Overlijden Henricus Sentrop 05-12-1873
 1 PUBL https://hdl.handle.net/21.12133/E5A8CA6668874C999A42C08A2B946220
+2 CONT https://hdl.handle.net/21.12133/22043C904FE74F178EEA5896C93BE853
 1 REPO @R00003@
+1 OBJE @M00516@
+1 TEXT No 4102
+2 CONT Op heden den zesden december Achttien honderd
+2 CONT Drie en Zeventig, zijn voor mij Ambtenaar van den Burgerlijken Stand van Rotterdam, in het
+2 CONT huis der Gemeente, verschenen:
+2 CONT Johannes van Dorsten van beroep zonder
+2 CONT oud zesenvijftig jaren, wonende Schiedamschendijk
+2 CONT bekende van de natenoemen overledene, en
+2 CONT Johannes Bermon van beroep zonder
+2 CONT oud vijfenzeventig jaren, wonende Schiedamschendijk
+2 CONT bekende van de natenoemen overledene, welke mij hebben
+2 CONT verklaard, dat op den vijfden dezer
+2 CONT des na middags ten vier ure, in het huis staande aan de
+2 CONT Schiedamschendijk is overleden
+2 CONT Henricus Sentrop oud
+2 CONT eenenzeventig jaren en twee
+2 CONT maanden; weduwenaar van Petronella
+2 CONT Wessels, zonder beroep, geboren en
+2 CONT wonende alhier, zoon van Henricus
+2 CONT Sentrop en Joanna Vriethoff beide
+2 CONT alhier overleden
+2 CONT En heb ik hiervan deze akte opgemaakt, welke na voorlezing door
+2 CONT de aangevers en mij is onderteekend.
+2 CONT J. van Dorsten
+2 CONT J. Bermon
+2 CONT Eijkma
 1 CHAN
-2 DATE 03 AUG 2026
-3 TIME 12:03:55
+2 DATE 19 AUG 2026
+3 TIME 12:04:45
 0 @S00555@ SOUR
 1 TITL Trouwen Hendrik Sentrop en Johanna Vliethoff 08-12-1799 (Stadstrouw)
 1 PUBL https://hdl.handle.net/21.12133/3E06DE881A044AC58C2AC8284A61941E
+2 CONT https://hdl.handle.net/21.12133/108793E6571D4594BE9E67E4E0E6161B
 1 REPO @R00003@
+1 OBJE @M00514@
+1 TEXT Pro Deo.
+2 CONT
+2 CONT Wy, Commissarissen tot de Huwlykszaken uit de Muni-
+2 CONT cipaliteit der Stad Rotterdam, authoriseren, by dezen,
+2 CONT onzen gezworen Kamerbewaarer, om, van het Huis der Ge-
+2 CONT meente dezer Stad, op drie agter elkander volgende Zondagen,
+2 CONT af te lezen drie Huwlyksbekendmakingen, tusschen
+2 CONT Hendrik Sentrop, wedr op de kleijne
+2 CONT Kipstraat met
+2 CONT Johanna Vliethoff, wede Jan Jansen, in de Baanstraat
+2 CONT beiden alhier geboren —
+2 CONT waervan de eerste zal worden
+2 CONT gedaen den 24 November 1799, op dat, daerna,
+2 CONT gemelde personen, in den Huwlyken Staet zouden kunnen
+2 CONT worden bevestigd.
+2 CONT Gedaen den 23 November 1799
+2 CONT Ter Ordonnantie van Commissarissen voorn:
+2 CONT Als Secretaris,
+2 CONT [onleesbaar]
+2 CONT
+2 CONT Getrouwd 8 December 1799
+2 CONT
+2 CONT Dat de drie Huwlyks bekendmakingen tusschen de personen boven gemeld,
+2 CONT van het Huis der Gemeente dezer Stad, invoege als voorsz: is, behoorlyk
+2 CONT zyn geschied, getuig ik, ondergeschreven, Kamerbewarer.
+2 CONT Den 8e december — , 1799
+2 CONT Het 5 Jaer der Bataefsche Vryheid.
+2 CONT H. van Eck
 1 CHAN
-2 DATE 03 AUG 2026
-3 TIME 15:39:46
+2 DATE 16 AUG 2026
+3 TIME 15:39:48
 0 @S00556@ SOUR
 1 TITL Trouwen Jan Janse en Anna Friedhoff 27-05-1787 (Stadstrouw)
 1 PUBL https://hdl.handle.net/21.12133/8B4272E090964EE6A62F46727B0930BB
@@ -38829,10 +39076,15 @@
 0 @S00557@ SOUR
 1 TITL Trouwen Joannes Jansen en Anna Friedhoff 27-05-1787
 1 PUBL https://hdl.handle.net/21.12133/976F8EDB589A416CADD6E83B34C03CC1
+2 CONT https://hdl.handle.net/21.12133/5E6CBE4DF720426983E20F9F7DD4737C
 1 REPO @R00003@
+1 OBJE @M00513@
+1 TEXT 1787. Maii
+2 CONT 27. Contraxit Joannes Janssen cum Anna
+2 CONT Friedhoff, testibus Ancillis.
 1 CHAN
-2 DATE 03 AUG 2026
-3 TIME 16:57:00
+2 DATE 16 AUG 2026
+3 TIME 10:45:58
 0 @M00512@ OBJE
 1 FILE E:/ancestris-data/media/NL-RtSA_1-01_1071_0196.jpg
 2 FORM jpg
@@ -38860,9 +39112,45 @@
 2 GIVN Jan
 2 SURN Janse
 2 SOUR @S00556@
+1 NAME Joannes /Janssen/
+2 GIVN Joannes
+2 SURN Janssen
+2 SOUR @S00557@
+1 SOUR @S00557@
+1 SOUR @S00537@
+1 BURI
+2 DATE 11 MAR 1799
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00537@
+1 DEAT
+2 DATE 8 MAR 1799
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00537@
+1 OCCU klapwaker
+2 DATE 11 MAR 1799
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00537@
+1 RESI
+2 DATE 11 MAR 1799
+2 PLAC , Rotterdam, , , , 
+2 ADDR L. Baanstraat bij R. Leeuw
+2 SOUR @S00537@
+1 FACT 3 minderjarige kinderen
+2 TYPE Nalatende kinderen
+2 DATE 11 MAR 1799
+2 SOUR @S00537@
+1 NAME Jan /Janssen/
+2 GIVN Jan
+2 SURN Janssen
+2 SOUR @S00537@
+1 NAME Jan /Jansen/
+2 GIVN Jan
+2 SURN Jansen
+2 SOUR @S00555@
+1 SOUR @S00555@
 1 CHAN
-2 DATE 04 AUG 2026
-3 TIME 17:03:36
+2 DATE 16 AUG 2026
+3 TIME 15:53:53
 0 @I00342@ INDI
 1 NAME Maria Theresia /Jansen/
 2 GIVN Maria, Theresia
@@ -38895,12 +39183,314 @@
 2 DATE 27 MAY 1787
 2 PLAC , Rotterdam, , , , 
 2 SOUR @S00556@
+2 SOUR @S00557@
 1 MARB
 2 DATE 12 MAY 1787
 2 PLAC , Rotterdam, , , , 
 2 SOUR @S00556@
 1 SOUR @S00556@
+1 SOUR @S00537@
+1 SOUR @S00555@
 1 CHAN
-2 DATE 04 AUG 2026
-3 TIME 16:54:58
+2 DATE 16 AUG 2026
+3 TIME 15:53:35
+0 @M00513@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_152_0181.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_152_0181
+1 CHAN
+2 DATE 16 AUG 2026
+3 TIME 10:43:12
+0 @M00514@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-01_1075_0227.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-01_1075_0227
+1 CHAN
+2 DATE 16 AUG 2026
+3 TIME 15:19:49
+0 @M00515@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_153_0177.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_153_0177
+1 CHAN
+2 DATE 17 AUG 2026
+3 TIME 22:21:02
+0 @M00516@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-09_1873F_085.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-09_1873F_085
+1 CHAN
+2 DATE 17 AUG 2026
+3 TIME 23:26:54
+0 @M00517@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_999-09_1813B_017.jpg
+2 FORM jpg
+2 TITL NL-RtSA_999-09_1813B_017
+1 CHAN
+2 DATE 19 AUG 2026
+3 TIME 12:11:39
+0 @I00343@ INDI
+1 NAME Jan /Sentrop/
+2 GIVN Jan
+2 SURN Sentrop
+2 SOUR @S00548@
+1 SEX M
+1 SOUR @S00548@
+1 OCCU Kuiperknegt
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00548@
+1 DEAT
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00548@
+1 FAMS @F00123@
+1 CHAN
+2 DATE 19 AUG 2026
+3 TIME 12:50:51
+0 @I00344@ INDI
+1 NAME Anna /Waarbenje/
+2 GIVN Anna
+2 SURN Waarbenje
+2 SOUR @S00548@
+1 SEX F
+1 SOUR @S00548@
+1 DEAT
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00548@
+1 FAMS @F00123@
+1 CHAN
+2 DATE 19 AUG 2026
+3 TIME 12:50:51
+0 @F00123@ FAM
+1 HUSB @I00343@
+1 WIFE @I00344@
+1 CHIL @I00339@
+1 SOUR @S00548@
+1 CHAN
+2 DATE 19 AUG 2026
+3 TIME 12:50:51
+0 @M00518@ OBJE
+1 FILE E:/ancestris-data/media/NL-RtSA_1-02_152_0005.jpg
+2 FORM jpg
+2 TITL NL-RtSA_1-02_152_0005
+1 CHAN
+2 DATE 19 AUG 2026
+3 TIME 17:35:42
+0 @I00345@ INDI
+1 NAME Joannes Henricus /Freidhof/
+2 GIVN Joannes, Henricus
+2 SURN Freidhof
+2 SOUR @S00532@
+1 SEX M
+1 SOUR @S00532@
+1 CHR
+2 DATE 30 MAR 1776
+2 PLAC , Rotterdam, , , , 
+2 SOUR @S00532@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Henricus van Hees
+3 CONT     relation: peter
+3 CONT   - name: Joanna van Son
+3 CONT     relation: peetje
+3 CONT
+1 FAMC @F00115@
+1 CHAN
+2 DATE 19 AUG 2026
+3 TIME 17:50:16
+0 @S00558@ SOUR
+1 TITL Begraven Kaatie Friedhof 01-11-1776
+1 PUBL https://hdl.handle.net/21.12133/02FAB500B505440B9D3B95B87608B61E
+1 REPO @R00003@
+1 TEXT [Open Archieven indexrecord (A2A) van Stadsarchief Rotterdam, DTB Begraven -- indexgegevens, niet het begraafregister van 1776 zelf en geen scan; onderliggend register: Stadsarchief Rotterdam archief 9999_21, Begraven 1770-1779, inschrijving 01-11-
+2 CONC 1776. dataset opendata.archieven.nl 2F08FFA8E5F14B37824839D2FD79DE5D; laatst door de bronhouder bijgewerkt 22-06-2026.]
+2 CONT Begrafenis op 1 november 1776 te Rotterdam
+2 CONT Overledene: Kaatie N.n.
+2 CONT Vader/moeder: Dorus Friedhof
+2 CONT Opmerking: overledene was 2 1/2 jaar, Schotsteeg op de Hoogstraat
+2 CONT Bronvermelding: Stadsarchief Rotterdam te Rotterdam, DTB Begraven -- Begraven 1770-1779, Rotterdam, archief 9999_21, 01-11-1776
+2 CONT Permalink: https://hdl.handle.net/21.12133/02FAB500B505440B9D3B95B87608B61E
+1 CHAN
+2 DATE 21 AUG 2026
+3 TIME 15:50:23
+0 @R00018@ REPO
+1 NAME Regionaal Archief Tilburg
+1 WWW https://www.regionaalarchieftilburg.nl
+1 CHAN
+2 DATE 21 AUG 2026
+3 TIME 16:05:04
+0 @S00559@ SOUR
+1 TITL Doop Maria Theresia van de Silver 30-03-1733
+1 PUBL https://www.regionaalarchieftilburg.nl/zoek-een-persoon/deeds/2361e842-3863-11e0-bcd1-8edf61960649
+1 REPO @R00018@
+1 OBJE @M00519@
+1 TEXT Martius 1733
+2 CONT 30. Maria Theresia fil: Legit: Adriani
+2 CONT van de Silver et Anna Goossens coniug:
+2 CONT Suse: Gertrudis Hoevenaers.
+1 CHAN
+2 DATE 21 AUG 2026
+3 TIME 20:38:16
+0 @M00519@ OBJE
+1 FILE E:/ancestris-data/media/TB_DTB_008_044.tjp.jpg
+2 FORM jpg
+2 TITL TB_DTB_008_044.tjp
+1 CHAN
+2 DATE 21 AUG 2026
+3 TIME 19:48:56
+0 @I00346@ INDI
+1 NAME Adrianus /van de Silver/
+1 SEX M
+1 SOUR @S00559@
+1 FAMS @F00124@
+1 CHAN
+2 DATE 21 AUG 2026
+3 TIME 20:39:48
+0 @I00347@ INDI
+1 NAME Anna /Goossens/
+1 SEX F
+1 SOUR @S00559@
+1 FAMS @F00124@
+1 CHAN
+2 DATE 21 AUG 2026
+3 TIME 20:39:48
+0 @F00124@ FAM
+1 HUSB @I00346@
+1 WIFE @I00347@
+1 CHIL @I00324@
+1 SOUR @S00559@
+1 CHAN
+2 DATE 21 AUG 2026
+3 TIME 20:39:48
+0 @R00019@ REPO
+1 NAME Landesarchiv NRW Abteilung Rheinland
+1 CHAN
+2 DATE 22 AUG 2026
+3 TIME 08:57:00
+0 @S00560@ SOUR
+1 TITL Doop Theodorus Friethoff 20-12-1732
+1 PUBL https://dfg-viewer.de/show/?tx_dlf[id]=https://www.landesarchiv-nrw.de/digitalisate/Personenstandsarchiv_Rhld/Kirchenbuecher/BA/~012/1275/mets.xml
+1 REPO @R00019@
+1 OBJE @M00520@
+1 TEXT Kleve, St. Mariä Himmelfahrt (rk) — BA 1275, pag. 8; anno 1732, Xber (december).
+2 CONT 20. Jan Fritthoff, Cath. Oeijen. Theodor. -
+1 CHAN
+2 DATE 22 AUG 2026
+3 TIME 08:58:45
+0 @S00561@ SOUR
+1 TITL Doop Antonius Friethoff 13-06-1734
+1 PUBL https://dfg-viewer.de/show/?tx_dlf[id]=https://www.landesarchiv-nrw.de/digitalisate/Personenstandsarchiv_Rhld/Kirchenbuecher/BA/~012/1275/mets.xml
+1 REPO @R00019@
+1 OBJE @M00521@
+1 TEXT Kleve, St. Mariä Himmelfahrt (rk) — BA 1275, pag. 12; anno 1734, Jun.
+2 CONT 13 (eod.) Joes Frithoff, Cath. Oeijen. Anton. Joes Harman, Aleid. Oostendorp
+1 CHAN
+2 DATE 22 AUG 2026
+3 TIME 08:58:46
+0 @S00562@ SOUR
+1 TITL Doop Hermannus Friethoff 10-10-1737
+1 PUBL https://dfg-viewer.de/show/?tx_dlf[id]=https://www.landesarchiv-nrw.de/digitalisate/Personenstandsarchiv_Rhld/Kirchenbuecher/BA/~012/1275/mets.xml
+1 REPO @R00019@
+1 OBJE @M00522@
+1 TEXT Kleve, St. Mariä Himmelfahrt (rk) — BA 1275, pag. 20; anno 1737, 8ber (october).
+2 CONT 10. Joes Friethoff, Cath. Oeijen. Herman. R.D. N. Oeijen Vic., An. Elis Boss
+1 CHAN
+2 DATE 22 AUG 2026
+3 TIME 08:58:47
+0 @M00520@ OBJE
+1 FILE E:/ancestris-data/media/BA_1275_S008.jpg
+2 FORM jpg
+2 TITL BA_1275_S008
+1 CHAN
+2 DATE 22 AUG 2026
+3 TIME 08:57:50
+0 @M00521@ OBJE
+1 FILE E:/ancestris-data/media/BA_1275_S012.jpg
+2 FORM jpg
+2 TITL BA_1275_S012
+1 CHAN
+2 DATE 22 AUG 2026
+3 TIME 08:57:54
+0 @M00522@ OBJE
+1 FILE E:/ancestris-data/media/BA_1275_S020.jpg
+2 FORM jpg
+2 TITL BA_1275_S020
+1 CHAN
+2 DATE 22 AUG 2026
+3 TIME 08:57:58
+0 @I00348@ INDI
+1 NAME Joannes /Friethoff/
+2 SOUR @S00560@
+2 SOUR @S00561@
+2 SOUR @S00562@
+1 SEX M
+1 SOUR @S00560@
+1 SOUR @S00561@
+1 SOUR @S00562@
+1 FAMS @F00125@
+1 CHAN
+2 DATE 22 AUG 2026
+3 TIME 09:02:55
+0 @I00349@ INDI
+1 NAME Catharina /Oeijen/
+2 SOUR @S00560@
+2 SOUR @S00561@
+2 SOUR @S00562@
+1 SEX F
+1 SOUR @S00560@
+1 SOUR @S00561@
+1 SOUR @S00562@
+1 FAMS @F00125@
+1 CHAN
+2 DATE 22 AUG 2026
+3 TIME 09:02:55
+0 @I00350@ INDI
+1 NAME Antonius /Friethoff/
+2 SOUR @S00561@
+1 SEX M
+1 SOUR @S00561@
+1 CHR
+2 DATE 13 JUN 1734
+2 PLAC , Kleve, , , , Duitsland
+2 SOUR @S00561@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Joës Harman
+3 CONT     relation: peter
+3 CONT   - name: Aleid. Oostendorp
+3 CONT     relation: peetje
+3 CONT
+1 FAMC @F00125@
+1 CHAN
+2 DATE 22 AUG 2026
+3 TIME 09:02:55
+0 @I00351@ INDI
+1 NAME Hermannus /Friethoff/
+2 SOUR @S00562@
+1 SEX M
+1 SOUR @S00562@
+1 CHR
+2 DATE 10 OCT 1737
+2 PLAC , Kleve, , , , Duitsland
+2 SOUR @S00562@
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: R.D. N. Oeijen
+3 CONT     occupation: Vicarius
+3 CONT     relation: peter
+3 CONT   - name: An. Elis Boss
+3 CONT     relation: peetje
+3 CONT
+1 FAMC @F00125@
+1 CHAN
+2 DATE 22 AUG 2026
+3 TIME 09:02:55
+0 @F00125@ FAM
+1 HUSB @I00348@
+1 WIFE @I00349@
+1 CHIL @I00323@
+1 CHIL @I00350@
+1 CHIL @I00351@
+1 CHAN
+2 DATE 22 AUG 2026
+3 TIME 09:02:55
 0 TRLR
