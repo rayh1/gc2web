@@ -4,8 +4,8 @@ from datetime import datetime
 
 from model.Date import Date
 
-class TestDateParseMethods(unittest.TestCase):
 
+class TestDateParseMethods(unittest.TestCase):
     def test_parse_simple_date(self):
         self.assertEqual(Date.parse_simple_date("30 JUN 1965"), "30 JUN 1965")
         self.assertEqual(Date.parse_simple_date("JUN 1965"), "JUN 1965")
@@ -13,12 +13,22 @@ class TestDateParseMethods(unittest.TestCase):
         self.assertIsNone(Date.parse_simple_date("INVALID DATE"))
 
     def test_parse_period_date(self):
-        self.assertEqual(Date.parse_period_date("FROM 30 JUN 1965"), ("30 JUN 1965", None))
-        self.assertEqual(Date.parse_period_date("TO 30 JUN 1965"), (None, "30 JUN 1965"))
-        self.assertEqual(Date.parse_period_date("FROM 30 JUN 1965 TO 1 JUL 1965"), ("30 JUN 1965", "1 JUL 1965"))
+        self.assertEqual(
+            Date.parse_period_date("FROM 30 JUN 1965"), ("30 JUN 1965", None)
+        )
+        self.assertEqual(
+            Date.parse_period_date("TO 30 JUN 1965"), (None, "30 JUN 1965")
+        )
+        self.assertEqual(
+            Date.parse_period_date("FROM 30 JUN 1965 TO 1 JUL 1965"),
+            ("30 JUN 1965", "1 JUL 1965"),
+        )
         self.assertEqual(Date.parse_period_date("FROM JUN 1965"), ("JUN 1965", None))
         self.assertEqual(Date.parse_period_date("TO JUN 1965"), (None, "JUN 1965"))
-        self.assertEqual(Date.parse_period_date("FROM JUN 1965 TO JUL 1965"), ("JUN 1965", "JUL 1965"))
+        self.assertEqual(
+            Date.parse_period_date("FROM JUN 1965 TO JUL 1965"),
+            ("JUN 1965", "JUL 1965"),
+        )
         self.assertEqual(Date.parse_period_date("FROM 1965"), ("1965", None))
         self.assertEqual(Date.parse_period_date("TO 1965"), (None, "1965"))
         self.assertEqual(Date.parse_period_date("FROM 1965 TO 1966"), ("1965", "1966"))
@@ -94,5 +104,6 @@ class TestDateParseMethods(unittest.TestCase):
         date = Date("INT 1965")
         self.assertEqual(date.date(), datetime(1965, 1, 1))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

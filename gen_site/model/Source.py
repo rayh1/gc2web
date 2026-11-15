@@ -2,6 +2,7 @@ import re
 
 from model.Repository import Repository
 
+
 class Source:
     def __init__(self):
         self.__xref_id: str = ""
@@ -64,6 +65,7 @@ class Source:
     def repository(self) -> Repository | None:
         if self.__repository_cache is None and self.repository_id:
             from model.GedcomModel import GedcomModel
+
             self.__repository_cache = GedcomModel().get_repository(self.repository_id)
         return self.__repository_cache
 
@@ -72,4 +74,8 @@ class Source:
 
     @property
     def publications(self) -> list[str]:
-        return list(filter(None, re.split(r"\r?\n", self.__publication))) if self.__publication else []
+        return (
+            list(filter(None, re.split(r"\r?\n", self.__publication)))
+            if self.__publication
+            else []
+        )

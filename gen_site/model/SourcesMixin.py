@@ -1,6 +1,7 @@
 from typing import List
 from model.Source import Source
 
+
 class SourcesMixin:
     def __init__(self):
         self.__source_ids: List[str] = []
@@ -11,7 +12,15 @@ class SourcesMixin:
         from model.GedcomModel import GedcomModel
 
         if self.__sources_cache is None:
-            self.__sources_cache = list(filter(None, (GedcomModel().get_source(source_id) for source_id in self.__source_ids)))
+            self.__sources_cache = list(
+                filter(
+                    None,
+                    (
+                        GedcomModel().get_source(source_id)
+                        for source_id in self.__source_ids
+                    ),
+                )
+            )
         return self.__sources_cache
 
     @property

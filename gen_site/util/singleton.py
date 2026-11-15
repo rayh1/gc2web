@@ -2,12 +2,13 @@ from typing import Any, TypeVar, cast
 
 from threading import Lock
 
-T = TypeVar('T')
+T = TypeVar("T")
+
 
 def singleton(cls: T) -> T:
     """
     A thread-safe singleton decorator.
-    
+
     Usage:
         @singleton
         class MyClass:
@@ -15,11 +16,11 @@ def singleton(cls: T) -> T:
     """
     _instance = {}
     _lock = Lock()
-    
+
     def get_instance(*args: Any, **kwargs: Any) -> T:
         with _lock:
             if cls not in _instance:
-                _instance[cls] = cls(*args, **kwargs) # type: ignore
+                _instance[cls] = cls(*args, **kwargs)  # type: ignore
             return cast(T, _instance[cls])
-            
+
     return cast(T, get_instance)

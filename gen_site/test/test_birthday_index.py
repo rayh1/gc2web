@@ -42,8 +42,18 @@ LIFESPAN_PATTERN = re.compile(r"^\((\d{4})-(\d{4}|\?)\)$")
 # A GEDCOM date carrying an actual calendar day, e.g. `7 JUL 1881`.
 DAY_AND_MONTH_PATTERN = re.compile(r"\b\d{1,2}\s+[A-Z]{3}\s+\d{4}\b")
 MONTH_TAGS: tuple[str, ...] = (
-    "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
-    "JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC",
 )
 DAYS_IN_MONTH: tuple[int, ...] = (31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
 
@@ -116,7 +126,7 @@ def _raw_birth_dates() -> dict[str, str]:
         if line.startswith("1 "):
             in_birth = line.startswith("1 BIRT")
         if current_id and in_birth and line.startswith("2 DATE "):
-            birth_dates[current_id] = line[len("2 DATE "):].strip()
+            birth_dates[current_id] = line[len("2 DATE ") :].strip()
 
     return birth_dates
 
@@ -219,7 +229,9 @@ class TestBothDirections(BirthdayIndexTestCase):
         }
         manually_private = sorted(seen_by_gedq - set(self.by_xref_id))
         self.assertGreater(
-            len(manually_private), 0, "expected gedq to see the manually private records"
+            len(manually_private),
+            0,
+            "expected gedq to see the manually private records",
         )
 
         for xref_id in manually_private:
@@ -252,11 +264,14 @@ class TestBothDirections(BirthdayIndexTestCase):
 
     def test_manual_private_is_the_only_redaction(self):
         """A manual private note still hides one person while a living public person stays."""
+
         def fake_event(year: int | None):
             return SimpleNamespace(
                 date=SimpleNamespace(
                     value=str(year) if year is not None else "",
-                    date=lambda year=year: SimpleNamespace(year=year) if year is not None else None,
+                    date=lambda year=year: (
+                        SimpleNamespace(year=year) if year is not None else None
+                    ),
                 )
             )
 

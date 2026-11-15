@@ -31,7 +31,9 @@ class TestGedqAdapter(TestCase):
 
     @patch("adapter.gedq_adapter.subprocess.run")
     def test_ensure_gedq_compatible_rejects_old_version(self, run_mock):
-        run_mock.return_value = CompletedProcess(["gedq", "--version"], 0, stdout="1.9.9\n", stderr="")
+        run_mock.return_value = CompletedProcess(
+            ["gedq", "--version"], 0, stdout="1.9.9\n", stderr=""
+        )
 
         with self.assertRaisesRegex(RuntimeError, r"found 1\.9\.9"):
             ensure_gedq_compatible()
@@ -40,10 +42,18 @@ class TestGedqAdapter(TestCase):
     def test_load_dataset_reads_each_kind(self, run_mock):
         run_mock.side_effect = [
             CompletedProcess(["gedq", "--version"], 0, stdout="2.0.0\n", stderr=""),
-            CompletedProcess(["gedq", "search"], 0, stdout='{"entity_id":"I1"}\n', stderr=""),
-            CompletedProcess(["gedq", "search"], 0, stdout='{"entity_id":"F1"}\n', stderr=""),
-            CompletedProcess(["gedq", "search"], 0, stdout='{"entity_id":"S1"}\n', stderr=""),
-            CompletedProcess(["gedq", "search"], 0, stdout='{"entity_id":"R1"}\n', stderr=""),
+            CompletedProcess(
+                ["gedq", "search"], 0, stdout='{"entity_id":"I1"}\n', stderr=""
+            ),
+            CompletedProcess(
+                ["gedq", "search"], 0, stdout='{"entity_id":"F1"}\n', stderr=""
+            ),
+            CompletedProcess(
+                ["gedq", "search"], 0, stdout='{"entity_id":"S1"}\n', stderr=""
+            ),
+            CompletedProcess(
+                ["gedq", "search"], 0, stdout='{"entity_id":"R1"}\n', stderr=""
+            ),
         ]
 
         dataset = load_dataset("gen_site/Hoofman.ged")
@@ -151,11 +161,15 @@ class TestGedqAdapter(TestCase):
         primary_name, alternate_name = individuals["I1"].names
 
         self.assertEqual(primary_name.source_ids, ["S2", "S1"])
-        self.assertEqual([note.value for note in primary_name.notes], ["Alias explanation"])
+        self.assertEqual(
+            [note.value for note in primary_name.notes], ["Alias explanation"]
+        )
         self.assertEqual([note.line_num for note in primary_name.notes], [42])
         self.assertEqual(alternate_name.source_ids, ["S3"])
 
-    def test_build_individuals_falls_back_to_name_variant_cites_when_names_missing(self):
+    def test_build_individuals_falls_back_to_name_variant_cites_when_names_missing(
+        self,
+    ):
         individuals = build_individuals(
             [
                 {

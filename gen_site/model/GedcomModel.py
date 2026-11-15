@@ -1,5 +1,5 @@
 from typing import List, Dict
-from tqdm import tqdm # type: ignore
+from tqdm import tqdm  # type: ignore
 
 from adapter.gedq_adapter import build_families
 from adapter.gedq_adapter import build_individuals
@@ -14,6 +14,7 @@ from model.Repository import Repository
 
 from util.singleton import singleton
 
+
 @singleton
 class GedcomModel:
     def __init__(self):
@@ -24,7 +25,11 @@ class GedcomModel:
 
     def __exclude_privates(self):
         """Exclude private individuals from the GedcomModel"""
-        for individual in tqdm(list(filter(lambda i: i.is_private(), self.individuals)), desc="Excluded private individuals", bar_format='{desc}: {total_fmt}'):
+        for individual in tqdm(
+            list(filter(lambda i: i.is_private(), self.individuals)),
+            desc="Excluded private individuals",
+            bar_format="{desc}: {total_fmt}",
+        ):
             del self.__individual_map[individual.xref_id]
 
     def get_individual(self, id: str) -> Individual | None:
@@ -73,4 +78,3 @@ class GedcomModel:
         self.__individual_map = build_individuals(dataset.individuals, dataset.sources)
         self.__family_map = build_families(dataset.families)
         self.__exclude_privates()
-

@@ -9,13 +9,17 @@ from model.Date import Date
 from model.Name import Name
 from model.EventDetail import EventDetail
 
+
 class Location:
     """
     Represents an event of an individual itself or together with its spouse.
     """
-    def __init__(self, spouse: Union['Individual', None], event: EventDetail): # type: ignore
-        self.spouse: Union['Individual', None] = spouse
+
+    def __init__(self, spouse: Union["Individual", None], event: EventDetail):  # type: ignore
+        self.spouse: Union["Individual", None] = spouse
         self.event: EventDetail = event
+
+
 class Individual(SourcesMixin, NotesMixin):
     def __init__(self):
         super().__init__()
@@ -36,11 +40,13 @@ class Individual(SourcesMixin, NotesMixin):
         self.__associations: list[Association] = []
         self.__descriptions: list[EventDetail] = []
 
-        self.__fams_cache: list['Family'] | None = None # type: ignore
-        self.__famc_cache: 'Family' | None = None # type: ignore
-        self.__spouses_cache: list['Individual'] | None = None
+        self.__fams_cache: list["Family"] | None = None  # type: ignore
+        self.__famc_cache: "Family" | None = None  # type: ignore
+        self.__spouses_cache: list["Individual"] | None = None
         self.__locations_cache: list[Location] | None = None
-        self.__witnessed_events_cache: list[tuple[str, 'EventDetail', list['Individual']]] | None = None
+        self.__witnessed_events_cache: (
+            list[tuple[str, "EventDetail", list["Individual"]]] | None
+        ) = None
 
     @property
     def xref_id(self) -> str:
@@ -149,63 +155,72 @@ class Individual(SourcesMixin, NotesMixin):
     def associations(self) -> list[Association]:
         return self.__associations
 
-# Utility methods
+    # Utility methods
 
     @property
-    def fams(self) -> list['Family']: # type: ignore
+    def fams(self) -> list["Family"]:  # type: ignore
         from model.GedcomModel import GedcomModel
+
         if self.__fams_cache is None:
-            self.__fams_cache = list(filter(None, [GedcomModel().get_family(fams_id) for fams_id in self.fams_ids]))
+            self.__fams_cache = list(
+                filter(
+                    None,
+                    [GedcomModel().get_family(fams_id) for fams_id in self.fams_ids],
+                )
+            )
         return self.__fams_cache
 
     @property
-    def famc(self) -> 'Family': # type: ignore
+    def famc(self) -> "Family":  # type: ignore
         from model.GedcomModel import GedcomModel
+
         if self.__famc_cache is None and self.__famc_id:
             self.__famc_cache = GedcomModel().get_family(self.__famc_id)
-        return self.__famc_cache # type: ignore
+        return self.__famc_cache  # type: ignore
 
     @property
-    def father(self) -> 'Individual':
+    def father(self) -> "Individual":
         if self.famc:
-            return self.famc.husband         # type: ignore
-        return None # type: ignore
+            return self.famc.husband  # type: ignore
+        return None  # type: ignore
 
     @property
-    def mother(self) -> 'Individual':
+    def mother(self) -> "Individual":
         if self.famc:
-            return self.famc.wife # type: ignore
-        return None # type: ignore
+            return self.famc.wife  # type: ignore
+        return None  # type: ignore
 
     @property
-    def spouses(self) -> list['Individual']:
+    def spouses(self) -> list["Individual"]:
         if self.__spouses_cache is None:
             self.__spouses_cache = []
             for family in self.fams:
-                if (family.husband and family.husband != self):
+                if family.husband and family.husband != self:
                     self.__spouses_cache.append(family.husband)
-                if (family.wife and family.wife != self):
+                if family.wife and family.wife != self:
                     self.__spouses_cache.append(family.wife)
         return self.__spouses_cache
 
-    def children(self, spouse: 'Individual') -> list['Individual']:
+    def children(self, spouse: "Individual") -> list["Individual"]:
         children = []
         for family in self.fams:
-            if (family.husband == self and family.wife == spouse) or (family.husband == spouse and family.wife == self):
+            if (family.husband == self and family.wife == spouse) or (
+                family.husband == spouse and family.wife == self
+            ):
                 children.extend(family.children)
         return children
 
     @property
     def is_male(self) -> bool:
-        return self.__sex == 'M'
+        return self.__sex == "M"
 
     @property
     def is_female(self) -> bool:
-        return self.__sex == 'F'
+        return self.__sex == "F"
 
     @property
     def is_unknown_sex(self) -> bool:
-        return self.__sex not in ['M', 'F']
+        return self.__sex not in ["M", "F"]
 
     @property
     def start_life(self) -> EventDetail:
@@ -236,7 +251,6 @@ class Individual(SourcesMixin, NotesMixin):
 
     def locations(self) -> list[Location]:
         if self.__locations_cache is None:
-
             locations: list[Location] = []
 
             for residence in self.residences:
@@ -246,20 +260,22 @@ class Individual(SourcesMixin, NotesMixin):
                 for residence in family.residences:
                     locations.append(Location(family.spouse(self), residence))
 
-            self.__locations_cache = sorted(locations, key=lambda x: x.event.date.date() or datetime.min)
+            self.__locations_cache = sorted(
+                locations, key=lambda x: x.event.date.date() or datetime.min
+            )
 
         return self.__locations_cache
 
-    def siblings(self) -> list['Individual']:
+    def siblings(self) -> list["Individual"]:
         if self.famc:
             return sorted(
-                    [child for child in self.famc.children if child != self],
-                    key=lambda x: x.start_life.date.date() or datetime.max
-                )
+                [child for child in self.famc.children if child != self],
+                key=lambda x: x.start_life.date.date() or datetime.max,
+            )
         return []
 
-    def uncles_aunts(self) -> list['Individual']:
-        result: list['Individual'] = []
+    def uncles_aunts(self) -> list["Individual"]:
+        result: list["Individual"] = []
         for parent in [self.father, self.mother]:
             if not parent:
                 continue
@@ -311,11 +327,11 @@ class Individual(SourcesMixin, NotesMixin):
 
         return self.__remove_duplicates(sources)
 
-    def witnessed_events(self) -> list[tuple[str, 'EventDetail', list['Individual']]]:
+    def witnessed_events(self) -> list[tuple[str, "EventDetail", list["Individual"]]]:
         if self.__witnessed_events_cache is None:
             from model.GedcomModel import GedcomModel
 
-            result: list[tuple[str, 'EventDetail', list['Individual']]] = []
+            result: list[tuple[str, "EventDetail", list["Individual"]]] = []
 
             for individual in GedcomModel().individuals:
                 if individual.birth.has_witness(self):
@@ -329,7 +345,13 @@ class Individual(SourcesMixin, NotesMixin):
 
                 for family in individual.fams:
                     if family.marriage.has_witness(self):
-                        result.append(("Huwelijk", family.marriage, [individual, family.spouse(individual)]))
+                        result.append(
+                            (
+                                "Huwelijk",
+                                family.marriage,
+                                [individual, family.spouse(individual)],
+                            )
+                        )
 
             # Remove duplicates based on event
             unique_events = {}
@@ -337,7 +359,9 @@ class Individual(SourcesMixin, NotesMixin):
                 if event not in unique_events:
                     unique_events[event] = (label, event, related_individuals)
 
-            self.__witnessed_events_cache = sorted(unique_events.values(), key=lambda x: x[1].date.date() or datetime.min)
+            self.__witnessed_events_cache = sorted(
+                unique_events.values(), key=lambda x: x[1].date.date() or datetime.min
+            )
 
         return self.__witnessed_events_cache
 

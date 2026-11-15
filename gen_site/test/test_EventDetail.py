@@ -4,6 +4,7 @@ from model.EventDetail import EventDetail
 
 from model.Note import Note
 
+
 class TestEventDetail(unittest.TestCase):
     def setUp(self):
         self.event_detail = EventDetail()
@@ -34,7 +35,7 @@ witnesses:
         self.assertEqual(self.event_detail.witnesses[0].name, "Constantina Engels")
 
         def test_parse_witnesses_with_bare_gedcom_xref(self):
-                note_value = """
+            note_value = """
 ---
 witnesses:
     - name: Theodorus Friethof
@@ -44,13 +45,13 @@ witnesses:
         residence: Prinsenstraat J. 211
         relation: vader
                                 """
-                note: Note = Note()
-                note.value = note_value
-                self.event_detail.notes = [note]
-                self.event_detail.parse_witnesses()
+            note: Note = Note()
+            note.value = note_value
+            self.event_detail.notes = [note]
+            self.event_detail.parse_witnesses()
 
-                self.assertEqual(len(self.event_detail.witnesses), 1)
-                self.assertEqual(self.event_detail.witnesses[0].xref_id, "@I00282@")
+            self.assertEqual(len(self.event_detail.witnesses), 1)
+            self.assertEqual(self.event_detail.witnesses[0].xref_id, "@I00282@")
 
     def test_parse_timestamp_with_valid_data(self):
         note_value = """
@@ -113,5 +114,5 @@ timestamp: "4:00"
         self.assertEqual(self.event_detail.timestamp, "4:00")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

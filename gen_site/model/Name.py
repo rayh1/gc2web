@@ -1,6 +1,7 @@
 from model.SourcesMixin import SourcesMixin
 from model.NotesMixin import NotesMixin
 
+
 class Name(SourcesMixin, NotesMixin):
     def __init__(self):
         super().__init__()

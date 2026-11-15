@@ -4,6 +4,7 @@ from model.Witness import Witness
 from model.Place import Place
 from model.Date import Date
 
+
 class EventDetail(SourcesMixin, NotesMixin):
     def __init__(self):
         super().__init__()
@@ -23,8 +24,8 @@ class EventDetail(SourcesMixin, NotesMixin):
         for note in self.notes:
             note_data: dict | None = note.parse_yaml()
 
-            if note_data and 'timestamp' in note_data:
-                self.timestamp = note_data['timestamp']
+            if note_data and "timestamp" in note_data:
+                self.timestamp = note_data["timestamp"]
                 return
 
     def parse_witnesses(self):
@@ -32,11 +33,14 @@ class EventDetail(SourcesMixin, NotesMixin):
         for note in self.notes:
             note_data: dict | None = note.parse_yaml()
 
-            if note_data and 'witnesses' in note_data:
-                self.__witnesses = [Witness(note.line_num, witness_data) for witness_data in note_data['witnesses']]
+            if note_data and "witnesses" in note_data:
+                self.__witnesses = [
+                    Witness(note.line_num, witness_data)
+                    for witness_data in note_data["witnesses"]
+                ]
                 return
 
-# Properties
+    # Properties
 
     @property
     def value(self) -> str | None:
@@ -94,9 +98,9 @@ class EventDetail(SourcesMixin, NotesMixin):
     def is_defined(self) -> bool:
         return self.date.value is not None
 
-# Utility
+    # Utility
 
-    def has_witness(self, individual: 'Individual') -> bool: # type: ignore
+    def has_witness(self, individual: "Individual") -> bool:  # type: ignore
         for witness in self.witnesses:
             if witness.xref_id and witness.xref_id == individual.xref_id:
                 return True

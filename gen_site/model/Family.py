@@ -3,6 +3,7 @@ from model.NotesMixin import NotesMixin
 from model.Individual import Individual
 from model.EventDetail import EventDetail
 
+
 class Family(SourcesMixin, NotesMixin):
     def __init__(self):
         super().__init__()
@@ -19,7 +20,7 @@ class Family(SourcesMixin, NotesMixin):
         self.__wife_cache: Individual | None = None
         self.__children_cache: list[Individual] | None = None
 
-# Properties
+    # Properties
 
     @property
     def xref_id(self) -> str:
@@ -69,11 +70,12 @@ class Family(SourcesMixin, NotesMixin):
     def residences(self, value: list[EventDetail]):
         self.__residences = value
 
-# Utility
+    # Utility
 
     @property
     def husband(self) -> Individual | None:
         from model.GedcomModel import GedcomModel
+
         if self.__husband_cache is None and self.husband_id:
             self.__husband_cache = GedcomModel().get_individual(self.husband_id)
         return self.__husband_cache
@@ -81,6 +83,7 @@ class Family(SourcesMixin, NotesMixin):
     @property
     def wife(self) -> Individual | None:
         from model.GedcomModel import GedcomModel
+
         if self.__wife_cache is None and self.wife_id:
             self.__wife_cache = GedcomModel().get_individual(self.wife_id)
         return self.__wife_cache
@@ -88,8 +91,17 @@ class Family(SourcesMixin, NotesMixin):
     @property
     def children(self) -> list[Individual]:
         from model.GedcomModel import GedcomModel
+
         if self.__children_cache is None:
-            self.__children_cache = list(filter(None, (GedcomModel().get_individual(child_id) for child_id in self.children_ids)))
+            self.__children_cache = list(
+                filter(
+                    None,
+                    (
+                        GedcomModel().get_individual(child_id)
+                        for child_id in self.children_ids
+                    ),
+                )
+            )
         return self.__children_cache
 
     def spouse(self, individual: Individual) -> Individual | None:

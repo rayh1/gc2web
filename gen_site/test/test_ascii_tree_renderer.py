@@ -24,8 +24,12 @@ class TestAsciiTreeRenderer(TestCase):
         self.assertIn("Petrus Hoofman (1833-1874)", rendered[0])
         self.assertEqual(rendered[1], "└── x Constantia Engels (1838-1915)")
         self.assertEqual(rendered[2], "    └── Augustinus Hoofman (1860-1918)")
-        self.assertTrue(any("x Maria Antoinetta Rozema (1862-?)" in line for line in rendered))
-        self.assertTrue(any("Petrus Johannes Hoofman (1888-1890)" in line for line in rendered))
+        self.assertTrue(
+            any("x Maria Antoinetta Rozema (1862-?)" in line for line in rendered)
+        )
+        self.assertTrue(
+            any("Petrus Johannes Hoofman (1888-1890)" in line for line in rendered)
+        )
 
     def test_render_ascii_tree_falls_back_to_single_focus_line(self):
         focus = self._person("I1", "Solo Person", None, None, sex="U")
@@ -58,7 +62,11 @@ class TestAsciiTreeRenderer(TestCase):
         family.xref_id = "F-siblings"
         family.husband_id = father.xref_id
         family.wife_id = mother.xref_id
-        family.children_ids = [older_sibling.xref_id, focus.xref_id, younger_sibling.xref_id]
+        family.children_ids = [
+            older_sibling.xref_id,
+            focus.xref_id,
+            younger_sibling.xref_id,
+        ]
         family._Family__husband_cache = father
         family._Family__wife_cache = mother
         family._Family__children_cache = [older_sibling, focus, younger_sibling]
@@ -85,12 +93,16 @@ class TestAsciiTreeRenderer(TestCase):
         self._add_spouse_family(focus, spouse=spouse_two, children=[])
         self._add_spouse_family(focus, spouse=spouse_three, children=[])
 
-        rendered = [line.text for line in render_ascii_tree(focus, max_spouse_families=2)]
+        rendered = [
+            line.text for line in render_ascii_tree(focus, max_spouse_families=2)
+        ]
 
         self.assertTrue(any("x Spouse One (1831-?)" in line for line in rendered))
         self.assertTrue(any("x Spouse Two (1832-?)" in line for line in rendered))
         self.assertFalse(any("x Spouse Three (1833-?)" in line for line in rendered))
-        self.assertTrue(any("… 1 more family branch not shown" in line for line in rendered))
+        self.assertTrue(
+            any("… 1 more family branch not shown" in line for line in rendered)
+        )
 
     def _person(
         self,

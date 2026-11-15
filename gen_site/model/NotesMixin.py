@@ -2,6 +2,7 @@ from typing import List
 
 from model.Note import Note
 
+
 class NotesMixin:
     def __init__(self):
         self.__notes: List[Note] = []

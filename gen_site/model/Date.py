@@ -1,6 +1,7 @@
 from datetime import datetime
 import re
 
+
 class Date:
     def __init__(self, value: str | None = None):
         self.__value: str | None = value
@@ -40,24 +41,23 @@ class Date:
             pass
 
         return None
-    
+
     def pretty_str(self) -> str:
         parsed_value = self.parse()
         if not parsed_value:
             return "?"
-        
+
         if isinstance(parsed_value, tuple):
             return f"{parsed_value[0] or '?'} - {parsed_value[1] or '?'}"
-        
-        return parsed_value
 
+        return parsed_value
 
     DATE_FORMAT_RE = r"(\d{4}|\w{3} \d{4}|\d{1,2} \w{3} \d{4})"
 
     def parse(self) -> str | tuple[str | None, str | None] | None:
         if self.__parsed_value:
             return self.__parsed_value
-        
+
         if not self.__value:
             return None
 
@@ -76,25 +76,27 @@ class Date:
                 return parsed_value
 
         return None
-    
+
     @staticmethod
     def parse_simple_date(value: str) -> str | None:
         match = re.search(Date.DATE_FORMAT_RE, value)
         if match:
             return match.group(1)
-        
+
         return None
 
     @staticmethod
     def parse_period_date(value: str) -> tuple[str | None, str | None] | None:
-        match = re.search(r"FROM " + Date.DATE_FORMAT_RE + " TO " + Date.DATE_FORMAT_RE, value)
+        match = re.search(
+            r"FROM " + Date.DATE_FORMAT_RE + " TO " + Date.DATE_FORMAT_RE, value
+        )
         if match:
             return match.group(1), match.group(2)
 
         match = re.search(r"FROM " + Date.DATE_FORMAT_RE, value)
         if match:
             return match.group(1), None
-        
+
         match = re.search(r"TO " + Date.DATE_FORMAT_RE, value)
         if match:
             return None, match.group(1)

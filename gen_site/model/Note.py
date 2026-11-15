@@ -1,8 +1,9 @@
 import re
-import yaml # type: ignore
+import yaml  # type: ignore
 
 
-GEDCOM_XREF_VALUE_RE = re.compile(r'(:\s*)(@[^@\s\n]+@)(?=\s*(?:#.*)?$)', re.MULTILINE)
+GEDCOM_XREF_VALUE_RE = re.compile(r"(:\s*)(@[^@\s\n]+@)(?=\s*(?:#.*)?$)", re.MULTILINE)
+
 
 class Note:
     def __init__(self):
@@ -31,14 +32,14 @@ class Note:
     def is_yaml(self) -> bool:
         if not self.value:
             return False
-        return self.value.strip().startswith('---')
+        return self.value.strip().startswith("---")
 
     def parse_yaml(self) -> dict | None:
         if not self.is_yaml():
             return None
         try:
             normalized_value = GEDCOM_XREF_VALUE_RE.sub(r'\1"\2"', self.value)
-            data = yaml.safe_load(normalized_value) # type: ignore
+            data = yaml.safe_load(normalized_value)  # type: ignore
             return data
         except yaml.YAMLError:
             print(f"Error parsing yaml: {self.value}")
@@ -46,8 +47,7 @@ class Note:
 
     def is_private(self) -> bool:
         data = self.parse_yaml()
-        if data and 'private' in data:
-            return data['private']
+        if data and "private" in data:
+            return data["private"]
 
         return False
-

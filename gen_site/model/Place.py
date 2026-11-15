@@ -11,7 +11,8 @@ class Place:
         self.__value = value
 
     def __str__(self) -> str:
-        if not self.__value: return "?"
+        if not self.__value:
+            return "?"
 
         parts = [part.strip() for part in self.__value.split(",") if part.strip()]
         return ",".join(parts)

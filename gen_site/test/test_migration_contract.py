@@ -20,17 +20,27 @@ ALLOWLIST_FILE = GEN_SITE_DIR / "test/migration_allowlist.json"
 TREE_SECTION_RE = re.compile(r"### Boom\n.*?(?=\n### |\Z)", re.DOTALL)
 ASCII_TREE_BLOCK_RE = re.compile(r'<div class="ascii-tree-wrap">.*?</div>', re.DOTALL)
 FRONTMATTER_METADATA_RE = re.compile(
-    r'^(lifespan|birth_place|death_place|relationship_summary|branch): .*\n?',
+    r"^(lifespan|birth_place|death_place|relationship_summary|branch): .*\n?",
     re.MULTILINE,
 )
-SECTION_ORDER_RE = re.compile(r'^section_order:\n(?:  - .*\n)+', re.MULTILINE)
+SECTION_ORDER_RE = re.compile(r"^section_order:\n(?:  - .*\n)+", re.MULTILINE)
 
 
-def run_command(*command: str, cwd: Path = WORKSPACE_DIR) -> subprocess.CompletedProcess[str]:
+def run_command(
+    *command: str, cwd: Path = WORKSPACE_DIR
+) -> subprocess.CompletedProcess[str]:
     env = os.environ.copy()
     python_path = env.get("PYTHONPATH")
-    env["PYTHONPATH"] = "." if cwd == GEN_SITE_DIR and not python_path else f".:{python_path}" if cwd == GEN_SITE_DIR else python_path or ""
-    return subprocess.run(command, cwd=cwd, env=env, text=True, capture_output=True, check=True)
+    env["PYTHONPATH"] = (
+        "."
+        if cwd == GEN_SITE_DIR and not python_path
+        else f".:{python_path}"
+        if cwd == GEN_SITE_DIR
+        else python_path or ""
+    )
+    return subprocess.run(
+        command, cwd=cwd, env=env, text=True, capture_output=True, check=True
+    )
 
 
 def load_jsonl_output(kind: str) -> list[dict]:
@@ -57,7 +67,9 @@ def normalize_tree_section(page_text: str) -> str:
     text = ASCII_TREE_BLOCK_RE.sub("[TREE CONTENT NORMALIZED]", text)
     text = FRONTMATTER_METADATA_RE.sub("", text)
     text = SECTION_ORDER_RE.sub("", text)
-    text = re.sub(r"\[TREE CONTENT NORMALIZED\]\n+", "[TREE CONTENT NORMALIZED]\n", text)
+    text = re.sub(
+        r"\[TREE CONTENT NORMALIZED\]\n+", "[TREE CONTENT NORMALIZED]\n", text
+    )
     return text
 
 
@@ -91,10 +103,18 @@ class TestGedqMigrationContract(unittest.TestCase):
         cls.allowlist_paths = set(cls.allowlist["files"])
 
     def test_gedq_records_validate_against_published_schemas(self):
-        person_schema = json.loads(run_command("gedq", "schema", "--mode", "person").stdout)
-        family_schema = json.loads(run_command("gedq", "schema", "--mode", "family").stdout)
-        source_schema = json.loads(run_command("gedq", "schema", "--mode", "source").stdout)
-        event_schema = json.loads(run_command("gedq", "schema", "--mode", "event").stdout)
+        person_schema = json.loads(
+            run_command("gedq", "schema", "--mode", "person").stdout
+        )
+        family_schema = json.loads(
+            run_command("gedq", "schema", "--mode", "family").stdout
+        )
+        source_schema = json.loads(
+            run_command("gedq", "schema", "--mode", "source").stdout
+        )
+        event_schema = json.loads(
+            run_command("gedq", "schema", "--mode", "event").stdout
+        )
         note_schema = json.loads(run_command("gedq", "schema", "--mode", "note").stdout)
 
         validators = {
@@ -138,21 +158,39 @@ class TestGedqMigrationContract(unittest.TestCase):
                             "note_src": event.get("note_src", []),
                             "note_refs": event.get("note_refs", []),
                             "age_at_event": event.get("age_at_event"),
-                            "age_at_event_confidence": event.get("age_at_event_confidence", "unknown"),
+                            "age_at_event_confidence": event.get(
+                                "age_at_event_confidence", "unknown"
+                            ),
                             "age_at_event_full": event.get("age_at_event_full"),
                             "age_at_event_min": event.get("age_at_event_min"),
                             "age_at_event_max": event.get("age_at_event_max"),
-                            "age_at_event_period_start": event.get("age_at_event_period_start"),
-                            "age_at_event_period_end": event.get("age_at_event_period_end"),
-                            "age_at_event_source_text": event.get("age_at_event_source_text"),
-                            "age_at_event_dual_year": event.get("age_at_event_dual_year"),
+                            "age_at_event_period_start": event.get(
+                                "age_at_event_period_start"
+                            ),
+                            "age_at_event_period_end": event.get(
+                                "age_at_event_period_end"
+                            ),
+                            "age_at_event_source_text": event.get(
+                                "age_at_event_source_text"
+                            ),
+                            "age_at_event_dual_year": event.get(
+                                "age_at_event_dual_year"
+                            ),
                             "age_at_event_era": event.get("age_at_event_era"),
                             "age_at_event_era_year": event.get("age_at_event_era_year"),
-                            "age_at_event_min_era_year": event.get("age_at_event_min_era_year"),
-                            "age_at_event_max_era_year": event.get("age_at_event_max_era_year"),
+                            "age_at_event_min_era_year": event.get(
+                                "age_at_event_min_era_year"
+                            ),
+                            "age_at_event_max_era_year": event.get(
+                                "age_at_event_max_era_year"
+                            ),
                             "age_at_event_calendar": event.get("age_at_event_calendar"),
-                            "age_at_event_calendar_original": event.get("age_at_event_calendar_original"),
-                            "age_at_event_parse_warning": event.get("age_at_event_parse_warning"),
+                            "age_at_event_calendar_original": event.get(
+                                "age_at_event_calendar_original"
+                            ),
+                            "age_at_event_parse_warning": event.get(
+                                "age_at_event_parse_warning"
+                            ),
                         }
                     )
                     for note_src in event.get("note_src", []):
@@ -168,7 +206,10 @@ class TestGedqMigrationContract(unittest.TestCase):
                     self.assertIn("source_text", record)
 
     def test_no_gedq_internal_imports(self):
-        for path in [GEN_SITE_DIR / "adapter/gedq_adapter.py", GEN_SITE_DIR / "model/GedcomModel.py"]:
+        for path in [
+            GEN_SITE_DIR / "adapter/gedq_adapter.py",
+            GEN_SITE_DIR / "model/GedcomModel.py",
+        ]:
             text = path.read_text()
             self.assertNotIn("import gedq", text)
             self.assertNotIn("from gedq", text)
@@ -196,8 +237,7 @@ class TestGedqMigrationContract(unittest.TestCase):
             if line.strip()
         }
         current_files = {
-            str(path.relative_to(WORKSPACE_DIR))
-            for path in CONTENT_DIR.glob("*.md")
+            str(path.relative_to(WORKSPACE_DIR)) for path in CONTENT_DIR.glob("*.md")
         }
 
         self.assertEqual(current_files, baseline_files)
@@ -212,7 +252,9 @@ class TestGedqMigrationContract(unittest.TestCase):
                 text=True,
                 check=True,
             ).stdout
-            if normalize_tree_section(current_text) != normalize_tree_section(baseline_text):
+            if normalize_tree_section(current_text) != normalize_tree_section(
+                baseline_text
+            ):
                 diff_paths.add(rel_path)
 
         self.assertEqual(diff_paths, self.allowlist_paths)
@@ -244,12 +286,14 @@ class TestGedqMigrationContract(unittest.TestCase):
             check=True,
         ).stdout
 
-        self.assertEqual(normalize_tree_section(current), normalize_tree_section(baseline))
+        self.assertEqual(
+            normalize_tree_section(current), normalize_tree_section(baseline)
+        )
         self.assertIn('<pre class="ascii-tree-block">', current)
-        self.assertNotIn('<details><summary>Toon</summary>', current)
+        self.assertNotIn("<details><summary>Toon</summary>", current)
         self.assertIn('- Geboorte tijdstip: "des morgens te tien ure"', current)
-        self.assertIn('- Geboorte getuigen:', current)
-        self.assertIn('Petrus Hoofman', current)
+        self.assertIn("- Geboorte getuigen:", current)
+        self.assertIn("Petrus Hoofman", current)
 
     def test_feature_categories_still_exist(self):
         individuals = self.model.individuals
@@ -259,7 +303,9 @@ class TestGedqMigrationContract(unittest.TestCase):
         self.assertTrue(any(individual.sex for individual in individuals))
         self.assertTrue(any(individual.birth.date.value for individual in individuals))
         self.assertTrue(any(individual.death.date.value for individual in individuals))
-        self.assertTrue(any(individual.baptism.date.value for individual in individuals))
+        self.assertTrue(
+            any(individual.baptism.date.value for individual in individuals)
+        )
         self.assertTrue(any(individual.burial.date.value for individual in individuals))
         self.assertTrue(any(individual.occupations for individual in individuals))
         self.assertTrue(any(individual.residences for individual in individuals))
@@ -268,8 +314,16 @@ class TestGedqMigrationContract(unittest.TestCase):
         self.assertTrue(any(individual.associations for individual in individuals))
         self.assertTrue(any(individual.fams for individual in individuals))
         self.assertTrue(any(individual.sources for individual in individuals))
-        self.assertTrue(any(event.sources for individual in individuals for event in individual.all_events()))
-        self.assertTrue(any(source.repository and source.repository.www for source in sources))
+        self.assertTrue(
+            any(
+                event.sources
+                for individual in individuals
+                for event in individual.all_events()
+            )
+        )
+        self.assertTrue(
+            any(source.repository and source.repository.www for source in sources)
+        )
 
     def test_generation_fails_cleanly_without_gedq(self):
         env = os.environ.copy()

@@ -3,6 +3,7 @@ from typing import Union
 from model.NotesMixin import NotesMixin
 from model.SourcesMixin import SourcesMixin
 
+
 class Association(SourcesMixin, NotesMixin):
     def __init__(self):
         super().__init__()
@@ -13,7 +14,7 @@ class Association(SourcesMixin, NotesMixin):
         self.__rel_desc: str | None = None
         self.__rel_type: str | None = None
 
-# Properties
+    # Properties
 
     @property
     def line_num(self) -> int | None:
@@ -47,9 +48,9 @@ class Association(SourcesMixin, NotesMixin):
     def rel_type(self, value: str | None):
         self.__rel_type = value
 
-# Utility
+    # Utility
 
-    def individual(self) -> Union['Individual', None]: # type: ignore
+    def individual(self) -> Union["Individual", None]:  # type: ignore
         from model.GedcomModel import GedcomModel
 
         if not self.individual_id:

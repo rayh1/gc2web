@@ -104,15 +104,17 @@ def build_birthday_index(
             if is_placeholder_name(name):
                 continue
 
-            candidates.append((
-                _birth_year(individual),
-                xref_id,
-                {
-                    "id": xref_id,
-                    "name": name,
-                    "lifespan": lifespan_str(individual),
-                },
-            ))
+            candidates.append(
+                (
+                    _birth_year(individual),
+                    xref_id,
+                    {
+                        "id": xref_id,
+                        "name": name,
+                        "lifespan": lifespan_str(individual),
+                    },
+                )
+            )
 
         if not candidates:
             # [R-8]: a day with nothing on it gets no key at all.
@@ -150,7 +152,9 @@ def main(argv: list[str]) -> int:
         env -u VIRTUAL_ENV uv run python birthday_index.py [gedcom_file]
     """
     gedcom_file = argv[1] if len(argv) > 1 else "Hoofman.ged"
-    default_output = Path(__file__).resolve().parent.parent / "src/data/birthday-index.json"
+    default_output = (
+        Path(__file__).resolve().parent.parent / "src/data/birthday-index.json"
+    )
     output_path = Path(argv[2]) if len(argv) > 2 else default_output
 
     model = GedcomModel()

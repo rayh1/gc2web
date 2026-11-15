@@ -117,7 +117,9 @@ def build_repositories(records: list[dict]) -> dict[str, Repository]:
     return repositories
 
 
-def build_individuals(records: list[dict], source_records: list[dict]) -> dict[str, Individual]:
+def build_individuals(
+    records: list[dict], source_records: list[dict]
+) -> dict[str, Individual]:
     name_source_map = _build_name_source_map(source_records)
     individuals: dict[str, Individual] = {}
     for record in records:
@@ -221,7 +223,9 @@ def _build_names(
             for source_id in _as_string_list(occurrence.get("source_ids")):
                 name.add_source_id(source_id)
 
-            for note in _build_inline_notes(occurrence.get("notes", []), occurrence.get("src")):
+            for note in _build_inline_notes(
+                occurrence.get("notes", []), occurrence.get("src")
+            ):
                 name.add_note(note)
 
             names.append(name)
@@ -237,13 +241,17 @@ def _build_names(
     for variant in variants:
         name = Name()
         name.value = variant
-        for source_id in name_source_map.get((_require_entity_id(record), name.value), []):
+        for source_id in name_source_map.get(
+            (_require_entity_id(record), name.value), []
+        ):
             name.add_source_id(source_id)
         names.append(name)
     return names
 
 
-def _build_name_source_map(source_records: list[dict]) -> dict[tuple[str, str | None], list[str]]:
+def _build_name_source_map(
+    source_records: list[dict],
+) -> dict[tuple[str, str | None], list[str]]:
     grouped: dict[tuple[str, str | None], list[str]] = {}
     for source_record in source_records:
         source_id = source_record.get("entity_id")
@@ -308,7 +316,9 @@ def _build_record_notes(record: dict) -> list[Note]:
     for index, note_value in enumerate(list_notes):
         note = Note()
         note.value = _normalize_multiline_text(note_value)
-        note.line_num = _line_from_source(note_sources[index] if index < len(note_sources) else record.get("src"))
+        note.line_num = _line_from_source(
+            note_sources[index] if index < len(note_sources) else record.get("src")
+        )
         notes.append(note)
 
     return _dedupe_notes(notes)
@@ -322,7 +332,11 @@ def _build_event_notes(event_record: dict) -> list[Note]:
     for index, note_value in enumerate(note_values):
         note = Note()
         note.value = _normalize_multiline_text(note_value)
-        note_source = note_sources[index].get("src") if index < len(note_sources) else event_record.get("src")
+        note_source = (
+            note_sources[index].get("src")
+            if index < len(note_sources)
+            else event_record.get("src")
+        )
         note.line_num = _line_from_source(note_source)
         notes.append(note)
 
@@ -341,7 +355,11 @@ def _build_inline_notes(note_values: list[str], source_ref: dict | None) -> list
 
 def _family_ids(record: dict) -> list[str]:
     famc_id = record.get("famc")
-    relations = [relation for relation in record.get("relations", []) if isinstance(relation, str) and relation.startswith("F")]
+    relations = [
+        relation
+        for relation in record.get("relations", [])
+        if isinstance(relation, str) and relation.startswith("F")
+    ]
     return [relation for relation in relations if relation != famc_id]
 
 
