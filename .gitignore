@@ -1,40 +1,35 @@
-# build output
+# Ten-Day Project (python, node)
+
+# DevKit-managed content, installed at container create by .devcontainer/devkit.sh
+.github/
+.agents/
+
+# python
+.venv/
+__pycache__/
+*.py[cod]
+.ruff_cache/
+.pytest_cache/
 dist/
-# generated types
-.astro/
 
-# dependencies
+# node
 node_modules/
-
-# logs
 npm-debug.log*
+
+.DS_Store
+
+# gc2web
+.astro/
+test-results/
+playwright-report/
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
-
-# environment variables
-.env
+/.env
 .env.production
-# keep the versioned devcontainer env
-!.devcontainer/.env
-
-# Python (gen_site)
-__pycache__/
-*.py[cod]
-.venv/
 venv/
 *.egg-info/
-
 # gedq derived cache (created beside the GEDCOM)
 *.ladybug/
 .ladybug/
 *.ladybug.lease
-
-
-# DevKit content (installed at runtime by the Refresh DevKit task)
-.github/prompts/
-.agents/
-
-# macOS-specific files
-.DS_Store

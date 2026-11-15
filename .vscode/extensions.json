@@ -1,7 +1,3 @@
 {
-  "recommendations": [
-    "SanaAjani.taskrunnercode",
-    "editorconfig.editorconfig",
-    "streetsidesoftware.code-spell-checker"
-  ]
+  "recommendations": ["SanaAjani.taskrunnercode", "openai.chatgpt", "github.copilot-chat", "gxl.git-graph-3", "redhat.vscode-yaml", "yzhang.markdown-all-in-one", "DavidAnson.vscode-markdownlint", "editorconfig.editorconfig", "streetsidesoftware.code-spell-checker", "ms-python.python", "ms-python.vscode-pylance", "charliermarsh.ruff", "ms-python.debugpy", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "Angular.ng-template", "stylelint.vscode-stylelint", "formulahendry.auto-rename-tag", "astro-build.astro-vscode", "eamodio.gitlens", "redhat.fabric8-analytics", "mgmcdermott.vscode-language-babel"]
 }

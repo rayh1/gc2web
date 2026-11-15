@@ -1,0 +1,75 @@
+name: tdp-gc2web
+include:
+  - compose.extra.yaml
+
+services:
+  main:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        - USER_UID=${USER_UID:-1000}
+        - USER_GID=${USER_GID:-1000}
+        - PYTHON_VERSION=${PYTHON_VERSION}
+        - UV_VERSION=${UV_VERSION}
+        - UV_SHA256_AMD64=${UV_SHA256_AMD64}
+        - UV_SHA256_ARM64=${UV_SHA256_ARM64}
+        - NODE_VERSION=${NODE_VERSION}
+        - NODESOURCE_KEY_FINGERPRINT=${NODESOURCE_KEY_FINGERPRINT}
+        - JDK_VERSION=${JDK_VERSION}
+        - JDK_VENDOR=${JDK_VENDOR}
+        - ADOPTIUM_KEY_FINGERPRINT=${ADOPTIUM_KEY_FINGERPRINT}
+        - MAVEN_VERSION=${MAVEN_VERSION}
+        - MAVEN_SHA256=${MAVEN_SHA256}
+        - FLUTTER_VERSION=${FLUTTER_VERSION}
+        - FLUTTER_SHA256=${FLUTTER_SHA256}
+        - ANDROID_CMDLINE_TOOLS_VERSION=${ANDROID_CMDLINE_TOOLS_VERSION}
+        - ANDROID_CMDLINE_TOOLS_SHA256=${ANDROID_CMDLINE_TOOLS_SHA256}
+        - ANDROID_PLATFORM_VERSION=${ANDROID_PLATFORM_VERSION}
+        - ANDROID_BUILD_TOOLS_VERSION=${ANDROID_BUILD_TOOLS_VERSION}
+        - TEA_VERSION=${TEA_VERSION}
+        - TEA_SHA256_AMD64=${TEA_SHA256_AMD64}
+        - TEA_SHA256_ARM64=${TEA_SHA256_ARM64}
+        - GH_VERSION=${GH_VERSION}
+        - GH_SHA256_AMD64=${GH_SHA256_AMD64}
+        - GH_SHA256_ARM64=${GH_SHA256_ARM64}
+        - OSV_SCANNER_VERSION=${OSV_SCANNER_VERSION}
+        - OSV_SCANNER_SHA256_AMD64=${OSV_SCANNER_SHA256_AMD64}
+        - OSV_SCANNER_SHA256_ARM64=${OSV_SCANNER_SHA256_ARM64}
+        - PLAYWRIGHT_VERSION=${PLAYWRIGHT_VERSION}
+        - PLAYWRIGHT_CLI_VERSION=${PLAYWRIGHT_CLI_VERSION}
+    init: true
+    command: sleep infinity
+    working_dir: /workspace
+    # Codex's bubblewrap sandbox needs user namespaces; Docker's default seccomp profile blocks them.
+    security_opt:
+      - seccomp=unconfined
+    env_file:
+      - .env
+    environment:
+      - GH_TOKEN
+    ports:
+      - "8000"
+      - "3000"
+    volumes:
+      # The workspace is a named volume seeded from the image; see .devcontainer/README.md.
+      - workspace:/workspace
+      # Package caches and shell history. Nothing credential-like lives in a volume: the gh, Codex
+      # and Copilot logins are lost on recreate.
+      - uv-cache:/home/devuser/.cache/uv
+      - uv-data:/home/devuser/.local/share/uv
+      - npm-cache:/home/devuser/.npm
+      - bash-history:/home/devuser/.bash_history_dir
+      # Host files read by attach.sh (git identity, Codex login, gh login)
+      # HOME on Linux and macOS, USERPROFILE on Windows (compose nested default). The Codex login
+      # is mounted as its directory, so a machine without one gets at most an empty directory.
+      - ${HOME:-${USERPROFILE}}/.gitconfig:/tmp/host-gitconfig:ro
+      - ${HOME:-${USERPROFILE}}/.codex:/tmp/host-codex:ro
+      - ${HOME:-${USERPROFILE}}/.config/gh:/tmp/host-gh-config:ro
+
+volumes:
+  workspace:
+  uv-cache:
+  uv-data:
+  npm-cache:
+  bash-history:

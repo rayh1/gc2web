@@ -1,0 +1,35 @@
+# Extra compose services for this project, next to `main`: a database, an object store, whatever
+# the project needs. `.devcontainer/compose.yaml` pulls this file in through compose's `include`,
+# so every service declared here joins the project's default network and is reachable from `main`
+# by its service name; volumes and ports declared here are created like the template's own.
+#
+# This file is project-owned: `copier update` never overwrites it. A file with only comments is a
+# valid include, so leaving it as it is costs nothing.
+#
+# CI (.devcontainer/ci.sh) starts the services declared here for every run, as their own compose
+# project, and the checks reach each one by its service name. So publish container ports only (no
+# fixed host mapping such as "5432:5432"), and set none of `networks:`, `network_mode:` and
+# `container_name:`. A `healthcheck` makes CI wait until the service is ready.
+#
+# Example: a PostgreSQL server reachable from `main` as `db`, with its data in a named volume and
+# its port published on a dynamic host port. Uncomment and adjust to use it. Local development
+# only: `trust` lets any client on the project network in without a credential.
+#
+# services:
+#   db:
+#     image: postgres:17
+#     environment:
+#       POSTGRES_HOST_AUTH_METHOD: trust
+#       POSTGRES_DB: app
+#     volumes:
+#       - pgdata:/var/lib/postgresql/data
+#     ports:
+#       - "5432"
+#     healthcheck:
+#       test: ["CMD-SHELL", "pg_isready -U postgres -d app"]
+#       interval: 2s
+#       timeout: 5s
+#       retries: 30
+#
+# volumes:
+#   pgdata:

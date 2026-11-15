@@ -1,0 +1,3 @@
+# Keep LF everywhere: the shell scripts and the Dockerfile enter the image build context and
+# must not pick up CRLF from a core.autocrlf=true checkout.
+* text=auto eol=lf

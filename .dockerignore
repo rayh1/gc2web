@@ -1,18 +1,18 @@
+# Kept out of the image build context. .git is deliberately included: the workspace volume is
+# seeded from the image and must carry the repository.
 .venv
-.env
-node_modules
-.git
-.gitignore
-.DS_Store
-dist
-build
-*.pyc
 __pycache__
+node_modules
+target
+build
+.dart_tool
+.ruff_cache
 .pytest_cache
-.coverage
-.idea
-.vscode
-*.log
-test-results
-.next
+dist
 .astro
+test-results
+playwright-report
+**/*.ladybug
+**/*.ladybug.lease
+.env
+*.log

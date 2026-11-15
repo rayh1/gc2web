@@ -1,0 +1,16 @@
+# Changes here will be overwritten by Copier; do NOT edit manually.
+_commit: v0.18.0
+_src_path: http://git.charm.nl:3000/Charm/tdp-template.git
+charm_internal: false
+description: gc2web — a Ten-Day Project
+devkit: true
+dropped_stubs: []
+extra_dockerignore: dist, .astro, test-results, playwright-report, **/*.ladybug, **/*.ladybug.lease,
+    .env, *.log
+extra_extensions: astro-build.astro-vscode, eamodio.gitlens, redhat.fabric8-analytics,
+    mgmcdermott.vscode-language-babel
+issue_id: ''
+languages:
+- python
+- node
+project_name: gc2web

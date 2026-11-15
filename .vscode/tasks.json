@@ -2,44 +2,29 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Init",
-      "type": "shell",
-      "command": "./init.sh",
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      }
-    },
-    {
       "label": "Refresh DevKit",
+      "detail": "Clone or pull Charm/DevKit into /tmp/DevKit and run its installer (skills, docs, Copilot CLI, Codex CLI)",
       "type": "shell",
-      "command": "if [ -d /tmp/DevKit ]; then cd /tmp/DevKit && git pull; else git clone http://git.charm.nl:3000/Charm/DevKit /tmp/DevKit; fi && uv run /tmp/DevKit/install.py --target-dir /workspace/.github --skills --prompts --docs --skip-tooling-cli --no-vscode-settings",
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      }
+      "command": "bash .devcontainer/devkit.sh",
+      "problemMatcher": []
     },
     {
       "label": "Sync Dependencies",
+      "detail": "uv sync, npm ci / npm install, then Refresh DevKit",
       "type": "shell",
-      "command": "uv sync",
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      }
+      "command": "bash .devcontainer/update.sh",
+      "problemMatcher": []
     },
     {
-      "label": "Install Node Dependencies",
+      "label": "Run Checks",
+      "detail": "Install the dependencies, then run each language's default checks: what CI runs (.devcontainer/check.sh)",
       "type": "shell",
-      "command": "npm install",
-      "problemMatcher": [],
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared"
-      }
+      "command": "bash .devcontainer/check.sh",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": []
     },
     {
       "label": "Run Dev",
@@ -60,6 +45,5 @@
         "reveal": "always",
         "panel": "shared"
       }
-    }
-  ]
+    }  ]
 }

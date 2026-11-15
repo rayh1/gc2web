@@ -1,0 +1,11 @@
+# Accepted vulnerability risks for the dependency scans of .devcontainer/default-checks.sh, which pass
+# this file to every osv-scanner scan with --config. Project-owned: `copier update` never overwrites it.
+#
+# To accept one advisory until a date, add an entry like the one below without its leading `# `:
+# `id` is the advisory id osv-scanner prints (an OSV, GHSA or CVE id). After the `ignoreUntil` date
+# the advisory fails the scan again, so the decision comes back for review.
+#
+# [[IgnoredVulns]]
+# id = "GHSA-xxxx-xxxx-xxxx"
+# ignoreUntil = 2027-01-31
+# reason = "Why the risk is accepted, who decided it, and when."

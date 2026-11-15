@@ -1,0 +1,2 @@
+# Extra apt packages for this project, one name per line. Installed by the Dockerfile.
+# This file is project-owned: `copier update` never overwrites it.
