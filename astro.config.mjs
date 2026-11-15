@@ -22,6 +22,8 @@ export default defineConfig({
     tailwind(),
   ],
   server: {
-    host: true
+    host: true,
+    // The dev container publishes port 3000 for Node projects (tdp-template).
+    port: 3000
   },
 });
