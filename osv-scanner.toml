@@ -9,3 +9,107 @@
 # id = "GHSA-xxxx-xxxx-xxxx"
 # ignoreUntil = 2027-01-31
 # reason = "Why the risk is accepted, who decided it, and when."
+
+# Astro 5: these advisories are fixed only in Astro 6 or 7 (major versions) or in versions of Astro 5's own
+# dependencies (esbuild 0.28, sharp 0.35, zod 4) that Astro 5 cannot take. gc2web publishes a static build.
+# Accepted by the user on 2026-11-15 during the tdp-template migration, until gc2web moves to Astro 7.
+
+[[IgnoredVulns]]
+id = "GHSA-jmv2-qgxf-f995"
+ignoreUntil = 2027-02-15
+reason = "@astrojs/solid-js 5.1.3, fixed only in 7.1.2, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-26w7-cxv4-gfx2"
+ignoreUntil = 2027-02-15
+reason = "astro 5.18.2, fixed only in 7.2.8, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-2pvr-wf23-7pc7"
+ignoreUntil = 2027-02-15
+reason = "astro 5.18.2, fixed only in 6.4.6, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-376h-93r7-7g6f"
+ignoreUntil = 2027-02-15
+reason = "astro 5.18.2, fixed only in 7.2.4, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-4g3v-8h47-v7g6"
+ignoreUntil = 2027-02-15
+reason = "astro 5.18.2, fixed only in 7.1.0, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-7pw4-f3q4-r2p2"
+ignoreUntil = 2027-02-15
+reason = "astro 5.18.2, fixed only in 7.0.4, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-8hv8-536x-4wqp"
+ignoreUntil = 2027-02-15
+reason = "astro 5.18.2, fixed only in 6.3.3, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-98hj-9722-w3j8"
+ignoreUntil = 2027-02-15
+reason = "astro 5.18.2, fixed only in 7.3.2, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-f48w-9m4c-m7f5"
+ignoreUntil = 2027-02-15
+reason = "astro 5.18.2, fixed only in 7.0.6, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-j687-52p2-xcff"
+ignoreUntil = 2027-02-15
+reason = "astro 5.18.2, fixed only in 6.1.6, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-jrpj-wcv7-9fh9"
+ignoreUntil = 2027-02-15
+reason = "astro 5.18.2, fixed only in 6.4.6, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-mh32-jxcr-mh9f"
+ignoreUntil = 2027-02-15
+reason = "astro 5.18.2, fixed only in 7.4.5, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-r3h5-4585-7x3w"
+ignoreUntil = 2027-02-15
+reason = "astro 5.18.2, fixed only in 7.4.7, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-xr5h-phrj-8vxv"
+ignoreUntil = 2027-02-15
+reason = "astro 5.18.2, fixed only in 6.1.10, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-g7r4-m6w7-qqqr"
+ignoreUntil = 2027-02-15
+reason = "esbuild 0.27.7, fixed only in 0.28.1, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-rj75-hqrm-r3gf"
+ignoreUntil = 2027-02-15
+reason = "postcss-selector-parser 6.0.10, a dev dependency pinned exactly by @tailwindcss/typography 0.5; fixed in 6.1.5. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-f88m-g3jw-g9cj"
+ignoreUntil = 2027-02-15
+reason = "sharp 0.34.5, fixed only in 0.35.0, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-rgj7-g3m4-5g8c"
+ignoreUntil = 2027-02-15
+reason = "sharp 0.34.5, fixed only in 0.35.4, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-wq5f-xc86-pv6w"
+ignoreUntil = 2027-02-15
+reason = "sharp 0.34.5, fixed only in 0.35.5, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
+
+[[IgnoredVulns]]
+id = "GHSA-mrhx-c7xc-m3w5"
+ignoreUntil = 2027-02-15
+reason = "zod 3.25.76, fixed only in 4.6.6, beyond what Astro 5 takes. Accepted by the user 2026-11-15 until the Astro 7 move."
