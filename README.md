@@ -6,21 +6,19 @@ generated Markdown by Astro.
 
 ## Development
 
-Open in VS Code with the Dev Containers extension:
+The dev container comes from tdp-template; `.devcontainer/README.md` describes it.
+Open this folder in VS Code and choose **Reopen in Container**. On create it installs
+the Python dependencies (gedq among them, from the wheel in `vendor/`) and the Node
+dependencies.
 
-1. Open this folder in VS Code
-2. Click "Reopen in Container" when prompted
-3. Wait for the container to build (`init.sh` runs automatically and installs Node + Python dependencies)
-
-## Using without VS Code
-
-The dev container works with plain Docker too:
-
-- Start an interactive shell: `docker compose -f .devcontainer/compose.yaml run --rm main bash`
-- After `docker compose up`, find the mapped host port for the Astro dev server: `docker compose -f .devcontainer/compose.yaml port main 4321`
+- **Run Checks** (or `bash .devcontainer/ci.sh` on any host with Docker) runs ruff, the
+  Python tests, `npm run check` (unit tests, site build, Playwright tests) and the
+  osv-scanner dependency scans.
+- The Astro dev server listens on port 3000; find its host port with
+  `docker compose -f .devcontainer/compose.yaml port main 3000`.
 
 ## Getting Started
 
-- Generate the Markdown corpus from a GEDCOM file: `python gen_site/gen_site.py <file.ged>`
+- Generate the Markdown corpus from a GEDCOM file: `uv run python gen_site/gen_site.py <file.ged>`
 - Run the Astro dev server: `npm run dev`
 - Build the static site: `npm run build`
