@@ -100,7 +100,9 @@ class TestGedqMigrationContract(unittest.TestCase):
         cls.model = GedcomModel()
         cls.model.parse_file(str(GEDCOM_FILE))
         cls.allowlist = json.loads(ALLOWLIST_FILE.read_text())
-        cls.allowlist_paths = set(cls.allowlist["files"])
+        cls.allowlist_paths = set(cls.allowlist["files"]) | set(
+            cls.allowlist["data_changes"]["files"]
+        )
 
     def test_gedq_records_validate_against_published_schemas(self):
         person_schema = json.loads(
@@ -240,10 +242,12 @@ class TestGedqMigrationContract(unittest.TestCase):
             str(path.relative_to(WORKSPACE_DIR)) for path in CONTENT_DIR.glob("*.md")
         }
 
-        self.assertEqual(current_files, baseline_files)
+        # Records added to the GEDCOM after the baseline have no baseline page; every
+        # baseline page must still be generated.
+        self.assertLessEqual(baseline_files, current_files)
 
         diff_paths = set()
-        for rel_path in sorted(current_files):
+        for rel_path in sorted(baseline_files):
             current_text = (WORKSPACE_DIR / rel_path).read_text()
             baseline_text = subprocess.run(
                 ["git", "show", f"{BASELINE_COMMIT}:{rel_path}"],

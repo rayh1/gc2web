@@ -317,7 +317,7 @@ class TestDateDeterminism(BirthdayIndexTestCase):
             if "INT" in raw_date
         }
         self.assertEqual(
-            len(interpreted), 52, "the corpus's INT birth-date count has moved"
+            len(interpreted), 54, "the corpus's INT birth-date count has moved"
         )
 
         day_precise_interpreted = sorted(
@@ -347,7 +347,7 @@ class TestDateDeterminism(BirthdayIndexTestCase):
         )
         self.assertEqual(
             len(without_day_and_month),
-            50,
+            52,
             "the corpus's count of births with no day+month has moved",
         )
 
@@ -377,9 +377,13 @@ class TestPlaceholderNames(BirthdayIndexTestCase):
                 f"{entry['id']} ({entry['name']}) on {key} is a placeholder record",
             )
 
-    def test_the_six_days_emptied_by_the_rule_are_absent(self):
-        """1 Jan, 7 Feb, 18 Mar, 6 Jun, 20 Jun and 29 Jul lose their only entry."""
-        for key in ("01-01", "02-07", "03-18", "06-06", "06-20", "07-29"):
+    def test_the_days_emptied_by_the_rule_are_absent(self):
+        """1 Jan, 7 Feb, 18 Mar, 6 Jun and 29 Jul lose their only entry.
+
+        20 Jun lost its only entry too until the Friethoff ingest added I00333 (Cornelis
+        Friethof, born 20 JUN 1794), a real birth on that day.
+        """
+        for key in ("01-01", "02-07", "03-18", "06-06", "07-29"):
             self.assertNotIn(
                 key,
                 self.index,

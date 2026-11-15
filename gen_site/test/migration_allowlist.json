@@ -30,5 +30,19 @@
     "src/content/entity/I00213.md",
     "src/content/entity/I00223.md",
     "src/content/entity/I00224.md"
-  ]
+  ],
+  "data_changes": {
+    "reason_class": "source data changed",
+    "justification": "Pages whose GEDCOM records gained or changed data in GEDCOM updates after the baseline commit (2026-06 to 2026-08, among them the Friethoff ingest), so their content differs from the baseline for reasons outside the gedq migration.",
+    "files": [
+      "src/content/entity/I00021.md",
+      "src/content/entity/I00074.md",
+      "src/content/entity/I00169.md",
+      "src/content/entity/I00170.md",
+      "src/content/entity/S00096.md",
+      "src/content/entity/S00098.md",
+      "src/content/entity/S00112.md",
+      "src/content/entity/S00360.md"
+    ]
+  }
 }
