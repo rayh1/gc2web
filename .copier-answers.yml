@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier; do NOT edit manually.
-_commit: v0.18.0
+_commit: v0.19.0
 _src_path: http://git.charm.nl:3000/Charm/tdp-template.git
 charm_internal: false
 description: gc2web — a Ten-Day Project

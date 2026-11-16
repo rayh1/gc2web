@@ -209,6 +209,9 @@ The rendered `osv-scanner.toml` holds this example commented out.
 
 - `README.md` — the project's own README at the top of the repository: written once, a short
   stub to replace with the project's documentation.
+- `AGENTS.md` and `CLAUDE.md` — instructions for coding agents at the top of the repository,
+  written once. `AGENTS.md` is a stub for the project to fill in (a starter may bring its own);
+  `CLAUDE.md` holds only the line `@AGENTS.md`, which makes Claude Code read `AGENTS.md`.
 - `package.json` — the project's Node manifest at the top of the repository: written once from a
   stub, then the project's own to change or replace (a starter may bring its own). An update that
   drops node from the languages removes it.
