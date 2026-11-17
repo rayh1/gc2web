@@ -122,6 +122,27 @@ check the template adds later reaches the project with the next update. Do not e
 `exit "$failed"` line; a check added after the `exit` line never runs. They run even when a
 default check failed. A project that wants a different
 default set edits or drops the `default-checks.sh` call in its `check.sh`.
+
+In a project rendered from tdp-template v0.20.0 on, `check.sh` holds one such check from the
+start: `uv run mypy`, strict type checking of the project's Python code, which fails as
+`==> FAILED: uv run mypy`. The command takes no arguments: what mypy checks and how strictly is
+set in the `[tool.mypy]` table of `pyproject.toml`, which the stub fills with `strict = true` and
+`files = ["."]` (and `mypy` joins the `dev` dependency group). Narrow the files
+(`files = ["src"]`), relax strictness or add overrides for the tests in that table, without
+touching `check.sh`. The check is skipped, printing nothing, when `pyproject.toml` has no line
+starting with `[tool.mypy` or `[[tool.mypy` (as after a starter brings its own `pyproject.toml`
+without mypy settings), or when the project holds no Python file (`.py` or `.pyi`) outside the
+folders mypy always skips: `node_modules`, `__pycache__`, `site-packages` and every folder whose
+name starts with a dot, such as `.venv`. The `files` and `exclude` settings of `[tool.mypy]` do
+not count for the skip: when they leave no Python file to check (`files = ["src"]` with no Python
+file in `src/`, or an `exclude` that covers every Python file), the check runs and fails with
+mypy's own message, such as `There are no .py[i] files in directory 'src'`. Change `files` or
+`exclude` so that they take in a Python file, or remove the `[tool.mypy]` table (and any
+`[[tool.mypy.overrides]]`) to turn the check off. A project rendered from an older release has
+no mypy check, since `copier update` never touches `check.sh` or `pyproject.toml`; it adopts
+mypy by adding a `[tool.mypy]` table to `pyproject.toml`, `mypy` to its `dev` dependency group,
+and the line `check uv run mypy` to its `check.sh`.
+
 `TDP_CI=1` makes `update.sh` skip the DevKit install, which the checks do not need.
 
 The two format checks change no file: they fail when a file is not formatted the way
