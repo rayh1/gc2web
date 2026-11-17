@@ -542,20 +542,38 @@ def is_uncle_bride2(witness: Witness) -> bool:
 # schoonbroeder
 
 
-def is_brother_in_law2(witness: Witness) -> bool:
-    return has_exact_phrases(
-        witness.relation,
-        [
-            "zwager van den echtgenoot",
-            "zwager der bruidegom",
-            "zwager van bruidegom",
-            "behuwdneef van den echtgenoot",
-            "zwager van de echtgenoote",
-            "zwager der bruid",
-            "schoonbroeder van de echtgenoote",
-            "schoonbroeder",
-        ],
+BROTHER_IN_LAW_GROOM_PHRASES = [
+    "zwager van den echtgenoot",
+    "zwager der bruidegom",
+    "zwager van bruidegom",
+    "behuwdneef van den echtgenoot",
+]
+BROTHER_IN_LAW_BRIDE_PHRASES = [
+    "zwager van de echtgenoote",
+    "zwager der bruid",
+    "schoonbroeder van de echtgenoote",
+]
+
+
+def _is_unsided_brother_in_law(witness: Witness) -> bool:
+    # A bare "schoonbroeder" names neither side, so it counts for both.
+    return (
+        has_exact_phrase(witness.relation, "schoonbroeder")
+        and not has_exact_phrases(witness.relation, BROTHER_IN_LAW_GROOM_PHRASES)
+        and not has_exact_phrases(witness.relation, BROTHER_IN_LAW_BRIDE_PHRASES)
     )
+
+
+def is_brother_in_law_groom2(witness: Witness) -> bool:
+    return has_exact_phrases(
+        witness.relation, BROTHER_IN_LAW_GROOM_PHRASES
+    ) or _is_unsided_brother_in_law(witness)
+
+
+def is_brother_in_law_bride2(witness: Witness) -> bool:
+    return has_exact_phrases(
+        witness.relation, BROTHER_IN_LAW_BRIDE_PHRASES
+    ) or _is_unsided_brother_in_law(witness)
 
 
 def find_brother_in_law2(name: str | None, individual: Individual) -> list[Individual]:
@@ -701,12 +719,12 @@ def identify_witnesses() -> None:
                     candidates = find_uncle2(witness.name, wife)
                     print_witnesses(witness, candidates, wife)
 
-                if is_brother_in_law2(witness):
+                if is_brother_in_law_groom2(witness):
                     candidates = find_brother_in_law2(witness.name, husband)
                     print_witnesses(witness, candidates, husband)
 
-                if is_brother_in_law2(witness):
-                    candidates = find_brother_in_law2(witness.name, husband)
+                if is_brother_in_law_bride2(witness):
+                    candidates = find_brother_in_law2(witness.name, wife)
                     print_witnesses(witness, candidates, wife)
 
                 if is_something_of_groom2(witness):
