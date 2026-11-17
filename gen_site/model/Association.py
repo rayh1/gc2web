@@ -1,7 +1,10 @@
-from typing import Union
+from typing import TYPE_CHECKING
 
 from model.NotesMixin import NotesMixin
 from model.SourcesMixin import SourcesMixin
+
+if TYPE_CHECKING:
+    from model.Individual import Individual
 
 
 class Association(SourcesMixin, NotesMixin):
@@ -50,7 +53,7 @@ class Association(SourcesMixin, NotesMixin):
 
     # Utility
 
-    def individual(self) -> Union["Individual", None]:  # type: ignore
+    def individual(self) -> Individual | None:
         from model.GedcomModel import GedcomModel
 
         if not self.individual_id:

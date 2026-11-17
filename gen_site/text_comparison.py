@@ -16,10 +16,9 @@ Usage:
 """
 
 import argparse
-import sys
 import re
+import sys
 from pathlib import Path
-from typing import List, Tuple
 
 
 def normalize_text(text: str) -> str:
@@ -118,14 +117,13 @@ def calculate_wer(reference: str, candidate: str) -> float:
     if not ref_words:
         return 100.0 if cand_words else 0.0
 
-    distance = levenshtein_distance(" ".join(ref_words), " ".join(cand_words))
     # For WER, we need to calculate based on word-level operations
     word_distance = levenshtein_distance_words(ref_words, cand_words)
     wer = (word_distance / len(ref_words)) * 100
     return wer
 
 
-def levenshtein_distance_words(words1: List[str], words2: List[str]) -> int:
+def levenshtein_distance_words(words1: list[str], words2: list[str]) -> int:
     """
     Calculate Levenshtein distance at word level.
 
@@ -180,8 +178,8 @@ def read_file_safely(filepath: Path) -> str:
 
 
 def process_files(
-    reference_file: Path, candidate_files: List[Path]
-) -> List[Tuple[str, float, float, int]]:
+    reference_file: Path, candidate_files: list[Path]
+) -> list[tuple[str, float, float, int]]:
     """
     Process all files and calculate metrics.
 
@@ -196,7 +194,7 @@ def process_files(
         reference_text = read_file_safely(reference_file)
         # Normalize reference text once
         reference_text = normalize_text(reference_text)
-    except Exception as e:
+    except OSError as e:
         print(f"Error reading reference file {reference_file}: {e}", file=sys.stderr)
         sys.exit(1)
 
@@ -215,7 +213,7 @@ def process_files(
 
             results.append((candidate_file.name, cer, wer, levenshtein_dist))
 
-        except Exception as e:
+        except OSError as e:
             print(
                 f"Error processing candidate file {candidate_file}: {e}",
                 file=sys.stderr,
@@ -227,7 +225,7 @@ def process_files(
     return results
 
 
-def generate_markdown_table(results: List[Tuple[str, float, float, int]]) -> str:
+def generate_markdown_table(results: list[tuple[str, float, float, int]]) -> str:
     """
     Generate a markdown table from the results.
 
@@ -316,7 +314,7 @@ Examples:
             with open(args.output, "w", encoding="utf-8") as f:
                 f.write(markdown_table)
             print(f"Results written to {args.output}", file=sys.stderr)
-        except Exception as e:
+        except OSError as e:
             print(f"Error writing to output file: {e}", file=sys.stderr)
             sys.exit(1)
     else:

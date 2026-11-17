@@ -12,7 +12,6 @@ from model.Note import Note
 from model.Repository import Repository
 from model.Source import Source
 
-
 REQUIRED_GEDQ_VERSION = (2, 0, 0)
 
 

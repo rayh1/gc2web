@@ -2,13 +2,15 @@ from subprocess import CompletedProcess
 from unittest import TestCase
 from unittest.mock import patch
 
-from adapter.gedq_adapter import REQUIRED_GEDQ_VERSION
-from adapter.gedq_adapter import build_families
-from adapter.gedq_adapter import build_individuals
-from adapter.gedq_adapter import ensure_gedq_compatible
-from adapter.gedq_adapter import format_version
-from adapter.gedq_adapter import load_dataset
-from adapter.gedq_adapter import parse_version
+from adapter.gedq_adapter import (
+    REQUIRED_GEDQ_VERSION,
+    build_families,
+    build_individuals,
+    ensure_gedq_compatible,
+    format_version,
+    load_dataset,
+    parse_version,
+)
 
 
 class TestGedqAdapter(TestCase):

@@ -1,13 +1,16 @@
-from typing import Union
 from datetime import datetime
+from typing import TYPE_CHECKING
 
-from model.SourcesMixin import SourcesMixin
-from model.NotesMixin import NotesMixin
 from model.Association import Association
-from model.Source import Source
 from model.Date import Date
-from model.Name import Name
 from model.EventDetail import EventDetail
+from model.Name import Name
+from model.NotesMixin import NotesMixin
+from model.Source import Source
+from model.SourcesMixin import SourcesMixin
+
+if TYPE_CHECKING:
+    from model.Family import Family
 
 
 class Location:
@@ -15,8 +18,8 @@ class Location:
     Represents an event of an individual itself or together with its spouse.
     """
 
-    def __init__(self, spouse: Union["Individual", None], event: EventDetail):  # type: ignore
-        self.spouse: Union["Individual", None] = spouse
+    def __init__(self, spouse: Individual | None, event: EventDetail):
+        self.spouse: Individual | None = spouse
         self.event: EventDetail = event
 
 
@@ -40,12 +43,12 @@ class Individual(SourcesMixin, NotesMixin):
         self.__associations: list[Association] = []
         self.__descriptions: list[EventDetail] = []
 
-        self.__fams_cache: list["Family"] | None = None  # type: ignore
-        self.__famc_cache: "Family" | None = None  # type: ignore
-        self.__spouses_cache: list["Individual"] | None = None
+        self.__fams_cache: list[Family] | None = None
+        self.__famc_cache: Family | None = None
+        self.__spouses_cache: list[Individual] | None = None
         self.__locations_cache: list[Location] | None = None
         self.__witnessed_events_cache: (
-            list[tuple[str, "EventDetail", list["Individual"]]] | None
+            list[tuple[str, EventDetail, list[Individual]]] | None
         ) = None
 
     @property
@@ -158,7 +161,7 @@ class Individual(SourcesMixin, NotesMixin):
     # Utility methods
 
     @property
-    def fams(self) -> list["Family"]:  # type: ignore
+    def fams(self) -> list[Family]:
         from model.GedcomModel import GedcomModel
 
         if self.__fams_cache is None:
@@ -171,7 +174,7 @@ class Individual(SourcesMixin, NotesMixin):
         return self.__fams_cache
 
     @property
-    def famc(self) -> "Family":  # type: ignore
+    def famc(self) -> Family:
         from model.GedcomModel import GedcomModel
 
         if self.__famc_cache is None and self.__famc_id:
@@ -179,19 +182,19 @@ class Individual(SourcesMixin, NotesMixin):
         return self.__famc_cache  # type: ignore
 
     @property
-    def father(self) -> "Individual":
+    def father(self) -> Individual:
         if self.famc:
             return self.famc.husband  # type: ignore
         return None  # type: ignore
 
     @property
-    def mother(self) -> "Individual":
+    def mother(self) -> Individual:
         if self.famc:
             return self.famc.wife  # type: ignore
         return None  # type: ignore
 
     @property
-    def spouses(self) -> list["Individual"]:
+    def spouses(self) -> list[Individual]:
         if self.__spouses_cache is None:
             self.__spouses_cache = []
             for family in self.fams:
@@ -201,7 +204,7 @@ class Individual(SourcesMixin, NotesMixin):
                     self.__spouses_cache.append(family.wife)
         return self.__spouses_cache
 
-    def children(self, spouse: "Individual") -> list["Individual"]:
+    def children(self, spouse: Individual) -> list[Individual]:
         children = []
         for family in self.fams:
             if (family.husband == self and family.wife == spouse) or (
@@ -266,7 +269,7 @@ class Individual(SourcesMixin, NotesMixin):
 
         return self.__locations_cache
 
-    def siblings(self) -> list["Individual"]:
+    def siblings(self) -> list[Individual]:
         if self.famc:
             return sorted(
                 [child for child in self.famc.children if child != self],
@@ -274,20 +277,19 @@ class Individual(SourcesMixin, NotesMixin):
             )
         return []
 
-    def uncles_aunts(self) -> list["Individual"]:
-        result: list["Individual"] = []
+    def uncles_aunts(self) -> list[Individual]:
+        result: list[Individual] = []
         for parent in [self.father, self.mother]:
             if not parent:
                 continue
             for sibling in parent.siblings():
                 result.append(sibling)
-                for spouse in sibling.spouses:
-                    result.append(spouse)
+                result.extend(sibling.spouses)
 
         return result
 
     def has_name(self, name: str) -> bool:
-        return any([name == n.plain_value for n in self.names])
+        return any(name == n.plain_value for n in self.names)
 
     def all_events(self) -> list[EventDetail]:
         events: list[EventDetail] = []
@@ -299,8 +301,7 @@ class Individual(SourcesMixin, NotesMixin):
 
         for family in self.fams:
             events.append(family.marriage)
-            for e in family.residences:
-                events.append(e)
+            events.extend(family.residences)
 
         events.extend(self.occupations)
         events.extend(self.residences)
@@ -327,11 +328,11 @@ class Individual(SourcesMixin, NotesMixin):
 
         return self.__remove_duplicates(sources)
 
-    def witnessed_events(self) -> list[tuple[str, "EventDetail", list["Individual"]]]:
+    def witnessed_events(self) -> list[tuple[str, EventDetail, list[Individual]]]:
         if self.__witnessed_events_cache is None:
             from model.GedcomModel import GedcomModel
 
-            result: list[tuple[str, "EventDetail", list["Individual"]]] = []
+            result: list[tuple[str, EventDetail, list[Individual]]] = []
 
             for individual in GedcomModel().individuals:
                 if individual.birth.has_witness(self):

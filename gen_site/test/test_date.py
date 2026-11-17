@@ -1,5 +1,4 @@
 import unittest
-
 from datetime import datetime
 
 from model.Date import Date

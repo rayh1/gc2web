@@ -2,8 +2,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest import TestCase
 
-from gen_site import generate_individual_page
 from model.GedcomModel import GedcomModel
+
+from gen_site import generate_individual_page
 
 
 class TestAsciiTreeGeneration(TestCase):

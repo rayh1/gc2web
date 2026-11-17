@@ -1,5 +1,4 @@
 from model.NotesMixin import NotesMixin
-
 from util.singleton import singleton
 
 

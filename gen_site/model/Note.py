@@ -1,6 +1,6 @@
 import re
-import yaml  # type: ignore
 
+import yaml  # type: ignore
 
 GEDCOM_XREF_VALUE_RE = re.compile(r"(:\s*)(@[^@\s\n]+@)(?=\s*(?:#.*)?$)", re.MULTILINE)
 

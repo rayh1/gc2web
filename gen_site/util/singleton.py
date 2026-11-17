@@ -1,11 +1,8 @@
-from typing import Any, TypeVar, cast
-
 from threading import Lock
+from typing import Any, cast
 
-T = TypeVar("T")
 
-
-def singleton(cls: T) -> T:
+def singleton[T](cls: T) -> T:
     """
     A thread-safe singleton decorator.
 

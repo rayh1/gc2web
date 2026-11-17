@@ -1,14 +1,13 @@
-from typing import List
 from model.Source import Source
 
 
 class SourcesMixin:
     def __init__(self):
-        self.__source_ids: List[str] = []
-        self.__sources_cache: List[Source] | None = None
+        self.__source_ids: list[str] = []
+        self.__sources_cache: list[Source] | None = None
 
     @property
-    def sources(self) -> List[Source]:
+    def sources(self) -> list[Source]:
         from model.GedcomModel import GedcomModel
 
         if self.__sources_cache is None:
@@ -24,7 +23,7 @@ class SourcesMixin:
         return self.__sources_cache
 
     @property
-    def source_ids(self) -> List[str]:
+    def source_ids(self) -> list[str]:
         return self.__source_ids
 
     def add_source_id(self, source_id: str):

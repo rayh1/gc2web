@@ -193,10 +193,7 @@ def is_unknown_marriage_witness(witness: Witness, individual: Individual) -> boo
         return False
     if is_mother_groom(witness, individual) and individual.is_female:
         return False
-    if is_mother_bride(witness, individual) and individual.is_male:
-        return False
-
-    return True
+    return not (is_mother_bride(witness, individual) and individual.is_male)
 
 
 def has_exact_phrase(s: str | None, phrase: str) -> bool:

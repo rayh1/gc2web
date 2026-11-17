@@ -1,5 +1,5 @@
-from model.SourcesMixin import SourcesMixin
 from model.NotesMixin import NotesMixin
+from model.SourcesMixin import SourcesMixin
 
 
 class Name(SourcesMixin, NotesMixin):

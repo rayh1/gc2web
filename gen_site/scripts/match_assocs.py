@@ -7,7 +7,7 @@ from model.GedcomModel import GedcomModel
 def witnesses_to_string(witnesses):
     if len(witnesses) == 0:
         return ""
-    return f"witnesses ({str(witnesses[0].line_num)}): " + ", ".join(
+    return f"witnesses ({witnesses[0].line_num!s}): " + ", ".join(
         [witness.name + " (age=" + str(witness.age) + ")" for witness in witnesses]
     )
 
@@ -26,7 +26,7 @@ def match_assocs():
     for individual in GedcomModel().individuals:
         if len(individual.associations) == 0:
             continue
-        print("")
+        print()
         print(
             f"{individual.name} ({individual.xref_id}) has {len(individual.associations)} associations"
         )
@@ -55,7 +55,7 @@ def match_assocs():
                         )  # type: ignore
                         warning_age_match = "" if is_age_match else "XXX"
                         print(
-                            f"--> {warning_age_match}MATCH {witness.name} (id={witness.xref_id}, age={witness.age}, line={str(witness.line_num)})"
+                            f"--> {warning_age_match}MATCH {witness.name} (id={witness.xref_id}, age={witness.age}, line={witness.line_num!s})"
                         )
                         break
                 else:
@@ -64,7 +64,7 @@ def match_assocs():
                 print(
                     f"{association.rel_type} {association.rel_desc} {association.individual().name} (id={association.individual_id})"
                 )  # type: ignore
-                print(f"--> UNKNOWN EVENT")
+                print("--> UNKNOWN EVENT")
 
 
 def main(argv):

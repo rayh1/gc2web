@@ -1,8 +1,13 @@
-from model.SourcesMixin import SourcesMixin
-from model.NotesMixin import NotesMixin
-from model.Witness import Witness
-from model.Place import Place
+from typing import TYPE_CHECKING
+
 from model.Date import Date
+from model.NotesMixin import NotesMixin
+from model.Place import Place
+from model.SourcesMixin import SourcesMixin
+from model.Witness import Witness
+
+if TYPE_CHECKING:
+    from model.Individual import Individual
 
 
 class EventDetail(SourcesMixin, NotesMixin):
@@ -100,7 +105,7 @@ class EventDetail(SourcesMixin, NotesMixin):
 
     # Utility
 
-    def has_witness(self, individual: "Individual") -> bool:  # type: ignore
+    def has_witness(self, individual: Individual) -> bool:
         for witness in self.witnesses:
             if witness.xref_id and witness.xref_id == individual.xref_id:
                 return True

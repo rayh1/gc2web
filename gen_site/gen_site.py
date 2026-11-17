@@ -1,22 +1,21 @@
 import argparse
-from datetime import datetime
 import json
-import sys
 import logging
+import sys
+from datetime import datetime
 from pathlib import Path
-from typing import List
-from tqdm import tqdm  # type: ignore
 
-from util.AsciiTreeRenderer import render_ascii_tree_block
-from util.Lifespan import lifespan_str
 from birthday_index import generate_birthday_index
+from model.EventDetail import EventDetail
+from model.Footnote import Footnote
 from model.GedcomModel import GedcomModel
 from model.Individual import Individual
-from model.SourcesMixin import SourcesMixin
 from model.Source import Source
-from model.EventDetail import EventDetail
+from model.SourcesMixin import SourcesMixin
 from model.Witness import Witness
-from model.Footnote import Footnote
+from tqdm import tqdm  # type: ignore
+from util.AsciiTreeRenderer import render_ascii_tree_block
+from util.Lifespan import lifespan_str
 
 # Every output path is derived from this file's own location, never hardcoded — the
 # checkout is not always at /workspace, and an absolute guess writes the whole generated
@@ -47,7 +46,7 @@ class ChronologyEvent:
         self.date: datetime = d
         self.description = description
 
-    def __lt__(self, other: "ChronologyEvent"):
+    def __lt__(self, other: ChronologyEvent):
         return self.date < other.date
 
     def __str__(self):
@@ -316,7 +315,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
             birth_place = place_summary(individual.birth.place)
             death_place = place_summary(individual.death.place)
             relationship_summary = relationship_summary_str(individual)
-            content.append(f"---")
+            content.append("---")
             content.append(
                 f"title: {yaml_string(f'{individual.name} {lifespan_str(individual)}')}"
             )
@@ -336,12 +335,12 @@ def generate_individual_page(individual: Individual, filepath: Path):
             content.append("section_order:")
             for section in section_order:
                 content.append(f"  - {section}")
-            content.append(f"---")
-            content.append(f"")
+            content.append("---")
+            content.append("")
 
             content.append(render_ascii_tree_block(individual))
 
-            content.append(f"")
+            content.append("")
             content.append(f"{HEADER_PREFIX} Gegevens")
             content.append(
                 f"- Naam: {individual.name} {Footnote().add(individual.name)}{sources_str(individual.name)}"
@@ -386,14 +385,14 @@ def generate_individual_page(individual: Individual, filepath: Path):
                     f"- Begraven {individual.burial.date} te {individual.burial.place} {Footnote().add(individual.burial)}{sources_str(individual.burial)}"
                 )
             if len(individual.names) > 1:
-                content.append(f"- Alternatieve namen:")
+                content.append("- Alternatieve namen:")
                 for name in individual.names[1:]:
                     content.append(
                         f"  - {name} {Footnote().add(name)}{sources_str(name)}"
                     )
 
             if len(individual.descriptions) > 0:
-                content.append(f"- Beschrijvingen:")
+                content.append("- Beschrijvingen:")
                 for description in individual.descriptions:
                     description_date_str: str = (
                         f" ({description.date})" if description.date.date() else ""
@@ -425,7 +424,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 for fams in sorted_fams:
                     spouse: Individual | None = fams.spouse(individual)
                     if spouse:
-                        content.append(f"")
+                        content.append("")
                         content.append(
                             f"Gehuwd met {individual_link(spouse)} {lifespan_str(spouse)} {Footnote().add(fams.marriage)}{sources_str(fams.marriage)}"
                         )
@@ -524,7 +523,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
                 Footnote().gen(content)
 
             file.writelines("\n".join(content))
-    except IOError as e:
+    except OSError as e:
         logger.error(f"Failed to write file {filepath}: {e}")
         raise
 
@@ -535,29 +534,29 @@ def generate_source_page(source, filepath):
 
         with open(filepath, "w") as file:
             content = []
-            content.append(f"---")
+            content.append("---")
             content.append(f'title: "{source.title}"')
-            content.append(f'description: "Source"')
-            content.append(f'pubDate: "November 20 2024"')
-            content.append(f"---")
-            content.append(f"")
+            content.append('description: "Source"')
+            content.append('pubDate: "November 20 2024"')
+            content.append("---")
+            content.append("")
 
             if source.repository:
                 content.append(f"{HEADER_PREFIX} Archief")
                 content.append(f"[{source.repository.name}]({source.repository.www})")
-                content.append(f"")
+                content.append("")
 
             content.append(f"{HEADER_PREFIX} Rechtstreekse Verwijzingen")
             for publication in source.publications:
                 content.append(f"- {publication}")
 
             if source.text:
-                content.append(f"")
+                content.append("")
                 content.append(f"{HEADER_PREFIX} Tekst")
                 content.append(f"{source.text}")
 
             file.writelines("\n".join(content))
-    except IOError as e:
+    except OSError as e:
         logger.error(f"Failed to write file {filepath}: {e}")
         raise
 
@@ -590,12 +589,12 @@ def generate_last_modified():
     try:
         with open(last_modified_path, "w") as file:
             file.write(content)
-    except IOError as e:
+    except OSError as e:
         logger.error(f"Failed to write file {last_modified_path}: {e}")
         raise
 
 
-def main(argv: List[str]):
+def main(argv: list[str]):
     ap = argparse.ArgumentParser(description="Process a GEDCOM file.")
     ap.add_argument("file", type=str, help="Path to the GEDCOM file")
 

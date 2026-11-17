@@ -1,7 +1,6 @@
 import unittest
 
 from model.EventDetail import EventDetail
-
 from model.Note import Note
 
 

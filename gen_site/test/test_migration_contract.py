@@ -7,9 +7,7 @@ import unittest
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
-
 from model.GedcomModel import GedcomModel
-
 
 WORKSPACE_DIR = Path(__file__).resolve().parents[2]
 GEN_SITE_DIR = WORKSPACE_DIR / "gen_site"
@@ -201,9 +199,8 @@ class TestGedqMigrationContract(unittest.TestCase):
                 if kind == "INDI":
                     self.assertIsInstance(record.get("name_variants", []), list)
                     self.assertIn("sex", record)
-                if kind == "FAM":
-                    if "events" in record:
-                        self.assertIsInstance(record["events"], list)
+                if kind == "FAM" and "events" in record:
+                    self.assertIsInstance(record["events"], list)
                 if kind == "SOUR":
                     self.assertIn("source_text", record)
 
@@ -274,7 +271,7 @@ class TestGedqMigrationContract(unittest.TestCase):
         self.assertGreater(len(private_ids), 0)
         self.assertTrue(model_ids.isdisjoint(private_ids))
 
-        retained_public_id = sorted(public_ids)[0]
+        retained_public_id = min(public_ids)
         self.assertIn(retained_public_id, model_ids)
         self.assertFalse((CONTENT_DIR / "I00001.md").exists())
         self.assertTrue((CONTENT_DIR / f"{retained_public_id}.md").exists())

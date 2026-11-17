@@ -1,27 +1,25 @@
-from typing import List, Dict
-from tqdm import tqdm  # type: ignore
-
-from adapter.gedq_adapter import build_families
-from adapter.gedq_adapter import build_individuals
-from adapter.gedq_adapter import build_repositories
-from adapter.gedq_adapter import build_sources
-from adapter.gedq_adapter import load_dataset
-
-from model.Individual import Individual
+from adapter.gedq_adapter import (
+    build_families,
+    build_individuals,
+    build_repositories,
+    build_sources,
+    load_dataset,
+)
 from model.Family import Family
-from model.Source import Source
+from model.Individual import Individual
 from model.Repository import Repository
-
+from model.Source import Source
+from tqdm import tqdm  # type: ignore
 from util.singleton import singleton
 
 
 @singleton
 class GedcomModel:
     def __init__(self):
-        self.__individual_map: Dict[str, Individual] = {}
-        self.__family_map: Dict[str, Family] = {}
-        self.__source_map: Dict[str, Source] = {}
-        self.__repository_map: Dict[str, Repository] = {}
+        self.__individual_map: dict[str, Individual] = {}
+        self.__family_map: dict[str, Family] = {}
+        self.__source_map: dict[str, Source] = {}
+        self.__repository_map: dict[str, Repository] = {}
 
     def __exclude_privates(self):
         """Exclude private individuals from the GedcomModel"""
@@ -45,19 +43,19 @@ class GedcomModel:
         return self.__repository_map.get(id, None)
 
     @property
-    def individuals(self) -> List[Individual]:
+    def individuals(self) -> list[Individual]:
         return list(self.__individual_map.values())
 
     @property
-    def families(self) -> List[Family]:
+    def families(self) -> list[Family]:
         return list(self.__family_map.values())
 
     @property
-    def sources(self) -> List[Source]:
+    def sources(self) -> list[Source]:
         return list(self.__source_map.values())
 
     @property
-    def repositories(self) -> List[Repository]:
+    def repositories(self) -> list[Repository]:
         return list(self.__repository_map.values())
 
     def clear(self):

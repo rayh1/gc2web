@@ -1,7 +1,7 @@
-from model.SourcesMixin import SourcesMixin
-from model.NotesMixin import NotesMixin
-from model.Individual import Individual
 from model.EventDetail import EventDetail
+from model.Individual import Individual
+from model.NotesMixin import NotesMixin
+from model.SourcesMixin import SourcesMixin
 
 
 class Family(SourcesMixin, NotesMixin):
