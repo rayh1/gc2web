@@ -1,0 +1,50 @@
+0 HEAD
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Johannes /Publiek/
+2 GIVN Johannes
+2 SURN Publiek
+1 SEX M
+1 FAMS @F1@
+1 BIRT
+2 DATE 3 MAR 1850
+2 PLAC Graauw
+2 SOUR @S1@
+1 DEAT
+2 DATE 9 SEP 1910
+2 PLAC Graauw
+0 @I2@ INDI
+1 NAME Geheimina /Verborgen/
+2 GIVN Geheimina
+2 SURN Verborgen
+1 SEX F
+1 NOTE ---
+2 CONT private: true
+1 FAMS @F1@
+1 BIRT
+2 DATE 7 JUL 1852
+2 PLAC Graauw
+0 @I3@ INDI
+1 NAME Pieter /Getuige/
+2 GIVN Pieter
+2 SURN Getuige
+1 SEX M
+1 BIRT
+2 DATE 1 JAN 1840
+2 PLAC Graauw
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+1 MARR
+2 DATE 12 MAY 1875
+2 PLAC Graauw
+2 NOTE ---
+3 CONT witnesses:
+3 CONT   - name: Pieter Getuige
+3 CONT     xref_id: I3
+0 @S1@ SOUR
+1 TITL Doopboek Graauw
+0 TRLR
