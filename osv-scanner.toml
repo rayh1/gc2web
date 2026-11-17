@@ -9,3 +9,8 @@
 # id = "GHSA-xxxx-xxxx-xxxx"
 # ignoreUntil = 2027-01-31
 # reason = "Why the risk is accepted, who decided it, and when."
+
+[[IgnoredVulns]]
+id = "GHSA-fc5q-39xc-vjpf"
+ignoreUntil = 2027-01-31
+reason = "picomatch ReDoS with no fixed version yet (all versions through 4.0.7 affected). gc2web gets it only through Astro, Vite and Vitest at build and test time, matching the project's own glob patterns. Accepted by the project owner on 2026-11-17."
