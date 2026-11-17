@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import { SITE_URL } from "./src/consts.ts";
 import remarkGemoji from 'remark-gemoji'
 
@@ -19,8 +19,10 @@ export default defineConfig({
     }),
     sitemap(),
     solidJs(),
-    tailwind(),
   ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   server: {
     host: true,
     // The dev container publishes port 3000 for Node projects (tdp-template).

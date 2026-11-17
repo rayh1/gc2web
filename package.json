@@ -20,27 +20,30 @@
     "check": "npm run test:unit && npm run build && npm run test:e2e"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.9",
-    "@astrojs/mdx": "^4.3.4",
-    "@astrojs/rss": "^4.0.12",
-    "@astrojs/sitemap": "^3.5.1",
-    "@astrojs/solid-js": "^5.1.0",
-    "@astrojs/tailwind": "^6.0.2",
-    "astro": "^5.13.4",
+    "@astrojs/check": "^0.9.12",
+    "@astrojs/markdown-remark": "^7.3.9",
+    "@astrojs/mdx": "^8.1.6",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.5",
+    "@astrojs/solid-js": "^7.1.6",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.12",
     "fuse.js": "^6.6.2",
     "remark-gemoji": "^8.0.0",
     "solid-js": "^1.9.9",
-    "tailwindcss": "^3.3.1",
+    "tailwindcss": "^4.3.5",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
     "@solidjs/testing-library": "^0.8.10",
-    "@tailwindcss/typography": "^0.5.9",
+    "@tailwindcss/typography": "^0.5.20",
     "@testing-library/jest-dom": "^6.9.1",
     "jsdom": "^29.1.1",
-    "prettier-plugin-tailwindcss": "^0.2.7",
     "vite-plugin-solid": "^2.11.12",
     "vitest": "^4.1.9"
+  },
+  "overrides": {
+    "postcss-selector-parser": "^6.1.5"
   }
 }

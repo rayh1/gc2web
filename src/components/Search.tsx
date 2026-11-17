@@ -104,7 +104,7 @@ export default function Search({ searchList }: Props) {
         </div>
         <input
           type="search"
-          class="block w-full rounded-[1.4rem] border border-archive-line bg-archive-paper p-4 pl-10 text-sm text-archive-ink focus:border-archive-accent focus:outline-none focus:ring-2 focus:ring-archive-accent/30 dark:border-archive-dark-line dark:bg-archive-dark-paper dark:text-archive-dark-ink dark:placeholder-archive-dark-muted dark:focus:border-archive-dark-accent dark:focus:ring-archive-dark-accent/30"
+          class="block w-full rounded-[1.4rem] border border-archive-line bg-archive-paper p-4 pl-10 text-sm text-archive-ink focus:border-archive-accent focus:outline-hidden focus:ring-2 focus:ring-archive-accent/30 dark:border-archive-dark-line dark:bg-archive-dark-paper dark:text-archive-dark-ink dark:placeholder-archive-dark-muted dark:focus:border-archive-dark-accent dark:focus:ring-archive-dark-accent/30"
           placeholder="Zoek personen en bronnen..."
           required
           id="search"

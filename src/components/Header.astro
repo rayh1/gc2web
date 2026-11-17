@@ -13,7 +13,7 @@ const { currentContext = [] } = Astro.props;
 const breadcrumbs = normalizeBreadcrumbs(currentContext);
 ---
 
-<header class="sticky top-0 z-50 w-full border-b border-archive-line/80 bg-archive-paper/90 shadow-sm backdrop-blur-sm dark:border-archive-dark-line/80 dark:bg-archive-dark-paper/90">
+<header class="sticky top-0 z-50 w-full border-b border-archive-line/80 bg-archive-paper/90 shadow-xs backdrop-blur-xs dark:border-archive-dark-line/80 dark:bg-archive-dark-paper/90">
   <nav class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
       <a class="font-display text-xl font-semibold tracking-tight text-archive-ink transition-colors hover:text-archive-accent dark:text-archive-dark-ink dark:hover:text-archive-dark-accent" href="/">

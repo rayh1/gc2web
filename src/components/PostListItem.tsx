@@ -33,7 +33,7 @@ function highlightText(text: string, indices: readonly [number, number][]) {
     <For each={segments}>
       {(segment) =>
         segment.highlight ? (
-          <span class="bg-yellow-100 dark:bg-yellow-900 rounded px-0.5">{segment.text}</span>
+          <span class="bg-yellow-100 dark:bg-yellow-900 rounded-sm px-0.5">{segment.text}</span>
         ) : (
           segment.text
         )
@@ -57,13 +57,13 @@ export const PostListItem = ({ post, matches = [] }: Props) => {
   const placeSummary = [birthPlace, deathPlace].filter(Boolean).join(" → ");
 
   return (
-    <div class="rounded-[1.4rem] border border-archive-line bg-white/80 p-5 shadow-sm transition-colors hover:border-archive-accent/60 hover:bg-white dark:border-archive-dark-line dark:bg-white/5 dark:hover:border-archive-dark-accent/60 dark:hover:bg-white/10">
+    <div class="rounded-[1.4rem] border border-archive-line bg-white/80 p-5 shadow-xs transition-colors hover:border-archive-accent/60 hover:bg-white dark:border-archive-dark-line dark:bg-white/5 dark:hover:border-archive-dark-accent/60 dark:hover:bg-white/10">
       <div class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.18em] text-archive-muted dark:text-archive-dark-muted">
         {branch && <span>{branch}</span>}
         {lifespan && <span>{lifespan}</span>}
       </div>
       <a
-        class="mt-3 block break-words font-display text-xl font-semibold text-archive-ink no-underline transition-colors hover:text-archive-accent dark:text-archive-dark-ink dark:hover:text-archive-dark-accent sm:text-2xl"
+        class="mt-3 block wrap-break-word font-display text-xl font-semibold text-archive-ink no-underline transition-colors hover:text-archive-accent dark:text-archive-dark-ink dark:hover:text-archive-dark-accent sm:text-2xl"
         href={`/entity/${id}/`}
       >
         {titleMatch ? highlightText(title, titleMatch.indices) : title}

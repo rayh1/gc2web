@@ -37,7 +37,7 @@ const title = frontmatter?.title || Astro.props.title;
 
   <body class="page-shell min-h-screen flex flex-col">
     <Header currentContext={currentContext} />
-    <main class="container flex-grow py-6 sm:py-8 lg:py-10">
+    <main class="container grow py-6 sm:py-8 lg:py-10">
       <div class="content-frame mx-auto max-w-6xl">
         <div class="prose prose-lg mx-auto max-w-none px-5 py-6 sm:px-8 sm:py-8 lg:px-12 lg:py-10 dark:prose-dark">
           <slot />

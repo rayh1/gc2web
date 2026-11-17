@@ -29,7 +29,7 @@ const { page } = Astro.props;
 >
   <h2>Alle personen</h2>
     {page.data.length === 0 && <p>Nog geen personen beschikbaar.</p>}
-    {page.data.length > 0 && <PostList posts={page.data} />
+    {page.data.length > 0 && <PostList posts={page.data} />}
 
     <div class="mt-8 grid w-full grid-cols-3 items-center gap-3 border-t border-archive-line/70 pt-6 text-sm dark:border-archive-dark-line/70">
       {
