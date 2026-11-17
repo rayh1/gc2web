@@ -17,7 +17,7 @@
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
     "test": "npm run test:unit && npm run test:e2e",
-    "check": "npm run test:unit && npm run build && npm run test:e2e"
+    "check": "astro check && npm run test:unit && npm run build && npm run test:e2e"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.12",
