@@ -15,4 +15,4 @@ class Place:
             return "?"
 
         parts = [part.strip() for part in self.__value.split(",") if part.strip()]
-        return ",".join(parts)
+        return ", ".join(parts)
