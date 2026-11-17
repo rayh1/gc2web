@@ -50,7 +50,7 @@ The family's genealogy research lives in a GEDCOM file; this generator publishes
 19. [R-19] The first NAME occurrence MUST be the primary name; the plain form strips GEDCOM slashes; additional occurrences MUST be listed under `Alternatieve namen` with their own footnotes/source links.
 20. [R-20] The generator MUST require gedq ≥ 2.0.0 and abort the run with a readable error on a missing binary, a failing `gedq --version` call, or a lower version.
 21. [R-21] The `branch` frontmatter field MUST be the last space-separated token of the primary name (omitted when no name).
-22. [R-22] The `Getuige bij` section MUST list events where the individual is a witness, labeled `Geboorte`/`Overlijden`/`Doop`/`Begrafenis`/`Huwelijk` (marriage rows naming both spouses), deduplicated per event and sorted by date.
+22. [R-22] The `Getuige bij` section MUST list events where the individual is a witness, labeled `Geboorte`/`Overlijden`/`Doop`/`Begrafenis`/`Huwelijk` (marriage rows naming both spouses, or only the one present when the other is privacy-excluded or not recorded), deduplicated per event and sorted by date.
 23. [R-23] Life anchors MUST fall back: start of life = birth else baptism; end of life = death else burial — used for lifespan, ages, and chronology filtering.
 24. [R-24] Source references on fact lines MUST render as superscript HTML anchors (`:link:` icon, source-title tooltip) linking the source's page.
 

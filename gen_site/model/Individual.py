@@ -346,13 +346,14 @@ class Individual(SourcesMixin, NotesMixin):
 
                 for family in individual.fams:
                     if family.marriage.has_witness(self):
+                        # The spouse is None when they are private (excluded at
+                        # load) or not recorded; only the partners present are named.
+                        spouse = family.spouse(individual)
                         result.append(
                             (
                                 "Huwelijk",
                                 family.marriage,
-                                # A privacy-excluded spouse is None here; the
-                                # page renders that as a crash (left as it is).
-                                [individual, family.spouse(individual)],  # type: ignore[list-item]
+                                [individual, spouse] if spouse else [individual],
                             )
                         )
 

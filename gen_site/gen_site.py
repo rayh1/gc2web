@@ -232,19 +232,21 @@ def generate_chronology(individual: Individual, content: list[str]) -> None:
         )
     for family in individual.fams:
         if family.marriage:
+            # The spouse is None when they are private (excluded at load) or not
+            # recorded: the marriage line stays, without a partner, and the
+            # partner's death line goes, as it would publish a private death date.
+            spouse: Individual | None = family.spouse(individual)
             events.append(
                 ChronologyEvent(
                     family.marriage,
-                    # A privacy-excluded spouse is None here; individual_link
-                    # crashes on it (left as it is).
-                    f"Huwelijk met {individual_link(family.spouse(individual))}",  # type: ignore[arg-type]
+                    f"Huwelijk met {individual_link(spouse)}" if spouse else "Huwelijk",
                 )
             )
-            if family.spouse(individual).end_life.date.value:  # type: ignore[union-attr]
+            if spouse and spouse.end_life.date.value:
                 events.append(
                     ChronologyEvent(
-                        family.spouse(individual).end_life,  # type: ignore[union-attr]
-                        f"Overlijden partner {individual_link(family.spouse(individual))}",  # type: ignore[arg-type]
+                        spouse.end_life,
+                        f"Overlijden partner {individual_link(spouse)}",
                     )
                 )
             for child in family.children:
