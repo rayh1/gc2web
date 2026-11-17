@@ -3,7 +3,7 @@ from model.SourcesMixin import SourcesMixin
 
 
 class Name(SourcesMixin, NotesMixin):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         NotesMixin.__init__(self)
 
@@ -14,7 +14,7 @@ class Name(SourcesMixin, NotesMixin):
         return self.__value
 
     @value.setter
-    def value(self, value: str | None):
+    def value(self, value: str | None) -> None:
         self.__value = value
 
     # Utility methods

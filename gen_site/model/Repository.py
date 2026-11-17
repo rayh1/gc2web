@@ -1,5 +1,5 @@
 class Repository:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__xref_id: str = ""
         self.__name: str | None = None
         self.__www: str | None = None
@@ -9,7 +9,7 @@ class Repository:
         return self.__xref_id
 
     @xref_id.setter
-    def xref_id(self, value: str):
+    def xref_id(self, value: str) -> None:
         self.__xref_id = value
 
     @property
@@ -17,7 +17,7 @@ class Repository:
         return self.__name
 
     @name.setter
-    def name(self, value: str | None):
+    def name(self, value: str | None) -> None:
         self.__name = value
 
     @property
@@ -25,7 +25,7 @@ class Repository:
         return self.__www
 
     @www.setter
-    def www(self, value: str | None):
+    def www(self, value: str | None) -> None:
         self.__www = value
 
     def __repr__(self) -> str:

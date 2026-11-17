@@ -179,7 +179,7 @@ def read_file_safely(filepath: Path) -> str:
 
 def process_files(
     reference_file: Path, candidate_files: list[Path]
-) -> list[tuple[str, float, float, int]]:
+) -> list[tuple[str, float, float, float]]:
     """
     Process all files and calculate metrics.
 
@@ -198,7 +198,7 @@ def process_files(
         print(f"Error reading reference file {reference_file}: {e}", file=sys.stderr)
         sys.exit(1)
 
-    results = []
+    results: list[tuple[str, float, float, float]] = []
 
     for candidate_file in candidate_files:
         try:
@@ -225,7 +225,7 @@ def process_files(
     return results
 
 
-def generate_markdown_table(results: list[tuple[str, float, float, int]]) -> str:
+def generate_markdown_table(results: list[tuple[str, float, float, float]]) -> str:
     """
     Generate a markdown table from the results.
 
@@ -254,7 +254,7 @@ def generate_markdown_table(results: list[tuple[str, float, float, int]]) -> str
     return f"{header}\n{separator}\n" + "\n".join(rows)
 
 
-def main():
+def main() -> None:
     """Main function to handle command line arguments and orchestrate the comparison."""
     parser = argparse.ArgumentParser(
         description="Compare text files and calculate CER, WER, and Levenshtein Distance",

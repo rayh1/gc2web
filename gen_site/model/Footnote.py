@@ -4,10 +4,10 @@ from util.singleton import singleton
 
 @singleton
 class Footnote:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__notes: list[str] = []
 
-    def reset(self):
+    def reset(self) -> None:
         self.__notes = []
 
     @property
@@ -27,7 +27,7 @@ class Footnote:
 
         return result
 
-    def gen(self, content: list[str]):
+    def gen(self, content: list[str]) -> None:
         for count in range(len(self.__notes)):
             content.append(f"[^{count + 1}]: {self.__notes[count]}")
         self.reset()

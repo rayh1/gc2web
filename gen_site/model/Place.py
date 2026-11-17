@@ -7,7 +7,7 @@ class Place:
         return self.__value
 
     @value.setter
-    def value(self, value: str | None):
+    def value(self, value: str | None) -> None:
         self.__value = value
 
     def __str__(self) -> str:

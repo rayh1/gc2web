@@ -27,5 +27,6 @@ bash .devcontainer/default-checks.sh || failed=1
 # Add each check as `check <command>`, between the marker line and the final `exit` line: a check
 # added after the `exit` line never runs.
 # The project's own checks go below this line.
+check uv run mypy
 
 exit "$failed"

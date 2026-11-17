@@ -2,17 +2,18 @@ import argparse
 import sys
 
 from model.GedcomModel import GedcomModel
+from model.Witness import Witness
 
 
-def witnesses_to_string(witnesses):
+def witnesses_to_string(witnesses: list[Witness]) -> str:
     if len(witnesses) == 0:
         return ""
     return f"witnesses ({witnesses[0].line_num!s}): " + ", ".join(
-        [witness.name + " (age=" + str(witness.age) + ")" for witness in witnesses]
+        [f"{witness.name} (age={witness.age})" for witness in witnesses]
     )
 
 
-def match_assocs():
+def match_assocs() -> None:
     # Loop through all individuals and all their associations
     # For each association, find the corresponding event in the individual's events (this is based on the rel_type of the association)
     # Then try to find a witness for that event that has the same value for the xref_id fiels as the individual in the association
@@ -31,6 +32,12 @@ def match_assocs():
             f"{individual.name} ({individual.xref_id}) has {len(individual.associations)} associations"
         )
         for association in individual.associations:
+            person = association.individual()
+            if person is None:
+                print(
+                    f"{association.rel_type} {association.rel_desc} (id={association.individual_id}) is not in the model"
+                )
+                continue
             if association.rel_type == "@#INDI:BIRT@":
                 event = individual.birth
             elif association.rel_type == "@#INDI:DEAT@":
@@ -41,18 +48,15 @@ def match_assocs():
                 event = None
             if event:
                 print(
-                    f"{association.rel_type} {association.rel_desc} {association.individual().name} (id={association.individual_id}, age={association.individual().age(event.date)}, line={association.line_num})"
-                )  # type: ignore
+                    f"{association.rel_type} {association.rel_desc} {person.name} (id={association.individual_id}, age={person.age(event.date)}, line={association.line_num})"
+                )
                 for witness in event.witnesses:
                     if witness.xref_id == association.individual_id:
                         # Check if the age of the witness matches the age of the individual in the association. They may differ by one year due to the way ages are calculated in the GEDCOM file
-                        is_age_match = (
-                            witness.age == association.individual().age(event.date)
-                            or witness.age
-                            == association.individual().age(event.date) + 1
-                            or witness.age
-                            == association.individual().age(event.date) - 1
-                        )  # type: ignore
+                        age = person.age(event.date)
+                        is_age_match = witness.age == age or (
+                            age is not None and witness.age in (age + 1, age - 1)
+                        )
                         warning_age_match = "" if is_age_match else "XXX"
                         print(
                             f"--> {warning_age_match}MATCH {witness.name} (id={witness.xref_id}, age={witness.age}, line={witness.line_num!s})"
@@ -62,12 +66,12 @@ def match_assocs():
                     print(f"--> NO MATCH ({witnesses_to_string(event.witnesses)})")
             else:
                 print(
-                    f"{association.rel_type} {association.rel_desc} {association.individual().name} (id={association.individual_id})"
-                )  # type: ignore
+                    f"{association.rel_type} {association.rel_desc} {person.name} (id={association.individual_id})"
+                )
                 print("--> UNKNOWN EVENT")
 
 
-def main(argv):
+def main(argv: list[str]) -> None:
     ap = argparse.ArgumentParser(description="Set witness IDs in a GEDCOM file.")
     ap.add_argument("file", type=str, help="Path to the GEDCOM file")
 

@@ -124,7 +124,7 @@ def is_mother_in_marriage(witness: Witness, individual: Individual) -> bool:
     return False
 
 
-def print_witness(witness: Witness, individual: Individual):
+def print_witness(witness: Witness, individual: Individual) -> None:
     if witness.xref_id:
         return
     print(f"{witness.line_num} {witness.name} {individual.xref_id}")
@@ -132,7 +132,7 @@ def print_witness(witness: Witness, individual: Individual):
     # print(f"[{individual.name}] {witness.relation}: {individual.father.name}/{witness.name}")
 
 
-def process_witnesses():
+def process_witnesses() -> None:
     for individual in GedcomModel().individuals:
         for event in [
             individual.birth,
@@ -632,14 +632,14 @@ def show_candidates(candidates: list[Individual]) -> str | list[str]:
 
 def print_witnesses(
     witness: Witness, individuals: list[Individual], individual: Individual
-):
+) -> None:
     # print(f"{witness.line_num} {witness.name} {show_candidates(individuals)}")
     print(
         f"{witness.line_num} {witness.relation}: {witness.name} = {show_candidates_names(individuals)} --> {individual.name} {individual.xref_id}"
     )
 
 
-def identify_witnesses():
+def identify_witnesses() -> None:
     for individual in GedcomModel().individuals:
         for event in [
             individual.birth,
@@ -656,74 +656,67 @@ def identify_witnesses():
                     print_witnesses(witness, candidates, individual)
 
                 if is_grandmother2(witness):
-                    candidates: list[Individual] = find_grandmother2(
-                        witness.name, individual
-                    )
+                    candidates = find_grandmother2(witness.name, individual)
                     print_witnesses(witness, candidates, individual)
 
         for fams in individual.fams:
+            husband, wife = fams.husband, fams.wife
+            if husband is None or wife is None:
+                # A spouse missing from the model (private or absent) has no
+                # relatives to search.
+                continue
             for witness in fams.marriage.witnesses:
                 if is_identified_witness2(witness):
                     continue
 
                 if is_father_groom2(witness):
-                    candidates: list[Individual] = find_father2(fams.husband)
-                    print_witnesses(witness, candidates, fams.husband)
+                    candidates = find_father2(husband)
+                    print_witnesses(witness, candidates, husband)
 
                 if is_father_bride2(witness):
-                    candidates: list[Individual] = find_father2(fams.wife)
-                    print_witnesses(witness, candidates, fams.wife)
+                    candidates = find_father2(wife)
+                    print_witnesses(witness, candidates, wife)
 
                 if is_mother_groom2(witness):
-                    candidates: list[Individual] = find_mother2(fams.husband)
-                    print_witnesses(witness, candidates, fams.husband)
+                    candidates = find_mother2(husband)
+                    print_witnesses(witness, candidates, husband)
 
                 if is_mother_bride2(witness):
-                    candidates: list[Individual] = find_mother2(fams.wife)
-                    print_witnesses(witness, candidates, fams.wife)
+                    candidates = find_mother2(wife)
+                    print_witnesses(witness, candidates, wife)
 
                 if is_brother_groom2(witness):
-                    candidates: list[Individual] = find_sibling2(
-                        witness.name, fams.husband
-                    )
-                    print_witnesses(witness, candidates, fams.husband)
+                    candidates = find_sibling2(witness.name, husband)
+                    print_witnesses(witness, candidates, husband)
 
                 if is_brother_bride2(witness):
-                    candidates: list[Individual] = find_sibling2(
-                        witness.name, fams.wife
-                    )
-                    print_witnesses(witness, candidates, fams.wife)
+                    candidates = find_sibling2(witness.name, wife)
+                    print_witnesses(witness, candidates, wife)
 
                 if is_uncle_groom2(witness):
-                    candidates: list[Individual] = find_uncle2(
-                        witness.name, fams.husband
-                    )
-                    print_witnesses(witness, candidates, fams.husband)
+                    candidates = find_uncle2(witness.name, husband)
+                    print_witnesses(witness, candidates, husband)
 
                 if is_uncle_bride2(witness):
-                    candidates: list[Individual] = find_uncle2(witness.name, fams.wife)
-                    print_witnesses(witness, candidates, fams.wife)
+                    candidates = find_uncle2(witness.name, wife)
+                    print_witnesses(witness, candidates, wife)
 
                 if is_brother_in_law2(witness):
-                    candidates: list[Individual] = find_brother_in_law2(
-                        witness.name, fams.husband
-                    )
-                    print_witnesses(witness, candidates, fams.husband)
+                    candidates = find_brother_in_law2(witness.name, husband)
+                    print_witnesses(witness, candidates, husband)
 
                 if is_brother_in_law2(witness):
-                    candidates: list[Individual] = find_brother_in_law2(
-                        witness.name, fams.husband
-                    )
-                    print_witnesses(witness, candidates, fams.wife)
+                    candidates = find_brother_in_law2(witness.name, husband)
+                    print_witnesses(witness, candidates, wife)
 
                 if is_something_of_groom2(witness):
-                    print_witnesses(witness, [], fams.husband)
+                    print_witnesses(witness, [], husband)
 
                 if is_something_of_bride2(witness):
-                    print_witnesses(witness, [], fams.wife)
+                    print_witnesses(witness, [], wife)
 
 
-def main(argv):
+def main(argv: list[str]) -> None:
     ap = argparse.ArgumentParser(description="Set witness IDs in a GEDCOM file.")
     ap.add_argument("file", type=str, help="Path to the GEDCOM file")
 

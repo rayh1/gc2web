@@ -8,7 +8,7 @@ if TYPE_CHECKING:
 
 
 class Association(SourcesMixin, NotesMixin):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         NotesMixin.__init__(self)
 
@@ -24,7 +24,7 @@ class Association(SourcesMixin, NotesMixin):
         return self.__line_num
 
     @line_num.setter
-    def line_num(self, value: int | None):
+    def line_num(self, value: int | None) -> None:
         self.__line_num = value
 
     @property
@@ -32,7 +32,7 @@ class Association(SourcesMixin, NotesMixin):
         return self.__individual_id
 
     @individual_id.setter
-    def individual_id(self, value: str | None):
+    def individual_id(self, value: str | None) -> None:
         self.__individual_id = value
 
     @property
@@ -40,7 +40,7 @@ class Association(SourcesMixin, NotesMixin):
         return self.__rel_desc
 
     @rel_desc.setter
-    def rel_desc(self, value: str | None):
+    def rel_desc(self, value: str | None) -> None:
         self.__rel_desc = value
 
     @property
@@ -48,7 +48,7 @@ class Association(SourcesMixin, NotesMixin):
         return self.__rel_type
 
     @rel_type.setter
-    def rel_type(self, value: str | None):
+    def rel_type(self, value: str | None) -> None:
         self.__rel_type = value
 
     # Utility

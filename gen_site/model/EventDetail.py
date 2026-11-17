@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from model.Date import Date
 from model.NotesMixin import NotesMixin
@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 
 
 class EventDetail(SourcesMixin, NotesMixin):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         NotesMixin.__init__(self)
 
@@ -24,19 +24,19 @@ class EventDetail(SourcesMixin, NotesMixin):
         self.__timestamp: str | None = None
         self.__witnesses: list[Witness] = []
 
-    def parse_timestamp(self):
+    def parse_timestamp(self) -> None:
         self.timestamp = None
         for note in self.notes:
-            note_data: dict | None = note.parse_yaml()
+            note_data: dict[str, Any] | None = note.parse_yaml()
 
             if note_data and "timestamp" in note_data:
                 self.timestamp = note_data["timestamp"]
                 return
 
-    def parse_witnesses(self):
+    def parse_witnesses(self) -> None:
         self.__witnesses = []
         for note in self.notes:
-            note_data: dict | None = note.parse_yaml()
+            note_data: dict[str, Any] | None = note.parse_yaml()
 
             if note_data and "witnesses" in note_data:
                 self.__witnesses = [
@@ -52,7 +52,7 @@ class EventDetail(SourcesMixin, NotesMixin):
         return self.__value
 
     @value.setter
-    def value(self, value: str | None):
+    def value(self, value: str | None) -> None:
         self.__value = value
 
     @property
@@ -60,7 +60,7 @@ class EventDetail(SourcesMixin, NotesMixin):
         return self.__date
 
     @date.setter
-    def date(self, value: Date):
+    def date(self, value: Date) -> None:
         self.__date = value
 
     @property
@@ -68,7 +68,7 @@ class EventDetail(SourcesMixin, NotesMixin):
         return self.__place
 
     @place.setter
-    def place(self, value: Place):
+    def place(self, value: Place) -> None:
         self.__place = value
 
     @property
@@ -76,7 +76,7 @@ class EventDetail(SourcesMixin, NotesMixin):
         return self.__address
 
     @address.setter
-    def address(self, value: str | None):
+    def address(self, value: str | None) -> None:
         self.__address = value
 
     @property
@@ -84,7 +84,7 @@ class EventDetail(SourcesMixin, NotesMixin):
         return self.__type
 
     @type.setter
-    def type(self, value: str | None):
+    def type(self, value: str | None) -> None:
         self.__type = value
 
     @property
@@ -92,7 +92,7 @@ class EventDetail(SourcesMixin, NotesMixin):
         return self.__timestamp
 
     @timestamp.setter
-    def timestamp(self, value: str | None):
+    def timestamp(self, value: str | None) -> None:
         self.__timestamp = value
 
     @property

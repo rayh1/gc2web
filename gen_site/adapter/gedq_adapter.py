@@ -2,6 +2,7 @@ import json
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 from model.Association import Association
 from model.EventDetail import EventDetail
@@ -17,10 +18,10 @@ REQUIRED_GEDQ_VERSION = (2, 0, 0)
 
 @dataclass(frozen=True)
 class GedqDataset:
-    individuals: list[dict]
-    families: list[dict]
-    sources: list[dict]
-    repositories: list[dict]
+    individuals: list[dict[str, Any]]
+    families: list[dict[str, Any]]
+    sources: list[dict[str, Any]]
+    repositories: list[dict[str, Any]]
 
 
 INDIVIDUAL_SINGLE_EVENT_TAGS = {
@@ -46,7 +47,8 @@ def parse_version(raw_version: str) -> tuple[int, int, int]:
         raise ValueError(f"Invalid gedq version output: {raw_version!r}")
 
     try:
-        return tuple(int(part) for part in parts[:3])
+        major, minor, patch = (int(part) for part in parts[:3])
+        return (major, minor, patch)
     except ValueError as exc:
         raise ValueError(f"Invalid gedq version output: {raw_version!r}") from exc
 
@@ -91,7 +93,7 @@ def load_dataset(gedcom_file: str) -> GedqDataset:
     )
 
 
-def build_sources(records: list[dict]) -> dict[str, Source]:
+def build_sources(records: list[dict[str, Any]]) -> dict[str, Source]:
     sources: dict[str, Source] = {}
     for record in records:
         source = Source()
@@ -105,7 +107,7 @@ def build_sources(records: list[dict]) -> dict[str, Source]:
     return sources
 
 
-def build_repositories(records: list[dict]) -> dict[str, Repository]:
+def build_repositories(records: list[dict[str, Any]]) -> dict[str, Repository]:
     repositories: dict[str, Repository] = {}
     for record in records:
         repository = Repository()
@@ -117,7 +119,7 @@ def build_repositories(records: list[dict]) -> dict[str, Repository]:
 
 
 def build_individuals(
-    records: list[dict], source_records: list[dict]
+    records: list[dict[str, Any]], source_records: list[dict[str, Any]]
 ) -> dict[str, Individual]:
     name_source_map = _build_name_source_map(source_records)
     individuals: dict[str, Individual] = {}
@@ -152,7 +154,7 @@ def build_individuals(
     return individuals
 
 
-def build_families(records: list[dict]) -> dict[str, Family]:
+def build_families(records: list[dict[str, Any]]) -> dict[str, Family]:
     families: dict[str, Family] = {}
     for record in records:
         family = Family()
@@ -178,7 +180,9 @@ def build_families(records: list[dict]) -> dict[str, Family]:
     return families
 
 
-def _search_records(gedcom_path: Path, kind: str, *extra_args: str) -> list[dict]:
+def _search_records(
+    gedcom_path: Path, kind: str, *extra_args: str
+) -> list[dict[str, Any]]:
     command = [
         "gedq",
         "search",
@@ -195,7 +199,7 @@ def _search_records(gedcom_path: Path, kind: str, *extra_args: str) -> list[dict
         message = result.stderr.strip() or result.stdout.strip() or "unknown error"
         raise RuntimeError(f"gedq search failed for {kind}: {message}")
 
-    records: list[dict] = []
+    records: list[dict[str, Any]] = []
     for line in result.stdout.splitlines():
         line = line.strip()
         if not line:
@@ -205,7 +209,7 @@ def _search_records(gedcom_path: Path, kind: str, *extra_args: str) -> list[dict
 
 
 def _build_names(
-    record: dict,
+    record: dict[str, Any],
     name_source_map: dict[tuple[str, str | None], list[str]],
 ) -> list[Name]:
     occurrences = list(record.get("names", []))
@@ -236,7 +240,7 @@ def _build_names(
     if not variants and record.get("name"):
         variants = [record["name"]]
 
-    names: list[Name] = []
+    names = []
     for variant in variants:
         name = Name()
         name.value = variant
@@ -249,7 +253,7 @@ def _build_names(
 
 
 def _build_name_source_map(
-    source_records: list[dict],
+    source_records: list[dict[str, Any]],
 ) -> dict[tuple[str, str | None], list[str]]:
     grouped: dict[tuple[str, str | None], list[str]] = {}
     for source_record in source_records:
@@ -267,7 +271,7 @@ def _build_name_source_map(
     return grouped
 
 
-def _build_event(event_record: dict) -> EventDetail:
+def _build_event(event_record: dict[str, Any]) -> EventDetail:
     event = EventDetail()
     event.value = event_record.get("value")
     event.date.value = event_record.get("date")
@@ -286,7 +290,7 @@ def _build_event(event_record: dict) -> EventDetail:
     return event
 
 
-def _build_association(association_record: dict) -> Association:
+def _build_association(association_record: dict[str, Any]) -> Association:
     role = association_record.get("role") or ""
     parts = role.split(" ", 1)
     association = Association()
@@ -300,7 +304,7 @@ def _build_association(association_record: dict) -> Association:
     return association
 
 
-def _build_record_notes(record: dict) -> list[Note]:
+def _build_record_notes(record: dict[str, Any]) -> list[Note]:
     notes: list[Note] = []
 
     list_notes = _as_string_list(record.get("NOTE"))
@@ -323,7 +327,7 @@ def _build_record_notes(record: dict) -> list[Note]:
     return _dedupe_notes(notes)
 
 
-def _build_event_notes(event_record: dict) -> list[Note]:
+def _build_event_notes(event_record: dict[str, Any]) -> list[Note]:
     notes: list[Note] = []
     note_values = list(event_record.get("notes", []))
     note_sources = list(event_record.get("note_src", []))
@@ -342,7 +346,9 @@ def _build_event_notes(event_record: dict) -> list[Note]:
     return notes
 
 
-def _build_inline_notes(note_values: list[str], source_ref: dict | None) -> list[Note]:
+def _build_inline_notes(
+    note_values: list[str], source_ref: dict[str, Any] | None
+) -> list[Note]:
     notes: list[Note] = []
     for note_value in note_values:
         note = Note()
@@ -352,7 +358,7 @@ def _build_inline_notes(note_values: list[str], source_ref: dict | None) -> list
     return _dedupe_notes(notes)
 
 
-def _family_ids(record: dict) -> list[str]:
+def _family_ids(record: dict[str, Any]) -> list[str]:
     famc_id = record.get("famc")
     relations = [
         relation
@@ -362,14 +368,14 @@ def _family_ids(record: dict) -> list[str]:
     return [relation for relation in relations if relation != famc_id]
 
 
-def _require_entity_id(record: dict) -> str:
+def _require_entity_id(record: dict[str, Any]) -> str:
     entity_id = record.get("entity_id")
     if not entity_id:
         raise ValueError(f"gedq record has no entity_id: {record}")
-    return entity_id
+    return str(entity_id)
 
 
-def _line_from_source(source_ref: dict | None) -> int | None:
+def _line_from_source(source_ref: dict[str, Any] | None) -> int | None:
     if not source_ref:
         return None
     return source_ref.get("line")
@@ -379,7 +385,9 @@ def _first(values: list[str]) -> str | None:
     return values[0] if values else None
 
 
-def _field_source_list(field_src: dict | None, tag: str) -> list[dict]:
+def _field_source_list(
+    field_src: dict[str, Any] | None, tag: str
+) -> list[dict[str, Any]]:
     if not field_src:
         return []
     by_tag = field_src.get("by_tag", {})

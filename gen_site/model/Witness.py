@@ -1,5 +1,8 @@
+from typing import Any
+
+
 class Witness:
-    def __init__(self, line_num: int | None, data: dict):
+    def __init__(self, line_num: int | None, data: dict[str, Any]):
         self.__line_num: int | None = line_num
         self.__name: str | None = data.get("name", None)
         self.__occupation: str | None = data.get("occupation", None)

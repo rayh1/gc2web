@@ -2,7 +2,7 @@ from model.Note import Note
 
 
 class NotesMixin:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__notes: list[Note] = []
 
     @property
@@ -10,10 +10,10 @@ class NotesMixin:
         return self.__notes
 
     @notes.setter
-    def notes(self, notes: list[Note]):
+    def notes(self, notes: list[Note]) -> None:
         self.__notes = notes
 
-    def add_note(self, note: Note):
+    def add_note(self, note: Note) -> None:
         self.__notes.append(note)
 
     def is_private(self) -> bool:

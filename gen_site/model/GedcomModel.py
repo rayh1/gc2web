@@ -9,19 +9,19 @@ from model.Family import Family
 from model.Individual import Individual
 from model.Repository import Repository
 from model.Source import Source
-from tqdm import tqdm  # type: ignore
+from tqdm import tqdm
 from util.singleton import singleton
 
 
 @singleton
 class GedcomModel:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__individual_map: dict[str, Individual] = {}
         self.__family_map: dict[str, Family] = {}
         self.__source_map: dict[str, Source] = {}
         self.__repository_map: dict[str, Repository] = {}
 
-    def __exclude_privates(self):
+    def __exclude_privates(self) -> None:
         """Exclude private individuals from the GedcomModel"""
         for individual in tqdm(
             list(filter(lambda i: i.is_private(), self.individuals)),
@@ -58,13 +58,13 @@ class GedcomModel:
     def repositories(self) -> list[Repository]:
         return list(self.__repository_map.values())
 
-    def clear(self):
+    def clear(self) -> None:
         self.__individual_map = {}
         self.__family_map = {}
         self.__source_map = {}
         self.__repository_map = {}
 
-    def parse_file(self, gedcom_file: str):
+    def parse_file(self, gedcom_file: str) -> None:
         try:
             dataset = load_dataset(gedcom_file)
         except RuntimeError as exc:

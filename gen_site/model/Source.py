@@ -4,7 +4,7 @@ from model.Repository import Repository
 
 
 class Source:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__xref_id: str = ""
         self.__title: str | None = None
         self.__author: str | None = None
@@ -18,7 +18,7 @@ class Source:
         return self.__xref_id
 
     @xref_id.setter
-    def xref_id(self, value: str):
+    def xref_id(self, value: str) -> None:
         self.__xref_id = value
 
     @property
@@ -26,7 +26,7 @@ class Source:
         return self.__title
 
     @title.setter
-    def title(self, value: str | None):
+    def title(self, value: str | None) -> None:
         self.__title = value
 
     @property
@@ -34,7 +34,7 @@ class Source:
         return self.__author
 
     @author.setter
-    def author(self, value: str | None):
+    def author(self, value: str | None) -> None:
         self.__author = value
 
     @property
@@ -42,7 +42,7 @@ class Source:
         return self.__publication
 
     @publication.setter
-    def publication(self, value: str | None):
+    def publication(self, value: str | None) -> None:
         self.__publication = value
 
     @property
@@ -50,7 +50,7 @@ class Source:
         return self.__text
 
     @text.setter
-    def text(self, value: str | None):
+    def text(self, value: str | None) -> None:
         self.__text = value
 
     @property
@@ -58,7 +58,7 @@ class Source:
         return self.__repository_id
 
     @repository_id.setter
-    def repository_id(self, value: str | None):
+    def repository_id(self, value: str | None) -> None:
         self.__repository_id = value
 
     @property

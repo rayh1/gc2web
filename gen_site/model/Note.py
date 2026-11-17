@@ -1,12 +1,13 @@
 import re
+from typing import Any
 
-import yaml  # type: ignore
+import yaml
 
 GEDCOM_XREF_VALUE_RE = re.compile(r"(:\s*)(@[^@\s\n]+@)(?=\s*(?:#.*)?$)", re.MULTILINE)
 
 
 class Note:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__line_num: int | None = None
         self.__value: str | None = None
 
@@ -15,7 +16,7 @@ class Note:
         return self.__value
 
     @value.setter
-    def value(self, value: str | None):
+    def value(self, value: str | None) -> None:
         self.__value = value
 
     @property
@@ -23,7 +24,7 @@ class Note:
         return self.__line_num
 
     @line_num.setter
-    def line_num(self, value: int | None):
+    def line_num(self, value: int | None) -> None:
         self.__line_num = value
 
     def __repr__(self) -> str:
@@ -34,12 +35,13 @@ class Note:
             return False
         return self.value.strip().startswith("---")
 
-    def parse_yaml(self) -> dict | None:
-        if not self.is_yaml():
+    def parse_yaml(self) -> dict[str, Any] | None:
+        value = self.value
+        if value is None or not self.is_yaml():
             return None
         try:
-            normalized_value = GEDCOM_XREF_VALUE_RE.sub(r'\1"\2"', self.value)
-            data = yaml.safe_load(normalized_value)  # type: ignore
+            normalized_value = GEDCOM_XREF_VALUE_RE.sub(r'\1"\2"', value)
+            data: dict[str, Any] | None = yaml.safe_load(normalized_value)
             return data
         except yaml.YAMLError:
             print(f"Error parsing yaml: {self.value}")
@@ -48,6 +50,6 @@ class Note:
     def is_private(self) -> bool:
         data = self.parse_yaml()
         if data and "private" in data:
-            return data["private"]
+            return bool(data["private"])
 
         return False

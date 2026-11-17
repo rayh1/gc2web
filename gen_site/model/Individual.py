@@ -24,7 +24,7 @@ class Location:
 
 
 class Individual(SourcesMixin, NotesMixin):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         NotesMixin.__init__(self)
 
@@ -56,7 +56,7 @@ class Individual(SourcesMixin, NotesMixin):
         return self.__xref_id
 
     @xref_id.setter
-    def xref_id(self, value: str):
+    def xref_id(self, value: str) -> None:
         self.__xref_id = value
 
     @property
@@ -67,7 +67,7 @@ class Individual(SourcesMixin, NotesMixin):
     def names(self) -> list[Name]:
         return self.__names
 
-    def add_name(self, value: Name):
+    def add_name(self, value: Name) -> None:
         self.__names.append(value)
 
     @property
@@ -75,7 +75,7 @@ class Individual(SourcesMixin, NotesMixin):
         return self.__birth
 
     @birth.setter
-    def birth(self, value: EventDetail):
+    def birth(self, value: EventDetail) -> None:
         self.__birth = value
 
     @property
@@ -83,7 +83,7 @@ class Individual(SourcesMixin, NotesMixin):
         return self.__death
 
     @death.setter
-    def death(self, value: EventDetail):
+    def death(self, value: EventDetail) -> None:
         self.__death = value
 
     @property
@@ -91,7 +91,7 @@ class Individual(SourcesMixin, NotesMixin):
         return self.__baptism
 
     @baptism.setter
-    def baptism(self, value: EventDetail):
+    def baptism(self, value: EventDetail) -> None:
         self.__baptism = value
 
     @property
@@ -99,7 +99,7 @@ class Individual(SourcesMixin, NotesMixin):
         return self.__burial
 
     @burial.setter
-    def burial(self, value: EventDetail):
+    def burial(self, value: EventDetail) -> None:
         self.__burial = value
 
     @property
@@ -107,7 +107,7 @@ class Individual(SourcesMixin, NotesMixin):
         return self.__fams_ids
 
     @fams_ids.setter
-    def fams_ids(self, value: list[str]):
+    def fams_ids(self, value: list[str]) -> None:
         self.__fams_ids = value
 
     @property
@@ -115,7 +115,7 @@ class Individual(SourcesMixin, NotesMixin):
         return self.__famc_id
 
     @famc_id.setter
-    def famc_id(self, value: str | None):
+    def famc_id(self, value: str | None) -> None:
         self.__famc_id = value
 
     @property
@@ -123,35 +123,35 @@ class Individual(SourcesMixin, NotesMixin):
         return self.__sex
 
     @sex.setter
-    def sex(self, value: str | None):
+    def sex(self, value: str | None) -> None:
         self.__sex = value
 
     @property
     def occupations(self) -> list[EventDetail]:
         return self.__occupations
 
-    def add_occupation(self, value: EventDetail):
+    def add_occupation(self, value: EventDetail) -> None:
         self.__occupations.append(value)
 
     @property
     def residences(self) -> list[EventDetail]:
         return self.__residences
 
-    def add_residence(self, value: EventDetail):
+    def add_residence(self, value: EventDetail) -> None:
         self.__residences.append(value)
 
     @property
     def facts(self) -> list[EventDetail]:
         return self.__facts
 
-    def add_fact(self, value: EventDetail):
+    def add_fact(self, value: EventDetail) -> None:
         self.__facts.append(value)
 
     @property
     def descriptions(self) -> list[EventDetail]:
         return self.__descriptions
 
-    def add_description(self, value: EventDetail):
+    def add_description(self, value: EventDetail) -> None:
         self.__descriptions.append(value)
 
     @property
@@ -350,7 +350,9 @@ class Individual(SourcesMixin, NotesMixin):
                             (
                                 "Huwelijk",
                                 family.marriage,
-                                [individual, family.spouse(individual)],
+                                # A privacy-excluded spouse is None here; the
+                                # page renders that as a crash (left as it is).
+                                [individual, family.spouse(individual)],  # type: ignore[list-item]
                             )
                         )
 
@@ -367,9 +369,9 @@ class Individual(SourcesMixin, NotesMixin):
         return self.__witnessed_events_cache
 
     @staticmethod
-    def __remove_duplicates(items: list) -> list:
-        seen = set()
-        unique_items = []
+    def __remove_duplicates[T](items: list[T]) -> list[T]:
+        seen: set[T] = set()
+        unique_items: list[T] = []
         for item in items:
             if item not in seen:
                 unique_items.append(item)

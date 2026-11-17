@@ -14,6 +14,9 @@ dev = [
     "ruff",
     "pytest",
     "gedq",
+    "mypy",
+    "types-PyYAML",
+    "types-tqdm",
 ]
 
 [tool.uv.sources]
@@ -23,6 +26,14 @@ gedq = { path = "vendor/gedq-2.3.0-py3-none-any.whl" }
 [tool.pytest.ini_options]
 testpaths = ["gen_site/test"]
 pythonpath = ["gen_site"]
+
+[tool.mypy]
+strict = true
+# gen_site/ is the import root (no __init__.py files); its test/ folder stays out.
+files = ["gen_site"]
+exclude = ["^gen_site/test/"]
+mypy_path = "gen_site"
+explicit_package_bases = true
 
 [tool.uv]
 # gen_site is run as a script, not installed as a package — manage the env only.

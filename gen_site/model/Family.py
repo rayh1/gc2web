@@ -5,7 +5,7 @@ from model.SourcesMixin import SourcesMixin
 
 
 class Family(SourcesMixin, NotesMixin):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         NotesMixin.__init__(self)
 
@@ -27,7 +27,7 @@ class Family(SourcesMixin, NotesMixin):
         return self.__xref_id
 
     @xref_id.setter
-    def xref_id(self, value: str):
+    def xref_id(self, value: str) -> None:
         self.__xref_id = value
 
     @property
@@ -35,7 +35,7 @@ class Family(SourcesMixin, NotesMixin):
         return self.__husband_id
 
     @husband_id.setter
-    def husband_id(self, value: str | None):
+    def husband_id(self, value: str | None) -> None:
         self.__husband_id = value
 
     @property
@@ -43,7 +43,7 @@ class Family(SourcesMixin, NotesMixin):
         return self.__wife_id
 
     @wife_id.setter
-    def wife_id(self, value: str | None):
+    def wife_id(self, value: str | None) -> None:
         self.__wife_id = value
 
     @property
@@ -51,7 +51,7 @@ class Family(SourcesMixin, NotesMixin):
         return self.__children_ids
 
     @children_ids.setter
-    def children_ids(self, value: list[str]):
+    def children_ids(self, value: list[str]) -> None:
         self.__children_ids = value
 
     @property
@@ -59,7 +59,7 @@ class Family(SourcesMixin, NotesMixin):
         return self.__marriage
 
     @marriage.setter
-    def marriage(self, value: EventDetail):
+    def marriage(self, value: EventDetail) -> None:
         self.__marriage = value
 
     @property
@@ -67,7 +67,7 @@ class Family(SourcesMixin, NotesMixin):
         return self.__residences
 
     @residences.setter
-    def residences(self, value: list[EventDetail]):
+    def residences(self, value: list[EventDetail]) -> None:
         self.__residences = value
 
     # Utility

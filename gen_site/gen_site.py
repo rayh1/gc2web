@@ -13,7 +13,7 @@ from model.Individual import Individual
 from model.Source import Source
 from model.SourcesMixin import SourcesMixin
 from model.Witness import Witness
-from tqdm import tqdm  # type: ignore
+from tqdm import tqdm
 from util.AsciiTreeRenderer import render_ascii_tree_block
 from util.Lifespan import lifespan_str
 
@@ -46,15 +46,15 @@ class ChronologyEvent:
         self.date: datetime = d
         self.description = description
 
-    def __lt__(self, other: ChronologyEvent):
+    def __lt__(self, other: ChronologyEvent) -> bool:
         return self.date < other.date
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"[{self.description}] happens on {self.date}"
 
 
-def s(value) -> str:  # type: ignore
-    return str(value) if value != None else "?"  # type: ignore
+def s(value: object) -> str:
+    return str(value) if value != None else "?"
 
 
 def individual_url(individual: Individual) -> str:
@@ -124,11 +124,12 @@ def is_in_lifetime(individual: Individual, event: EventDetail) -> bool:
     if not individual.start_life.is_defined or not individual.end_life.is_defined:
         return False
 
-    return (
-        individual.start_life.date.date()
-        <= event.date.date()
-        <= individual.end_life.date.date()
-    )  # type: ignore
+    start = individual.start_life.date.date()
+    when = event.date.date()
+    end = individual.end_life.date.date()
+    if start is None or when is None or end is None:
+        return False
+    return start <= when <= end
 
 
 def yaml_string(value: str | None) -> str:
@@ -177,7 +178,7 @@ def gender_str(individual: Individual) -> str:
         return "Onbekend"
 
 
-def witness_str(witness) -> str:
+def witness_str(witness: Witness) -> str:
     witness_individual = None
     if witness.xref_id:
         witness_individual = GedcomModel().get_individual(witness.xref_id)
@@ -197,7 +198,7 @@ def witness_str(witness) -> str:
     )
 
 
-def generate_chronology(individual: Individual, content: list[str]):
+def generate_chronology(individual: Individual, content: list[str]) -> None:
     events: list[ChronologyEvent] = []
     if individual.father and individual.father.end_life.date.value:
         events.append(
@@ -234,14 +235,16 @@ def generate_chronology(individual: Individual, content: list[str]):
             events.append(
                 ChronologyEvent(
                     family.marriage,
-                    f"Huwelijk met {individual_link(family.spouse(individual))}",
+                    # A privacy-excluded spouse is None here; individual_link
+                    # crashes on it (left as it is).
+                    f"Huwelijk met {individual_link(family.spouse(individual))}",  # type: ignore[arg-type]
                 )
             )
-            if family.spouse(individual).end_life.date.value:
+            if family.spouse(individual).end_life.date.value:  # type: ignore[union-attr]
                 events.append(
                     ChronologyEvent(
-                        family.spouse(individual).end_life,
-                        f"Overlijden partner {individual_link(family.spouse(individual))}",
+                        family.spouse(individual).end_life,  # type: ignore[union-attr]
+                        f"Overlijden partner {individual_link(family.spouse(individual))}",  # type: ignore[arg-type]
                     )
                 )
             for child in family.children:
@@ -287,7 +290,7 @@ def generate_chronology(individual: Individual, content: list[str]):
         content.append(f"- {event.date.strftime('%d-%m-%Y')}{age}: {event.description}")
 
 
-def generate_individual_page(individual: Individual, filepath: Path):
+def generate_individual_page(individual: Individual, filepath: Path) -> None:
     try:
         filepath.parent.mkdir(parents=True, exist_ok=True)
 
@@ -528,7 +531,7 @@ def generate_individual_page(individual: Individual, filepath: Path):
         raise
 
 
-def generate_source_page(source, filepath):
+def generate_source_page(source: Source, filepath: Path) -> None:
     try:
         filepath.parent.mkdir(parents=True, exist_ok=True)
 
@@ -561,7 +564,7 @@ def generate_source_page(source, filepath):
         raise
 
 
-def generate_individual_pages(output_dir: Path):
+def generate_individual_pages(output_dir: Path) -> None:
     for individual in tqdm(
         GedcomModel().individuals,
         desc="Generated individual pages",
@@ -570,7 +573,7 @@ def generate_individual_pages(output_dir: Path):
         generate_individual_page(individual, output_dir / f"{individual.xref_id}.md")
 
 
-def generate_source_pages(output_dir: Path):
+def generate_source_pages(output_dir: Path) -> None:
 
     for source in tqdm(
         GedcomModel().sources,
@@ -580,7 +583,7 @@ def generate_source_pages(output_dir: Path):
         generate_source_page(source, output_dir / f"{source.xref_id}.md")
 
 
-def generate_last_modified():
+def generate_last_modified() -> None:
     last_modified_path = Path(LAST_MODIFIED_FILE)
 
     current_time = datetime.now().astimezone().strftime("%d-%m-%Y")
@@ -594,7 +597,7 @@ def generate_last_modified():
         raise
 
 
-def main(argv: list[str]):
+def main(argv: list[str]) -> None:
     ap = argparse.ArgumentParser(description="Process a GEDCOM file.")
     ap.add_argument("file", type=str, help="Path to the GEDCOM file")
 

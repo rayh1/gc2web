@@ -2,7 +2,7 @@ from model.Source import Source
 
 
 class SourcesMixin:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__source_ids: list[str] = []
         self.__sources_cache: list[Source] | None = None
 
@@ -26,6 +26,6 @@ class SourcesMixin:
     def source_ids(self) -> list[str]:
         return self.__source_ids
 
-    def add_source_id(self, source_id: str):
+    def add_source_id(self, source_id: str) -> None:
         self.__sources_cache = None
         self.__source_ids.append(source_id)
